@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 가져다 쓰기 -->
+    <string name="transaction_his">거래내역</string>
+    <string name="send">보내기</string>
+    <string name="receive">받기</string>
+    <string name="address">주소록</string>
+    <string name="his_all">전체내역</string>
+    <string name="his_receive">입금내역</string>
+    <string name="his_send">송금내역</string>
+    <string name="toast_text_clipboard_address">주소가 복사 되었습니다.</string>
+
+    <!-- 언어변경 테스트 -->
+    <string name="create_account">계좌 생성</string>
+    <string name="create_account2">계좌 생성 2</string>
+    <string name="reg_account">계좌 등록</string>
+    <string name="account_balance">계좌 잔고</string>
+    <string name="account_balance2">계좌 잔고 2</string>
+    <string name="payments">지불</string>
+    <string name="confirm_payments_his">거래 기록 확인</string>
+    <string name="receives">수신</string>
+    <string name="toolbar_activity">툴바 액티비티</string>
+    <string name="make_address">주소록</string>
+    <string name="make_qr">QR코드</string>
+    <string name="setting">설정</string>
+    <string name="setting_wallets">지갑 설정</string>
+    <string name="create_wallets">지갑 생성</string>
+    <string name="install_wallets">지갑 가져오기</string>
+    <string name="change_wallets">지갑 순서변경</string>
+    <string name="change_lang">언어 변경</string>
+    <string name="show_tips">팁 보기</string>
+    <string name="setting_lang">언어 설정</string>
+    <string name="english">영어</string>
+    <string name="korea">한국어</string>
+    <string name="import_seed">보안키 입력</string>
+    <string name="import_secure">복구키 입력</string>
+    <string name="recover">복구하기</string>
+    <string name="input_used_pw">사용하던 패스워드를 입력해 주세요.</string>
+
+    <string name="create_wallet">지갑생성</string>
+    <string name="import_wallet">지갑가져오기</string>
+    <string name="input_wallet_name">지갑 이름 입력</string>
+    <string name="input_new_pw">새로운 비빌 번호 입력</string>
+    <string name="confirm_new_pw">새로운 비빌 번호 확인</string>
+    <string name="ok">확인</string>
+    <string name="qr_c">QR 코드</string>
+    <string name="input_already_pw">기존 비빌 번호 입력</string>
+    <string name="confirm_already_pw">기존 비밀 번호 확인</string>
+    <string name="input_pub_key">공개주소 입력</string>
+    <string name="send_fee">수수료</string>
+    <string name="ammount">금액</string>
+
+
+    <string name="error_no_name">지갑이름을 입력해 주세요</string>
+    <string name="error_no_pw">패스워드를 입력해 주세요</string>
+    <string name="error_match_pw">패스워드가 서로 다릅니다.</string>
+    <string name="error_create_wallet">오류가 발생했습니다. 다시 시도해 주세요.</string>
+    <string name="error_no_key">복구를 위한 키가 필요합니다.</string>
+    <string name="error_decode_seed_key">유효하지 않은 키 형식입니다.</string>
+    <string name="error_decode_bos_key">유효하지 않은 키 형식입니다.</string>
+    <string name="error_two_key">하나의 키만 입력해 주세요.</string>
+</resources>

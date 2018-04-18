@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">BosTokneNetWallet</string>
+
+    <!-- 가져다 쓰기 -->
+    <string name="transaction_his">Payments</string>
+    <string name="send">Send</string>
+    <string name="receive">Receive</string>
+    <string name="address">Address</string>
+    <string name="his_all">All Payments</string>
+    <string name="his_receive">Receive History</string>
+    <string name="his_send">Send History</string>
+    <string name="toast_text_clipboard_address">Address Copyed.</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- 언어변경 테스트 -->
+    <string name="create_account">Create Account</string>
+    <string name="create_account2">Create Account 2</string>
+    <string name="reg_account">Regist Account</string>
+    <string name="account_balance">Account Balance</string>
+    <string name="account_balance2">Account Balance 2</string>
+    <string name="payments">Payments</string>
+    <string name="confirm_payments_his">Confirm Payments History</string>
+    <string name="receives">Receives</string>
+    <string name="toolbar_activity">Activity with Toolbar</string>
+    <string name="make_address">Address</string>
+    <string name="make_qr">Make QR</string>
+    <string name="setting">Setting</string>
+    <string name="setting_wallets">Setting_Wallets</string>
+    <string name="create_wallets">Create Wallets</string>
+    <string name="install_wallets">Install Wallets</string>
+    <string name="change_wallets">Change Order Wallets</string>
+    <string name="change_lang">Change Language</string>
+    <string name="show_tips">Show Tips</string>
+    <string name="setting_lang">Setting Language</string>
+    <string name="english">English</string>
+    <string name="korea">Korean</string>
+    <string name="import_seed">Import Seed Key</string>
+    <string name="import_secure">Import Secure Key</string>
+    <string name="recover">Recover</string>
+    <string name="input_used_pw">Used Password</string>
+
+    <string name="create_wallet">Create Wallet</string>
+    <string name="import_wallet">Import Wallet</string>
+    <string name="input_wallet_name">Input Wallet Name</string>
+    <string name="input_new_pw">Input New PassWord</string>
+    <string name="confirm_new_pw">Confirm New Password</string>
+    <string name="ok">OK</string>
+    <string name="qr_c">QR Code</string>
+    <string name="input_already_pw">Input Already PassWord</string>
+    <string name="confirm_already_pw">Confirm Already Password</string>
+    <string name="input_pub_key">Input Public Address</string>
+    <string name="send_fee">Fees</string>
+    <string name="ammount">Ammount</string>
+
+    <string name="error_no_name">Please Input Wallnet Name</string>
+    <string name="error_no_pw">Please Input Wallnet PassWord</string>
+    <string name="error_match_pw">Different PassWord</string>
+    <string name="error_create_wallet">Please ReTry</string>
+    <string name="error_no_key">We needs recover key.</string>
+    <string name="error_decode_seed_key">Invalid Seed key.</string>
+    <string name="error_decode_bos_key">Invalid Bos key.</string>
+    <string name="error_two_key">Please Only One Key</string>
+
+</resources>
