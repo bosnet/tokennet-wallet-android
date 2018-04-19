@@ -97,7 +97,7 @@ public class HistoryActivity extends AppCompatActivity implements
                 Log.e(TAG,"resp = "+responseString);
                 Log.e(TAG,"status = "+statusCode);
                 if(statusCode == Constants.Status.NOT_FOUND){
-                    wBalance.setText(" 0 BOS"); //계좌가 없음
+                    wBalance.setText(" 0 BOS");
                 }else{
                     Toast.makeText(mContext, mContext.getString(R.string.error_create_wallet), Toast.LENGTH_SHORT).show();
                 }

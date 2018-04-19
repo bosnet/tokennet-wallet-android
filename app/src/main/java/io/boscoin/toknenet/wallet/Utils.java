@@ -11,9 +11,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by kimcy on 2018. 2. 26..
- */
 
 public class Utils {
     private static final String TAG = "Utils";

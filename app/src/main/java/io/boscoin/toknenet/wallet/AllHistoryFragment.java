@@ -21,8 +21,6 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.adapter.AllHisViewAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.dummy.DummyContent;
-import io.boscoin.toknenet.wallet.dummy.DummyContent.DummyItem;
 import io.boscoin.toknenet.wallet.model.Payments;
 
 /**
@@ -59,7 +57,6 @@ public class AllHistoryFragment extends Fragment {
 
         Log.e(TAG,"CREATE");
         if (getArguments() != null) {
-           // mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
             mPubkey = getArguments().getString(Constants.Invoke.PUBKEY);
             Log.e(TAG, "pubkey = "+mPubkey);
         }
