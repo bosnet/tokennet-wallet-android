@@ -1,4 +1,4 @@
-# Tokennet-wallet-android
+# Tokennet Wallet For Android
 BOScoin tokennet wallet for Android by BlockchainOS, Inc
 
 It is designed to enhance security to solve the problem of users losing or taken over their seed key.
