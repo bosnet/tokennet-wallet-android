@@ -12,8 +12,6 @@ The following basic functions can be tested.
 - Create Wallet
 - Import Wallet(with Recovery Key)
 
-# Download
-Download the [latest JAR](https://github.com/kimcyb/java-bostokennet-sdk/releases).
 
 # Compatibility
 * **Minimum Android SDK**: Glide v4.4 requires a minimum API level of 21.
@@ -32,6 +30,5 @@ To open in Android Studio:
 **Note**: Make sure your *Android SDK* has the *Android Support Repository* installed, and that your `$ANDROID_HOME` environment
 variable is pointing at the SDK or add a `local.properties` file in the root project with a `sdk.dir=...` line.
 
-# Author
-Kim Changyong - @kimcyb on GitHub
+
 
