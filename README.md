@@ -5,6 +5,7 @@ It is designed to enhance security to solve the problem of users losing or taken
 
 For more information please refer to the website.
 
+
 # Status
 The current version has been implemented Android Basic UI.
 The following basic functions can be tested.
@@ -18,7 +19,7 @@ The following basic functions can be tested.
 * **Compile Android SDK**: Glide v4.4 requires you to compile against API 26 or later.
 
 # Development and Build
-Follow the steps in the [Download](#Download) section to setup it up, and then edit the files however you wish.
+For building [java-stellar-sdk](https://github.com/bosnet/java-stellar-sdk) is required, and then edit the files however you wish.
 [Android Studio][26] cleanly imports both tokennet-wallet-android's source and tests.
 
 To open in Android Studio:
