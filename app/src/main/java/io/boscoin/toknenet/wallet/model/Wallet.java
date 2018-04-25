@@ -63,4 +63,13 @@ public class Wallet {
         this.walletOrder = worder;
         this.walletBalance = wasset;
     }
+
+    public Wallet(Wallet wallet){
+        this.walletId = wallet.walletId;
+        this.walletName = wallet.walletName;
+        this.walletAccountId = wallet.walletAccountId;
+        this.walletKey = wallet.walletKey;
+        this.walletOrder = wallet.walletOrder;
+        this.walletBalance = wallet.walletBalance;
+    }
 }

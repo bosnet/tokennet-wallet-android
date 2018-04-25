@@ -21,14 +21,10 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.adapter.AllHisViewAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
+
 import io.boscoin.toknenet.wallet.model.Payments;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListAllFragInteractionListener}
- * interface.
- */
+
 public class AllHistoryFragment extends Fragment {
 
     private static final String TAG = "AllHistoryFragment";
@@ -151,17 +147,6 @@ public class AllHistoryFragment extends Fragment {
 
 
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnListAllFragInteractionListener {
         // TODO: Update argument type and name
         void ListAllFragInteraction(Payments.PayRecords item);

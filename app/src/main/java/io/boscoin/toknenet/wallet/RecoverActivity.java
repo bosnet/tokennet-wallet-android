@@ -11,6 +11,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.toknenet.wallet.utils.Utils;
 
 
 public class RecoverActivity extends AppCompatActivity {

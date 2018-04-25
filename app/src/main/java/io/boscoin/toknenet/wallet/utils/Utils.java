@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.toknenet.wallet.utils;
 
 import com.google.common.io.BaseEncoding;
 
@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * Created by kimcy on 2018. 2. 26..
+ */
 
 public class Utils {
     private static final String TAG = "Utils";
@@ -19,15 +22,17 @@ public class Utils {
     public static String convertUtcToLocal(String utcTime){
         String localTime = "";
 
+        //날짜(date)포맷 선언
         SimpleDateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         SimpleDateFormat dateLocalFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         try {
-
+            //해당포맷으로 변경
             Date dateUtcTime = dateFormat.parse(utcTime);
-
+            //long타입의 시간으로 변경
             long longUtcTime = dateUtcTime.getTime();
 
+            //time zone을 통해 시간차 계산(썸머타임 고려 getrawoffset 대신 getoffset 사용
             TimeZone zone = TimeZone.getDefault();
             int offset = zone.getOffset(longUtcTime);
             long longLocalTime = longUtcTime + offset;
@@ -36,6 +41,7 @@ public class Utils {
             Date dateLocalTime = new Date();
             dateLocalTime.setTime(longLocalTime);
 
+            //로컬타임을 문자열로.
             localTime = dateLocalFormat.format(dateLocalTime);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -52,7 +58,7 @@ public class Utils {
         String address;
         int length = add.length();
         int strat = length -4;
-        address = add.substring(0,4);
+        address = add.substring(0,4); //처음 4자
         address = address+"..........";
         address = address+add.substring(strat,length);
 

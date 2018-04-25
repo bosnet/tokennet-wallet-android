@@ -24,6 +24,7 @@ import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.dummy.DummyContent;
 import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Payments;
+import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class HistoryActivity extends AppCompatActivity implements
         AllHistoryFragment.OnListAllFragInteractionListener,AllHistoryFragment.CurrentBalanceListener,
@@ -34,6 +35,7 @@ public class HistoryActivity extends AppCompatActivity implements
     private DbOpenHelper mDbOpenHelper;
     private TextView wName , wBalance, wPubKey;
     private String mMyPublicKey;
+    private long mAccountId;
     private Context mContext;
 
     @Override
@@ -66,6 +68,7 @@ public class HistoryActivity extends AppCompatActivity implements
         mMyPublicKey = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
         wPubKey.setText(Utils.contractionAddress(mMyPublicKey));
 
+        mAccountId = cursor.getLong(cursor.getColumnIndex("_id"));
         AllHistoryFragment allf = new AllHistoryFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
@@ -131,6 +134,7 @@ public class HistoryActivity extends AppCompatActivity implements
 
     public void goSendView(View view) {
         Intent it = new Intent(HistoryActivity.this, SendActivity.class);
+        it.putExtra(Constants.Invoke.SEND,mAccountId);
         startActivity(it);
     }
 

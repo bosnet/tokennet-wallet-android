@@ -2,12 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical">
+
+   <include
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       layout="@layout/layout_list_title"
+       />
 
     <android.support.v7.widget.RecyclerView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:id="@+id/rv_walletlist">
+        android:layout_marginTop="3dp"
+        android:id="@+id/rv_walletlist"
+        android:background="@color/background_list">
 
     </android.support.v7.widget.RecyclerView>
 

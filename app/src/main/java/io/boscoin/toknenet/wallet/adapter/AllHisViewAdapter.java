@@ -8,12 +8,11 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.AllHistoryFragment.OnListAllFragInteractionListener;
 import io.boscoin.toknenet.wallet.R;
-import io.boscoin.toknenet.wallet.Utils;
+import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.dummy.DummyContent.DummyItem;
 import io.boscoin.toknenet.wallet.model.Payments;
 
 import java.util.ArrayList;
-
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the

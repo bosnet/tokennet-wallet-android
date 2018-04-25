@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class WalletListActivity extends AppCompatActivity {
     private List<Wallet> walletList;
     private Cursor mCursor;
     private Context mContext;
+    private Button mBtnSetting;
 
     public interface ClickListener {
         void onSendClicked(int postion);
@@ -45,6 +48,15 @@ public class WalletListActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
+
+        mBtnSetting = findViewById(R.id.btn_setting);
+        mBtnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(WalletListActivity.this, WalletOrderActivity.class);
+                startActivity(it);
+            }
+        });
 
         initializeData();
         initializeAdapter();

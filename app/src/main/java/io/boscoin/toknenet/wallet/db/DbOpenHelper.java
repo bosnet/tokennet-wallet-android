@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import io.boscoin.toknenet.wallet.conf.Constants;
 
 public class DbOpenHelper {
 
@@ -72,7 +73,7 @@ public class DbOpenHelper {
 		return mDB.insert(DataBases.CreateWalletDB._TABLENAME, null, values);
 	}
 
-    public long insertColumnWallet2(String name, String add, String key, int order, String bal){
+    public long insertColumnWallet(String name, String add, String key, int order, String bal){
         ContentValues values = new ContentValues();
         values.put(DataBases.CreateWalletDB.COL_NAME, name);
         values.put(DataBases.CreateWalletDB.COL_ADDRESS, add);
@@ -95,6 +96,16 @@ public class DbOpenHelper {
 		values.put(DataBases.CreateWalletDB.COL_NAME, name);
 		values.put(DataBases.CreateWalletDB.COL_ADDRESS, add);
 		values.put(DataBases.CreateWalletDB.COL_KEY, key);
+		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
+	}
+
+	public boolean updateColumnWallet(long id , String name, String add, String key, int order, String bal){
+		ContentValues values = new ContentValues();
+		values.put(DataBases.CreateWalletDB.COL_NAME, name);
+		values.put(DataBases.CreateWalletDB.COL_ADDRESS, add);
+		values.put(DataBases.CreateWalletDB.COL_KEY, key);
+		values.put(DataBases.CreateWalletDB.COL_ORDER, order);
+		values.put(DataBases.CreateWalletDB.COL_LASTEST, bal);
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 
@@ -135,6 +146,18 @@ public class DbOpenHelper {
 	}
 
 
+	public Cursor getColumnWalletByOrder(String ordring){
+		String orderBy = Constants.DB.WALLET_ORDER + " " +ordring;
+
+		return mDB.query(DataBases.CreateWalletDB._TABLENAME, null,
+				Constants.DB.WALLET_ORDER, null, null, null, orderBy);
+	}
+
+	public int getWalletCount(){
+		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, null, null, null, null, null, null);
+		int count = c.getCount();
+		return count;
+	}
 }
 
 

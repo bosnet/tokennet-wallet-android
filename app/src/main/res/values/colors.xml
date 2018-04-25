@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#00193D</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
@@ -9,4 +9,8 @@
     <color name="swipe_color_2">#99CC00</color>
     <color name="swipe_color_3">#8ABD00</color>
     <color name="swipe_color_4">#7CAF00</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="background_list">#EEEEEE</color>
+    <color name="background_title">#133f68</color>
 </resources>

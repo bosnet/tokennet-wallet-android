@@ -38,6 +38,7 @@
     <string name="import_secure">Import Secure Key</string>
     <string name="recover">Recover</string>
     <string name="input_used_pw">Used Password</string>
+    <string name="done">Done</string>
 
     <string name="create_wallet">Create Wallet</string>
     <string name="import_wallet">Import Wallet</string>
@@ -51,6 +52,8 @@
     <string name="input_pub_key">Input Public Address</string>
     <string name="send_fee">Fees</string>
     <string name="ammount">Ammount</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="change_wallet_order">Change Wallet Order</string>
 
     <string name="error_no_name">Please Input Wallnet Name</string>
     <string name="error_no_pw">Please Input Wallnet PassWord</string>
@@ -60,5 +63,8 @@
     <string name="error_decode_seed_key">Invalid Seed key.</string>
     <string name="error_decode_bos_key">Invalid Bos key.</string>
     <string name="error_two_key">Please Only One Key</string>
+    <string name="title_activity_wallet_order">WalletOrderActivity</string>
+
+
 
 </resources>

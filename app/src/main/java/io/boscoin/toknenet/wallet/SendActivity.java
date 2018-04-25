@@ -33,6 +33,7 @@ import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class SendActivity extends AppCompatActivity {
 

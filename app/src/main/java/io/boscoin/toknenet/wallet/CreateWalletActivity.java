@@ -104,7 +104,8 @@ public class CreateWalletActivity extends AppCompatActivity {
                 String dec =  AESCrypt.decrypt(wPw1,tmp2);
                 mDbOpenHelper = new DbOpenHelper(this);
                 mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-                walletId = mDbOpenHelper.insertColumnWallet2(wName,KeyPair.fromSecretSeed(dec).getAccountId(),mKey, 0,"0");
+                int count = mDbOpenHelper.getWalletCount();
+                walletId = mDbOpenHelper.insertColumnWallet(wName,KeyPair.fromSecretSeed(dec).getAccountId(),mKey, ++count,"0");
                 mDbOpenHelper.close();
                 makeQRcode();
             } catch (GeneralSecurityException e) {
@@ -117,7 +118,8 @@ public class CreateWalletActivity extends AppCompatActivity {
                 final String aes =  AESCrypt.encrypt(wPw1, mKey);
                 mDbOpenHelper = new DbOpenHelper(this);
                 mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-                walletId = mDbOpenHelper.insertColumnWallet2(wName,pair.getAccountId(),aes,0,"0");
+                int count = mDbOpenHelper.getWalletCount();
+                walletId = mDbOpenHelper.insertColumnWallet(wName,pair.getAccountId(),aes,++count,"0");
                 mDbOpenHelper.close();
                 makeQRcode();
             } catch (GeneralSecurityException e) {
@@ -135,7 +137,9 @@ public class CreateWalletActivity extends AppCompatActivity {
                 final String aes =  AESCrypt.encrypt(wPw1, new String(pair.getSecretSeed()));
                 mDbOpenHelper = new DbOpenHelper(this);
                 mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-                walletId = mDbOpenHelper.insertColumnWallet2(wName,pair.getAccountId(),aes, 0, "0");
+
+                int count = mDbOpenHelper.getWalletCount();
+                walletId = mDbOpenHelper.insertColumnWallet(wName,pair.getAccountId(),aes, ++count, "0");
                 mDbOpenHelper.close();
                 makeQRcode();
                 if(TEST_GET){
