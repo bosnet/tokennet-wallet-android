@@ -53,7 +53,7 @@ public class Utils {
         String address;
         int length = add.length();
         int strat = length -4;
-        address = add.substring(0,4); //처음 4자
+        address = add.substring(0,4);
         address = address+"..........";
         address = address+add.substring(strat,length);
 
