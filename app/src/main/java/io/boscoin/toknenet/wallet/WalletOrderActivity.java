@@ -59,7 +59,6 @@ public class WalletOrderActivity extends AppCompatActivity {
                 walletList = wAdapter.getWalletList();
 
 
-                // TODO: 2018. 4. 24. 변경되면 sharedpreference 에 저장 
                 int ordering = 0;
                 for(Wallet w : walletList ){
                     ordering++;
@@ -109,51 +108,4 @@ public class WalletOrderActivity extends AppCompatActivity {
 
     }
 
-    /*private void getWallerList2(){
-        mTask = new WalletWorkerTask();
-    }
-
-    private class WalletWorkerTask extends AsyncTask{
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
-        }
-
-        @Override
-        protected void onProgressUpdate(Object[] values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-            Log.e(TAG,"call onCancelled");
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mTask.onCancelled();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mTask.onCancelled();
-    }*/
 }
