@@ -11,9 +11,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- * Created by kimcy on 2018. 3. 12..
- */
+
 
 public class AESCrypt {
     private static final String TAG = "AESCrypt";

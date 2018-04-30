@@ -37,6 +37,7 @@ public class HistoryActivity extends AppCompatActivity implements
     private String mMyPublicKey;
     private long mAccountId;
     private Context mContext;
+    private long mIdx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +54,10 @@ public class HistoryActivity extends AppCompatActivity implements
     private void initUI() {
         Intent it = getIntent();
 
-        long idx = it.getLongExtra(Constants.Invoke.HISTORY,0);
+        mIdx = it.getLongExtra(Constants.Invoke.HISTORY,0);
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-        Cursor cursor = mDbOpenHelper.getColumnWallet(idx);
+        Cursor cursor = mDbOpenHelper.getColumnWallet(mIdx);
 
         wName = findViewById(R.id.tv_wname);
         wName.setText(cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_NAME)));
@@ -68,7 +69,7 @@ public class HistoryActivity extends AppCompatActivity implements
         mMyPublicKey = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
         wPubKey.setText(Utils.contractionAddress(mMyPublicKey));
 
-        mAccountId = cursor.getLong(cursor.getColumnIndex("_id"));
+       mAccountId = cursor.getLong(cursor.getColumnIndex("_id"));
         AllHistoryFragment allf = new AllHistoryFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
@@ -139,14 +140,16 @@ public class HistoryActivity extends AppCompatActivity implements
     }
 
     public void goReceiveView(View view) {
-        // TODO: 2018. 4. 12. will be needs received activity
-        Intent it = new Intent(HistoryActivity.this, QRActivity.class);
-        it.putExtra(Constants.Invoke.WALLET, mMyPublicKey);
+
+        Intent it = new Intent(HistoryActivity.this, ReceiveActivity.class);
+        it.putExtra(Constants.Invoke.WALLET, mIdx);
         startActivity(it);
+        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
     }
 
     public void goAddressView(View view) {
         Toast.makeText(mContext, "Next Step", Toast.LENGTH_SHORT).show();
+
     }
 
     public void addressCopy(View view) {

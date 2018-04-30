@@ -9,6 +9,8 @@ The current version has been implemented with 'Android Basic UI'. Using current 
 - Sending transaction
 - Creating wallet
 - Importing wallet(with *Recovery Key*)
+- Ordiring wallet list(temporary)
+- Receive
 
 # Compatibility
 

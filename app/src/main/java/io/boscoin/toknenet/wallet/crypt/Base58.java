@@ -2,9 +2,7 @@ package io.boscoin.toknenet.wallet.crypt;
 
 import java.math.BigInteger;
 
-/**
- * Created by kimcy on 2018. 3. 27..
- */
+
 
 public class Base58 {
     private static final String ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";

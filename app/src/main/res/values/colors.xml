@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00193D</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#133F68</color>
+    <color name="colorPrimaryDark">#0F3253</color>
+   <!-- <color name="colorAccent">#00000000</color> -->
+    <color name="colorAccent">#B6DB49</color>
 
     <!-- pull to refresh temp color -->
     <color name="swipe_color_1">#B6DB49</color>
     <color name="swipe_color_2">#99CC00</color>
     <color name="swipe_color_3">#8ABD00</color>
     <color name="swipe_color_4">#7CAF00</color>
-    <color name="white">#FFFFFF</color>
+
+
 
     <color name="background_list">#EEEEEE</color>
     <color name="background_title">#133f68</color>
+   <color name="nav_text">#666666</color>
+
+    <color name="line_nav_back">#fafafa</color>
+
+
+    <!-- black style -->
+    <color name="black">#000000</color>
+
+
+
+
+
+    <!-- white -->
+    <color name="white">#FFFFFF</color>
+    <color name="white_line">#bdbdbd</color>
+    <color name="white_e_hint">#999999</color>
+
+    <!-- blue -->
+    <color name="blue_name">#1e3148</color>
+    <color name="blue_rect">#0094bd</color>
+
+    <!--  red -->
+    <color name="red_error">#db1403</color>
 </resources>

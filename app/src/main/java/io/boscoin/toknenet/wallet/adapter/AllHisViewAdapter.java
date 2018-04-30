@@ -14,11 +14,7 @@ import io.boscoin.toknenet.wallet.model.Payments;
 
 import java.util.ArrayList;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListAllFragInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.ViewHolder> {
 
     private ArrayList<Payments.PayRecords> mValues;

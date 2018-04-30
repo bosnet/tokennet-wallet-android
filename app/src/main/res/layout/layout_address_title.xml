@@ -11,11 +11,11 @@
         android:layout_centerInParent="true"
         android:text="@string/my_wallet"/>
 
+
     <Button
-        android:id="@+id/btn_setting"
+        android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting"
-        android:layout_alignParentRight="true"/>
-
+        android:text="@string/add"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

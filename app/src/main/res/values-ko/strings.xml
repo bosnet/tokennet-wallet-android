@@ -18,7 +18,7 @@
     <string name="account_balance2">계좌 잔고 2</string>
     <string name="payments">지불</string>
     <string name="confirm_payments_his">거래 기록 확인</string>
-    <string name="receives">수신</string>
+    <string name="receives">받기</string>
     <string name="toolbar_activity">툴바 액티비티</string>
     <string name="make_address">주소록</string>
     <string name="make_qr">QR코드</string>
@@ -52,8 +52,12 @@
     <string name="ammount">금액</string>
     <string name="my_wallet">내 지갑</string>
     <string name="change_wallet_order">지갑 순서 변경</string>
-
-
+    <string name="add">추가</string>
+    <string name="history">거래내역</string>
+    <string name="request_amount">(선택)요청 금액 입력</string>
+    <string name="copy">복사</string>
+    <string name="share">공유</string>
+    <string name="req_amount">요청 금액</string>
 
     <string name="error_no_name">지갑이름을 입력해 주세요</string>
     <string name="error_no_pw">패스워드를 입력해 주세요</string>
@@ -63,4 +67,5 @@
     <string name="error_decode_seed_key">유효하지 않은 키 형식입니다.</string>
     <string name="error_decode_bos_key">유효하지 않은 키 형식입니다.</string>
     <string name="error_two_key">하나의 키만 입력해 주세요.</string>
+    <string name="error_amount">소수점은 7번째 자리까지만 가능합니다.</string>
 </resources>

@@ -12,11 +12,7 @@ import io.boscoin.toknenet.wallet.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListReceiptFragInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class ReceiptViewAdapter extends RecyclerView.Adapter<ReceiptViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;

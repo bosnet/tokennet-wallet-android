@@ -63,7 +63,7 @@ public class WalletListActivity extends AppCompatActivity {
     }
 
     private void initializeData() {
-        // TODO: 2018. 4. 9. 순서변경, 제한 개수 읽기
+
         walletList = new ArrayList<>();
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
@@ -103,7 +103,7 @@ public class WalletListActivity extends AppCompatActivity {
             @Override
             public void onReceivedClicked(int postion) {
                 // TODO: 2018. 4. 12. will be needs received activity 
-                Intent it = new Intent(WalletListActivity.this, QRActivity.class);
+                Intent it = new Intent(WalletListActivity.this, ReceiveActivity.class);
                 it.putExtra(Constants.Invoke.WALLET, walletList.get(postion).getWalletId());
                 startActivity(it);
             }

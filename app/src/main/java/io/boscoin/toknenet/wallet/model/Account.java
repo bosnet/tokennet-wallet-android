@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-/**
- * Created by kimcy on 2018. 2. 23..
- */
 
 public class Account {
    private static final String TAG = "Account";

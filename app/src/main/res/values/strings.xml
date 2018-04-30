@@ -11,6 +11,7 @@
     <string name="his_send">Send History</string>
     <string name="toast_text_clipboard_address">Address Copyed.</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="contacts">Contacts</string>
 
     <!-- 언어변경 테스트 -->
     <string name="create_account">Create Account</string>
@@ -20,7 +21,7 @@
     <string name="account_balance2">Account Balance 2</string>
     <string name="payments">Payments</string>
     <string name="confirm_payments_his">Confirm Payments History</string>
-    <string name="receives">Receives</string>
+    <string name="receives">Receive</string>
     <string name="toolbar_activity">Activity with Toolbar</string>
     <string name="make_address">Address</string>
     <string name="make_qr">Make QR</string>
@@ -54,6 +55,13 @@
     <string name="ammount">Ammount</string>
     <string name="my_wallet">My Wallet</string>
     <string name="change_wallet_order">Change Wallet Order</string>
+    <string name="add">Add</string>
+    <string name="history">History</string>
+    <string name="request_amount">(Option) Request a specific amount</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="req_amount">Request Amount</string>
+
 
     <string name="error_no_name">Please Input Wallnet Name</string>
     <string name="error_no_pw">Please Input Wallnet PassWord</string>
@@ -64,7 +72,11 @@
     <string name="error_decode_bos_key">Invalid Bos key.</string>
     <string name="error_two_key">Please Only One Key</string>
     <string name="title_activity_wallet_order">WalletOrderActivity</string>
-
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="error_amount">The decimal point can only be entered to the 7th digit</string>
 
 
 </resources>

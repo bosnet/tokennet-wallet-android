@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_bg">
+
+
+        <RelativeLayout
+            android:id="@+id/menu_trans_his"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <ImageButton
+                android:id="@+id/ic_history"
+                android:layout_width="25dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_icon_history" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif"
+                android:layout_below="@+id/ic_history"
+                android:textStyle="normal"
+                android:textColor="@color/nav_text"
+                android:lineSpacingExtra="6sp"
+                android:layout_marginTop="9dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:text="@string/history"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/menu_send"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <ImageButton
+                android:id="@+id/ic_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_icon_send" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/nav_text"
+                android:lineSpacingExtra="6sp"
+                android:layout_below="@+id/ic_send"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:text="@string/send"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/menu_receive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <ImageButton
+                android:id="@+id/ic_receive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_icon_recieve" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/nav_text"
+                android:lineSpacingExtra="6sp"
+                android:layout_below="@+id/ic_receive"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:text="@string/receive"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu_contact"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <ImageButton
+                android:id="@+id/ic_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_icon_recieve" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/nav_text"
+                android:lineSpacingExtra="6sp"
+                android:layout_below="@+id/ic_contact"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:text="@string/contacts"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

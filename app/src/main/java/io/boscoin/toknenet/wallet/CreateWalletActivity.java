@@ -133,7 +133,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             pair = KeyPair.random();
 
             try {
-                // TODO: 2018. 4. 6. 동일한 이름이 있는지 검색 
+
                 final String aes =  AESCrypt.encrypt(wPw1, new String(pair.getSecretSeed()));
                 mDbOpenHelper = new DbOpenHelper(this);
                 mDbOpenHelper.open(Constants.DB.MY_WALLETS);
