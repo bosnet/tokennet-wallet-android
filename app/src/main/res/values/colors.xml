@@ -3,7 +3,7 @@
     <color name="colorPrimary">#133F68</color>
     <color name="colorPrimaryDark">#0F3253</color>
    <!-- <color name="colorAccent">#00000000</color> -->
-    <color name="colorAccent">#B6DB49</color>
+    <color name="colorAccent">#0094bd</color>
 
     <!-- pull to refresh temp color -->
     <color name="swipe_color_1">#B6DB49</color>
@@ -15,7 +15,7 @@
 
     <color name="background_list">#EEEEEE</color>
     <color name="background_title">#133f68</color>
-   <color name="nav_text">#666666</color>
+
 
     <color name="line_nav_back">#fafafa</color>
 
@@ -31,10 +31,16 @@
     <color name="white">#FFFFFF</color>
     <color name="white_line">#bdbdbd</color>
     <color name="white_e_hint">#999999</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_nav_text">#666666</color>
+    <color name="white_btn">#cccccc</color>
 
     <!-- blue -->
     <color name="blue_name">#1e3148</color>
     <color name="blue_rect">#0094bd</color>
+    <color name="blue_bg">#0b3d6b</color>
+    <color name="blue_light_bg">#104473</color>
+    <color name="blue_bottom_bg">#446799</color>
 
     <!--  red -->
     <color name="red_error">#db1403</color>

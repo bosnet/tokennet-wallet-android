@@ -61,7 +61,33 @@
     <string name="copy">Copy</string>
     <string name="share">Share</string>
     <string name="req_amount">Request Amount</string>
-
+    <string name="bos_tk">BOScoin Tokennet</string>
+    <string name="wallet">Wallet</string>
+    <string name="bos_p_f">BOS Platform Foundation</string>
+    <string name="wellcome_t">Welcome to</string>
+    <string name="bos_tk_w">BOScoin Tokennet Wallet</string>
+    <string name="let_start">Let\'s start with the notes before</string>
+    <string name="using_yw">using your wallet.</string>
+    <string name="users_using">Users using this wallet are deemed to have</string>
+    <string name="agree_all_precautions">agreed to all precautions.</string>
+    <string name="dont_show">Don\'t show again</string>
+    <string name="next">Next</string>
+    <string name="ca_do_not_lose">Do not lose or share your secret seed,\nrecovery key, or password.</string>
+    <string name="ca_sec_seed">Secret seed, recovery key, and password can\nnot be found again. Please manage it\nthoroughly.</string>
+    <string name="please_quit">Please quit the app immediately\nafter use.</string>
+    <string name="someone_can">Someone can always steal your secret seed.</string>
+    <string name="no_see_page">Do you want to see this page again?</string>
+    <string name="please_check">Please check the following notes.</string>
+    <string name="min_balance">A minimum balance is required to create a valid\naccount. Please send a minimum balance of\n0.1BOS after setting the password.</string>
+    <string name="wallet_name">Wallet names and information in your contacts\nwill all disappear when the app is removed or\nyour wallet is imported.</string>
+    <string name="your_pw">Your password is required to send BOS, check\nyour secret seed, and import your wallet.\nRemember, you cannot find your password\nif you lose it.</string>
+    <string name="secret_seed">Secret seed and recovery key are required when\nimporting wallets. Do not lose it or share it with\nothers.</string>
+    <string name="enter_wname">Enter Wallet Name</string>
+    <string name="enter_pw">Enter Password</string>
+    <string name="confirm_pw">Confirm Password</string>
+    <string name="your_pw_is">Your password is required to send BOS, check your secret seed</string>
+    <string name="and_import">and import your wallet. Remember,</string>
+    <string name="you_cannot_find">you cannot find your password if you lose it.</string>
 
     <string name="error_no_name">Please Input Wallnet Name</string>
     <string name="error_no_pw">Please Input Wallnet PassWord</string>
@@ -77,6 +103,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="error_amount">The decimal point can only be entered to the 7th digit</string>
-
+    <string name="error_all_check">Please check all notice.</string>
+    <string name="error_already">The name is already taken</string>
 
 </resources>

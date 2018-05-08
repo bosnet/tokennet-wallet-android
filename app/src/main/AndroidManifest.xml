@@ -11,15 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="false"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".CreateWalletActivity" />
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".CreateWalletActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".QRActivity" />
         <activity android:name=".RecoverActivity" />
         <activity android:name=".SmallCaptureActivity" />
@@ -36,8 +32,15 @@
 
         <activity
             android:name=".ReceiveActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode = "adjustPan">
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -9,11 +9,13 @@ public class WalletPreference {
     private static final String TAG = WalletPreference.class.getSimpleName();
 
     private static final String WALLET_IS_CHANGE_ORDER = "wallet.change.order";
+    private static final String SKIP_CAUTIONS = "wallet.skip.caution";
 
 
     public static void defaultPreference(Context context) {
 
         setBoolean(context, WALLET_IS_CHANGE_ORDER, false);
+        setBoolean(context, SKIP_CAUTIONS, false);
 
     }
 
@@ -25,6 +27,13 @@ public class WalletPreference {
         setBoolean(context, WALLET_IS_CHANGE_ORDER, set);
     }
 
+    public static boolean getSkipCaution(Context context) {
+        return getBoolean(context,SKIP_CAUTIONS, false);
+    }
+
+    public static void setSkipCaution(Context context, boolean set) {
+        setBoolean(context, SKIP_CAUTIONS, set);
+    }
 
     public static void setBoolean(Context context, String key, boolean value) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);

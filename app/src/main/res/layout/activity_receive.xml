@@ -68,6 +68,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
         android:layout_marginTop="26dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@null"
         android:textCursorDrawable="@drawable/edit_cursor_color"/>
 
 

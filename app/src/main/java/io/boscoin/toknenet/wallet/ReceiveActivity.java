@@ -85,40 +85,7 @@ public class ReceiveActivity extends AppCompatActivity {
 
 
         mEAmount = findViewById(R.id.edit_amount);
-        /*mEAmount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.e(TAG, "before = "+s.toString());
-               // mEAmount.setText(result);
 
-
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.e(TAG,"s = "+s.toString());
-                Log.e(TAG,"00 result = "+result);
-               *//* if(!TextUtils.isEmpty(s.toString()) && !s.toString().equals(result)){
-                   // result = decimalFormat.format(Double.parseDouble(s.toString().replaceAll(",","")));
-                    Log.e(TAG,"11 result = "+result);
-                    result = decimalFormat.format(Double.parseDouble(s.toString().replace(",","")));
-                    Log.e(TAG,"22 result = "+result);
-                    mEAmount.setText(result);
-                    mEAmount.setSelection(result.length());
-
-                }*//*
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                Log.e(TAG, "after = "+s.toString());
-
-
-            }
-        });*/
 
     }
 
@@ -128,7 +95,6 @@ public class ReceiveActivity extends AppCompatActivity {
         it.setType("text/plain");
         String message = mPubKey+ "\n"+mEAmount.getText().toString();
         it.putExtra(Intent.EXTRA_TEXT, message);
-        //it.putExtra(Intent., message);
         startActivity(it);
 
         Intent chooserIntent = Intent.createChooser(it, getString(R.string.req_amount));

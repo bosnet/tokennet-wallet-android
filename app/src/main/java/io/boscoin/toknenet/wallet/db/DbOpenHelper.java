@@ -153,6 +153,18 @@ public class DbOpenHelper {
 				Constants.DB.WALLET_ORDER, null, null, null, orderBy);
 	}
 
+
+	public Cursor getColumnWalletName(){
+		String[] columns = {Constants.DB.WALLET_NAME};
+
+		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, columns,
+				null, null, null, null, null);
+
+		if(c != null && c.getCount() != 0)
+			c.moveToFirst();
+		return c;
+	}
+
 	public int getWalletCount(){
 		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, null, null, null, null, null, null);
 		int count = c.getCount();
