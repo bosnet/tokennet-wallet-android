@@ -88,6 +88,14 @@
     <string name="your_pw_is">Your password is required to send BOS, check your secret seed</string>
     <string name="and_import">and import your wallet. Remember,</string>
     <string name="you_cannot_find">you cannot find your password if you lose it.</string>
+    <string name="rember_recover">Remember the recovery key show\non the next screen so you can\nrecover your wallet again.</string>
+    <string name="title_setup">Password setup is complete.</string>
+    <string name="double_check">Double-check that you have kept a recovery key that you can\nsee now.
+        The recovery key and secret seed can be found on\nthe Settings screen of the individual wallet.</string>
+    <string name="check_reckey">Check Recovery Key.</string>
+
+
+
 
     <string name="error_no_name">Please Input Wallnet Name</string>
     <string name="error_no_pw">Please Input Wallnet PassWord</string>
@@ -105,5 +113,19 @@
     <string name="error_amount">The decimal point can only be entered to the 7th digit</string>
     <string name="error_all_check">Please check all notice.</string>
     <string name="error_already">The name is already taken</string>
+    <string name="title_activity_login">Sign in</string>
+
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="error_wname_length">Wallet name can be up to 10.</string>
+    <string name="error_pw">The password must be at least 8\ncharacters long and must include\nnumbers, uppercase English,\nlowercase letters, and special\ncharacters.</string>
 
 </resources>

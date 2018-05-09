@@ -23,9 +23,15 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent it = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(it);
-                finish();
+                if(!WalletPreference.getSkipCaution(mContext)){
+                    Intent it = new Intent(SplashActivity.this, PreCautionOneActivity.class);
+                    startActivity(it);
+                    finish();
+                }else{
+                    Intent it = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(it);
+                    finish();
+                }
             }
         }, SPLASH_TIME);
     }

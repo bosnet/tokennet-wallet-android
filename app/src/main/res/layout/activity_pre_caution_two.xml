@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreCautionTwoActivity"
+    android:background="@color/blue_light_bg">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="144dp"
+        android:background="@drawable/ic_icon_lock"/>
+
+    <ImageButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_icon_close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"/>
+
+    <TextView
+        android:id="@+id/txt_ca1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="364dp"
+        android:layout_marginLeft="28dp"
+        android:text="@string/ca_do_not_lose"
+        />
+
+    <TextView
+        android:id="@+id/txt_ca2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/white_50"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintStart_toStartOf="@id/txt_ca1"
+        app:layout_constraintTop_toBottomOf="@id/txt_ca1"
+        android:layout_marginTop="8dp"
+        android:text="@string/ca_sec_seed"
+        />
+
+    <View
+        android:id="@+id/cw"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ca2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="28dp"
+        android:background="@drawable/circle_b50"/>
+
+    <!-- app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="88dp" -->
+    <View
+        android:id="@+id/cb1"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ca2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="44dp"
+        android:background="@drawable/circle_w"/>
+
+    <View
+        android:id="@+id/cb2"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ca2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/circle_b50"/>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        layout="@layout/layout_bottom_caution"
+        />
+</android.support.constraint.ConstraintLayout>

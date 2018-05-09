@@ -41,6 +41,7 @@
     <color name="blue_bg">#0b3d6b</color>
     <color name="blue_light_bg">#104473</color>
     <color name="blue_bottom_bg">#446799</color>
+    <color name="blue_art_msg">#de0094bd</color>
 
     <!--  red -->
     <color name="red_error">#db1403</color>

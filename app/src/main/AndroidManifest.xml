@@ -42,6 +42,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PreCautionOneActivity" />
+        <activity android:name=".PreCautionTwoActivity" />
+        <activity android:name=".PreCationThreeActivity" />
+        <activity android:name=".CreateNoticeActivity" />
+
     </application>
 
 </manifest>
