@@ -73,13 +73,14 @@ public class DbOpenHelper {
 		return mDB.insert(DataBases.CreateWalletDB._TABLENAME, null, values);
 	}
 
-    public long insertColumnWallet(String name, String add, String key, int order, String bal){
+    public long insertColumnWallet(String name, String add, String key, int order, String bal, String time){
         ContentValues values = new ContentValues();
         values.put(DataBases.CreateWalletDB.COL_NAME, name);
         values.put(DataBases.CreateWalletDB.COL_ADDRESS, add);
         values.put(DataBases.CreateWalletDB.COL_KEY, key);
         values.put(DataBases.CreateWalletDB.COL_ORDER, order);
         values.put(DataBases.CreateWalletDB.COL_LASTEST, bal);
+		values.put(DataBases.CreateWalletDB.COL_TIME, time);
         return mDB.insert(DataBases.CreateWalletDB._TABLENAME, null, values);
     }
 
@@ -99,13 +100,14 @@ public class DbOpenHelper {
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 
-	public boolean updateColumnWallet(long id , String name, String add, String key, int order, String bal){
+	public boolean updateColumnWallet(long id , String name, String add, String key, int order, String bal, String time){
 		ContentValues values = new ContentValues();
 		values.put(DataBases.CreateWalletDB.COL_NAME, name);
 		values.put(DataBases.CreateWalletDB.COL_ADDRESS, add);
 		values.put(DataBases.CreateWalletDB.COL_KEY, key);
 		values.put(DataBases.CreateWalletDB.COL_ORDER, order);
 		values.put(DataBases.CreateWalletDB.COL_LASTEST, bal);
+		values.put(DataBases.CreateWalletDB.COL_TIME, time);
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 

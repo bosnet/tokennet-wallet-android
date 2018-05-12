@@ -1,52 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_wallet"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardElevation="2dp"
+    card_view:contentPaddingLeft="20dp"
+    card_view:contentPaddingRight="20dp"
+    card_view:contentPaddingTop="20dp"
+    card_view:contentPaddingBottom="17dp"
+    card_view:cardBackgroundColor="@color/white">
 
-    <!-- 추후 android:background="@color/white" -->
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_height="match_parent"
+
         >
 
+        <!-- android:layout_alignParentTop="true" -->
         <TextView
             android:id="@+id/wallet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:textSize="30sp"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textColor="@color/dark_blue_grey"
+            tools:text="BOS Wallet A01"
             />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/wallet_name"
+            android:background="@color/white_two"
+            android:layout_marginTop="7dp"/>
 
         <TextView
             android:id="@+id/wallet_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wallet_name" />
+            android:textSize="28sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/black"
+            tools:text="283.0025713 BOS"
+            android:layout_below="@+id/line1"
+            android:layout_marginTop="18dp"/>
 
 
-        <Button
+        <ImageView
+            android:id="@+id/img_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/ic_icon_clock"/>
+
+
+        <TextView
+            android:id="@+id/wallet_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/brownish_grey"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/img_clock"
+            android:layout_marginLeft="6dp"
+            tools:text="2018.04.23  13:48"
+            />
+
+
+
+        <TextView
             android:id="@+id/btn_receive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wallet_balance"
-            android:layout_alignParentEnd="true"
-            android:text="@string/receive"/>
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/cerulean"
+            android:text="@string/receive"
+            />
 
-        <Button
+        <TextView
             android:id="@+id/btn_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wallet_balance"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/btn_receive"
-            android:text="@string/send"/>
+            android:layout_marginRight="28dp"
+            android:textColor="@color/cerulean"
+            android:text="@string/send"
+            />
 
     </RelativeLayout>
 

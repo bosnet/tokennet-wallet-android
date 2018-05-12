@@ -5,12 +5,14 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +31,9 @@ public class WalletOrderActivity extends AppCompatActivity {
     private Cursor mCursor;
     private Wallet mWallet;
     private WalletOrderAdapter wAdapter;
-    private Button mBtnReorder;
+    private TextView mBtnReorder;
     private Context mContext;
-   // private WalletWorkerTask mTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +43,18 @@ public class WalletOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wallet_order);
         RecyclerView walletRV = findViewById(R.id.rv_worder_list);
         walletRV.setLayoutManager(new LinearLayoutManager(this));
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
+        dividerItemDecoration.setDrawable(mContext.getResources().getDrawable(R.drawable.line_divider));
+
         wAdapter = new WalletOrderAdapter();
         WalletTouchHelper dragHelper = new WalletTouchHelper(wAdapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(dragHelper);
         wAdapter.setTouchHelper(touchHelper);
+
+        walletRV.addItemDecoration(dividerItemDecoration);
+
         walletRV.setAdapter(wAdapter);
         touchHelper.attachToRecyclerView(walletRV);
 
@@ -63,10 +73,19 @@ public class WalletOrderActivity extends AppCompatActivity {
                 for(Wallet w : walletList ){
                     ordering++;
                     mDbOpenHelper.updateColumnWallet(w.getWalletId(),w.getWalletName(),w.getWalletAccountId(),
-                    w.getWalletKey(),ordering,w.getWalletBalance());
+                    w.getWalletKey(),ordering,w.getWalletBalance(),w.getWalletTime());
                 }
                 mDbOpenHelper.close();
                 WalletPreference.setWalletIsChangeOrder(mContext,true);
+                finish();
+            }
+        });
+
+
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -96,7 +115,8 @@ public class WalletOrderActivity extends AppCompatActivity {
                     mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_ADDRESS)),
                     mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_KET)),
                     mCursor.getInt(mCursor.getColumnIndex(Constants.DB.WALLET_ORDER)),
-                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LASTEST))
+                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LASTEST)),
+                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LAST_TIME))
 
 
             );

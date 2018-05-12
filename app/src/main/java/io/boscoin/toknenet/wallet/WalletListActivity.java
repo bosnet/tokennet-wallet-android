@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class WalletListActivity extends AppCompatActivity {
     private List<Wallet> walletList;
     private Cursor mCursor;
     private Context mContext;
-    private Button mBtnSetting;
+    private ImageButton mBtnSetting;
 
     public interface ClickListener {
         void onSendClicked(int postion);
@@ -53,11 +54,28 @@ public class WalletListActivity extends AppCompatActivity {
         mBtnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(WalletListActivity.this, WalletOrderActivity.class);
+
+                Intent it = new Intent(WalletListActivity.this, SettingActivity.class);
                 startActivity(it);
             }
         });
 
+        findViewById(R.id.btn_import).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(WalletListActivity.this, ImportActivity.class);
+                startActivity(it);
+            }
+        });
+
+        findViewById(R.id.btn_create).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(WalletListActivity.this, CreateNoticeActivity.class);
+                startActivity(it);
+            }
+        });
+        
         initializeData();
         initializeAdapter();
     }
@@ -79,7 +97,8 @@ public class WalletListActivity extends AppCompatActivity {
                     mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_ADDRESS)),
                     mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_KET)),
                     mCursor.getInt(mCursor.getColumnIndex(Constants.DB.WALLET_ORDER)),
-                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LASTEST))
+                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LASTEST)),
+                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LAST_TIME))
 
 
             );

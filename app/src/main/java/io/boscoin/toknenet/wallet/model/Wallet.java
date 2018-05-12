@@ -2,10 +2,17 @@ package io.boscoin.toknenet.wallet.model;
 
 
 public class Wallet {
-    private String walletName, walletKey, walletAccountId, walletBalance;
+    private String walletName, walletKey, walletAccountId, walletBalance,walletTime;
     private long walletId;
     private int walletOrder;
 
+    public String getWalletTime() {
+        return walletTime;
+    }
+
+    public void setWalletTime(String walletTime) {
+        this.walletTime = walletTime;
+    }
 
     public String getWalletName() {
         return walletName;
@@ -55,13 +62,14 @@ public class Wallet {
         this.walletOrder = walletOrder;
     }
 
-    public Wallet(long _id , String wname, String wpubkey, String wboskey, int worder, String wasset) {
+    public Wallet(long _id , String wname, String wpubkey, String wboskey, int worder, String wasset, String wtime) {
         this.walletId = _id;
         this.walletName = wname;
         this.walletAccountId = wpubkey;
         this.walletKey = wboskey;
         this.walletOrder = worder;
         this.walletBalance = wasset;
+        this.walletTime = wtime;
     }
 
     public Wallet(Wallet wallet){
@@ -71,5 +79,6 @@ public class Wallet {
         this.walletKey = wallet.walletKey;
         this.walletOrder = wallet.walletOrder;
         this.walletBalance = wallet.walletBalance;
+        this.walletTime = wallet.walletTime;
     }
 }

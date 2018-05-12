@@ -37,7 +37,13 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
     @Override
     public void onBindViewHolder(WalletListAdapter.WalletViewHolder holder, int position) {
         holder.walletName.setText(mWalletList.get(position).getWalletName());
-        holder.walletBalance.setText(mWalletList.get(position).getWalletBalance()+"BOS");
+        holder.walletTime.setText( mWalletList.get(position).getWalletTime());
+        String bal = mWalletList.get(position).getWalletBalance() + " BOS";
+
+        holder.walletBalance.setText(bal);
+
+
+
     }
 
     @Override
@@ -51,8 +57,9 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
         private CardView cv;
         private TextView walletName;
         private TextView walletBalance;
-        private Button btnSend;
-        private Button btnReceive;
+        private TextView btnSend;
+        private TextView btnReceive;
+        private TextView walletTime;
         private WeakReference<WalletListActivity.ClickListener> listenerRef;
 
         public WalletViewHolder(View itemView) {
@@ -61,8 +68,9 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
             cv = (CardView)itemView.findViewById(R.id.cv_wallet);
             walletName = (TextView)itemView.findViewById(R.id.wallet_name);
             walletBalance = (TextView)itemView.findViewById(R.id.wallet_balance);
-            btnReceive = (Button)itemView.findViewById(R.id.btn_receive);
-            btnSend = (Button)itemView.findViewById(R.id.btn_send);
+            walletTime = itemView.findViewById(R.id.wallet_time);
+            btnReceive = itemView.findViewById(R.id.btn_receive);
+            btnSend = itemView.findViewById(R.id.btn_send);
 
             btnSend.setOnClickListener(new View.OnClickListener() {
                 @Override

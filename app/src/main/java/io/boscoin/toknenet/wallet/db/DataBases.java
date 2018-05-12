@@ -29,6 +29,7 @@ public final class DataBases {
 		public static final String COL_KEY = Constants.DB.WALLET_KET;
 		public static final String COL_ORDER = Constants.DB.WALLET_ORDER;
 		public static final String COL_LASTEST = Constants.DB.WALLET_LASTEST;
+		public static final String COL_TIME = Constants.DB.WALLET_LAST_TIME;
 		public static final String _TABLENAME = "wallets";
 		public static final String _CREATE =
 				"CREATE TABLE "+_TABLENAME+"("
@@ -37,6 +38,7 @@ public final class DataBases {
 						+COL_ADDRESS+" Text NOT NULL ,"
 						+COL_KEY+" Text NOT NULL , "
 						+COL_ORDER+" Integer DEFAULT 0 , "
-		                +COL_LASTEST+" Text NOT NULL )";
+		                +COL_LASTEST+" Text NOT NULL ,"
+						+COL_TIME+" Text NOT NULL )";
 	}
 }

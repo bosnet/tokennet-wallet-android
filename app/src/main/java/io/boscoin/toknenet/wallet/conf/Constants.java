@@ -22,6 +22,7 @@ public class Constants {
 		public static final String WALLET_KET = "key";
 		public static final String WALLET_ORDER = "ordering";
 		public static final String WALLET_LASTEST = "lastest";
+		public static final String WALLET_LAST_TIME = "ltime";
     }
 
     public static final class Domain {

@@ -1,92 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateWalletActivity">
+    tools:context=".CreateWalletActivity"
+    android:background="@color/white">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        layout="@layout/layout_title"/>
+
+    <LinearLayout
+        android:id="@+id/name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="74dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_wname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="10dp"
+                android:hint="@string/enter_wname"
+                android:textColorHint="@color/brownish_grey"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:background="@null"
+                android:textCursorDrawable="@drawable/edit_cursor_color" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+   
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/name_layout"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
     <TextView
-        android:id="@+id/title_create_wallet"
+        android:id="@+id/txt_err_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/input_wallet_name"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <EditText
-        android:id="@+id/input_wname"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="10dp"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/line1"
         android:layout_marginTop="8dp"
-        android:hint="wallet #1"
-        android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_create_wallet" />
+        android:text="@string/error_already"
+        android:visibility="gone"/>
 
     <TextView
+        android:id="@+id/txt_err_name_length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/line1"
+        android:layout_marginTop="8dp"
+        android:text="@string/error_wname_length"
+        android:visibility="gone"/>
+
+   <!-- <TextView
         android:id="@+id/title_input_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/input_new_pw"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_wname" />
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/blue_rect"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/line1"
+        android:text="@string/enter_pw"
+        android:visibility="gone"/> -->
+
+
+   <android.support.design.widget.TextInputLayout
+        android:id="@+id/pw_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="41dp">
 
     <EditText
         android:id="@+id/edit_pw"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:hint="Please Input PassWord"
-        android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_input_pw" />
-
-
-    <TextView
-        android:id="@+id/title_confirm_pw"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/confirm_new_pw"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_pw" />
+        android:hint="@string/enter_pw"
+        android:textColorHint="@color/brownish_grey"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        android:background="@null"
+        android:inputType="textPassword"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp"
+        android:maxLines="1"
+        />
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- android:layout_below="@+id/edit_pw"
+            android:layout_marginTop="10dp"-->
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/pw_layout"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/comfirm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="38dp">
 
     <EditText
         android:id="@+id/confirm_pw"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:hint="Confirm PassWord"
+        android:layout_height="wrap_content"
+        android:hint="@string/confirm_pw"
         android:singleLine="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_confirm_pw" />
+        android:background="@null"
+        android:textColorHint="@color/brownish_grey"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp"
+        android:maxLines="1"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/comfirm_layout"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
     <Button
         android:id="@+id/btn_create"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:layout_below="@+id/line3"
+        android:background="@color/white_btn"
+        android:onClick="createWallet"/>
+
+    <TextView
+        android:id="@+id/txt_no1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/ok"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirm_pw"
-        android:onClick="createWallet"/>
-</android.support.constraint.ConstraintLayout>
+        android:textSize="10sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/cerulean"
+        android:lineSpacingExtra="8sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/your_pw_is"
+        android:layout_below="@+id/btn_create"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/txt_no2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/cerulean"
+        android:lineSpacingExtra="8sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/and_import"
+        android:layout_below="@+id/txt_no1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/cerulean"
+        android:lineSpacingExtra="8sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/you_cannot_find"
+        android:layout_below="@+id/txt_no2" />
+</RelativeLayout>

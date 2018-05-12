@@ -10,9 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 
-import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class PreCautionOneActivity extends AppCompatActivity {
@@ -42,8 +40,7 @@ public class PreCautionOneActivity extends AppCompatActivity {
            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                Log.e(TAG,"check = "+isChecked);
                 if(mCheck.isChecked()){
-                    Log.e(TAG,"alert dialog ");
-                    //얼랏다이얼로그에 취소키가 없다. 이럴경우 ios는 기타 로직이상함.
+
                     final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
                     alert.setMessage(R.string.no_see_page).setCancelable(false).setPositiveButton("OK",
                             new DialogInterface.OnClickListener() {

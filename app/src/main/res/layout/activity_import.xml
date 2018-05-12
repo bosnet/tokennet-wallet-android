@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImportActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        layout="@layout/layout_title"/>
+
+
+    <LinearLayout
+        android:id="@+id/ly_seedkey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="74dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="100dp"
+        android:orientation="vertical">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_seedkey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="10dp"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:hint="@string/enter_skey"
+                android:background="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="SAKPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSDFKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKFL"/>
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/ly_seedkey"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp" />
+
+    <TextView
+        android:id="@+id/txt_err_seckey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/error_seed_invalid"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:id="@+id/btn_del_seed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/qr_seed"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/ic_icon_delete_text"
+        android:visibility="gone"
+        android:onClick="deleteSeedKey"/>
+
+    <ImageButton
+        android:id="@+id/qr_seed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="94dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_qr_code"
+        android:onClick="readQRSeed"/>
+
+
+    <!-- app:layout_constraintTop_toBottomOf="@+id/line1" -->
+   <android.support.design.widget.TextInputLayout
+       android:id="@+id/ly_boskey"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toBottomOf="@+id/txt_err_seckey"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:layout_marginTop="21dp"
+       android:layout_marginLeft="20dp"
+       android:layout_marginRight="100dp"
+       android:focusable="false">
+
+       <EditText
+           android:id="@+id/input_boskey"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="@string/enter_rkey"
+           android:textSize="14sp"
+           android:fontFamily="sans-serif"
+           android:textStyle="normal"
+           android:textColor="@color/black"
+           android:paddingTop="8dp"
+           android:paddingBottom="10dp"
+           android:background="@null"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           tools:text="SAKPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSDFKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKFL"/>
+
+   </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/ly_boskey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp" />
+
+    <TextView
+        android:id="@+id/txt_err_bkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:text="@string/error_bos_invalid"
+        android:visibility="gone"/>
+
+
+    <ImageButton
+        android:id="@+id/btn_del_bos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/qr_bos"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/ic_icon_delete_text"
+        android:visibility="gone"
+        android:onClick="deleteBosKey"/>
+
+    <!--app:layout_constraintTop_toBottomOf="@+id/qr_seed"
+    android:layout_marginTop="49dp"-->
+    <ImageButton
+        android:id="@+id/qr_bos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_qr_code"
+        app:layout_constraintTop_toTopOf="@+id/ly_boskey"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="20dp"
+        android:onClick="readQRBosKey"/>
+
+    <!-- app:layout_constraintTop_toBottomOf="@+id/line2" -->
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:text="@string/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_err_bkey"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/white_btn"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:onClick="recoverWallet"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/cerulean"
+        android:lineSpacingExtra="8sp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/btn_next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="@string/p_enter_your"
+        />
+
+</android.support.constraint.ConstraintLayout>

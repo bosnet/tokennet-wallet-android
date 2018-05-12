@@ -1,16 +1,23 @@
 package io.boscoin.toknenet.wallet.utils;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.google.common.io.BaseEncoding;
-import org.stellar.sdk.FormatException;
-import org.stellar.sdk.responses.SubmitTransactionResponse;
 
+
+import java.security.GeneralSecurityException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
 
+import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 
 
 public class Utils {
@@ -41,6 +48,16 @@ public class Utils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        return localTime;
+    }
+
+    public static String getCreateTime(long createTime){
+        String localTime = "";
+        SimpleDateFormat dateLocalFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date dateLocalTime = new Date(createTime);
+        localTime = dateLocalFormat.format(dateLocalTime);
 
         return localTime;
     }
@@ -212,5 +229,18 @@ public class Utils {
 
     }
 
+    public static boolean isValidRecoveryKey(String key){
+        String suffix = key.substring(key.length() - 2, key.length()-1);
+        if(key.startsWith("BOS") && suffix.endsWith("A")){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     
+
+
+
 }

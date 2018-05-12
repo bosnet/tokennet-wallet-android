@@ -2,20 +2,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:background="@color/background_title">
+    android:background="@color/light_navy_two"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_icon_arrow"/>
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/btn_back"
+        android:layout_marginLeft="20dp"
         android:layout_centerInParent="true"
-        android:text="@string/my_wallet"/>
+        android:text="@string/change_wallet_order"/>
 
 
-    <Button
+    <TextView
         android:id="@+id/btn_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/done"
-        android:layout_alignParentRight="true" />
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/done" />
+
+
 </RelativeLayout>

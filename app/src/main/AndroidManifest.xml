@@ -15,9 +15,11 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".CreateWalletActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".QRActivity" />
-        <activity android:name=".RecoverActivity" />
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".RecoveryQRActivity" />
+        <activity
+            android:name=".ImportActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".SmallCaptureActivity" />
         <activity
             android:name=".WalletListActivity"
@@ -47,6 +49,8 @@
         <activity android:name=".PreCationThreeActivity" />
         <activity android:name=".CreateNoticeActivity" />
 
+        <activity android:name=".PopupActivity" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>

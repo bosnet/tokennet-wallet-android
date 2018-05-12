@@ -13,14 +13,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void createWallet(View view) {
-        Intent it = new Intent(MainActivity.this, CreateWalletActivity.class);
+    public void makeWallet(View view) {
+        Intent it = new Intent(MainActivity.this, CreateNoticeActivity.class);
         startActivity(it);
 
     }
 
     public void importWallet(View view) {
-        Intent it = new Intent(MainActivity.this, RecoverActivity.class);
+        Intent it = new Intent(MainActivity.this, ImportActivity.class);
         startActivity(it);
     }
 }

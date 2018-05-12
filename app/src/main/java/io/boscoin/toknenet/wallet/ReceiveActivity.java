@@ -11,12 +11,16 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.Selection;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +30,7 @@ import com.google.zxing.WriterException;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import javax.validation.Constraint;
 
@@ -39,7 +44,7 @@ public class ReceiveActivity extends AppCompatActivity {
     private long mIdx;
     private DbOpenHelper mDbOpenHelper;
     private Cursor mCursor;
-    private TextView mTvName, mTvPubKey;
+    private TextView mTvName, mTvPubKey, mTvTitle;
     private Context mContext;
     private EditText mEAmount;
     private DecimalFormat decimalFormat = new DecimalFormat("#,###.#######");
@@ -67,6 +72,9 @@ public class ReceiveActivity extends AppCompatActivity {
         mTvName.setText(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_NAME)));
 
         mTvPubKey = findViewById(R.id.txt_address);
+
+        mTvTitle = findViewById(R.id.title);
+        mTvTitle.setText(R.string.receive);
 
         mPubKey = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
         mTvPubKey.setText(mPubKey);

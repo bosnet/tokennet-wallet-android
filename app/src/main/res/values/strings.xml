@@ -40,6 +40,7 @@
     <string name="recover">Recover</string>
     <string name="input_used_pw">Used Password</string>
     <string name="done">Done</string>
+    <string name="slan">Language</string>
 
     <string name="create_wallet">Create Wallet</string>
     <string name="import_wallet">Import Wallet</string>
@@ -93,8 +94,13 @@
     <string name="double_check">Double-check that you have kept a recovery key that you can\nsee now.
         The recovery key and secret seed can be found on\nthe Settings screen of the individual wallet.</string>
     <string name="check_reckey">Check Recovery Key.</string>
-
-
+    <string name="enter_skey">Enter Secret Seed</string>
+    <string name="enter_rkey">Enter Recovery Key</string>
+    <string name="p_enter_your">Please enter your secret seed or recovery key.</string>
+    <string name="wallet_restore">Your wallet has been restored.</string>
+    <string name="y_pass_is">Your password is required to send money,\ncheck your secret seed and import your wallet.\nEach wallet must set a password.</string>
+    <string name="t_new_pw">Set a new password</string>
+    <string name="s_precautions">Precautions</string>
 
 
     <string name="error_no_name">Please Input Wallnet Name</string>
@@ -127,5 +133,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="error_wname_length">Wallet name can be up to 10.</string>
     <string name="error_pw">The password must be at least 8\ncharacters long and must include\nnumbers, uppercase English,\nlowercase letters, and special\ncharacters.</string>
-
+    <string name="error_seed_invalid">security key is invalid.</string>
+    <string name="error_bos_invalid">recovery key is invalid.</string>
+    <string name="error_bos_pw">Wrong password for recovery key</string>
 </resources>

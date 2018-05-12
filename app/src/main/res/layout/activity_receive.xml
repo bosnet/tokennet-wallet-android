@@ -19,7 +19,7 @@
         android:textSize="16sp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
-        android:textColor="@color/blue_name"
+        android:textColor="@color/dark_blue_grey"
         android:layout_centerHorizontal="true"
         tools:text="BOS Wallet A01"
         />
@@ -51,8 +51,7 @@
 FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
         />
 
-    <!-- android:textSize="14sp"
-     android:gravity="right"-->
+
     <EditText
         android:id="@+id/edit_amount"
         android:layout_width="match_parent"
@@ -63,7 +62,6 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
         android:textColorHint="@color/white_e_hint"
         android:layout_below="@+id/txt_address"
         android:inputType="numberDecimal"
-
         android:singleLine="true"
         android:layout_marginTop="26dp"
         android:layout_marginLeft="20dp"
@@ -113,7 +111,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/copy"
-            android:background="@color/blue_rect"
+            android:background="@color/cerulean"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:onClick="addressCopy"/>
@@ -126,7 +124,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/share"
-            android:background="@color/blue_rect"
+            android:background="@color/cerulean"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:onClick="share"/>
