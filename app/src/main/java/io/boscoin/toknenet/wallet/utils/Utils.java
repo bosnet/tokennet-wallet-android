@@ -70,8 +70,9 @@ public class Utils {
         String address;
         int length = add.length();
         int strat = length -4;
-        address = add.substring(0,4);
-        address = address+"..........";
+        address = add.substring(0,4); 
+
+        address = address+" ... ";
         address = address+add.substring(strat,length);
 
         return address;
@@ -239,7 +240,14 @@ public class Utils {
 
     }
 
-    
+    public static SpannableStringBuilder dispayBalance(String bal){
+        int pos = bal.indexOf(".");
+        Log.e(TAG,"pso = "+pos);
+        SpannableStringBuilder ssb = new SpannableStringBuilder(bal);
+        ssb.setSpan(new StyleSpan(Typeface.BOLD),0, pos+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return ssb;
+    }
+
 
 
 

@@ -111,6 +111,12 @@ public class DbOpenHelper {
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 
+	public boolean updateColumnWalletBalance(long id , String bal){
+		ContentValues values = new ContentValues();
+		values.put(DataBases.CreateWalletDB.COL_LASTEST, bal);
+		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
+	}
+
 	// Delete ID
 	public boolean deleteColumnAddress(long id){
 		return mDB.delete(DataBases.CreateAddressDB._TABLENAME, "_id="+id, null) > 0;
@@ -171,6 +177,23 @@ public class DbOpenHelper {
 		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, null, null, null, null, null, null);
 		int count = c.getCount();
 		return count;
+	}
+
+	public int getAddressCount(){
+		Cursor c = mDB.query(DataBases.CreateAddressDB._TABLENAME, null, null, null, null, null, null);
+		int count = c.getCount();
+		return count;
+	}
+
+	public Cursor getColumnAddressName(){
+		String[] columns = {Constants.DB.BOOK_NAME};
+
+		Cursor c = mDB.query(DataBases.CreateAddressDB._TABLENAME, columns,
+				null, null, null, null, null);
+
+		if(c != null && c.getCount() != 0)
+			c.moveToFirst();
+		return c;
 	}
 }
 

@@ -32,11 +32,14 @@
     <color name="white">#FFFFFF</color>
     <color name="white_line">#bdbdbd</color>
     <color name="white_e_hint">#999999</color>
-    <color name="white_50">#80FFFFFF</color>
+    <color name="white_op50">#80FFFFFF</color>
     <color name="brownish_grey">#666666</color>
-    <color name="white_btn">#cccccc</color>
+    <color name="pinkish_grey">#cccccc</color>
     <color name="white_bg_list">#EEEEEE</color>
     <color name="white_two">#e6e6e6</color>
+    <color name="white_87">#deffffff</color>
+    <color name="white_op20">#33ffffff</color>
+    <color name="brownish_grey_87">#de666666</color>
 
     <!-- blue -->
     <color name="dark_blue_grey">#1e3148</color>

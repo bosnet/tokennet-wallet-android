@@ -1,5 +1,6 @@
 package io.boscoin.toknenet.wallet;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,6 +19,7 @@ import io.boscoin.toknenet.wallet.adapter.WalletListAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Wallet;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
 public class WalletListActivity extends AppCompatActivity {
@@ -29,6 +31,9 @@ public class WalletListActivity extends AppCompatActivity {
     private Cursor mCursor;
     private Context mContext;
     private ImageButton mBtnSetting;
+    private WalletListAdapter mAdapter;
+    private static final int ORDER_REQUEST_CODE = 1;
+    private static final int WALLET_DETAIL_VIEW = 2;
 
     public interface ClickListener {
         void onSendClicked(int postion);
@@ -56,7 +61,8 @@ public class WalletListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent it = new Intent(WalletListActivity.this, SettingActivity.class);
-                startActivity(it);
+
+                startActivityForResult(it, ORDER_REQUEST_CODE);
             }
         });
 
@@ -82,12 +88,59 @@ public class WalletListActivity extends AppCompatActivity {
 
     private void initializeData() {
 
+       getWalletList();
+
+    }
+
+    private void initializeAdapter(){
+        mAdapter = new WalletListAdapter(walletList, new ClickListener() {
+            @Override
+            public void onSendClicked(int postion) {
+                Intent it = new Intent(WalletListActivity.this, SendActivity.class);
+                it.putExtra(Constants.Invoke.SEND, walletList.get(postion).getWalletId());
+                startActivity(it);
+               // startActivityForResult(it, WALLET_DETAIL_VIEW);
+            }
+
+            @Override
+            public void onReceivedClicked(int postion) {
+                // TODO: 2018. 4. 12. will be needs received activity 
+                Intent it = new Intent(WalletListActivity.this, ReceiveActivity.class);
+                it.putExtra(Constants.Invoke.WALLET, walletList.get(postion).getWalletId());
+                startActivity(it);
+            }
+
+            @Override
+            public void onItemClicked(int postion) {
+                Intent it = new Intent(WalletListActivity.this, WalletHistoryActivity.class);
+                it.putExtra(Constants.Invoke.HISTORY, walletList.get(postion).getWalletId());
+               // startActivity(it);
+                startActivityForResult(it, WALLET_DETAIL_VIEW);
+            }
+        });
+        rv.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == ORDER_REQUEST_CODE || requestCode == WALLET_DETAIL_VIEW){
+
+            walletList.clear();
+            getWalletList();
+            mAdapter.setWalletList(walletList);
+
+        }
+    }
+
+    private void getWalletList() {
         walletList = new ArrayList<>();
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-
         mCursor = null;
-        mCursor = mDbOpenHelper.getAllColumnsWallet();
+
+
+        mCursor = mDbOpenHelper.getColumnWalletByOrder("DESC");
 
         while (mCursor.moveToNext()){
 
@@ -103,37 +156,10 @@ public class WalletListActivity extends AppCompatActivity {
 
             );
 
-            walletList.add(0,mWallet);
+            walletList.add(mWallet);
         }
         mCursor.close();
         mDbOpenHelper.close();
 
-    }
-
-    private void initializeAdapter(){
-        WalletListAdapter adapter = new WalletListAdapter(walletList, new ClickListener() {
-            @Override
-            public void onSendClicked(int postion) {
-                Intent it = new Intent(WalletListActivity.this, SendActivity.class);
-                it.putExtra(Constants.Invoke.SEND, walletList.get(postion).getWalletId());
-                startActivity(it);
-            }
-
-            @Override
-            public void onReceivedClicked(int postion) {
-                // TODO: 2018. 4. 12. will be needs received activity 
-                Intent it = new Intent(WalletListActivity.this, ReceiveActivity.class);
-                it.putExtra(Constants.Invoke.WALLET, walletList.get(postion).getWalletId());
-                startActivity(it);
-            }
-
-            @Override
-            public void onItemClicked(int postion) {
-                Intent it = new Intent(WalletListActivity.this, HistoryActivity.class);
-                it.putExtra(Constants.Invoke.HISTORY, walletList.get(postion).getWalletId());
-                startActivity(it);
-            }
-        });
-        rv.setAdapter(adapter);
     }
 }

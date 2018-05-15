@@ -1,5 +1,6 @@
 package io.boscoin.toknenet.wallet;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -69,14 +70,18 @@ public class WalletOrderActivity extends AppCompatActivity {
                 walletList = wAdapter.getWalletList();
 
 
-                int ordering = 0;
+
+                int ordering = walletList.size()+1;
+                Log.e(TAG,"ordering = "+ordering);
                 for(Wallet w : walletList ){
-                    ordering++;
+
+                    ordering --;
                     mDbOpenHelper.updateColumnWallet(w.getWalletId(),w.getWalletName(),w.getWalletAccountId(),
                     w.getWalletKey(),ordering,w.getWalletBalance(),w.getWalletTime());
                 }
                 mDbOpenHelper.close();
                 WalletPreference.setWalletIsChangeOrder(mContext,true);
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         });
@@ -85,6 +90,7 @@ public class WalletOrderActivity extends AppCompatActivity {
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(Activity.RESULT_CANCELED);
                 finish();
             }
         });
@@ -100,12 +106,8 @@ public class WalletOrderActivity extends AppCompatActivity {
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
         mCursor = null;
 
-        if(WalletPreference.getWalletIsChangeOrder(mContext)){
-            mCursor = mDbOpenHelper.getColumnWalletByOrder("ASC");
-        }else{
-            mCursor = mDbOpenHelper.getColumnWalletByOrder("DESC");
-        }
 
+        mCursor = mDbOpenHelper.getColumnWalletByOrder("DESC");
 
         while (mCursor.moveToNext()){
 

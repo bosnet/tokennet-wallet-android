@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_navy_two"
+    tools:context=".WalletHistoryActivity">
+
+    <RelativeLayout
+        android:id="@+id/ly_top"
+        android:layout_width="match_parent"
+        android:layout_height="216dp"
+        android:layout_marginTop="20dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/ic_icon_arrow"/>
+
+        <TextView
+            android:id="@+id/tv_wname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            tools:text="BOS Wallet A01"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ic_icon_setting"/>
+
+
+        <TextView
+            android:id="@+id/tv_balances"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/white_87"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_wname"
+            android:layout_marginTop="43dp"
+            tools:text="2537.0048623 BOS"
+            />
+
+        <TextView
+            android:id="@+id/tv_pub_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/white_87"
+            android:layout_below="@+id/tv_balances"
+            android:layout_marginTop="11dp"
+            android:layout_centerHorizontal="true"
+            tools:text="GOQW … EFBC"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_balances"
+            android:layout_toRightOf="@+id/tv_pub_key"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_copy_white"
+            android:onClick="addressCopy"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btn_his_all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:onClick="viewHistoryAll">
+
+                <TextView
+                    android:id="@+id/txt_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="normal"
+                    android:layout_gravity="center"
+                    android:textColor="#ffffff"
+                    android:text="@string/his_all"
+                    />
+                <View
+                    android:id="@+id/line_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/cerulean"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_his_send"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:onClick="viewSendHistory">
+
+                <TextView
+                    android:id="@+id/txt_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:layout_gravity="center"
+                    android:textColor="#ffffff"
+                    android:text="@string/his_send"
+                    />
+                <View
+                    android:id="@+id/line_send"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/cerulean"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_his_receive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:onClick="viewReceiveHistory">
+
+                <TextView
+                    android:id="@+id/txt_receive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:text="@string/his_receive"
+                    />
+                <View
+                    android:id="@+id/line_receive"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/cerulean"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/frag_container"
+        android:layout_below="@+id/ly_top"
+        android:layout_above="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+    </FrameLayout>
+
+    <include
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        layout="@layout/layout_bottom_nav"/>
+
+</RelativeLayout>
+

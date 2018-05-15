@@ -176,7 +176,8 @@ public class SendActivity extends AppCompatActivity {
                         SubmitTransactionResponse response = server.submitTransaction(transaction);
 
                         Utils.printResponse(response);
-                        Intent it = new Intent(SendActivity.this, HistoryActivity.class);
+                        
+                        Intent it = new Intent(SendActivity.this, WalletHistoryActivity.class);
                         it.putExtra(Constants.Invoke.HISTORY,mIdx);
                         startActivity(it);
 
@@ -229,7 +230,8 @@ public class SendActivity extends AppCompatActivity {
                         SubmitTransactionResponse response = server.submitTransaction(transaction);
                         System.out.println("Success!");
                         Utils.printResponse(response);
-                        Intent it = new Intent(SendActivity.this, HistoryActivity.class);
+
+                        Intent it = new Intent(SendActivity.this, WalletHistoryActivity.class);
                         it.putExtra(Constants.Invoke.HISTORY,mIdx);
                         startActivity(it);
 

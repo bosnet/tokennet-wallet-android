@@ -84,6 +84,18 @@
     <string name="wallet_restore">지갑이 복구되었습니다.</string>
     <string name="y_pass_is">비밀번호는\n송금,보안키조회,지갑 가져오기 할 때 필요합니다.\n각각의 지갑은 비밀번호를 설정해야 합니다.</string>
     <string name="t_new_pw">새 비밀번호 설정</string>
+    <string name="title_contact">주소록</string>
+    <string name="no_contact">현재 등록된 주소록이 없습니다.</string>
+    <string name="add_contact">주소록 추가</string>
+    <string name="add_cname">이름</string>
+    <string name="pub_address">공개주소</string>
+    <string name="inform_you">지금 등록하는 정보는 앱이 삭제되거나 재설치 되면 모두 사라지며,\n주소록은 최대 100개까지만 등록 가능합니다..</string>
+    <string name="enter_name">이름을 입력해주세요.</string>
+    <string name="enter_pub_address">공개주소를 입력해 주세요.</string>
+    <string name="menu_edit">수정</string>
+    <string name="menu_send">보내기</string>
+    <string name="menu_delete">삭제</string>
+
 
 
 
@@ -104,4 +116,5 @@
     <string name="error_seed_invalid">보안키가 올바르지 않습니다.</string>
     <string name="error_bos_invalid">복구키가 올바르지 않습니다.</string>
     <string name="error_bos_pw">잘못된 비밀번호입니다. 다시 확인하세요.</string>
+    <string name="error_invalid_pubkey">공개 주소가 올바르지 않습니다.</string>
 </resources>

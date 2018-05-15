@@ -25,13 +25,11 @@
             android:name=".WalletListActivity"
             android:theme="@style/NoTitle" />
         <activity android:name=".SendActivity" />
-        <activity android:name=".HistoryActivity" />
+        <activity android:name=".WalletHistoryActivity" />
         <activity
             android:name=".WalletOrderActivity"
             android:label="@string/title_activity_wallet_order"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
         <activity
             android:name=".ReceiveActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -50,7 +48,9 @@
         <activity android:name=".CreateNoticeActivity" />
 
         <activity android:name=".PopupActivity" />
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".AddContactActivity"></activity>
     </application>
 
 </manifest>

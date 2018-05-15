@@ -129,7 +129,7 @@ public class ImportActivity extends AppCompatActivity /*implements TextWatcher*/
         eSeedKey.setText("");
         mErrSeedKey.setVisibility(View.GONE);
         mSeedDel.setVisibility(View.GONE);
-        mBtnNext.setBackgroundColor(getResources().getColor(R.color.white_btn));
+        mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
         mIsNextSeed = false;
     }
 
@@ -137,7 +137,7 @@ public class ImportActivity extends AppCompatActivity /*implements TextWatcher*/
         eBosKey.setText("");
         mErrBosKey.setVisibility(View.GONE);
         mBosDel.setVisibility(View.GONE);
-        mBtnNext.setBackgroundColor(getResources().getColor(R.color.white_btn));
+        mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
         mIsNextBos = false;
     }
 
@@ -168,7 +168,7 @@ public class ImportActivity extends AppCompatActivity /*implements TextWatcher*/
                         } catch (Exception e){
                             mErrSeedKey.setVisibility(View.VISIBLE);
                             mSeedDel.setVisibility(View.VISIBLE);
-                            mBtnNext.setBackgroundColor(getResources().getColor(R.color.white_btn));
+                            mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
                             mIsNextSeed = false;
                             return;
                         }
@@ -182,7 +182,7 @@ public class ImportActivity extends AppCompatActivity /*implements TextWatcher*/
                         mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
                     }else{
                         mErrBosKey.setVisibility(View.VISIBLE);
-                        mBtnNext.setBackgroundColor(getResources().getColor(R.color.white_btn));
+                        mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
                         mIsNextBos = false;
                         return;
                     }

@@ -12,8 +12,8 @@ public final class DataBases {
 	private DataBases(){};
 
 	public static final class CreateAddressDB implements BaseColumns {
-		public static final String COL_NAME = Constants.DB.WALLET_NAME;
-		public static final String COL_ADDRESS = Constants.DB.WALLET_ADDRESS;
+		public static final String COL_NAME = Constants.DB.BOOK_NAME;
+		public static final String COL_ADDRESS = Constants.DB.BOOK_ADDRESS;
 		public static final String _TABLENAME = "address";
 		public static final String _CREATE =
 				"CREATE TABLE "+_TABLENAME+"("

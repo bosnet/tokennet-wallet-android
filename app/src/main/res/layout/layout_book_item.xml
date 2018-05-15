@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/book_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/black_87"
+        android:lineSpacingExtra="6sp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="24dp"
+        tools:text="BOS Wallet A01"
+        />
+
+    <ImageView
+        android:id="@+id/btn_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_icon_more"/>
+
+    <TextView
+        android:id="@+id/book_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/brownish_grey_87"
+        android:layout_below="@id/book_title"
+        android:layout_marginTop="4dp"
+        android:lineSpacingExtra="6sp"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="40dp"
+        tools:text="GOQWEPSDEFBOBAEOQWEPSDEFBABADOQWEPSDEFBBBAKOQWEPSDEFBCBA"
+        />
+</RelativeLayout>

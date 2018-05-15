@@ -1,7 +1,13 @@
 package io.boscoin.toknenet.wallet.adapter;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +20,7 @@ import java.util.List;
 import io.boscoin.toknenet.wallet.R;
 import io.boscoin.toknenet.wallet.WalletListActivity;
 import io.boscoin.toknenet.wallet.model.Wallet;
+import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.WalletViewHolder>{
 
@@ -38,17 +45,19 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
     public void onBindViewHolder(WalletListAdapter.WalletViewHolder holder, int position) {
         holder.walletName.setText(mWalletList.get(position).getWalletName());
         holder.walletTime.setText( mWalletList.get(position).getWalletTime());
+        
         String bal = mWalletList.get(position).getWalletBalance() + " BOS";
-
-        holder.walletBalance.setText(bal);
-
-
-
+        holder.walletBalance.setText(Utils.dispayBalance(bal));
     }
 
     @Override
     public int getItemCount() {
         return mWalletList.size();
+    }
+
+    public void setWalletList(List<Wallet> walletList) {
+        this.mWalletList = walletList;
+        notifyDataSetChanged();
     }
 
     public class WalletViewHolder extends RecyclerView.ViewHolder {

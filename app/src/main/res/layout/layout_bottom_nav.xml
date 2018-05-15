@@ -20,7 +20,7 @@
             android:layout_weight="1">
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/ic_history"
                 android:layout_width="25dp"
                 android:layout_height="14dp"
@@ -30,6 +30,7 @@
 
 
             <TextView
+                android:id="@+id/nav_his"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
@@ -53,7 +54,7 @@
             android:layout_weight="1">
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/ic_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,6 +64,7 @@
 
 
             <TextView
+                android:id="@+id/nav_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
@@ -86,7 +88,7 @@
             android:layout_weight="1">
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/ic_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,6 +98,7 @@
 
 
             <TextView
+                android:id="@+id/nav_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
@@ -118,7 +121,7 @@
             android:layout_weight="1">
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/ic_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,6 +131,7 @@
 
 
             <TextView
+                android:id="@+id/nav_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"

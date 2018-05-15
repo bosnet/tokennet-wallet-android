@@ -191,7 +191,7 @@
         android:layout_marginRight="100dp"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="28dp"
-        android:background="@color/white_btn"
+        android:background="@color/pinkish_grey"
         android:textSize="14sp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"

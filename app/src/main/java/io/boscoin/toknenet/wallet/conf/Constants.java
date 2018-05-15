@@ -11,6 +11,7 @@ public class Constants {
 		public static final String HISTORY = "history";
 		public static final String PUBKEY = "public-key";
 		public static final String SEND = "send";
+		public static final String ADDRESS_BOOK = "address-book";
 	}
 
     public static final class DB {
@@ -23,6 +24,9 @@ public class Constants {
 		public static final String WALLET_ORDER = "ordering";
 		public static final String WALLET_LASTEST = "lastest";
 		public static final String WALLET_LAST_TIME = "ltime";
+
+        public static final String BOOK_NAME = "name";
+        public static final String BOOK_ADDRESS = "address";
     }
 
     public static final class Domain {

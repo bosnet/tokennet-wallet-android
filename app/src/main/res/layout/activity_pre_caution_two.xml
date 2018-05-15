@@ -49,7 +49,7 @@
         android:textSize="14sp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
-        android:textColor="@color/white_50"
+        android:textColor="@color/white_op50"
         android:lineSpacingExtra="8sp"
         app:layout_constraintStart_toStartOf="@id/txt_ca1"
         app:layout_constraintTop_toBottomOf="@id/txt_ca1"

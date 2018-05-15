@@ -6,9 +6,9 @@
     <string name="send">Send</string>
     <string name="receive">Receive</string>
     <string name="address">Address</string>
-    <string name="his_all">All Payments</string>
-    <string name="his_receive">Receive History</string>
-    <string name="his_send">Send History</string>
+    <string name="his_all">All</string>
+    <string name="his_receive">Receive</string>
+    <string name="his_send">Send</string>
     <string name="toast_text_clipboard_address">Address Copyed.</string>
     <string name="title_activity_settings">Settings</string>
     <string name="contacts">Contacts</string>
@@ -101,6 +101,12 @@
     <string name="y_pass_is">Your password is required to send money,\ncheck your secret seed and import your wallet.\nEach wallet must set a password.</string>
     <string name="t_new_pw">Set a new password</string>
     <string name="s_precautions">Precautions</string>
+    <string name="pub_address">Public Address</string>
+    <string name="inform_you">The information you register now will disappear once the app is\n
+removed or reinstalled, and you can only register up to 100 contacts.</string>
+    <string name="enter_name">Enter a name</string>
+    <string name="enter_pub_address">Enter a public address</string>
+
 
 
     <string name="error_no_name">Please Input Wallnet Name</string>
@@ -120,6 +126,13 @@
     <string name="error_all_check">Please check all notice.</string>
     <string name="error_already">The name is already taken</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="title_contact">Contacts</string>
+    <string name="no_contact">You have no contacts in your address book.</string>
+    <string name="add_contact">Add contacts</string>
+    <string name="add_cname">Name</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_delete">Delete</string>
 
 
     <string name="prompt_email">Email</string>
@@ -136,4 +149,5 @@
     <string name="error_seed_invalid">security key is invalid.</string>
     <string name="error_bos_invalid">recovery key is invalid.</string>
     <string name="error_bos_pw">Wrong password for recovery key</string>
+    <string name="error_invalid_pubkey">Invalid Public Address.</string>
 </resources>

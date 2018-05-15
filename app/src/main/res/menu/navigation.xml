@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navi_edit"
+        android:title="@string/menu_edit"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/black_87"
+        android:lineSpacingExtra="6sp"/>
+
+    <item
+        android:id="@+id/navi_send"
+        android:title="@string/menu_send"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/black_87"
+        android:lineSpacingExtra="6sp" />
+
+    <item
+        android:id="@+id/navi_del"
+        android:title="@string/menu_delete"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#def10000"
+        android:lineSpacingExtra="6sp"/>
+
+</menu>
+
+

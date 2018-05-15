@@ -84,19 +84,7 @@
         android:text="@string/error_wname_length"
         android:visibility="gone"/>
 
-   <!-- <TextView
-        android:id="@+id/title_input_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/blue_rect"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_below="@+id/line1"
-        android:text="@string/enter_pw"
-        android:visibility="gone"/> -->
+ 
 
 
    <android.support.design.widget.TextInputLayout
@@ -186,7 +174,7 @@
         android:text="@string/next"
         android:textAllCaps="false"
         android:layout_below="@+id/line3"
-        android:background="@color/white_btn"
+        android:background="@color/pinkish_grey"
         android:onClick="createWallet"/>
 
     <TextView
