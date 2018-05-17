@@ -50,6 +50,7 @@ public class DbOpenHelper {
 		mDBHelper = new DatabaseHelper(mCtx, dbName, null, DATABASE_VERSION);
 		mDB = mDBHelper.getWritableDatabase();
 		return this;
+
 	}
 
 	public void close(){
@@ -114,6 +115,12 @@ public class DbOpenHelper {
 	public boolean updateColumnWalletBalance(long id , String bal){
 		ContentValues values = new ContentValues();
 		values.put(DataBases.CreateWalletDB.COL_LASTEST, bal);
+		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
+	}
+
+	public boolean updateColumnWalletName(long id , String name){
+		ContentValues values = new ContentValues();
+		values.put(DataBases.CreateWalletDB.COL_NAME, name);
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 

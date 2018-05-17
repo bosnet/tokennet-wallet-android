@@ -39,7 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/ic_icon_setting"/>
+            android:background="@drawable/ic_icon_edit"
+            android:onClick="editWallet"/>
 
 
         <TextView

@@ -2,10 +2,15 @@ package io.boscoin.toknenet.wallet.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.google.common.io.BaseEncoding;
+
 
 
 import java.security.GeneralSecurityException;
@@ -248,6 +253,10 @@ public class Utils {
         return ssb;
     }
 
+    private static final int MAX_NAME = 11;
+    public static boolean isNameValid(String name) {
+        return name.length() < MAX_NAME;
+    }
 
 
 

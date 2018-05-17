@@ -1,6 +1,8 @@
 package io.boscoin.toknenet.wallet;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -17,11 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.boscoin.toknenet.wallet.adapter.AddressAdapter;
-import io.boscoin.toknenet.wallet.adapter.WalletOrderAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.AddressBook;
-import io.boscoin.toknenet.wallet.model.Wallet;
 
 public class ContactActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -34,11 +34,18 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private RelativeLayout mNavHis, mNavSend, mNavReceive, mNavContact;
     private ImageView mIcHis, mIcSend, mIcReceive, mIcContact;
     private TextView navTvhis, navTvSend, navTvReceive, navTvContact;
-    private long mIdx;
+    private long mWalletIdx;
     private List<AddressBook> bookList;
     private AddressBook mBook;
     private static final int ADD_REQUEST_CODE = 3;
+    private static final int EDIT_REQUEST_CODE = 4;
     private boolean mIsEmpty;
+
+    public interface MenuClickListener {
+        void onEditClicked(int postion);
+        void onSendClicked(int postion);
+        void onDeleteClicked(int postion);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +55,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         mContext = this;
 
         Intent it = getIntent();
-        mIdx = it.getLongExtra(Constants.Invoke.ADDRESS_BOOK,0);
+        //wallet
+        mWalletIdx = it.getLongExtra(Constants.Invoke.ADDRESS_BOOK,0);
 
         initUI();
     }
@@ -116,10 +124,75 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             mRV.addItemDecoration(dividerItemDecoration);
             initializeData();
 
-            mAdapter = new AddressAdapter(bookList, mContext);
+            mAdapter = new AddressAdapter(bookList, mContext, new MenuClickListener() {
+                @Override
+                public void onEditClicked(int postion) {
+                    AddressBook book = bookList.get(postion);
+                    Intent it = new Intent(ContactActivity.this, EditContactActivity.class);
+                    it.putExtra(Constants.Invoke.ADDRESS_BOOK, book);
+                    startActivityForResult(it, EDIT_REQUEST_CODE);
+                }
+
+                @Override
+                public void onSendClicked(int postion) {
+                    Intent it = new Intent(ContactActivity.this, SendActivity.class);
+                    it.putExtra(Constants.Invoke.SEND, mWalletIdx);
+                    it.putExtra(Constants.Invoke.PUBKEY, bookList.get(postion).getAddress());
+                    startActivity(it);
+                }
+
+                @Override
+                public void onDeleteClicked(int postion) {
+                    confirmDelete(postion);
+                }
+            });
             mRV.setAdapter(mAdapter);
             mRV.setHasFixedSize(true);
         }
+
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void confirmDelete(int pos) {
+        final int where = pos;
+        AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
+       // alert.setTitle(R.string.delete_title);
+        alert.setMessage(R.string.delete_title);
+
+
+        alert.setCancelable(false).setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mDbOpenHelper = new DbOpenHelper(mContext);
+                mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
+                mDbOpenHelper.deleteColumnAddress(bookList.get(where).getAddressId());
+                mDbOpenHelper.close();
+                dialog.dismiss();
+
+                bookList.clear();
+                getAddressList();
+                mAdapter.setAddBooktList(bookList);
+            }
+        });
+
+        alert.setCancelable(false).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+
+        dialog.show();
+
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setAllCaps(false);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setAllCaps(false);
     }
 
     private void initializeData() {
@@ -158,7 +231,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == ADD_REQUEST_CODE){
+        if(requestCode == ADD_REQUEST_CODE || requestCode == EDIT_REQUEST_CODE){
             if(mIsEmpty){
                 mEmpty.setVisibility(View.GONE);
                 mRV.setVisibility(View.VISIBLE);
@@ -172,7 +245,28 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 mRV.addItemDecoration(dividerItemDecoration);
                 initializeData();
 
-                mAdapter = new AddressAdapter(bookList, mContext);
+                mAdapter = new AddressAdapter(bookList, mContext, new MenuClickListener() {
+                    @Override
+                    public void onEditClicked(int postion) {
+
+                        AddressBook book = bookList.get(postion);
+                       Intent it = new Intent(ContactActivity.this, EditContactActivity.class);
+                       it.putExtra(Constants.Invoke.ADDRESS_BOOK, book);
+                       startActivityForResult(it, EDIT_REQUEST_CODE);
+                    }
+
+                    @Override
+                    public void onSendClicked(int postion) {
+                        Intent it = new Intent(ContactActivity.this, SendActivity.class);
+                        it.putExtra(Constants.Invoke.SEND, mWalletIdx);
+                        startActivity(it);
+                    }
+
+                    @Override
+                    public void onDeleteClicked(int postion) {
+                        confirmDelete(postion);
+                    }
+                });
                 mRV.setAdapter(mAdapter);
                 mRV.setHasFixedSize(true);
             }else{
@@ -191,21 +285,21 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.menu_trans_his:
                 it = new Intent(ContactActivity.this, WalletHistoryActivity.class);
-                it.putExtra(Constants.Invoke.HISTORY,mIdx);
+                it.putExtra(Constants.Invoke.HISTORY,mWalletIdx);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
                 break;
 
             case R.id.menu_send:
                 it = new Intent(ContactActivity.this, SendActivity.class);
-                it.putExtra(Constants.Invoke.SEND, mIdx);
+                it.putExtra(Constants.Invoke.SEND, mWalletIdx);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
                 break;
 
             case R.id.menu_receive:
                 it = new Intent(ContactActivity.this, ReceiveActivity.class);
-                it.putExtra(Constants.Invoke.WALLET, mIdx);
+                it.putExtra(Constants.Invoke.WALLET, mWalletIdx);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
                 break;

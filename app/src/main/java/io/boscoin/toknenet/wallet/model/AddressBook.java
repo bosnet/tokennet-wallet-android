@@ -1,6 +1,8 @@
 package io.boscoin.toknenet.wallet.model;
 
-public class AddressBook {
+import java.io.Serializable;
+
+public class AddressBook implements Serializable{
     private String addressName,address ;
     private long addressId;
 

@@ -73,7 +73,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mEInputName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Log.e(TAG,"입력 완료 = "+mEInputName.getText().toString());
+
                 mTvNameErr.setVisibility(View.GONE);
                 mTvLengthErr.setVisibility(View.GONE);
 
@@ -83,7 +83,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                 }
 
                 if(!hasFocus){
-                    Log.e(TAG,"포커스 = "+hasFocus);
+
                     String wName = mEInputName.getText().toString();
                     mDbOpenHelperName = new DbOpenHelper(mContext);
                     mDbOpenHelperName.open(Constants.DB.MY_WALLETS);
@@ -95,7 +95,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                         do{
 
                             if(wName.equals(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_NAME)))){
-                                Log.e(TAG,"값이 존재");
+
                                 mTvNameErr.setVisibility(View.VISIBLE);
                                 mTvLengthErr.setVisibility(View.GONE);
                                 mDbOpenHelperName.close();

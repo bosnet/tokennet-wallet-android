@@ -40,6 +40,7 @@
     <color name="white_87">#deffffff</color>
     <color name="white_op20">#33ffffff</color>
     <color name="brownish_grey_87">#de666666</color>
+    <color name="white_three">#d8d8d8</color>
 
     <!-- blue -->
     <color name="dark_blue_grey">#1e3148</color>
@@ -52,4 +53,5 @@
 
     <!--  red -->
     <color name="red_error">#db1403</color>
+    <color name="red_two">#f10000</color>
 </resources>

@@ -24,7 +24,7 @@
         <activity
             android:name=".WalletListActivity"
             android:theme="@style/NoTitle" />
-        <activity android:name=".SendActivity" />
+        <activity android:name=".Send_oldActivity" />
         <activity android:name=".WalletHistoryActivity" />
         <activity
             android:name=".WalletOrderActivity"
@@ -50,7 +50,12 @@
         <activity android:name=".PopupActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".ContactActivity" />
-        <activity android:name=".AddContactActivity"></activity>
+        <activity android:name=".AddContactActivity" />
+        <activity android:name=".EditContactActivity" />
+        <activity android:name=".SendActivity" />
+        <activity android:name=".EditWalletActivity" />
+        <activity android:name=".ChWalletNameActivity" />
+        <activity android:name=".ChWalletPassWordActivity"></activity>
     </application>
 
 </manifest>

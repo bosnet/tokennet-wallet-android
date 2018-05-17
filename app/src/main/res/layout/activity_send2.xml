@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+
+    <include
+        android:id="@+id/contact_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        layout="@layout/layout_send_title"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/address_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginTop="18dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/input_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pub_address"
+            android:textColorHint="@color/brownish_grey"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/black"
+            android:background="@null"
+            android:paddingTop="8dp"
+            android:paddingBottom="10dp"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/del_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/qr_address"
+        android:layout_below="@+id/contact_title"
+        android:layout_marginTop="38dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_icon_delete_text"
+        android:visibility="gone"/>
+
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/address_layout"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp" />
+
+    <ImageView
+        android:id="@+id/qr_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/contact_title"
+        android:layout_marginTop="38dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_qr_code"
+        android:onClick="getAddress"/>
+
+    <TextView
+        android:id="@+id/err_pubkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        android:layout_below="@+id/line1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/enter_pub_address"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/ammount_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/line1"
+        android:layout_marginTop="40dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_ammount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="10dp"
+                android:hint="@string/ammount"
+                android:textColorHint="@color/brownish_grey"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:background="@null"
+                android:inputType="numberDecimal"
+                android:textCursorDrawable="@drawable/edit_cursor_color" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ammount_layout"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        android:layout_below="@+id/line2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/fee"
+        />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/line2"
+        android:layout_marginTop="54dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/pinkish_grey"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:text="@string/send"
+        android:onClick="showSendBos"/>
+
+
+    <include
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        layout="@layout/layout_bottom_nav"/>
+</RelativeLayout>

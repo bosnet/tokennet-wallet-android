@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChWalletPassWordActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        layout="@layout/layout_title"/>
+
+    <LinearLayout
+        android:id="@+id/ly_pw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="96dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="10dp"
+                android:hint="@string/cur_wname"
+                android:textColorHint="@color/brownish_grey"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:background="@null"
+                android:focusable="false"
+                android:clickable="false"
+                android:textCursorDrawable="@drawable/edit_cursor_color" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ly_pw"
+        android:background="@color/white_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+</RelativeLayout>

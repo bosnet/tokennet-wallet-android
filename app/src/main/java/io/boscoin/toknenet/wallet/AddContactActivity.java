@@ -1,6 +1,7 @@
 package io.boscoin.toknenet.wallet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.stellar.sdk.KeyPair;
 
@@ -30,6 +35,7 @@ public class AddContactActivity extends AppCompatActivity {
     private boolean mSameName, mNameEmpty, mAddressEmpty, mIsAddress;
     private String mName, mPubKey;
     private Button mBtnOk;
+    private final int ADDRESS_REQUEST_CODE = 0x0000ff00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +107,7 @@ public class AddContactActivity extends AppCompatActivity {
                         do{
 
                             if(mName.equals(mCursor.getString(mCursor.getColumnIndex(Constants.DB.BOOK_NAME)))){
-                                Log.e(TAG,"값이 존재");
+
                                 mTvNameErr.setText(R.string.error_already);
                                 mTvNameErr.setVisibility(View.VISIBLE);
                                 mDbOpenHelper.close();
@@ -197,6 +203,33 @@ public class AddContactActivity extends AppCompatActivity {
             mBtnOk.setBackgroundColor(getResources().getColor(R.color.cerulean));
         }else{
             mBtnOk.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+        }
+    }
+
+    public void importAddress(View view) {
+        new IntentIntegrator(this).setCaptureActivity(SmallCaptureActivity.class)
+                .setRequestCode(ADDRESS_REQUEST_CODE).initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult( resultCode, data);
+
+        if(result != null) {
+            if(result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+
+                switch (requestCode){
+                    case ADDRESS_REQUEST_CODE:
+                        mEPubKey.setText(result.getContents());
+                        break;
+
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

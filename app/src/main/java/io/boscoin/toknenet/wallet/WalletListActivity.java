@@ -1,6 +1,5 @@
 package io.boscoin.toknenet.wallet;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
@@ -19,7 +17,6 @@ import io.boscoin.toknenet.wallet.adapter.WalletListAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Wallet;
-import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
 public class WalletListActivity extends AppCompatActivity {

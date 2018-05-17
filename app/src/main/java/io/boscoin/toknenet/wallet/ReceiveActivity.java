@@ -95,6 +95,54 @@ public class ReceiveActivity extends AppCompatActivity {
         mEAmount = findViewById(R.id.edit_amount);
 
 
+
+        mEAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.e(TAG, "before = "+s.toString());
+
+
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+                String input = s.toString();
+
+                if(input.contains(".") && s.charAt(s.length()-1) != '.'){
+                    Log.e(TAG, " 111 ");
+                    if(input.indexOf(".") + 3 <= input.length()-1){
+                        Log.e(TAG, " 222 ");
+                        String formatted = input.substring(0, input.indexOf(".") + 3);
+                        mEAmount.setText(formatted);
+                        mEAmount.setSelection(formatted.length());
+                    }
+                }else if(input.contains(",") && s.charAt(s.length()-1) != ','){
+                    if(input.indexOf(",") + 3 <= input.length()-1){
+                        String formatted = input.substring(0, input.indexOf(",") + 3);
+                        mEAmount.setText(formatted);
+                        mEAmount.setSelection(formatted.length());
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.e(TAG, "after = "+s.toString());
+
+
+            }
+        });
+
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

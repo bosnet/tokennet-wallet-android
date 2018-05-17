@@ -12,6 +12,7 @@ public class Constants {
 		public static final String PUBKEY = "public-key";
 		public static final String SEND = "send";
 		public static final String ADDRESS_BOOK = "address-book";
+		public static final String EDIT = "edit";
 	}
 
     public static final class DB {
@@ -53,5 +54,9 @@ public class Constants {
 		public static final String PASSPHRASE_BOS_TEST = "Test BOS Token Network ; tokennet.test; September 2017";
 		public static final String PASSPHRASE_STELLAR_TEST = "Test SDF Network ; September 2015";
 
+	}
+
+	public static final class RssultCode{
+		public static final int CHANGE_NAME = 1;
 	}
 }

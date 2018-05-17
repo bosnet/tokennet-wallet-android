@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddContactActivity">
+    tools:context=".EditContactActivity">
 
     <include
         android:id="@+id/contact_title"
@@ -14,7 +14,7 @@
         />
 
     <LinearLayout
-        android:id="@+id/name_layout"
+        android:id="@+id/ly_ename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/input_cname"
+                android:id="@+id/edit_cname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
@@ -48,24 +48,13 @@
 
     </LinearLayout>
 
-  <!--  <ImageButton
-        android:id="@+id/btn_del"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/ic_icon_delete_text"
-        android:visibility="gone"
-        android:layout_above="@+id/line1"
-        android:layout_marginBottom="8dp"
-        android:onClick="deleteAddName"/> -->
 
 
     <View
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/name_layout"
+        android:layout_below="@+id/ly_ename"
         android:background="@color/white_line"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
@@ -81,12 +70,12 @@
         android:layout_below="@+id/line1"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/enter_name"
+        android:text="@string/error_book_length"
         android:visibility="gone"
         />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/pw_layout"
+        android:id="@+id/ly_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line1"
@@ -95,7 +84,7 @@
         android:layout_marginTop="41dp">
 
         <EditText
-            android:id="@+id/input_address"
+            android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pub_address"
@@ -103,31 +92,33 @@
             android:textSize="14sp"
             android:fontFamily="sans-serif"
             android:textStyle="normal"
-            android:textColor="@color/black"
+            android:textColor="@color/white_three"
             android:background="@null"
             android:paddingTop="8dp"
             android:paddingBottom="10dp"
+            android:focusable="false"
+            android:clickable="false"
             />
     </android.support.design.widget.TextInputLayout>
+
 
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/pw_layout"
+        android:layout_below="@+id/ly_address"
         android:background="@color/white_line"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="60dp" />
 
-     <ImageView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentRight="true"
-         android:layout_above="@+id/line2"
-         android:layout_marginBottom="8dp"
-         android:layout_marginRight="20dp"
-         android:background="@drawable/ic_qr_code"
-         android:onClick="importAddress"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/line2"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_qr_code_disable" />
 
     <TextView
         android:id="@+id/err_pubkey"
@@ -140,13 +131,12 @@
         android:layout_below="@+id/line2"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
-        android:text="@string/enter_pub_address"
-        android:visibility="gone"
+        android:text="@string/edit_no"
         />
 
-    <!-- android:onClick="createAddress" -->
+
     <Button
-        android:id="@+id/btn_add_ok"
+        android:id="@+id/btn_edit_ok"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@+id/line2"
@@ -164,7 +154,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_add_ok"
+        android:layout_below="@+id/btn_edit_ok"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:textSize="10sp"

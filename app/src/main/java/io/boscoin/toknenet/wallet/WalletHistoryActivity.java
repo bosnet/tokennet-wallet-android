@@ -47,12 +47,13 @@ public class WalletHistoryActivity extends AppCompatActivity implements
     private RelativeLayout mNavHis, mNavSend, mNavReceive, mNavContact;
     private ImageView mIcHis, mIcSend, mIcReceive, mIcContact;
     private TextView navTvhis, navTvSend, navTvReceive, navTvContact;
+    private static final int EDIT_REQUEST = 5;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_history);
+
         setContentView(R.layout.activity_wallet_history);
 
         mContext = this;
@@ -76,7 +77,7 @@ public class WalletHistoryActivity extends AppCompatActivity implements
 
         wBalance = findViewById(R.id.tv_balances);
         mBal = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_LASTEST));
-        //wBalance.setText(cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_LASTEST)));
+
         wBalance.setText(Utils.dispayBalance(mBal));
 
         wPubKey = findViewById(R.id.tv_pub_key);
@@ -96,6 +97,7 @@ public class WalletHistoryActivity extends AppCompatActivity implements
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,allf).commit();
 
         mDbOpenHelper.close();
+        cursor.close();
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,5 +307,33 @@ public class WalletHistoryActivity extends AppCompatActivity implements
                 startActivity(it);
                 break;
         }
+    }
+
+    public void editWallet(View view) {
+        Intent it = new Intent(WalletHistoryActivity.this, EditWalletActivity.class);
+        it.putExtra(Constants.Invoke.EDIT, mIdx);
+        startActivityForResult(it,EDIT_REQUEST);
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == EDIT_REQUEST && resultCode == Constants.RssultCode.CHANGE_NAME){
+            checkWallet();
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+    }
+
+    private void checkWallet() {
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+        Cursor cursor = mDbOpenHelper.getColumnWallet(mIdx);
+        wName = findViewById(R.id.tv_wname);
+        wName.setText(cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_NAME)));
+        mDbOpenHelper.close();
+        cursor.close();
     }
 }

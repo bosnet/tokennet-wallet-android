@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
+import io.boscoin.toknenet.wallet.ContactActivity;
 import io.boscoin.toknenet.wallet.R;
 import io.boscoin.toknenet.wallet.model.AddressBook;
 import io.boscoin.toknenet.wallet.model.Wallet;
@@ -24,10 +26,12 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     private static final String TAG = "AddressAdapter";
     private List<AddressBook> mAddBookList;
     private Context mContext;
+    private ContactActivity.MenuClickListener listener;
 
-    public AddressAdapter(List<AddressBook> mAddBookList, Context con) {
+    public AddressAdapter(List<AddressBook> mAddBookList, Context con, ContactActivity.MenuClickListener listener) {
         this.mAddBookList = mAddBookList;
         this.mContext = con;
+        this.listener = listener;
     }
 
     @Override
@@ -38,7 +42,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     }
 
     @Override
-    public void onBindViewHolder(final AddressViewHolder holder, int position) {
+    public void onBindViewHolder(final AddressViewHolder holder, final int position) {
 
         holder.mbookTi.setText(mAddBookList.get(position).getAddressName());
         holder.mbooAddress.setText(mAddBookList.get(position).getAddress());
@@ -47,6 +51,8 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
             @Override
             public void onClick(View v) {
                // Context contextWrapper = new ContextThemeWrapper(mContext, R.style.OptionMenu);
+                final WeakReference<ContactActivity.MenuClickListener> listenerWeakReference;
+                listenerWeakReference = new WeakReference<>(listener);
                 PopupMenu popup = new PopupMenu(mContext, holder.mBtnmore);
                 popup.getMenuInflater()
                         .inflate(R.menu.navigation, popup.getMenu());
@@ -57,14 +63,17 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
                         switch (item.getItemId()){
                             case R.id.navi_edit:
 
+                                listenerWeakReference.get().onEditClicked(position);
                                 break;
 
                             case R.id.navi_send:
 
+                                listenerWeakReference.get().onSendClicked(position);
                                 break;
 
                             case R.id.navi_del:
 
+                                listenerWeakReference.get().onDeleteClicked(position);
                                 break;
 
                         }
@@ -96,6 +105,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     public class AddressViewHolder extends  RecyclerView.ViewHolder{
         TextView mbookTi, mbooAddress;
         ImageView mBtnmore;
+
 
         public AddressViewHolder(View itemView) {
             super(itemView);
