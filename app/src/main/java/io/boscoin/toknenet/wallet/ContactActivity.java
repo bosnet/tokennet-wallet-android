@@ -22,6 +22,7 @@ import io.boscoin.toknenet.wallet.adapter.AddressAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.AddressBook;
+import io.boscoin.toknenet.wallet.utils.RecyclerViewItemClickListener;
 
 public class ContactActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -40,6 +41,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private static final int ADD_REQUEST_CODE = 3;
     private static final int EDIT_REQUEST_CODE = 4;
     private boolean mIsEmpty;
+    private boolean mIsFromSend;
 
     public interface MenuClickListener {
         void onEditClicked(int postion);
@@ -57,6 +59,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         Intent it = getIntent();
         //wallet
         mWalletIdx = it.getLongExtra(Constants.Invoke.ADDRESS_BOOK,0);
+        mIsFromSend = it.getBooleanExtra(Constants.Invoke.SEND,false);
 
         initUI();
     }
@@ -145,9 +148,27 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 public void onDeleteClicked(int postion) {
                     confirmDelete(postion);
                 }
-            });
+            }, mIsFromSend);
             mRV.setAdapter(mAdapter);
             mRV.setHasFixedSize(true);
+        }
+        if(mIsFromSend){
+            mRV.addOnItemTouchListener(new RecyclerViewItemClickListener(mContext, mRV, new RecyclerViewItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+
+                    Intent it = new Intent();
+                    it.putExtra(Constants.Invoke.SEND, bookList.get(position).getAddress());
+                    setResult(Constants.RssultCode.ADDRESS,it);
+                    finish();
+
+                }
+
+                @Override
+                public void onLongItemClick(View view, int position) {
+
+                }
+            }));
         }
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
@@ -266,7 +287,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                     public void onDeleteClicked(int postion) {
                         confirmDelete(postion);
                     }
-                });
+                },mIsFromSend);
                 mRV.setAdapter(mAdapter);
                 mRV.setHasFixedSize(true);
             }else{
@@ -284,7 +305,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         Intent it;
         switch (v.getId()){
             case R.id.menu_trans_his:
-                it = new Intent(ContactActivity.this, WalletHistoryActivity.class);
+                it = new Intent(ContactActivity.this, WalletActivity.class);
                 it.putExtra(Constants.Invoke.HISTORY,mWalletIdx);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);

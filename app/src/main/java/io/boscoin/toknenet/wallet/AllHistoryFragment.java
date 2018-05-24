@@ -39,10 +39,7 @@ public class AllHistoryFragment extends Fragment {
     private Context mContext;
     private RecyclerView recyclerView;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public AllHistoryFragment() {
     }
 
@@ -133,7 +130,7 @@ public class AllHistoryFragment extends Fragment {
                 Gson gson = new GsonBuilder().create();
                 Payments payments =  gson.fromJson(res, Payments.class);
 
-                recyclerView.setAdapter(new AllHisViewAdapter(payments.get_embedded().getRecordList(), mListener));
+                recyclerView.setAdapter(new AllHisViewAdapter(payments.get_embedded().getRecordList(), mListener,mPubkey));
                 mSwipeRefreshLayout.setRefreshing(false);
             }
 

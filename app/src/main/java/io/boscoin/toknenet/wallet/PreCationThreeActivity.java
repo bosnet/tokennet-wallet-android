@@ -38,7 +38,7 @@ public class PreCationThreeActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-                    alert.setMessage(R.string.no_see_page).setCancelable(false).setPositiveButton("OK",
+                    alert.setMessage(R.string.no_see_page).setCancelable(false).setPositiveButton(R.string.ok,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -47,7 +47,7 @@ public class PreCationThreeActivity extends AppCompatActivity {
                                     startActivity(it);
                                     finish();
                                 }
-                            }).setNegativeButton("Cancel",
+                            }).setNegativeButton(R.string.cancel,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

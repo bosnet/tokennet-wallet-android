@@ -173,7 +173,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             return;
         }
 
-        if(!isPasswordValid(wPw1) || !isPasswordValid(wPw2)){
+        if(!Utils.isPasswordValid(wPw1) || !Utils.isPasswordValid(wPw2)){
             final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
             alert.setMessage(R.string.error_pw).setCancelable(false).setPositiveButton("OK",
                     new DialogInterface.OnClickListener() {
@@ -277,7 +277,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
     // TODO: 2018. 5. 9. custom alert 
     private void confirmAlert() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(mContext /*, R.style.PasswordDialogStyle*/);
+        AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
         alert.setTitle(R.string.title_setup);
         alert.setMessage(R.string.rember_recover).setCancelable(false).setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
@@ -305,17 +305,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         return wname.length() < MAX_WALLET_NAME;
     }
 
-    private boolean isPasswordValid(String password) {
 
-        Pattern p = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-        Matcher match = p.matcher(password);
-
-        if(match.matches() && password.length() > MIN_PASSWORD){
-            return  true;
-        }
-
-        return false;
-    }
 
 
 }

@@ -36,7 +36,7 @@ public class RecoveryQRActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recovery_qr);
+        setContentView(R.layout.activity_qr);
         mContext = this;
 
         Intent it = getIntent();
@@ -85,4 +85,7 @@ public class RecoveryQRActivity extends AppCompatActivity {
         clipboard.setPrimaryClip(clipData);
         Toast.makeText(mContext, mContext.getString(R.string.toast_text_clipboard_address), Toast.LENGTH_SHORT).show();
     }
+
+
+
 }

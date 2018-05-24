@@ -13,6 +13,9 @@ public class Constants {
 		public static final String SEND = "send";
 		public static final String ADDRESS_BOOK = "address-book";
 		public static final String EDIT = "edit";
+		public static final String PASSWORD = "password";
+		public static final String QR_SEED = "qr-seed";
+		public static final String QR_BOS = "qr-bos";
 	}
 
     public static final class DB {
@@ -58,5 +61,7 @@ public class Constants {
 
 	public static final class RssultCode{
 		public static final int CHANGE_NAME = 1;
+		public static final int DELETE_WALLET = 2;
+		public static final int ADDRESS = 3;
 	}
 }

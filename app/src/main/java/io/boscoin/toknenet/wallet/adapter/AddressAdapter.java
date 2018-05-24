@@ -4,7 +4,6 @@ import android.content.Context;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,18 +19,19 @@ import java.util.List;
 import io.boscoin.toknenet.wallet.ContactActivity;
 import io.boscoin.toknenet.wallet.R;
 import io.boscoin.toknenet.wallet.model.AddressBook;
-import io.boscoin.toknenet.wallet.model.Wallet;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressViewHolder> {
     private static final String TAG = "AddressAdapter";
     private List<AddressBook> mAddBookList;
     private Context mContext;
     private ContactActivity.MenuClickListener listener;
+    private boolean mIsHide;
 
-    public AddressAdapter(List<AddressBook> mAddBookList, Context con, ContactActivity.MenuClickListener listener) {
+    public AddressAdapter(List<AddressBook> mAddBookList, Context con, ContactActivity.MenuClickListener listener, boolean hide) {
         this.mAddBookList = mAddBookList;
         this.mContext = con;
         this.listener = listener;
+        this.mIsHide =  hide;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     public void onBindViewHolder(final AddressViewHolder holder, final int position) {
 
         holder.mbookTi.setText(mAddBookList.get(position).getAddressName());
-        holder.mbooAddress.setText(mAddBookList.get(position).getAddress());
+        holder.mbookAddress.setText(mAddBookList.get(position).getAddress());
         // TODO: 2018. 5. 15. width size 
         holder.mBtnmore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +103,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     }
 
     public class AddressViewHolder extends  RecyclerView.ViewHolder{
-        TextView mbookTi, mbooAddress;
+        TextView mbookTi, mbookAddress;
         ImageView mBtnmore;
 
 
@@ -111,8 +111,14 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
             super(itemView);
 
             mbookTi = itemView.findViewById(R.id.book_title);
-            mbooAddress = itemView.findViewById(R.id.book_address);
+            mbookAddress = itemView.findViewById(R.id.book_address);
             mBtnmore = itemView.findViewById(R.id.btn_more);
+            if(mIsHide){
+                mBtnmore.setVisibility(View.GONE);
+            }else{
+                mBtnmore.setVisibility(View.VISIBLE);
+            }
+
 
         }
     }

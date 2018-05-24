@@ -2,16 +2,21 @@ package io.boscoin.toknenet.wallet.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.common.io.BaseEncoding;
 
-
+import org.stellar.sdk.FormatException;
+import org.stellar.sdk.KeyPair;
+import org.stellar.sdk.responses.SubmitTransactionResponse;
 
 import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
@@ -21,7 +26,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import io.boscoin.toknenet.wallet.R;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 
 
@@ -33,8 +41,7 @@ public class Utils {
         String localTime = "";
 
         SimpleDateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        SimpleDateFormat dateLocalFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+        SimpleDateFormat dateLocalFormat =  new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         try {
 
             Date dateUtcTime = dateFormat.parse(utcTime);
@@ -247,9 +254,27 @@ public class Utils {
 
     public static SpannableStringBuilder dispayBalance(String bal){
         int pos = bal.indexOf(".");
-        Log.e(TAG,"pso = "+pos);
+        Log.e(TAG,"pos = "+pos);
         SpannableStringBuilder ssb = new SpannableStringBuilder(bal);
         ssb.setSpan(new StyleSpan(Typeface.BOLD),0, pos+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return ssb;
+    }
+
+    public static SpannableStringBuilder changeColorRed(String str){
+
+        int pos = str.indexOf("BOS");
+        SpannableStringBuilder ssb = new SpannableStringBuilder(str);
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#999999")), pos, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return ssb;
+    }
+
+    public static SpannableStringBuilder changeColorBlue(String str){
+
+        int pos = str.indexOf("BOS");
+        SpannableStringBuilder ssb = new SpannableStringBuilder(str);
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#0082f2")), pos, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         return ssb;
     }
 
@@ -258,6 +283,33 @@ public class Utils {
         return name.length() < MAX_NAME;
     }
 
+
+    private static final int MIN_PASSWORD = 7;
+    public static boolean isPasswordValid(String password) {
+
+        Pattern p = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+        Matcher match = p.matcher(password);
+
+        if(match.matches() && password.length() > MIN_PASSWORD){
+            return  true;
+        }
+
+        return false;
+    }
+
+    public static String fitDigit(String str)
+    {
+        int dpos = str.indexOf(".");
+        String dstr = String.format("%,d",Integer.parseInt(str.substring(0, dpos)));
+        String fstr = str.substring(dpos+1, str.length());
+        while (fstr.endsWith("0")){
+            fstr = (fstr.substring(0, fstr.length() - 1));
+        }
+
+        return (dstr + fstr);
+    }
+
+ 
 
 
 }

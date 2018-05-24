@@ -31,7 +31,7 @@
     <!-- white -->
     <color name="white">#FFFFFF</color>
     <color name="white_line">#bdbdbd</color>
-    <color name="white_e_hint">#999999</color>
+    <color name="warm_grey">#999999</color>
     <color name="white_op50">#80FFFFFF</color>
     <color name="brownish_grey">#666666</color>
     <color name="pinkish_grey">#cccccc</color>
@@ -50,8 +50,12 @@
     <color name="blue_bottom_bg">#446799</color>
     <color name="blue_art_msg">#de0094bd</color>
     <color name="light_navy_two">#133f68</color>
+    <color name="cerulean_blue">#0082f2</color>
+
 
     <!--  red -->
     <color name="red_error">#db1403</color>
     <color name="red_two">#f10000</color>
+    <color name="red_two_87">#def10000</color>
+    <color name="red_three">#db0303</color>
 </resources>

@@ -108,6 +108,15 @@ removed or reinstalled, and you can only register up to 100 contacts.</string>
     <string name="enter_pub_address">Enter a public address</string>
     <string name="edit_no">Can’t edit</string>
     <string name="send_total">Total Amount</string>
+    <string name="new_pw2">New Password</string>
+    <string name="sec_key_noti">The secret seed starts with \'S\' and is a total of 56 characters.\n
+Keep your Secret Seed in a safe place.</string>
+    <string name="rc_key_noti">The secret seed starts with \'B\' and is a total of 56 characters.\n
+Keep your Secret Seed in a safe place.</string>
+    <string name="delete_w">Are you sure you want to deletethis wallet?</string>
+    <string name="if_you_delete">If you delete your wallet without\nbacking it up, you will not be able to\nrestore your wallet!</string>
+
+
 
 
     <string name="error_no_name">Please Input Wallnet Name</string>
@@ -144,14 +153,28 @@ removed or reinstalled, and you can only register up to 100 contacts.</string>
     <string name="dlog_pw">Enter a password </string>
     <string name="dlog_send_ok">Transfer completed </string>
     <string name="change_wallet_name">Change Wallet Name</string>
-    <string name="change_wallet_pw">Change password</string>
+    <string name="change_wallet_pw">Change Password</string>
     <string name="check_seed">Check secret seed</string>
-    <string name="check_rckey">Check Recovery Key</string>
     <string name="delete_wallet">Delete Wallet</string>
     <string name="info_endit">The information you edit now will be lost when you remove the app
 or import your wallet.</string>
+    <string name="check_rckey">Check Recovery Key</string>
     <string name="cur_wname">Current Wallet Name</string>
     <string name="new_wname">New Wallet Name</string>
+    <string name="cur_pw">Current Password</string>
+    <string name="noti_pw">If you change the password, the existing recovery key will be lost.
+The new recovery key can be checked in the settings.</string>
+    <string name="new_pw">Enter New Password</string>
+    <string name="conf_pw">Confirm New Password</string>
+    <string name="screen_cap">Screen capture is prohibited for security
+reasons. To restore your wallet, you need to
+know your secret seed or recovery key.</string>
+    <string name="be_care">Be careful not to lose them or be exposed to others.</string>
+    <string name="ck_seed">Check Secret Seed</string>
+    <string name="ck_rckey">Check Recovery Key</string>
+    <string name="sent">Sent</string>
+    <string name="received">Received</string>
+    <string name="create_ac">Create Account</string>
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -169,4 +192,5 @@ or import your wallet.</string>
     <string name="error_bos_invalid">recovery key is invalid.</string>
     <string name="error_bos_pw">Wrong password for recovery key</string>
     <string name="error_invalid_pubkey">Invalid Public Address.</string>
+    <string name="error_no_count_address">No registered contacts.</string>
 </resources>

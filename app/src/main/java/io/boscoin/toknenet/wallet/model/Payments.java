@@ -52,6 +52,28 @@ public class Payments {
        @SerializedName("type")
        private String type;
 
+       @SerializedName("funder")
+       private String funder;
+
+       @SerializedName("starting_balance")
+       private String starting_balance;
+
+       public String getStarting_balance() {
+           return starting_balance;
+       }
+
+       public void setStarting_balance(String starting_balance) {
+           this.starting_balance = starting_balance;
+       }
+
+       public String getFunder() {
+           return funder;
+       }
+
+       public void setFunder(String funder) {
+           this.funder = funder;
+       }
+
        public String getType() {
            return type;
        }

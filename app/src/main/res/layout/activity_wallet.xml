@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_navy_two"
-    tools:context=".WalletHistoryActivity">
+    tools:context=".WalletActivity">
 
     <RelativeLayout
         android:id="@+id/ly_top"

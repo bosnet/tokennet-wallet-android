@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoticeQRActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        layout="@layout/layout_title"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:layout_marginTop="156dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="106dp"
+        android:background="@drawable/ic_icon_nocamera"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:layout_marginTop="156dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="105dp"
+        android:background="@drawable/ic_icon_thief"/>
+
+    <TextView
+        android:id="@+id/noti_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="45dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="249dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/screen_cap"
+        android:textColor="@color/brownish_grey"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/noti_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="#000000"
+        android:lineSpacingExtra="8sp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/noti_1"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="85dp"
+        android:layout_marginRight="82dp"
+        android:text="@string/be_care"
+        />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:background="@color/cerulean"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/white"
+        android:text="@string/ok"
+        app:layout_constraintTop_toBottomOf="@+id/noti_2"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="notiOk"
+        />
+
+</android.support.constraint.ConstraintLayout>

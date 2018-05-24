@@ -1,7 +1,9 @@
 package io.boscoin.toknenet.wallet;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +58,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private DbOpenHelper mDbOpenHelper;
     private Cursor mCursor;
     private Context mContext;
-    private final int ADDRESS_REQUEST_CODE = 0x0000ff00;
+    private final int ADDRESS_REQUEST_QR_CODE = 14;
+    private final int ADDRESS_REQUEST_CODE = 13;
     private TextView mTvAddressErr;
     private RelativeLayout mNavHis, mNavSend, mNavReceive, mNavContact;
     private ImageView mIcHis, mIcSend, mIcReceive, mIcContact;
@@ -74,7 +77,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send2);
+        setContentView(R.layout.activity_send);
 
         mContext = this;
 
@@ -82,13 +85,14 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         mWalletId = it.getLongExtra(Constants.Invoke.SEND, 0);
         mPubKey = it.getStringExtra(Constants.Invoke.PUBKEY);
 
-        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper = new DbOpenHelper(mContext);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
         mCursor = mDbOpenHelper.getColumnWallet(mWalletId);
 
         mBosKey = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_KET));
 
         mDbOpenHelper.close();
+        mCursor.close();
 
         initUI();
     }
@@ -100,6 +104,30 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         mTvAddressErr = findViewById(R.id.err_pubkey);
         mBtnSend = findViewById(R.id.btn_send);
 
+
+        findViewById(R.id.btn_contact).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getAddressCount() > 0 ){
+                    Intent it = new Intent(SendActivity.this, ContactActivity.class);
+                    it.putExtra(Constants.Invoke.SEND, true);
+                    startActivityForResult(it,ADDRESS_REQUEST_CODE );
+                }else{
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                    alert.setMessage(R.string.error_no_count_address).setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+
+                                }
+                            });
+                    AlertDialog dialog = alert.create();
+                    dialog.show();
+                    return;
+                }
+            }
+        });
 
         editPubkey.addTextChangedListener(new TextWatcher() {
             @Override
@@ -200,6 +228,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         navTvReceive.setTextColor(getResources().getColor(R.color.brownish_grey));
         navTvContact.setTextColor(getResources().getColor(R.color.brownish_grey));
 
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    private int getAddressCount() {
+        mDbOpenHelper = new DbOpenHelper(mContext);
+        mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
+        int count = mDbOpenHelper.getAddressCount();
+        mDbOpenHelper.close();
+        return count;
     }
 
     public void showSendBos(View view) {
@@ -226,7 +269,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     View.OnClickListener PwOklistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          // Log.e(TAG,"seed = "+ mPwDialog.getSeed()) ;
+
             EditText inputPw = mPwDialog.getEditPw();
             TextView tvErrKey = mPwDialog.getmTvErrKey();
 
@@ -327,7 +370,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (Exception e) {
                         System.out.println("Something went wrong!");
                         System.out.println(e.getMessage());
-                       // Toast.makeText(getApplicationContext(), "Send Fail!", Toast.LENGTH_LONG).show();
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -365,11 +408,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     try {
                         SubmitTransactionResponse response = server.submitTransaction(transaction);
 
-                       // Utils.printResponse(response);
-                        //Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
-                       /* Intent it = new Intent(SendActivity.this, WalletHistoryActivity.class);
-                        it.putExtra(Constants.Invoke.HISTORY,mIdx);
-                        startActivity(it);*/
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -430,7 +468,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     public void getAddress(View view) {
         new IntentIntegrator(this).setCaptureActivity(SmallCaptureActivity.class)
-                .setRequestCode(ADDRESS_REQUEST_CODE).initiateScan();
+                .setRequestCode(ADDRESS_REQUEST_QR_CODE).initiateScan();
     }
 
     private void changeButton(){
@@ -446,24 +484,32 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        IntentResult result = IntentIntegrator.parseActivityResult( resultCode, data);
+        if(requestCode == ADDRESS_REQUEST_CODE && resultCode == Constants.RssultCode.ADDRESS){
+            String address = data.getStringExtra(Constants.Invoke.SEND);
+            editPubkey.setText(address);
+        } else{
+            IntentResult result = IntentIntegrator.parseActivityResult( resultCode, data);
 
-        if(result != null) {
-            if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
+            if(result != null) {
+                if(result.getContents() == null) {
+                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
 
-                switch (requestCode){
-                    case ADDRESS_REQUEST_CODE:
+                } else {
 
-                        editPubkey.setText(result.getContents());
-                        break;
+                    switch (requestCode){
+                        case ADDRESS_REQUEST_QR_CODE:
 
+                            editPubkey.setText(result.getContents());
+                            break;
+
+                    }
                 }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data);
             }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
+
+
     }
 
     @Override
@@ -471,7 +517,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         Intent it;
         switch (v.getId()){
             case R.id.menu_trans_his:
-                it = new Intent(SendActivity.this, WalletHistoryActivity.class);
+                it = new Intent(SendActivity.this, WalletActivity.class);
                 it.putExtra(Constants.Invoke.HISTORY,mWalletId);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);

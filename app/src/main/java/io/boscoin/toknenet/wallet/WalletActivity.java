@@ -29,7 +29,7 @@ import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Payments;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
-public class WalletHistoryActivity extends AppCompatActivity implements
+public class WalletActivity extends AppCompatActivity implements
         AllHistoryFragment.OnListAllFragInteractionListener,AllHistoryFragment.CurrentBalanceListener,
         PaymentFragment.OnListPayFragInteractionListener, ReceiptFragment.OnListReceiptFragInteractionListener, View.OnClickListener {
 
@@ -54,7 +54,7 @@ public class WalletHistoryActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_wallet_history);
+        setContentView(R.layout.activity_wallet);
 
         mContext = this;
 
@@ -162,10 +162,8 @@ public class WalletHistoryActivity extends AppCompatActivity implements
                 Gson gson = new GsonBuilder().create();
                 Account account =   gson.fromJson(res, Account.class);
                 mCurBal = account.getBalances().get(0).getBalance()+" BOS";
-                //int pos = mCurBal.indexOf("BOS");
+
                 String val =  mCurBal.replaceAll(" BOS", "");
-                Log.e(TAG, "bal = "+mCurBal);
-                Log.e(TAG, "val = "+val);
 
                 wBalance.setText(Utils.dispayBalance(mCurBal));
 
@@ -231,14 +229,14 @@ public class WalletHistoryActivity extends AppCompatActivity implements
     }
 
     public void goSendView(View view) {
-        Intent it = new Intent(WalletHistoryActivity.this, SendActivity.class);
+        Intent it = new Intent(WalletActivity.this, SendActivity.class);
         it.putExtra(Constants.Invoke.SEND,mAccountId);
         startActivity(it);
     }
 
     public void goReceiveView(View view) {
 
-        Intent it = new Intent(WalletHistoryActivity.this, ReceiveActivity.class);
+        Intent it = new Intent(WalletActivity.this, ReceiveActivity.class);
         it.putExtra(Constants.Invoke.WALLET, mIdx);
         startActivity(it);
         overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
@@ -287,21 +285,21 @@ public class WalletHistoryActivity extends AppCompatActivity implements
                 break;
 
             case R.id.menu_send:
-                it = new Intent(WalletHistoryActivity.this, SendActivity.class);
+                it = new Intent(WalletActivity.this, SendActivity.class);
                 it.putExtra(Constants.Invoke.SEND, mAccountId);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
                 break;
 
             case R.id.menu_receive:
-                it = new Intent(WalletHistoryActivity.this, ReceiveActivity.class);
+                it = new Intent(WalletActivity.this, ReceiveActivity.class);
                 it.putExtra(Constants.Invoke.WALLET, mAccountId);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
                 break;
 
             case R.id.menu_contact:
-                it = new Intent(WalletHistoryActivity.this, ContactActivity.class);
+                it = new Intent(WalletActivity.this, ContactActivity.class);
                 it.putExtra(Constants.Invoke.ADDRESS_BOOK, mAccountId);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
@@ -310,10 +308,10 @@ public class WalletHistoryActivity extends AppCompatActivity implements
     }
 
     public void editWallet(View view) {
-        Intent it = new Intent(WalletHistoryActivity.this, EditWalletActivity.class);
+        Intent it = new Intent(WalletActivity.this, EditWalletActivity.class);
         it.putExtra(Constants.Invoke.EDIT, mIdx);
         startActivityForResult(it,EDIT_REQUEST);
-
+        //startActivity(it);
 
     }
 
@@ -321,7 +319,9 @@ public class WalletHistoryActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == EDIT_REQUEST && resultCode == Constants.RssultCode.CHANGE_NAME){
             checkWallet();
-        }else{
+        } else if(requestCode == EDIT_REQUEST && resultCode == Constants.RssultCode.DELETE_WALLET){
+            finish();
+        } else{
             super.onActivityResult(requestCode, resultCode, data);
         }
 

@@ -32,6 +32,7 @@ public class WalletListActivity extends AppCompatActivity {
     private static final int ORDER_REQUEST_CODE = 1;
     private static final int WALLET_DETAIL_VIEW = 2;
 
+
     public interface ClickListener {
         void onSendClicked(int postion);
         void onReceivedClicked(int postion);
@@ -56,7 +57,6 @@ public class WalletListActivity extends AppCompatActivity {
         mBtnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent it = new Intent(WalletListActivity.this, SettingActivity.class);
 
                 startActivityForResult(it, ORDER_REQUEST_CODE);
@@ -101,7 +101,7 @@ public class WalletListActivity extends AppCompatActivity {
 
             @Override
             public void onReceivedClicked(int postion) {
-                // TODO: 2018. 4. 12. will be needs received activity 
+
                 Intent it = new Intent(WalletListActivity.this, ReceiveActivity.class);
                 it.putExtra(Constants.Invoke.WALLET, walletList.get(postion).getWalletId());
                 startActivity(it);
@@ -109,9 +109,9 @@ public class WalletListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClicked(int postion) {
-                Intent it = new Intent(WalletListActivity.this, WalletHistoryActivity.class);
+                Intent it = new Intent(WalletListActivity.this, WalletActivity.class);
                 it.putExtra(Constants.Invoke.HISTORY, walletList.get(postion).getWalletId());
-               // startActivity(it);
+
                 startActivityForResult(it, WALLET_DETAIL_VIEW);
             }
         });

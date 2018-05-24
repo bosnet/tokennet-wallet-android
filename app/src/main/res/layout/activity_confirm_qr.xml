@@ -43,7 +43,7 @@
 
         <TextView
             android:id="@+id/txt_boskey"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10sp"
             android:fontFamily="sans-serif"
@@ -56,7 +56,9 @@
             tools:text="BOSPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSD
 FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
 
-
+        <!--
+                     android:layout_toRightOf="@+id/txt_boskey"
+            android:layout_marginLeft="12dp"-->
         <ImageButton
             android:id="@+id/btn_copy"
             android:layout_width="wrap_content"
@@ -65,7 +67,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
             android:layout_marginRight="39dp"
             android:layout_centerVertical="true"
             android:background="@drawable/ic_icon_copy"
-            android:onClick="copyRecoveryKey"/>
+            android:onClick="copyKey"/>
     </RelativeLayout>
 
 
@@ -78,7 +80,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
         android:layout_marginRight="100dp"
         android:layout_marginTop="47.8dp"
         android:background="@color/cerulean"
-        android:onClick="viewWallet"
+        android:onClick="confirmOk"
         android:text="@string/ok"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -87,6 +89,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
 
 
     <TextView
+        android:id="@+id/txt_noti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
