@@ -264,8 +264,8 @@ public class Utils {
 
         int pos = str.indexOf("BOS");
         SpannableStringBuilder ssb = new SpannableStringBuilder(str);
-        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#999999")), pos, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#db0303")), 0, pos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(new StyleSpan(Typeface.BOLD),0, pos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return ssb;
     }
 
@@ -273,8 +273,9 @@ public class Utils {
 
         int pos = str.indexOf("BOS");
         SpannableStringBuilder ssb = new SpannableStringBuilder(str);
-        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#0082f2")), pos, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+        
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#0082f2")), 0, pos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(new StyleSpan(Typeface.BOLD),0, pos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return ssb;
     }
 

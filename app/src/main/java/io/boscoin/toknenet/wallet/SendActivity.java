@@ -316,13 +316,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String res) {
-                Log.e(TAG,"sendBOS");
+
                 sendBOS();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e(TAG,"createAccount");
+
                 createAccount();
 
             }

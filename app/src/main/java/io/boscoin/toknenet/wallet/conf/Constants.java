@@ -44,6 +44,8 @@ public class Constants {
 	public static final class Params{
 		public static final String ORDER = "order";
 		public static final String DESC = "desc";
+		public static final String ASC = "asc";
+		public static final String CURSOR = "cursor";
 		public static final String ACCOUNTS = "accounts";
 		public static final String PAYMENTS = "payments";
 	}

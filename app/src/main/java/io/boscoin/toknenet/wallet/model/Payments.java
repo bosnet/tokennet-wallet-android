@@ -40,8 +40,10 @@ public class Payments {
         @SerializedName("amount")
         private String amount;
 
-        @SerializedName("pagig_token")
-        private String pagig_token;
+
+
+       @SerializedName("paging_token")
+       private String paging_token;
 
         @SerializedName("created_at")
         private String created_at;
@@ -57,6 +59,25 @@ public class Payments {
 
        @SerializedName("starting_balance")
        private String starting_balance;
+
+       @SerializedName("type_i")
+       private String type_i;
+
+       public String getPaging_token() {
+           return paging_token;
+       }
+
+       public void setPaging_token(String paging_token) {
+           this.paging_token = paging_token;
+       }
+
+       public String getType_i() {
+           return type_i;
+       }
+
+       public void setType_i(String type_i) {
+           this.type_i = type_i;
+       }
 
        public String getStarting_balance() {
            return starting_balance;
@@ -106,13 +127,6 @@ public class Payments {
             this.amount = amount;
         }
 
-        public String getPagig_token() {
-            return pagig_token;
-        }
-
-        public void setPagig_token(String pagig_token) {
-            this.pagig_token = pagig_token;
-        }
 
         public String getCreated_at() {
             return created_at;

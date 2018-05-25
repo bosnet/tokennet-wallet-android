@@ -27,6 +27,7 @@ import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.dummy.DummyContent;
 import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Payments;
+import io.boscoin.toknenet.wallet.utils.DetailDialog;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class WalletActivity extends AppCompatActivity implements
@@ -257,7 +258,8 @@ public class WalletActivity extends AppCompatActivity implements
 
     @Override
     public void ListAllFragInteraction(Payments.PayRecords item) {
-
+        DetailDialog dialog = new DetailDialog(mContext,item,mMyPublicKey);
+        dialog.show();
     }
 
     @Override

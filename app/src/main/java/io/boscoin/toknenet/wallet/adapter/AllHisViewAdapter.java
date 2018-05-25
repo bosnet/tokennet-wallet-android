@@ -50,10 +50,11 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
             }
         }else{
             if(mValues.get(position).getFrom().equals(mPubKey)){
+                sentDisplay(holder,position);
+
+            }else{
 
                 receiveDisplay(holder,position);
-            }else{
-                sentDisplay(holder,position);
             }
         }
 
@@ -73,7 +74,7 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
         holder.mTvType.setText(R.string.received);
         holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFrom()));
 
-        String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
+        String tmp = Utils.fitDigit(mValues.get(pos).getAmount());
         String amount = tmp+" BOS";
 
         holder.mTvAmount.setText(Utils.changeColorBlue(amount));
@@ -95,7 +96,7 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
         holder.mTvType.setText(R.string.sent);
         holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getTo()));
 
-        String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
+        String tmp = Utils.fitDigit(mValues.get(pos).getAmount());
         String amount = tmp+" BOS";
 
         holder.mTvAmount.setText(Utils.changeColorRed(amount));

@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,10 +39,10 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
-public class ReceiveActivity extends AppCompatActivity {
+public class ReceiveActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "ReceiveActivity";
-    private long mIdx;
+    private long mWalletIdx;
     private DbOpenHelper mDbOpenHelper;
     private Cursor mCursor;
     private TextView mTvName, mTvPubKey, mTvTitle;
@@ -50,6 +51,9 @@ public class ReceiveActivity extends AppCompatActivity {
     private DecimalFormat decimalFormat = new DecimalFormat("#,###.#######");
     private String result="";
     private String mPubKey;
+    private RelativeLayout mNavHis, mNavSend, mNavReceive, mNavContact;
+    private ImageView mIcHis, mIcSend, mIcReceive, mIcContact;
+    private TextView navTvhis, navTvSend, navTvReceive, navTvContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +65,11 @@ public class ReceiveActivity extends AppCompatActivity {
 
         Intent it = getIntent();
 
-        mIdx = it.getLongExtra(Constants.Invoke.WALLET,0);
+        mWalletIdx = it.getLongExtra(Constants.Invoke.WALLET,0);
 
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-        mCursor = mDbOpenHelper.getColumnWallet(mIdx);
+        mCursor = mDbOpenHelper.getColumnWallet(mWalletIdx);
 
         mTvName = findViewById(R.id.wallet_name);
 
@@ -143,6 +147,39 @@ public class ReceiveActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        setNavBottom();
+    }
+
+    private void setNavBottom() {
+        mNavHis = findViewById(R.id.menu_trans_his);
+        mNavSend = findViewById(R.id.menu_send);
+        mNavReceive = findViewById(R.id.menu_receive);
+        mNavContact = findViewById(R.id.menu_contact);
+
+        mNavHis.setOnClickListener(this);
+        mNavSend.setOnClickListener(this);
+        mNavReceive.setOnClickListener(this);
+        mNavContact.setOnClickListener(this);
+
+        mIcHis = findViewById(R.id.ic_history);
+        mIcSend = findViewById(R.id.ic_send);
+        mIcReceive = findViewById(R.id.ic_receive);
+        mIcContact = findViewById(R.id.ic_contact);
+        mIcHis.setBackgroundResource(R.drawable.ic_icon_history_disable);
+        mIcSend.setBackgroundResource(R.drawable.ic_icon_send_disable);
+        mIcReceive.setBackgroundResource(R.drawable.ic_icon_recieve);
+        mIcContact.setBackgroundResource(R.drawable.ic_icon_contacts_disable);
+
+        navTvhis = findViewById(R.id.nav_his);
+        navTvSend = findViewById(R.id.nav_send);
+        navTvReceive = findViewById(R.id.nav_receive);
+        navTvContact = findViewById(R.id.nav_contact);
+
+        navTvhis.setTextColor(getResources().getColor(R.color.brownish_grey));
+        navTvSend.setTextColor(getResources().getColor(R.color.brownish_grey));
+        navTvReceive.setTextColor(getResources().getColor(R.color.cerulean));
+        navTvContact.setTextColor(getResources().getColor(R.color.brownish_grey));
     }
 
 
@@ -171,5 +208,35 @@ public class ReceiveActivity extends AppCompatActivity {
         ClipData clipData = ClipData.newPlainText("address", mPubKey);
         clipboard.setPrimaryClip(clipData);
         Toast.makeText(mContext, mContext.getString(R.string.toast_text_clipboard_address), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent it;
+        switch (v.getId()){
+            case R.id.menu_trans_his:
+                it = new Intent(ReceiveActivity.this, WalletActivity.class);
+                it.putExtra(Constants.Invoke.HISTORY,mWalletIdx);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(it);
+                break;
+
+            case R.id.menu_send:
+                it = new Intent(ReceiveActivity.this, SendActivity.class);
+                it.putExtra(Constants.Invoke.SEND, mWalletIdx);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(it);
+                break;
+
+            case R.id.menu_receive:
+                break;
+
+            case R.id.menu_contact:
+                it = new Intent(ReceiveActivity.this, ContactActivity.class);
+                it.putExtra(Constants.Invoke.ADDRESS_BOOK, mWalletIdx);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(it);
+                break;
+        }
     }
 }

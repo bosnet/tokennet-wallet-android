@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="false"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:screenOrientation="portrait">
         <activity android:name=".MainActivity" />
         <activity
             android:name=".CreateWalletActivity"

@@ -6,12 +6,15 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class SplashActivity extends AppCompatActivity {
 
     private static final int SPLASH_TIME = 1000;
     private Context mContext;
+    private DbOpenHelper mDbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +31,19 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(it);
                     finish();
                 }else{
-                    Intent it = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(it);
-                    finish();
+                    mDbOpenHelper = new DbOpenHelper(mContext);
+                    mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+                    int count = mDbOpenHelper.getWalletCount();
+                    if(count > 0 ){
+                        Intent it = new Intent(SplashActivity.this, WalletListActivity.class);
+                        startActivity(it);
+                        finish();
+                    }else{
+                        Intent it = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+
                 }
             }
         }, SPLASH_TIME);
