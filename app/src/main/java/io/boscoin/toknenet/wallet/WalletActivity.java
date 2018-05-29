@@ -1,10 +1,12 @@
 package io.boscoin.toknenet.wallet;
 
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,18 +26,18 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-import io.boscoin.toknenet.wallet.dummy.DummyContent;
 import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Payments;
 import io.boscoin.toknenet.wallet.utils.DetailDialog;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class WalletActivity extends AppCompatActivity implements
-        AllHistoryFragment.OnListAllFragInteractionListener,AllHistoryFragment.CurrentBalanceListener,
-        PaymentFragment.OnListPayFragInteractionListener, ReceiptFragment.OnListReceiptFragInteractionListener, View.OnClickListener {
+        AllHistoryFragment.OnListAllFragInteractionListener,
+        SendHistoryFragment.OnListSendFragInteractionListener, ReceiveHistoryFragment.OnListReceiveFragInteractionListener, View.OnClickListener {
 
-    private static final String TAG = "HistoryActivity";
+    private static final String TAG = "WalletActivity";
     private DbOpenHelper mDbOpenHelper;
+    private DbOpenHelper mDbOpenWalletHelper;
     private TextView wName , wBalance, wPubKey;
     private String mMyPublicKey, mBosKey, mBal, mCurBal, mTime;
     private long mAccountId;
@@ -49,7 +51,8 @@ public class WalletActivity extends AppCompatActivity implements
     private ImageView mIcHis, mIcSend, mIcReceive, mIcContact;
     private TextView navTvhis, navTvSend, navTvReceive, navTvContact;
     private static final int EDIT_REQUEST = 5;
-
+    private ProgressDialog mProgDialog;
+    private Cursor mCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,37 +71,44 @@ public class WalletActivity extends AppCompatActivity implements
         Intent it = getIntent();
 
         mIdx = it.getLongExtra(Constants.Invoke.HISTORY,0);
-        Log.e(TAG,"mIdx = "+mIdx);
-        mDbOpenHelper = new DbOpenHelper(this);
-        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-        Cursor cursor = mDbOpenHelper.getColumnWallet(mIdx);
+ 
 
-        wName = findViewById(R.id.tv_wname);
-        wName.setText(cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_NAME)));
+        try{
+            mDbOpenHelper = new DbOpenHelper(this);
 
-        wBalance = findViewById(R.id.tv_balances);
-        mBal = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_LASTEST));
+            mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+            mCursor = mDbOpenHelper.getColumnWallet(mIdx);
 
-        wBalance.setText(Utils.dispayBalance(mBal));
+            wName = findViewById(R.id.tv_wname);
+            wName.setText(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_NAME)));
 
-        wPubKey = findViewById(R.id.tv_pub_key);
-        mMyPublicKey = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
-        wPubKey.setText(Utils.contractionAddress(mMyPublicKey));
+            wBalance = findViewById(R.id.tv_balances);
+            mBal = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LASTEST));
 
-        mAccountId = cursor.getLong(cursor.getColumnIndex("_id"));
+            wBalance.setText(Utils.dispayBalance(mBal));
 
-        mBosKey = cursor.getString((cursor.getColumnIndex((Constants.DB.WALLET_KET))));
-        mTime = cursor.getString((cursor.getColumnIndex((Constants.DB.WALLET_LAST_TIME))));
-        mOrder = cursor.getInt(cursor.getColumnIndex((Constants.DB.WALLET_ORDER)));
+            wPubKey = findViewById(R.id.tv_pub_key);
+            mMyPublicKey = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
+            wPubKey.setText(Utils.contractionAddress(mMyPublicKey));
 
-        AllHistoryFragment allf = new AllHistoryFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
-        allf.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,allf).commit();
+            mAccountId = mCursor.getLong(mCursor.getColumnIndex("_id"));
 
-        mDbOpenHelper.close();
-        cursor.close();
+            mBosKey = mCursor.getString((mCursor.getColumnIndex((Constants.DB.WALLET_KET))));
+            mTime = mCursor.getString((mCursor.getColumnIndex((Constants.DB.WALLET_LAST_TIME))));
+            mOrder = mCursor.getInt(mCursor.getColumnIndex((Constants.DB.WALLET_ORDER)));
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        } finally {
+            mDbOpenHelper.close();
+            mDbOpenHelper = null;
+
+            mCursor.close();
+            mCursor = null;
+        }
+
+
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +125,20 @@ public class WalletActivity extends AppCompatActivity implements
         mTvReceive = findViewById(R.id.txt_receive);
         mTvSend = findViewById(R.id.txt_send);
 
+        setNavBottom();
+
+
+
+
+        AllHistoryFragment allf = new AllHistoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
+        allf.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,allf).commit();
+
+    }
+
+    private void setNavBottom() {
         mNavHis = findViewById(R.id.menu_trans_his);
         mNavSend = findViewById(R.id.menu_send);
         mNavReceive = findViewById(R.id.menu_receive);
@@ -164,19 +188,39 @@ public class WalletActivity extends AppCompatActivity implements
                 Account account =   gson.fromJson(res, Account.class);
                 mCurBal = account.getBalances().get(0).getBalance()+" BOS";
 
-                String val =  mCurBal.replaceAll(" BOS", "");
+                final String val =  mCurBal.replaceAll(" BOS", "");
+                Log.e(TAG, "bal = "+mCurBal);
+                Log.e(TAG, "val = "+val);
 
                 wBalance.setText(Utils.dispayBalance(mCurBal));
 
-                mDbOpenHelper = new DbOpenHelper(mContext);
-                mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-                mDbOpenHelper.updateColumnWalletBalance(mAccountId, val);
+                try{
+                    mDbOpenWalletHelper = new DbOpenHelper(mContext);
+                    mDbOpenWalletHelper.open(Constants.DB.MY_WALLETS);
+                    mDbOpenWalletHelper.getmDB().acquireReference();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDbOpenWalletHelper.updateColumnWalletBalance(mAccountId, val);
+                            mDbOpenWalletHelper.close();
+
+                        }
+                    });
+
+                }catch (Exception e){
+
+                    e.printStackTrace();
+                }finally {
+                    mDbOpenWalletHelper.close();
+                    mProgDialog.dismiss();
+
+                }
+
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e(TAG,"resp = "+responseString);
-                Log.e(TAG,"status = "+statusCode);
+
                 if(statusCode == Constants.Status.NOT_FOUND){
                     wBalance.setText(" 0 BOS");
                 }else{
@@ -189,11 +233,14 @@ public class WalletActivity extends AppCompatActivity implements
 
 
     public void viewHistoryAll(View view) {
-        AllHistoryFragment allf = new AllHistoryFragment();
+
+
+        AllHistoryFragment fragAll = new AllHistoryFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
-        allf.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,allf).commit();
+        fragAll.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,fragAll).commit();
+
         mAllLine.setVisibility(View.VISIBLE);
         mSendLine.setVisibility(View.INVISIBLE);
         mReceiveLine.setVisibility(View.INVISIBLE);
@@ -204,8 +251,13 @@ public class WalletActivity extends AppCompatActivity implements
     }
 
     public void viewReceiveHistory(View view) {
-        ReceiptFragment recipf = new ReceiptFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,recipf).commit();
+
+        ReceiveHistoryFragment fragReceive = new ReceiveHistoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
+        fragReceive.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,fragReceive).commit();
+
         mAllLine.setVisibility(View.INVISIBLE);
         mSendLine.setVisibility(View.INVISIBLE);
         mReceiveLine.setVisibility(View.VISIBLE);
@@ -215,8 +267,14 @@ public class WalletActivity extends AppCompatActivity implements
     }
 
     public void viewSendHistory(View view) {
-        PaymentFragment payf = new PaymentFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,payf).commit();
+
+
+        SendHistoryFragment fragSend = new SendHistoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
+        fragSend.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,fragSend).commit();
+
         mAllLine.setVisibility(View.INVISIBLE);
         mSendLine.setVisibility(View.VISIBLE);
         mReceiveLine.setVisibility(View.INVISIBLE);
@@ -225,28 +283,6 @@ public class WalletActivity extends AppCompatActivity implements
         mTvReceive.setTextColor(getResources().getColor(R.color.white_op50));
     }
 
-    public void goHistoryView(View view) {
-        return;
-    }
-
-    public void goSendView(View view) {
-        Intent it = new Intent(WalletActivity.this, SendActivity.class);
-        it.putExtra(Constants.Invoke.SEND,mAccountId);
-        startActivity(it);
-    }
-
-    public void goReceiveView(View view) {
-
-        Intent it = new Intent(WalletActivity.this, ReceiveActivity.class);
-        it.putExtra(Constants.Invoke.WALLET, mIdx);
-        startActivity(it);
-        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-    }
-
-    public void goAddressView(View view) {
-        Toast.makeText(mContext, "Next Step", Toast.LENGTH_SHORT).show();
-
-    }
 
     public void addressCopy(View view) {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
@@ -256,27 +292,11 @@ public class WalletActivity extends AppCompatActivity implements
     }
 
 
-    @Override
-    public void ListAllFragInteraction(Payments.PayRecords item) {
-        DetailDialog dialog = new DetailDialog(mContext,item,mMyPublicKey);
-        dialog.show();
-    }
-
-    @Override
-    public void getCurrentBalanceAll() {
-        getWalletBalances();
-    }
-
-    @Override
-    public void ListPayFragInteraction(DummyContent.DummyItem item) {
-
-    }
 
 
-    @Override
-    public void ListReceiptFragInteraction(DummyContent.DummyItem item) {
 
-    }
+
+
 
 
     @Override
@@ -313,7 +333,7 @@ public class WalletActivity extends AppCompatActivity implements
         Intent it = new Intent(WalletActivity.this, EditWalletActivity.class);
         it.putExtra(Constants.Invoke.EDIT, mIdx);
         startActivityForResult(it,EDIT_REQUEST);
-        //startActivity(it);
+
 
     }
 
@@ -330,12 +350,82 @@ public class WalletActivity extends AppCompatActivity implements
     }
 
     private void checkWallet() {
-        mDbOpenHelper = new DbOpenHelper(this);
-        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-        Cursor cursor = mDbOpenHelper.getColumnWallet(mIdx);
-        wName = findViewById(R.id.tv_wname);
-        wName.setText(cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_NAME)));
-        mDbOpenHelper.close();
-        cursor.close();
+
+
+        try{
+            mDbOpenHelper = new DbOpenHelper(this);
+            mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+            mCursor = mDbOpenHelper.getColumnWallet(mIdx);
+            wName = findViewById(R.id.tv_wname);
+            wName.setText(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_NAME)));
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }finally {
+            mDbOpenHelper.close();
+            mCursor.close();
+            mCursor = null;
+            mDbOpenHelper = null;
+        }
+
     }
+
+    @Override
+    public void ListAllFragInteraction(Payments.PayRecords item) {
+        DetailDialog dialog = new DetailDialog(mContext,item,mMyPublicKey);
+        dialog.show();
+    }
+
+    @Override
+    public void getCurrentBalanceAll() {
+        if(mProgDialog != null && !mProgDialog.isShowing()){
+
+            mProgDialog = new ProgressDialog(mContext);
+            mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgDialog.setMessage("Please Wait");
+            mProgDialog.setCancelable(false);
+            mProgDialog.show();
+            getWalletBalances();
+        }
+
+    }
+
+    @Override
+    public void ListSendFragInteraction(Payments.PayRecords item) {
+        // TODO: 2018. 5. 26.  
+    }
+
+    @Override
+    public void getCurrentBalanceSend() {
+        if(mProgDialog != null && !mProgDialog.isShowing()){
+
+            mProgDialog = new ProgressDialog(mContext);
+            mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgDialog.setMessage("Please Wait");
+            mProgDialog.setCancelable(false);
+            mProgDialog.show();
+            getWalletBalances();
+        }
+    }
+
+    @Override
+    public void ListReceiveFragInteraction(Payments.PayRecords item) {
+
+    }
+
+    @Override
+    public void getCurrentBalanceReceive() {
+        if(mProgDialog != null && !mProgDialog.isShowing()){
+
+            mProgDialog = new ProgressDialog(mContext);
+            mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgDialog.setMessage("Please Wait");
+            mProgDialog.setCancelable(false);
+            mProgDialog.show();
+            getWalletBalances();
+        }
+
+    }
+
 }

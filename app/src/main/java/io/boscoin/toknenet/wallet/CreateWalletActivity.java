@@ -146,7 +146,7 @@ public class CreateWalletActivity extends AppCompatActivity {
     }
 
     public void createWallet(View view) {
-        // TODO: 2018. 4. 4. string to byte
+
         String wName = mEInputName.getText().toString();
         String wPw1 = mEInputPW.getText().toString();
         String wPw2 = mEConfirmPW.getText().toString();
@@ -275,7 +275,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
     }
 
-    // TODO: 2018. 5. 9. custom alert 
+
     private void confirmAlert() {
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
         alert.setTitle(R.string.title_setup);

@@ -96,7 +96,7 @@ public class WalletListActivity extends AppCompatActivity {
                 Intent it = new Intent(WalletListActivity.this, SendActivity.class);
                 it.putExtra(Constants.Invoke.SEND, walletList.get(postion).getWalletId());
                 startActivity(it);
-               // startActivityForResult(it, WALLET_DETAIL_VIEW);
+
             }
 
             @Override

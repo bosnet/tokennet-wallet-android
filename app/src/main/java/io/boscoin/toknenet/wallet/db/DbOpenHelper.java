@@ -58,6 +58,9 @@ public class DbOpenHelper {
 		mDB = null;
 	}
 
+	public SQLiteDatabase getmDB(){
+	    return mDB;
+    }
 	// Insert DB
 	public long insertColumnAddress(String name, String add){
 		ContentValues values = new ContentValues();

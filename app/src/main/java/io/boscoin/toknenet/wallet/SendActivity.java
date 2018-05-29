@@ -246,10 +246,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showSendBos(View view) {
-        Log.e(TAG, "isNext = "+isNext);
+
        if(isNext){
            mDestion = editPubkey.getText().toString();
-           Log.e(TAG, "mDestion = "+mDestion);
+
            mSendValue = editAmmount.getText().toString();
            double val = Double.parseDouble(mSendValue)+ SEND_FEE;
            mSendTotal = Double.toString(val);
@@ -287,7 +287,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             String dec =  AESCrypt.decrypt(seedkey,tmp2);
             keyPair = KeyPair.fromSecretSeed(dec);
             mSeed = new String(keyPair.getSecretSeed());
-            Log.e(TAG, "seed key = "+mSeed);
+
             tvErrView.setVisibility(View.GONE);
             mPwDialog.dismiss();
             mProgDialog = new ProgressDialog(mContext);
@@ -297,7 +297,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             mProgDialog.show();
             sendBosTransation();
         } catch (GeneralSecurityException e) {
-           // e.printStackTrace();
+
             tvErrView.setVisibility(View.VISIBLE);
         }
     }
@@ -332,7 +332,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private void createAccount() {
         new Thread(){
             public void run(){
-                // TODO: 2018. 4. 13. bosnet
+
                 Network.use(new Network(Constants.Network.PASSPHRASE_BOS_TEST));
                 Server server = new Server(Constants.Domain.BOS_HORIZON_TEST);
 
@@ -343,7 +343,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 AccountResponse sourceAccount = null;
                 try {
                     sourceAccount = server.accounts().account(source);
-                    Log.e(TAG,"sourceAccount = "+sourceAccount);
+
 
                     // Start building the transaction.
                     Transaction transaction = new Transaction.Builder(sourceAccount)
@@ -394,7 +394,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 AccountResponse sourceAccount = null;
                 try {
                     sourceAccount = server.accounts().account(source);
-                    Log.e(TAG,"sourceAccount = "+sourceAccount);
+
 
                     // Start building the transaction.
                     Transaction transaction = new Transaction.Builder(sourceAccount)

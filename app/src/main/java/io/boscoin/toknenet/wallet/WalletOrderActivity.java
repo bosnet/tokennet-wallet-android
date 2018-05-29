@@ -72,7 +72,7 @@ public class WalletOrderActivity extends AppCompatActivity {
 
 
                 int ordering = walletList.size()+1;
-                Log.e(TAG,"ordering = "+ordering);
+
                 for(Wallet w : walletList ){
 
                     ordering --;

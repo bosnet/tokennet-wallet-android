@@ -33,15 +33,17 @@ public class DetailDialog extends Dialog{
         this.mDate = item.getCreated_at();
         if(item.getType_i().equals("0")){
             this.mType = context.getResources().getString(R.string.create_ac);
+            this.mFrom = item.getFunder();
         }else{
             if(item.getFrom().equals(myPubkey)){
                 this.mType = context.getResources().getString(R.string.sent);
             }else{
                 this.mType = context.getResources().getString(R.string.received);
             }
+            this.mFrom = item.getFrom();
         }
 
-
+        this.mTo = item.getTo();
         this.mAmount = item.getAmount();
 
     }
@@ -84,7 +86,6 @@ public class DetailDialog extends Dialog{
         mTvAmount = findViewById(R.id.ammount);
         mTvAmount.setText(mAmount);
 
-        mTvBalance = findViewById(R.id.balance);
-        mTvBalance.setText(mBalance);
+
     }
 }
