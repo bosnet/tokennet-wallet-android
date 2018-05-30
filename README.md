@@ -14,7 +14,7 @@ The current version has been implemented with 'Android Basic UI'. Using current 
 
 # Compatibility
 
-* Minimum Android SDK: API level of 23
+* Minimum Android SDK: API level of 21
 * Compile Android SDK: API 26 or later
 
 # Development and Build
