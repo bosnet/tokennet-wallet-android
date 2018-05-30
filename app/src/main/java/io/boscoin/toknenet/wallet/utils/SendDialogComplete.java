@@ -15,14 +15,16 @@ import io.boscoin.toknenet.wallet.R;
 
 public class SendDialogComplete extends Dialog{
     private String mTotal;
-    private TextView mTvAmmount;
+    private TextView mTvAmmount, mTvTitle;
     private View.OnClickListener mRightClickListener;
+
 
     public SendDialogComplete(@NonNull Context context, String total, View.OnClickListener rclistener) {
         super(context);
 
         this.mTotal = total;
         this.mRightClickListener = rclistener;
+
     }
 
     public SendDialogComplete(@NonNull Context context, int themeResId) {
@@ -43,6 +45,7 @@ public class SendDialogComplete extends Dialog{
 
         mTvAmmount = findViewById(R.id.total_val);
         mTvAmmount.setText(mTotal);
+
 
 
        findViewById(R.id.btn_ok).setOnClickListener(mRightClickListener);

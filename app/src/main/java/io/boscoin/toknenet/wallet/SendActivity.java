@@ -20,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.loopj.android.http.AsyncHttpClient;
@@ -43,8 +45,10 @@ import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.utils.SendDialogComplete;
 import io.boscoin.toknenet.wallet.utils.SendDialogConfirm;
+import io.boscoin.toknenet.wallet.utils.SendDialogFail;
 import io.boscoin.toknenet.wallet.utils.SendDialogPw;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
@@ -70,9 +74,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private SendDialogConfirm mConfirmDialog;
     private SendDialogPw mPwDialog;
     private SendDialogComplete mCompleteDialog;
+    private SendDialogFail mFailDialog;
     private static final double SEND_FEE = 0.001;
+    private static final double MIN_BALANCE = 0.1;
     private KeyPair keyPair;
     private ProgressDialog mProgDialog;
+    private String mCurBal, mAmount, mMyPubKey;
+    private static final String BALANCE_FAIL = "op_underfunded";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +98,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         mCursor = mDbOpenHelper.getColumnWallet(mWalletId);
 
         mBosKey = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_KET));
+        mMyPubKey = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
 
         mDbOpenHelper.close();
         mCursor.close();
@@ -102,7 +111,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         editAmmount = findViewById(R.id.input_ammount);
         mImgDel = findViewById(R.id.del_address);
         mTvAddressErr = findViewById(R.id.err_pubkey);
-        mBtnSend = findViewById(R.id.btn_send);
+        mBtnSend = findViewById(R.id.btn_send2);
 
 
         findViewById(R.id.btn_contact).setOnClickListener(new View.OnClickListener() {
@@ -179,8 +188,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void afterTextChanged(Editable s) {
-                String ammount = s.toString();
-                if(!TextUtils.isEmpty(ammount)){
+                mAmount = s.toString();
+                if(!TextUtils.isEmpty(mAmount)){
                     mValidAmmount = true;
                     changeButton();
                 }else{
@@ -246,16 +255,147 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showSendBos(View view) {
+        Log.e(TAG, "isNext = "+isNext);
+        showPleaseWait();
 
-       if(isNext){
-           mDestion = editPubkey.getText().toString();
+        getWalletBalances();
 
-           mSendValue = editAmmount.getText().toString();
-           double val = Double.parseDouble(mSendValue)+ SEND_FEE;
-           mSendTotal = Double.toString(val);
-           sendConfirmDialog();
-       }
 
+    }
+
+    private void showPleaseWait() {
+
+        if(mProgDialog != null){
+            mProgDialog.dismiss();
+        }
+
+        mProgDialog = new ProgressDialog(mContext);
+        mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setCancelable(false);
+        mProgDialog.show();
+    }
+
+    private void getWalletBalances() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+        url.append("/");
+        url.append(Constants.Params.ACCOUNTS);
+        url.append("/");
+        url.append(mMyPubKey);
+
+        client.get(String.valueOf(url),new TextHttpResponseHandler(){
+
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String res) {
+                Gson gson = new GsonBuilder().create();
+                Account account =   gson.fromJson(res, Account.class);
+                mCurBal = account.getBalances().get(0).getBalance();
+
+
+                try{
+                    mDbOpenHelper = new DbOpenHelper(mContext);
+                    mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDbOpenHelper.updateColumnWalletBalance(mWalletId, mCurBal);
+
+                        }
+                    });
+
+                }catch (Exception e){
+
+                    e.printStackTrace();
+                }finally {
+                    mDbOpenHelper.close();
+                    if(mProgDialog != null){
+                        mProgDialog.dismiss();
+                    }
+                }
+
+                mSendValue = editAmmount.getText().toString();
+                double sendAmount = Double.parseDouble(mSendValue)+ SEND_FEE;
+                mSendTotal = Double.toString(sendAmount);
+                double curAmount = Double.parseDouble(mCurBal);
+
+                if(sendAmount >= curAmount){
+
+                    alertDialogFunds();
+
+                }else if(curAmount - sendAmount < MIN_BALANCE){
+
+                    alertDialogSend();
+
+               } else{
+                    if(isNext){
+                        mDestion = editPubkey.getText().toString();
+
+                        sendConfirmDialog();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.e(TAG,"resp = "+responseString);
+                Log.e(TAG,"status = "+statusCode);
+                if(mProgDialog != null){
+                    mProgDialog.dismiss();
+                }
+                if(statusCode == Constants.Status.NOT_FOUND){
+                    alertDialogAccount();
+                }
+                mValidAddress = false;
+                changeButton();
+            }
+        });
+    }
+
+    private void alertDialogSend() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+        alert.setMessage(R.string.error_no_send).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
+    private void alertDialogFunds() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+        alert.setMessage(R.string.error_no_funds).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
+    private void alertDialogAccount() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+        alert.setMessage(R.string.error_no_account).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
     View.OnClickListener sendOklistener = new View.OnClickListener() {
@@ -355,25 +495,51 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     // And finally, send it off to Stellar!
                     try {
                         SubmitTransactionResponse response = server.submitTransaction(transaction);
-                        System.out.println("Success!");
+
                         Utils.printResponse(response);
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mProgDialog.dismiss();
-                                sendCompleteDialog();
-                            }
-                        });
+                        SubmitTransactionResponse.Extras extras = response.getExtras();
+                        if(extras == null){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgDialog.dismiss();
+                                    sendCompleteDialog();
+                                }
+                            });
+                        }else{
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgDialog.dismiss();
+                                    sendFailDialog();
+                                }
+                            });
+                        }
+
 
 
                     } catch (Exception e) {
                         System.out.println("Something went wrong!");
                         System.out.println(e.getMessage());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mProgDialog.dismiss();
+                                sendFailDialog();
+                            }
+                        });
 
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProgDialog.dismiss();
+                            sendFailDialog();
+                        }
+                    });
                 }
 
 
@@ -407,30 +573,72 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     // And finally, send it off to Stellar!
                     try {
                         SubmitTransactionResponse response = server.submitTransaction(transaction);
+                        Utils.printResponse(response);
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mProgDialog.dismiss();
-                                sendCompleteDialog();
-                            }
-                        });
+                        SubmitTransactionResponse.Extras extras = response.getExtras();
+
+                        if(extras == null){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgDialog.dismiss();
+                                    sendCompleteDialog();
+                                }
+                            });
+                        }else{
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mProgDialog.dismiss();
+                                    sendFailDialog();
+                                }
+                            });
+                        }
+
 
 
                     } catch (Exception e) {
                         System.out.println("Something went wrong!");
                         System.out.println(e.getMessage());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mProgDialog.dismiss();
+                                sendFailDialog();
+                            }
+                        });
                         // If the result is unknown (no response body, timeout etc.) we simply resubmit
                         // already built transaction:
                         // SubmitTransactionResponse response = server.submitTransaction(transaction);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProgDialog.dismiss();
+                            sendFailDialog();
+                        }
+                    });
                 }
 
 
             }
         }.start();
+    }
+
+    View.OnClickListener Okfaillistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mFailDialog.dismiss();
+            finish();
+        }
+    };
+
+    private void sendFailDialog() {
+        mFailDialog = new SendDialogFail(mContext, Okfaillistener);
+        mFailDialog.setCancelable(false);
+        mFailDialog.show();
     }
 
     View.OnClickListener Oklistener = new View.OnClickListener() {

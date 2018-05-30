@@ -42,7 +42,7 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
         if(CREATE_ACCOUNT.equals(mValues.get(position).getType())){
             if(mValues.get(position).getFunder().equals(mPubKey)) {
 
-                sentDisplay(holder,position);
+                sentCreateDisplay(holder,position);
             }else{
 
                 createDisplay(holder,position);
@@ -67,6 +67,17 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
                 }
             }
         });
+    }
+
+    private void sentCreateDisplay(ViewHolder holder, int pos) {
+        holder.mTvType.setText(R.string.sent);
+        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getAccount()));
+
+        String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
+        String amount = tmp+" BOS";
+
+        holder.mTvAmount.setText(Utils.changeColorRed(amount));
+        holder.mTvTime.setText(Utils.convertUtcToLocal(mValues.get(pos).getCreated_at()));
     }
 
     private void receiveDisplay(ViewHolder holder, int pos) {

@@ -63,6 +63,30 @@ public class Payments {
        @SerializedName("type_i")
        private String type_i;
 
+
+       @SerializedName("source_account")
+       private String source_account;
+
+       @SerializedName("account")
+       private String account;
+
+
+       public String getAccount() {
+           return account;
+       }
+
+       public void setAccount(String account) {
+           this.account = account;
+       }
+
+       public String getSource_account() {
+           return source_account;
+       }
+
+       public void setSource_account(String source_account) {
+           this.source_account = source_account;
+       }
+
        public String getPaging_token() {
            return paging_token;
        }

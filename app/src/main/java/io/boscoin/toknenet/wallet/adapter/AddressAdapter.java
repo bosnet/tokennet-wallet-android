@@ -46,11 +46,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
 
         holder.mbookTi.setText(mAddBookList.get(position).getAddressName());
         holder.mbookAddress.setText(mAddBookList.get(position).getAddress());
-        // TODO: 2018. 5. 15. width size 
+
         holder.mBtnmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Context contextWrapper = new ContextThemeWrapper(mContext, R.style.OptionMenu);
+
                 final WeakReference<ContactActivity.MenuClickListener> listenerWeakReference;
                 listenerWeakReference = new WeakReference<>(listener);
                 PopupMenu popup = new PopupMenu(mContext, holder.mBtnmore);

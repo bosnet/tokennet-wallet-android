@@ -117,6 +117,15 @@ Keep your Secret Seed in a safe place.</string>
 Keep your Secret Seed in a safe place.</string>
     <string name="delete_w">Are you sure you want to deletethis wallet?</string>
     <string name="if_you_delete">If you delete your wallet without\nbacking it up, you will not be able to\nrestore your wallet!</string>
+    <string name="d_date">Date</string>
+    <string name="d_type">Type</string>
+    <string name="d_from">From</string>
+    <string name="d_to">To</string>
+    <string name="d_amount">Amount</string>
+    <string name="min_bal">You must have a minimum balance (0.1BOS)\nto make the created account a valid account.\n
+        Get a minimum balance of 0.1BOS\nat the public address above.</string>
+    <string name="receive_bos">Receive 0.1 BOS</string>
+
 
 
 
@@ -196,4 +205,15 @@ know your secret seed or recovery key.</string>
     <string name="error_bos_pw">Wrong password for recovery key</string>
     <string name="error_invalid_pubkey">Invalid Public Address.</string>
     <string name="error_no_count_address">No registered contacts.</string>
+    <string name="error_no_account">This wallet is not a valid account.\nOnly valid accounts can be sent.</string>
+    <string name="error_no_funds">Your wallet has run out of funds.</string>
+    <string name="error_no_send">Minimum balance after sending must be 0.1 BOS or higher.</string>
+    <string name="error_fail_send">Fail to Send.</string>
+    <string name="error_fail_send_msg">Send was Fail\nPlease try again later.</string>
+
+
+
+
+
+
 </resources>

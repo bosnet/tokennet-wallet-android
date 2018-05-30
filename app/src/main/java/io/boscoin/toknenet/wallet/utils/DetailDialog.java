@@ -30,21 +30,26 @@ public class DetailDialog extends Dialog{
 
     public DetailDialog(@NonNull Context context, Payments.PayRecords item, String myPubkey) {
         super(context);
-        this.mDate = item.getCreated_at();
+        this.mDate = Utils.convertUtcToLocal(item.getCreated_at());
         if(item.getType_i().equals("0")){
             this.mType = context.getResources().getString(R.string.create_ac);
-            this.mFrom = item.getFunder();
-        }else{
+            this.mFrom = item.getSource_account();
+            this.mTo = item.getAccount();
+            this.mAmount = item.getStarting_balance();
+
+        }
+
+
+        else{
             if(item.getFrom().equals(myPubkey)){
                 this.mType = context.getResources().getString(R.string.sent);
             }else{
                 this.mType = context.getResources().getString(R.string.received);
             }
             this.mFrom = item.getFrom();
+            this.mTo = item.getTo();
+            this.mAmount = item.getAmount();
         }
-
-        this.mTo = item.getTo();
-        this.mAmount = item.getAmount();
 
     }
 

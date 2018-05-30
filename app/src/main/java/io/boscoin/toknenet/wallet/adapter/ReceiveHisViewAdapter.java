@@ -64,8 +64,7 @@ public class ReceiveHisViewAdapter extends RecyclerView.Adapter<ReceiveHisViewAd
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
+
                     mListener.ListReceiveFragInteraction(holder.mItem);
                 }
             }

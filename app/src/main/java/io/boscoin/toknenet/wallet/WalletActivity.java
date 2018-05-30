@@ -24,6 +24,7 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
+import io.boscoin.toknenet.wallet.adapter.AllHisViewAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Account;
@@ -32,8 +33,8 @@ import io.boscoin.toknenet.wallet.utils.DetailDialog;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class WalletActivity extends AppCompatActivity implements
-        AllHistoryFragment.OnListAllFragInteractionListener,
-        SendHistoryFragment.OnListSendFragInteractionListener, ReceiveHistoryFragment.OnListReceiveFragInteractionListener, View.OnClickListener {
+        AllHistoryFragment.OnListAllFragInteractionListener, SendHistoryFragment.OnListSendFragInteractionListener
+        , ReceiveHistoryFragment.OnListReceiveFragInteractionListener, View.OnClickListener {
 
     private static final String TAG = "WalletActivity";
     private DbOpenHelper mDbOpenHelper;
@@ -51,8 +52,10 @@ public class WalletActivity extends AppCompatActivity implements
     private ImageView mIcHis, mIcSend, mIcReceive, mIcContact;
     private TextView navTvhis, navTvSend, navTvReceive, navTvContact;
     private static final int EDIT_REQUEST = 5;
+    private static final int SEND_REQUEST = 15;
     private ProgressDialog mProgDialog;
     private Cursor mCursor;
+    private boolean mIsGetBalanceProcess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,14 +130,8 @@ public class WalletActivity extends AppCompatActivity implements
 
         setNavBottom();
 
+        viewHistoryAll();
 
-
-
-        AllHistoryFragment allf = new AllHistoryFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
-        allf.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,allf).commit();
 
     }
 
@@ -171,6 +168,10 @@ public class WalletActivity extends AppCompatActivity implements
     }
 
     private void getWalletBalances() {
+        if(mIsGetBalanceProcess == true){
+            return;
+        }
+        mIsGetBalanceProcess = true;
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
@@ -202,7 +203,6 @@ public class WalletActivity extends AppCompatActivity implements
                         @Override
                         public void run() {
                             mDbOpenWalletHelper.updateColumnWalletBalance(mAccountId, val);
-                            mDbOpenWalletHelper.close();
 
                         }
                     });
@@ -212,7 +212,12 @@ public class WalletActivity extends AppCompatActivity implements
                     e.printStackTrace();
                 }finally {
                     mDbOpenWalletHelper.close();
-                    mProgDialog.dismiss();
+                    mDbOpenWalletHelper = null;
+                    if(mProgDialog != null){
+                        mProgDialog.dismiss();
+                    }
+
+                    mIsGetBalanceProcess = false;
 
                 }
 
@@ -221,16 +226,37 @@ public class WalletActivity extends AppCompatActivity implements
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
+                if(mProgDialog != null){
+                    mProgDialog.dismiss();
+                }
                 if(statusCode == Constants.Status.NOT_FOUND){
                     wBalance.setText(" 0 BOS");
+                    viewEmptyWallet();
                 }else{
                     Toast.makeText(mContext, mContext.getString(R.string.error_create_wallet), Toast.LENGTH_SHORT).show();
                 }
+                mIsGetBalanceProcess = false;
             }
         });
     }
 
+    private void viewHistoryAll(){
+        AllHistoryFragment allf = new AllHistoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
+        allf.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,allf).commit();
+    }
 
+    private void viewEmptyWallet(){
+
+        EmptyWalletFragment fragAll = new EmptyWalletFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong(Constants.Invoke.WALLET, mAccountId);
+        fragAll.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,fragAll).commit();
+
+    }
 
     public void viewHistoryAll(View view) {
 
@@ -310,7 +336,8 @@ public class WalletActivity extends AppCompatActivity implements
                 it = new Intent(WalletActivity.this, SendActivity.class);
                 it.putExtra(Constants.Invoke.SEND, mAccountId);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(it);
+
+                startActivityForResult(it, SEND_REQUEST);
                 break;
 
             case R.id.menu_receive:
@@ -343,10 +370,30 @@ public class WalletActivity extends AppCompatActivity implements
             checkWallet();
         } else if(requestCode == EDIT_REQUEST && resultCode == Constants.RssultCode.DELETE_WALLET){
             finish();
+        } else if(requestCode == SEND_REQUEST){
+
+            getWalletBalances();
+            getRecentHistory();
+
         } else{
             super.onActivityResult(requestCode, resultCode, data);
         }
 
+    }
+
+    private void getRecentHistory() {
+        AllHistoryFragment fragAll = new AllHistoryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.Invoke.PUBKEY, mMyPublicKey);
+        fragAll.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,fragAll).commitAllowingStateLoss();
+
+        mAllLine.setVisibility(View.VISIBLE);
+        mSendLine.setVisibility(View.INVISIBLE);
+        mReceiveLine.setVisibility(View.INVISIBLE);
+        mTvAll.setTextColor(getResources().getColor(R.color.white));
+        mTvSend.setTextColor(getResources().getColor(R.color.white_op50));
+        mTvReceive.setTextColor(getResources().getColor(R.color.white_op50));
     }
 
     private void checkWallet() {
@@ -379,53 +426,63 @@ public class WalletActivity extends AppCompatActivity implements
 
     @Override
     public void getCurrentBalanceAll() {
-        if(mProgDialog != null && !mProgDialog.isShowing()){
 
-            mProgDialog = new ProgressDialog(mContext);
-            mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgDialog.setMessage("Please Wait");
-            mProgDialog.setCancelable(false);
-            mProgDialog.show();
-            getWalletBalances();
-        }
-
+        mProgDialog = new ProgressDialog(mContext);
+        mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setCancelable(false);
+        mProgDialog.show();
+        getWalletBalances();
     }
 
     @Override
     public void ListSendFragInteraction(Payments.PayRecords item) {
-        // TODO: 2018. 5. 26.  
+        DetailDialog dialog = new DetailDialog(mContext,item,mMyPublicKey);
+        dialog.show();
     }
 
     @Override
     public void getCurrentBalanceSend() {
-        if(mProgDialog != null && !mProgDialog.isShowing()){
 
-            mProgDialog = new ProgressDialog(mContext);
-            mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgDialog.setMessage("Please Wait");
-            mProgDialog.setCancelable(false);
-            mProgDialog.show();
-            getWalletBalances();
-        }
+        mProgDialog = new ProgressDialog(mContext);
+        mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setCancelable(false);
+        mProgDialog.show();
+        getWalletBalances();
     }
 
     @Override
     public void ListReceiveFragInteraction(Payments.PayRecords item) {
-
+        DetailDialog dialog = new DetailDialog(mContext,item,mMyPublicKey);
+        dialog.show();
     }
 
     @Override
     public void getCurrentBalanceReceive() {
-        if(mProgDialog != null && !mProgDialog.isShowing()){
 
-            mProgDialog = new ProgressDialog(mContext);
-            mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgDialog.setMessage("Please Wait");
-            mProgDialog.setCancelable(false);
-            mProgDialog.show();
-            getWalletBalances();
-        }
+        mProgDialog = new ProgressDialog(mContext);
+        mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setCancelable(false);
+        mProgDialog.show();
+        getWalletBalances();
 
     }
 
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mDbOpenHelper != null){
+            mDbOpenHelper.close();
+            mDbOpenHelper = null;
+        }
+        if(mCursor != null){
+            mCursor.close();
+            mCursor = null;
+        }
+
+    }
 }

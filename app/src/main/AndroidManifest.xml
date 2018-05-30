@@ -9,10 +9,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:testOnly="false"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:screenOrientation="portrait">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity" />
         <activity
             android:name=".CreateWalletActivity"
@@ -59,7 +59,7 @@
         <activity android:name=".ConfirmPassWordActivity" />
         <activity android:name=".ChPassWordActivity" />
         <activity android:name=".NoticeQRActivity" />
-        <activity android:name=".ConfirmQRActivity"></activity>
+        <activity android:name=".ConfirmQRActivity" />
     </application>
 
 </manifest>

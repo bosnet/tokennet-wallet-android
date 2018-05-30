@@ -46,7 +46,7 @@ public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.
         if(CREATE_ACCOUNT.equals(mValues.get(position).getType())){
             if(mValues.get(position).getFunder().equals(mPubKey)) {
 
-                sentDisplay(holder,position);
+                sentCreateDisplay(holder,position);
             }
         }else if(mValues.get(position).getFrom().equals(mPubKey)){
 
@@ -64,6 +64,17 @@ public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.
                 }
             }
         });
+    }
+
+    private void sentCreateDisplay(SendHisViewAdapter.ViewHolder holder, int pos) {
+        holder.mTvType.setText(R.string.sent);
+        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getAccount()));
+
+        String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
+        String amount = tmp+" BOS";
+
+        holder.mTvAmount.setText(Utils.changeColorRed(amount));
+        holder.mTvTime.setText(Utils.convertUtcToLocal(mValues.get(pos).getCreated_at()));
     }
 
     private void sentDisplay(SendHisViewAdapter.ViewHolder holder, int pos) {
