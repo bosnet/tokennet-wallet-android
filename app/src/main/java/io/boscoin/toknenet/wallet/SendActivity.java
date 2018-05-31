@@ -106,6 +106,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         initUI();
     }
 
+
     private void initUI() {
         editPubkey = findViewById(R.id.input_address);
         editAmmount = findViewById(R.id.input_ammount);
@@ -184,6 +185,23 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                String input = s.toString();
+
+                if(input.contains(".") && s.charAt(s.length()-1) != '.'){
+                    Log.e(TAG, " 111 ");
+                    if(input.indexOf(".") + 8 <= input.length()-1){
+                        Log.e(TAG, " 222 ");
+                        String formatted = input.substring(0, input.indexOf(".") + 8);
+                        editAmmount.setText(formatted);
+                        editAmmount.setSelection(formatted.length());
+                    }
+                }else if(input.contains(",") && s.charAt(s.length()-1) != ','){
+                    if(input.indexOf(",") + 8 <= input.length()-1){
+                        String formatted = input.substring(0, input.indexOf(",") + 8);
+                        editAmmount.setText(formatted);
+                        editAmmount.setSelection(formatted.length());
+                    }
+                }
             }
 
             @Override
@@ -256,9 +274,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     public void showSendBos(View view) {
         Log.e(TAG, "isNext = "+isNext);
-        showPleaseWait();
-
-        getWalletBalances();
+        if(isNext){
+            showPleaseWait();
+            getWalletBalances();
+        }
 
 
     }
@@ -351,7 +370,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     alertDialogAccount();
                 }
                 mValidAddress = false;
-                changeButton();
+
             }
         });
     }
@@ -496,7 +515,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     try {
                         SubmitTransactionResponse response = server.submitTransaction(transaction);
 
-                        Utils.printResponse(response);
+
 
                         SubmitTransactionResponse.Extras extras = response.getExtras();
                         if(extras == null){
@@ -645,6 +664,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onClick(View v) {
             mCompleteDialog.dismiss();
+            setResult(Constants.RssultCode.SEND);
             finish();
         }
     };

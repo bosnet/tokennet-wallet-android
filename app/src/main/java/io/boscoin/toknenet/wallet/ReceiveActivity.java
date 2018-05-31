@@ -118,15 +118,15 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
                 if(input.contains(".") && s.charAt(s.length()-1) != '.'){
                     Log.e(TAG, " 111 ");
-                    if(input.indexOf(".") + 3 <= input.length()-1){
+                    if(input.indexOf(".") + 8 <= input.length()-1){
                         Log.e(TAG, " 222 ");
-                        String formatted = input.substring(0, input.indexOf(".") + 3);
+                        String formatted = input.substring(0, input.indexOf(".") + 8);
                         mEAmount.setText(formatted);
                         mEAmount.setSelection(formatted.length());
                     }
                 }else if(input.contains(",") && s.charAt(s.length()-1) != ','){
-                    if(input.indexOf(",") + 3 <= input.length()-1){
-                        String formatted = input.substring(0, input.indexOf(",") + 3);
+                    if(input.indexOf(",") + 8 <= input.length()-1){
+                        String formatted = input.substring(0, input.indexOf(",") + 8);
                         mEAmount.setText(formatted);
                         mEAmount.setSelection(formatted.length());
                     }

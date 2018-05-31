@@ -125,6 +125,7 @@ Keep your Secret Seed in a safe place.</string>
     <string name="min_bal">You must have a minimum balance (0.1BOS)\nto make the created account a valid account.\n
         Get a minimum balance of 0.1BOS\nat the public address above.</string>
     <string name="receive_bos">Receive 0.1 BOS</string>
+    <string name="restore">Your wallet has been restored.</string>
 
 
 

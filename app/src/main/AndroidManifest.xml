@@ -47,7 +47,6 @@
         <activity android:name=".PreCautionTwoActivity" />
         <activity android:name=".PreCationThreeActivity" />
         <activity android:name=".CreateNoticeActivity" />
-
         <activity android:name=".PopupActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".ContactActivity" />

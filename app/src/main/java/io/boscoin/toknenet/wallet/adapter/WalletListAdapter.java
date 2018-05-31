@@ -55,6 +55,14 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
         return mWalletList.size();
     }
 
+    public List<Wallet> getWalletList() {
+        return mWalletList;
+    }
+
+    public Wallet getWalletListItem(int pos) {
+        return mWalletList.get(pos);
+    }
+
     public void setWalletList(List<Wallet> walletList) {
         this.mWalletList = walletList;
         notifyDataSetChanged();

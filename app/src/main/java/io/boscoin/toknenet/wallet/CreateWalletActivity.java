@@ -206,7 +206,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                 String time = Utils.getCreateTime(System.currentTimeMillis());
                 walletId = mDbOpenHelper.insertColumnWallet(wName,KeyPair.fromSecretSeed(dec).getAccountId(),mKey, ++count,"0", time);
                 mDbOpenHelper.close();
-                confirmAlert();
+                confirmRecoverAlert();
 
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
@@ -222,7 +222,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                 String time = Utils.getCreateTime(System.currentTimeMillis());
                 walletId = mDbOpenHelper.insertColumnWallet(wName, KeyPair.fromSecretSeed(mKey).getAccountId(),aes,++count,"0",time);
                 mDbOpenHelper.close();
-                confirmAlert();
+                confirmPwAlert();
 
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
@@ -244,7 +244,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                 String time = Utils.getCreateTime(System.currentTimeMillis());
                 walletId = mDbOpenHelper.insertColumnWallet(wName,pair.getAccountId(),aes, ++count, "0", time);
                 mDbOpenHelper.close();
-                confirmAlert();
+                confirmPwAlert();
 
                 if(TEST_GET){
                     new Thread(){
@@ -276,13 +276,14 @@ public class CreateWalletActivity extends AppCompatActivity {
     }
 
 
-    private void confirmAlert() {
+    private void confirmPwAlert() {
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
         alert.setTitle(R.string.title_setup);
         alert.setMessage(R.string.rember_recover).setCancelable(false).setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         makeQRcode();
                     }
                 });
@@ -291,6 +292,30 @@ public class CreateWalletActivity extends AppCompatActivity {
         dialog.show();
 
 
+    }
+
+    private void confirmRecoverAlert() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
+        alert.setMessage(R.string.restore).setCancelable(false).setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        goWalletList();
+                    }
+                });
+        AlertDialog dialog = alert.create();
+
+        dialog.show();
+
+
+    }
+
+    private void goWalletList() {
+        Intent it = new Intent(CreateWalletActivity.this, WalletListActivity.class);
+        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        startActivity(it);
     }
 
     private void makeQRcode(){

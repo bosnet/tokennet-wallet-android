@@ -26,7 +26,7 @@ import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class WalletOrderActivity extends AppCompatActivity {
 
-    private static final String TAG = "WalletOrderActivity";
+
     private List<Wallet> walletList;
     private DbOpenHelper mDbOpenHelper;
     private Cursor mCursor;

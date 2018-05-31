@@ -65,5 +65,6 @@ public class Constants {
 		public static final int CHANGE_NAME = 1;
 		public static final int DELETE_WALLET = 2;
 		public static final int ADDRESS = 3;
+		public static final int SEND = 4;
 	}
 }

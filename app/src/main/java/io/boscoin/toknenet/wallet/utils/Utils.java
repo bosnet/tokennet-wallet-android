@@ -243,6 +243,10 @@ public class Utils {
     }
 
     public static boolean isValidRecoveryKey(String key){
+        if(key.length() < 64){
+            return false;
+        }
+
         String suffix = key.substring(key.length() - 2, key.length()-1);
         if(key.startsWith("BOS") && suffix.endsWith("A")){
             return true;

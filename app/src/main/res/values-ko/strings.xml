@@ -144,7 +144,7 @@
     <string name="error_no_send">전송 후 최소 잔액은 0.1 BOS\n이상이어야 합니다.</string>
     <string name="error_fail_send">송금실패</string>
     <string name="error_fail_send_msg">송금이 실패되었습니다.\n잠시 후 다시 시도해 주십시오.</string>
-
+    <string name="restore">지갑이 복구 되었습니다.</string>
 
 
 

@@ -1,5 +1,6 @@
 package io.boscoin.toknenet.wallet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -7,15 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.adapter.WalletListAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Wallet;
 
 
@@ -29,15 +39,12 @@ public class WalletListActivity extends AppCompatActivity {
     private Context mContext;
     private ImageButton mBtnSetting;
     private WalletListAdapter mAdapter;
-    private static final int ORDER_REQUEST_CODE = 1;
+    private static final int ORDER_REQUEST = 1;
     private static final int WALLET_DETAIL_VIEW = 2;
-
-
-    public interface ClickListener {
-        void onSendClicked(int postion);
-        void onReceivedClicked(int postion);
-        void onItemClicked(int postion);
-    }
+    private static final int SEND_REQUEST = 16;
+    private ProgressDialog mProgDialog;
+    private DbOpenHelper mDbOpenWalletHelper;
+    private int mCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +66,7 @@ public class WalletListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(WalletListActivity.this, SettingActivity.class);
 
-                startActivityForResult(it, ORDER_REQUEST_CODE);
+                startActivityForResult(it, ORDER_REQUEST);
             }
         });
 
@@ -81,6 +88,141 @@ public class WalletListActivity extends AppCompatActivity {
         
         initializeData();
         initializeAdapter();
+
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    showDialogWalt();
+                    getBalances();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if(dx == 0 && dy == 0){
+
+                    showDialogWalt();
+                    getBalances();
+                }
+
+            }
+        });
+    }
+
+    private void getBalances(){
+        int firstVisibleItemPosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstVisibleItemPosition();
+        int lastVisibleItemPos = ((LinearLayoutManager)rv.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+        int idx = firstVisibleItemPosition;
+        mCount = idx;
+
+        for(; idx <= lastVisibleItemPos; idx++){
+          Wallet wallet =  mAdapter.getWalletListItem(idx);
+
+          getWalletBalances(wallet, idx, lastVisibleItemPos);
+
+        }
+
+
+
+
+    }
+
+
+
+    private void getWalletBalances(final Wallet wallet , final int pos, final int lastPos){
+
+
+        String pubKey = wallet.getWalletAccountId();
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+        url.append("/");
+        url.append(Constants.Params.ACCOUNTS);
+        url.append("/");
+        url.append(pubKey);
+
+        client.get(String.valueOf(url),new TextHttpResponseHandler(){
+
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String res) {
+                Gson gson = new GsonBuilder().create();
+                Account account =   gson.fromJson(res, Account.class);
+                final String curBal = account.getBalances().get(0).getBalance()+" BOS";
+
+                try{
+                    mDbOpenWalletHelper = new DbOpenHelper(mContext);
+                    mDbOpenWalletHelper.open(Constants.DB.MY_WALLETS);
+                    mDbOpenWalletHelper.getmDB().acquireReference();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDbOpenWalletHelper.updateColumnWalletBalance(wallet.getWalletId(), curBal);
+
+                        }
+                    });
+
+                }catch (Exception e){
+
+                    e.printStackTrace();
+                }finally {
+                    mDbOpenWalletHelper.close();
+                    mDbOpenWalletHelper = null;
+
+
+                    mCount++;
+
+
+                    if(mCount > lastPos /*(lastPos - pos)*/){
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                mProgDialog.dismiss();
+
+                                walletList.clear();
+                                getWalletList();
+                                mAdapter.setWalletList(walletList);
+                                mCount = 0;
+                            }
+                        });
+
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+
+                mCount++;
+                if(mCount > lastPos ){
+                    mProgDialog.dismiss();
+                    mAdapter.notifyItemRangeChanged(pos, lastPos);
+                    mCount = 0;
+
+                }
+
+
+            }
+        });
+    }
+
+    private void showDialogWalt(){
+        mProgDialog = new ProgressDialog(mContext);
+        mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setCancelable(false);
+        mProgDialog.show();
     }
 
     private void initializeData() {
@@ -95,7 +237,7 @@ public class WalletListActivity extends AppCompatActivity {
             public void onSendClicked(int postion) {
                 Intent it = new Intent(WalletListActivity.this, SendActivity.class);
                 it.putExtra(Constants.Invoke.SEND, walletList.get(postion).getWalletId());
-                startActivity(it);
+                startActivityForResult(it, SEND_REQUEST);
 
             }
 
@@ -118,15 +260,20 @@ public class WalletListActivity extends AppCompatActivity {
         rv.setAdapter(mAdapter);
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == ORDER_REQUEST_CODE || requestCode == WALLET_DETAIL_VIEW){
+        if(requestCode == ORDER_REQUEST || requestCode == WALLET_DETAIL_VIEW ){
 
             walletList.clear();
             getWalletList();
             mAdapter.setWalletList(walletList);
 
+        } else if(requestCode == SEND_REQUEST && resultCode == Constants.RssultCode.SEND){
+            showDialogWalt();
+            getBalances();
         }
     }
 
@@ -158,5 +305,11 @@ public class WalletListActivity extends AppCompatActivity {
         mCursor.close();
         mDbOpenHelper.close();
 
+    }
+
+    public interface ClickListener {
+        void onSendClicked(int postion);
+        void onReceivedClicked(int postion);
+        void onItemClicked(int postion);
     }
 }
