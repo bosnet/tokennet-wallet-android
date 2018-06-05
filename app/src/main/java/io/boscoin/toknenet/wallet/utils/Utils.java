@@ -18,6 +18,7 @@ import org.stellar.sdk.FormatException;
 import org.stellar.sdk.KeyPair;
 import org.stellar.sdk.responses.SubmitTransactionResponse;
 
+import java.math.BigDecimal;
 import java.security.GeneralSecurityException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -305,16 +306,61 @@ public class Utils {
     public static String fitDigit(String str)
     {
         int dpos = str.indexOf(".");
-        String dstr = String.format("%,d",Integer.parseInt(str.substring(0, dpos)));
-        String fstr = str.substring(dpos+1, str.length());
-        while (fstr.endsWith("0")){
-            fstr = (fstr.substring(0, fstr.length() - 1));
+
+
+        String fstr = String.format("%,d",Integer.parseInt(str.substring(0, dpos)));
+        String lstr = str.substring(dpos+1, str.length());
+        String dstr = str.substring(dpos, str.length());
+
+        while (dstr.endsWith("0")){
+            dstr = (dstr.substring(0, dstr.length() - 1));
         }
 
-        return (dstr + fstr);
+        while (lstr.endsWith("0")){
+            lstr = (lstr.substring(0, lstr.length() - 1));
+        }
+
+        if(lstr.length() == 0){
+            return (fstr);
+        }
+
+        return (fstr + dstr);
     }
 
- 
+    public static BigDecimal MoneyCalcualtion(String m1, String m2, int type) throws Exception {
+        final int ADD = 1;
+        final int SUB = 2;
+        BigDecimal preNum = new BigDecimal(m1);
+        BigDecimal postNum = new BigDecimal(m2);
+
+        if(type == ADD){
+
+          return preNum.add(postNum);
+        } else if(type == SUB){
+            return preNum.subtract(postNum);
+        } else{
+          throw new Exception("");
+        }
+    }
+
+    public static BigDecimal MoneyCalcualtion(BigDecimal m1, BigDecimal m2, int type) throws Exception {
+        final int ADD = 1;
+        final int SUB = 2;
+        BigDecimal preNum = m1;
+        BigDecimal postNum = m2;
+
+        if(type == ADD){
+
+            return preNum.add(postNum);
+        } else if(type == SUB){
+            return preNum.subtract(postNum);
+        } else{
+            throw new Exception("");
+        }
+    }
+
+
+
 
 
 }

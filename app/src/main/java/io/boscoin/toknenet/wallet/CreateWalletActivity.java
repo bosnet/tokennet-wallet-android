@@ -256,7 +256,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                             try {
                                 InputStream response = new URL(friendbotUrl).openStream();
                                 String body = new Scanner(response, "UTF-8").useDelimiter("\\A").next();
-                                System.out.println("SUCCESS! You have a new account :)\n" + body);
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

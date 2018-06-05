@@ -39,6 +39,7 @@ import org.stellar.sdk.responses.AccountResponse;
 import org.stellar.sdk.responses.SubmitTransactionResponse;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.GeneralSecurityException;
 
 import cz.msebera.android.httpclient.Header;
@@ -75,12 +76,15 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private SendDialogPw mPwDialog;
     private SendDialogComplete mCompleteDialog;
     private SendDialogFail mFailDialog;
-    private static final double SEND_FEE = 0.001;
+
+    private static final String SEND_FEE = "0.001";
     private static final double MIN_BALANCE = 0.1;
     private KeyPair keyPair;
     private ProgressDialog mProgDialog;
     private String mCurBal, mAmount, mMyPubKey;
     private static final String BALANCE_FAIL = "op_underfunded";
+    private static final int ADD = 1;
+    private static final int SUB = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,9 +192,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 String input = s.toString();
 
                 if(input.contains(".") && s.charAt(s.length()-1) != '.'){
-                    Log.e(TAG, " 111 ");
+
                     if(input.indexOf(".") + 8 <= input.length()-1){
-                        Log.e(TAG, " 222 ");
+
                         String formatted = input.substring(0, input.indexOf(".") + 8);
                         editAmmount.setText(formatted);
                         editAmmount.setSelection(formatted.length());
@@ -273,7 +277,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showSendBos(View view) {
-        Log.e(TAG, "isNext = "+isNext);
+
         if(isNext){
             showPleaseWait();
             getWalletBalances();
@@ -337,32 +341,55 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 mSendValue = editAmmount.getText().toString();
-                double sendAmount = Double.parseDouble(mSendValue)+ SEND_FEE;
-                mSendTotal = Double.toString(sendAmount);
-                double curAmount = Double.parseDouble(mCurBal);
 
-                if(sendAmount >= curAmount){
 
-                    alertDialogFunds();
 
-                }else if(curAmount - sendAmount < MIN_BALANCE){
+                BigDecimal sendAmount = null;
+                BigDecimal curAmount = null;
+                try {
+                    sendAmount = Utils.MoneyCalcualtion(mSendValue , SEND_FEE, ADD);
+                    curAmount = new BigDecimal(mCurBal);
+                    mSendTotal = sendAmount.toString();
 
-                    alertDialogSend();
 
-               } else{
-                    if(isNext){
-                        mDestion = editPubkey.getText().toString();
 
-                        sendConfirmDialog();
+                    double sendMoney = Double.parseDouble(sendAmount.toString());
+                    double curMoney = Double.parseDouble(mCurBal);
+
+                    if(sendMoney >= curMoney){
+                        alertDialogFunds();
+                        isNext = false;
+                    } else {
+                        BigDecimal tmp = Utils.MoneyCalcualtion(curAmount,sendAmount,SUB);
+                        String tmp2 = tmp.toString();
+                        double result = Double.parseDouble(tmp2);
+
+                        if(result < MIN_BALANCE){
+                            alertDialogSend();
+                            isNext = false;
+                        }
+
                     }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    isNext = false;
                 }
+
+                if(isNext){
+                    mDestion = editPubkey.getText().toString();
+
+                    sendConfirmDialog();
+                }
+
+
 
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.e(TAG,"resp = "+responseString);
-                Log.e(TAG,"status = "+statusCode);
+
                 if(mProgDialog != null){
                     mProgDialog.dismiss();
                 }
@@ -539,8 +566,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     } catch (Exception e) {
-                        System.out.println("Something went wrong!");
-                        System.out.println(e.getMessage());
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -617,8 +643,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     } catch (Exception e) {
-                        System.out.println("Something went wrong!");
-                        System.out.println(e.getMessage());
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

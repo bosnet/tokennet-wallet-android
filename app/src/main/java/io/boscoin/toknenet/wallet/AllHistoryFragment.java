@@ -129,11 +129,11 @@ public class AllHistoryFragment extends Fragment {
         }
 
         int itemTotalCount = recyclerView.getAdapter().getItemCount();
-        Log.e(TAG,"itemTotalCount = "+itemTotalCount);
+
 
         if (lastVisibleItemPos +firstVisbleItemPos >= itemTotalCount) {
             Toast.makeText(getContext(), "Last Position", Toast.LENGTH_SHORT).show();
-             //int size = mPayments.get_embedded().getRecordList().size();
+
              int size = mPayHistoryList.size();
              String cur = mPayHistoryList.get(size-1).getPaging_token();
              getPrevHistory(cur);

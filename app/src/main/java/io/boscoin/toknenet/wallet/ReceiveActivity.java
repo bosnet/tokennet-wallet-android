@@ -117,9 +117,9 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
                 String input = s.toString();
 
                 if(input.contains(".") && s.charAt(s.length()-1) != '.'){
-                    Log.e(TAG, " 111 ");
+
                     if(input.indexOf(".") + 8 <= input.length()-1){
-                        Log.e(TAG, " 222 ");
+
                         String formatted = input.substring(0, input.indexOf(".") + 8);
                         mEAmount.setText(formatted);
                         mEAmount.setSelection(formatted.length());
@@ -135,7 +135,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.e(TAG, "after = "+s.toString());
+
 
 
             }

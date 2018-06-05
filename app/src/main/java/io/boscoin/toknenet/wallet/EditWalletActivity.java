@@ -70,7 +70,7 @@ public class EditWalletActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == EDIT_REQUEST_NAME && resultCode == Constants.RssultCode.CHANGE_NAME){
             mChName = data.getStringExtra(Constants.Invoke.EDIT);
-            Log.e(TAG," name = "+mChName);
+
 
             mTitle.setText(mChName);
         }else{
@@ -84,7 +84,7 @@ public class EditWalletActivity extends AppCompatActivity {
         Intent it = new Intent(EditWalletActivity.this, ChWalletNameActivity.class);
         it.putExtra(Constants.Invoke.EDIT, mIdx);
         startActivityForResult(it, EDIT_REQUEST_NAME);
-        //startActivity(it);
+
     }
 
     public void changePassWord(View view) {

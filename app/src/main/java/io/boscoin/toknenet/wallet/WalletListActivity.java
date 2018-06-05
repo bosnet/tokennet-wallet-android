@@ -153,7 +153,7 @@ public class WalletListActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, String res) {
                 Gson gson = new GsonBuilder().create();
                 Account account =   gson.fromJson(res, Account.class);
-                final String curBal = account.getBalances().get(0).getBalance()+" BOS";
+                final String curBal = account.getBalances().get(0).getBalance();
 
                 try{
                     mDbOpenWalletHelper = new DbOpenHelper(mContext);
@@ -178,7 +178,7 @@ public class WalletListActivity extends AppCompatActivity {
                     mCount++;
 
 
-                    if(mCount > lastPos /*(lastPos - pos)*/){
+                    if(mCount > lastPos ){
 
                         runOnUiThread(new Runnable() {
                             @Override

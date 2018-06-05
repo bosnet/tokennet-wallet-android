@@ -190,8 +190,7 @@ public class WalletActivity extends AppCompatActivity implements
                 mCurBal = account.getBalances().get(0).getBalance()+" BOS";
 
                 final String val =  mCurBal.replaceAll(" BOS", "");
-                Log.e(TAG, "bal = "+mCurBal);
-                Log.e(TAG, "val = "+val);
+
 
                 wBalance.setText(Utils.dispayBalance(mCurBal));
 

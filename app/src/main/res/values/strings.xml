@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BosTokneNetWallet</string>
+    <string name="app_name">BosTokennetWallet</string>
 
     <!-- 가져다 쓰기 -->
     <string name="transaction_his">Payments</string>
