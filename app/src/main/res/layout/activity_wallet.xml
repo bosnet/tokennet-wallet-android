@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/ly_top"
         android:layout_width="match_parent"
-        android:layout_height="216dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
         <ImageButton
@@ -54,6 +54,8 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tv_wname"
             android:layout_marginTop="43dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             tools:text="2537.0048623 BOS"
             />
 
@@ -86,7 +88,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv_pub_key"
+            android:layout_marginTop="42dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -107,6 +110,7 @@
                     android:layout_gravity="center"
                     android:textColor="#ffffff"
                     android:text="@string/his_all"
+                    android:layout_marginBottom="15dp"
                     />
                 <View
                     android:id="@+id/line_all"
@@ -134,6 +138,8 @@
                     android:layout_gravity="center"
                     android:textColor="#ffffff"
                     android:text="@string/his_send"
+                    android:layout_marginBottom="15dp"
+
                     />
                 <View
                     android:id="@+id/line_send"
@@ -161,7 +167,7 @@
                     android:layout_gravity="center"
                     android:textColor="@color/white"
                     android:text="@string/his_receive"
-                    />
+                    android:layout_marginBottom="15dp"/>
                 <View
                     android:id="@+id/line_receive"
                     android:layout_width="match_parent"
@@ -187,7 +193,7 @@
     <include
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         layout="@layout/layout_bottom_nav"/>
 

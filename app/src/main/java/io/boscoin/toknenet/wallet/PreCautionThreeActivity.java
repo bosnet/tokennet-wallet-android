@@ -12,7 +12,7 @@ import android.widget.CompoundButton;
 
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
-public class PreCationThreeActivity extends AppCompatActivity {
+public class PreCautionThreeActivity extends AppCompatActivity {
 
     private CheckBox mCheck;
     private Context mContext;
@@ -20,14 +20,14 @@ public class PreCationThreeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pre_cation_tree);
+        setContentView(R.layout.activity_pre_caution_tree);
 
         mContext = this;
 
         findViewById(R.id.caution_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(PreCationThreeActivity.this,MainActivity.class);
+                Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
                 startActivity(it);
             }
         });
@@ -43,7 +43,7 @@ public class PreCationThreeActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     WalletPreference.setSkipCaution(mContext,true);
-                                    Intent it = new Intent(PreCationThreeActivity.this,MainActivity.class);
+                                    Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
                                     startActivity(it);
                                     finish();
                                 }
@@ -66,7 +66,7 @@ public class PreCationThreeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 WalletPreference.setSkipCaution(mContext,false);
-                Intent it = new Intent(PreCationThreeActivity.this,MainActivity.class);
+                Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
                 startActivity(it);
                 finish();
             }

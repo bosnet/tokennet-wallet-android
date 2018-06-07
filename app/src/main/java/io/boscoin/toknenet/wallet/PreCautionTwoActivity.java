@@ -28,7 +28,7 @@ public class PreCautionTwoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 WalletPreference.setSkipCaution(mContext,false);
-                Intent it = new Intent(PreCautionTwoActivity.this,PreCationThreeActivity.class);
+                Intent it = new Intent(PreCautionTwoActivity.this,PreCautionThreeActivity.class);
                 startActivity(it);
             }
         });

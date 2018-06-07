@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/ic_bos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,24 +25,16 @@
         android:textSize="16sp"
         android:textColor="@color/white"
         android:lineSpacingExtra="4sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@+id/ic_bos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="282dp"
-        android:text="@string/bos_tk"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="17dp"
+        android:text="@string/bos_tk_w"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:lineSpacingExtra="4sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_m1"
-        android:text="@string/wallet"
-        />
+
 
     <Button
         android:id="@+id/btn_create"
@@ -60,6 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_import"
         android:background="@drawable/round_button_b"
+        style="?android:attr/borderlessButtonStyle"
         android:onClick="makeWallet"/>
 
     <Button
@@ -79,7 +73,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/round_button_w"
-        android:onClick="importWallet"/>
+        android:onClick="importWallet"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
 </android.support.constraint.ConstraintLayout>

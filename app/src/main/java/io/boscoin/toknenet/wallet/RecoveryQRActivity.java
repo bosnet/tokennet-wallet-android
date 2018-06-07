@@ -64,7 +64,7 @@ public class RecoveryQRActivity extends AppCompatActivity {
         BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
         try {
             Bitmap bitmap = barcodeEncoder.encodeBitmap(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_KET)),
-                              BarcodeFormat.QR_CODE, Utils.convertDpToPixel(140,mContext), Utils.convertDpToPixel(140,mContext));
+                              BarcodeFormat.QR_CODE, Utils.convertDpToPixel(150,mContext), Utils.convertDpToPixel(150,mContext));
             ImageView imageViewQrCode = (ImageView) findViewById(R.id.img_qr);
             imageViewQrCode.setImageBitmap(bitmap);
         } catch (WriterException e) {

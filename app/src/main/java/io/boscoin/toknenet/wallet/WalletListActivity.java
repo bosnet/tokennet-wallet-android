@@ -211,7 +211,7 @@ public class WalletListActivity extends AppCompatActivity {
                     mCount = 0;
 
                 }
-
+                mProgDialog.dismiss();
 
             }
         });

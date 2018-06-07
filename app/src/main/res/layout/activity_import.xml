@@ -152,7 +152,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
         android:text="@string/error_bos_invalid"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
 
     <ImageButton
@@ -197,6 +197,7 @@
         android:textStyle="normal"
         android:textColor="@color/white"
         android:textAllCaps="false"
+        style="?android:attr/borderlessButtonStyle"
         android:onClick="recoverWallet"/>
 
 

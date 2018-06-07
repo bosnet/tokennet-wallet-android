@@ -1,6 +1,6 @@
 package io.boscoin.toknenet.wallet;
 
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,7 +31,7 @@ public class NoticeQRActivity extends AppCompatActivity {
     private KeyPair keyPair;
     private long mIdSeed, mIdBos;
     private boolean checkSeed, checkBos;
-    private TextView mTitle;
+    private TextView mTvTitle, mTvNoti;
     private DbOpenHelper mDbOpenHelper;
     private String mName;
     private static final  int KEY_REQUEST = 10;
@@ -41,6 +41,8 @@ public class NoticeQRActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
         mContext = this;
+
+        initUI();
 
         Intent it = getIntent();
         mIdSeed = it.getLongExtra(Constants.Invoke.QR_SEED,0);
@@ -56,7 +58,7 @@ public class NoticeQRActivity extends AppCompatActivity {
             getWalletInfo(mIdBos);
         }
 
-        initUI();
+
 
     }
 
@@ -73,11 +75,14 @@ public class NoticeQRActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        mTitle = findViewById(R.id.title);
+        mTvTitle = findViewById(R.id.title);
+        mTvNoti = findViewById(R.id.noti_1);
         if(checkSeed){
-            mTitle.setText(R.string.ck_seed);
+            mTvTitle.setText(R.string.ck_seed);
+            mTvNoti.setText(R.string.screen_cap);
         }else{
-            mTitle.setText(R.string.ck_rckey);
+            mTvTitle.setText(R.string.ck_rckey);
+            mTvNoti.setText(R.string.noti_key);
         }
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {

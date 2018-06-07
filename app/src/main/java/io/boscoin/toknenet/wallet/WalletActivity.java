@@ -169,6 +169,9 @@ public class WalletActivity extends AppCompatActivity implements
 
     private void getWalletBalances() {
         if(mIsGetBalanceProcess == true){
+            if(mProgDialog.isShowing()){
+                mProgDialog.dismiss();
+            }
             return;
         }
         mIsGetBalanceProcess = true;
@@ -209,6 +212,11 @@ public class WalletActivity extends AppCompatActivity implements
                 }catch (Exception e){
 
                     e.printStackTrace();
+
+                    mIsGetBalanceProcess = false;
+                    if(mProgDialog != null){
+                        mProgDialog.dismiss();
+                    }
                 }finally {
                     mDbOpenWalletHelper.close();
                     mDbOpenWalletHelper = null;
@@ -426,6 +434,11 @@ public class WalletActivity extends AppCompatActivity implements
     @Override
     public void getCurrentBalanceAll() {
 
+
+        if(mProgDialog != null && mProgDialog.isShowing()){
+            mProgDialog.dismiss();
+            mIsGetBalanceProcess = false;
+        }
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgDialog.setMessage("Please Wait");
@@ -442,7 +455,10 @@ public class WalletActivity extends AppCompatActivity implements
 
     @Override
     public void getCurrentBalanceSend() {
-
+        if(mProgDialog != null && mProgDialog.isShowing()){
+            mProgDialog.dismiss();
+            mIsGetBalanceProcess = false;
+        }
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgDialog.setMessage("Please Wait");
@@ -459,7 +475,10 @@ public class WalletActivity extends AppCompatActivity implements
 
     @Override
     public void getCurrentBalanceReceive() {
-
+        if(mProgDialog != null && mProgDialog.isShowing()){
+            mProgDialog.dismiss();
+            mIsGetBalanceProcess = false;
+        }
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgDialog.setMessage("Please Wait");

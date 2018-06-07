@@ -28,10 +28,7 @@
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="150dp"
+
         android:id="@+id/zxing_barcode_scanner"
         app:zxing_use_texture_view="false"
         app:zxing_preview_scaling_strategy="fitXY"/>

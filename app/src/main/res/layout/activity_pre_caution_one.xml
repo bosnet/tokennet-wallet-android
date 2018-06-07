@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="138dp"
+        android:layout_marginTop="162dp"
         android:text="@string/wellcome_t"
         />
 
@@ -41,6 +41,7 @@
         android:fontFamily="sans-serif-medium"
         android:lineSpacingExtra="10sp"
         android:text="@string/bos_tk_w"
+        android:gravity="center_horizontal"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="normal"
@@ -58,8 +59,7 @@
         android:textColor="@color/white"
         android:lineSpacingExtra="8sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_btw"
-        android:layout_marginTop="138dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_using"
         android:layout_marginLeft="28dp"
         android:text="@string/let_start"
         />
@@ -74,8 +74,8 @@
         android:textColor="@color/white"
         android:lineSpacingExtra="8sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ls"
-        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_users"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="28dp"
         android:text="@string/using_yw"
         />
@@ -89,9 +89,8 @@
         android:textStyle="normal"
         android:textColor="@color/white_op50"
         android:lineSpacingExtra="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_agree"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_using"
-        android:layout_marginTop="12dp"
         android:layout_marginLeft="28dp"
         android:text="@string/users_using"
         />
@@ -105,10 +104,12 @@
         android:textStyle="normal"
         android:textColor="@color/white_op50"
         android:lineSpacingExtra="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/ca_bottom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_users"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="80dp"
         android:layout_marginLeft="28dp"
+        android:layout_marginRight="32dp"
+        android:lines="2"
         android:text="@string/agree_all_precautions"
         />
 
@@ -116,19 +117,19 @@
         android:id="@+id/cw"
         android:layout_width="8dp"
         android:layout_height="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_agree"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginLeft="28dp"
-        android:background="@drawable/circle_w"/>
+        android:background="@drawable/circle_w"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ca_bottom" />
 
     <View
         android:id="@+id/cb1"
         android:layout_width="8dp"
         android:layout_height="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_agree"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/ca_bottom"
+        android:layout_marginBottom="40dp"
         android:layout_marginLeft="44dp"
         android:background="@drawable/circle_b50"/>
 
@@ -137,12 +138,13 @@
         android:layout_width="8dp"
         android:layout_height="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_agree"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/ca_bottom"
+        android:layout_marginBottom="40dp"
         android:layout_marginLeft="60dp"
         android:background="@drawable/circle_b50"/>
 
     <include
+        android:id="@+id/ca_bottom"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"

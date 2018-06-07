@@ -15,14 +15,12 @@
 
     <!-- 언어변경 테스트 -->
     <string name="create_account">Create Account</string>
-    <string name="create_account2">Create Account 2</string>
+
     <string name="reg_account">Regist Account</string>
-    <string name="account_balance">Account Balance</string>
-    <string name="account_balance2">Account Balance 2</string>
-    <string name="payments">Payments</string>
-    <string name="confirm_payments_his">Confirm Payments History</string>
+
+
     <string name="receives">Receive</string>
-    <string name="toolbar_activity">Activity with Toolbar</string>
+
     <string name="make_address">Address</string>
     <string name="make_qr">Make QR</string>
     <string name="setting">Setting</string>
@@ -30,15 +28,14 @@
     <string name="create_wallets">Create Wallets</string>
     <string name="install_wallets">Install Wallets</string>
     <string name="change_wallets">Change Order Wallets</string>
-    <string name="change_lang">Change Language</string>
-    <string name="show_tips">Show Tips</string>
+
+
     <string name="setting_lang">Setting Language</string>
     <string name="english">English</string>
     <string name="korea">Korean</string>
     <string name="import_seed">Import Seed Key</string>
     <string name="import_secure">Import Secure Key</string>
-    <string name="recover">Recover</string>
-    <string name="input_used_pw">Used Password</string>
+
     <string name="done">Done</string>
     <string name="slan">Language</string>
 
@@ -56,14 +53,13 @@
     <string name="ammount">Ammount</string>
     <string name="my_wallet">My Wallet</string>
     <string name="change_wallet_order">Change Wallet Order</string>
-    <string name="add">Add</string>
+
     <string name="history">History</string>
     <string name="request_amount">(Option) Request a specific amount</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
     <string name="req_amount">Request Amount</string>
-    <string name="bos_tk">BOScoin Tokennet</string>
-    <string name="wallet">Wallet</string>
+
 
 
     <string name="bos_p_f">BOS Platform Foundation</string>
@@ -88,9 +84,9 @@
     <string name="enter_wname">Enter Wallet Name</string>
     <string name="enter_pw">Enter Password</string>
     <string name="confirm_pw">Confirm Password</string>
-    <string name="your_pw_is">Your password is required to send BOS, check your secret seed</string>
-    <string name="and_import">and import your wallet. Remember,</string>
-    <string name="you_cannot_find">you cannot find your password if you lose it.</string>
+
+    <string name="your_pw_is">Your password is required to send BOS, check your secret seed,\n
+    and import your wallet. Remember,\nyou cannot find your password if you lose it.</string>
     <string name="rember_recover">Remember the recovery key show\non the next screen so you can\nrecover your wallet again.</string>
     <string name="title_setup">Password setup is complete.</string>
     <string name="double_check">Double-check that you have kept a recovery key that you can\nsee now.
@@ -160,8 +156,8 @@ Keep your Secret Seed in a safe place.</string>
     <string name="cancel">Cancel</string>
     <string name="fee">Fee 0.001 BOS</string>
     <string name="send_detail">Remittance details</string>
-    <string name="dlog_public">Public </string>
-    <string name="dlog_address">Address </string>
+    <string name="dlog_public">Public</string>
+    <string name="dlog_address">Address</string>
     <string name="dlog_pw">Enter a password </string>
     <string name="dlog_send_ok">Transfer completed </string>
     <string name="change_wallet_name">Change Wallet Name</string>
@@ -188,6 +184,13 @@ know your secret seed or recovery key.</string>
     <string name="received">Received</string>
     <string name="create_ac">Create Account</string>
     <string name="detail">Detail</string>
+    <string name="noti_key">To restore your wallet, you need to know your secret seed or recovery key.</string>
+
+
+
+
+
+
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

@@ -47,6 +47,8 @@
         android:layout_marginLeft="42dp"
         android:layout_below="@+id/img_qr"
         android:layout_marginTop="16dp"
+        android:maxLines="3"
+        android:gravity="center_horizontal"
         tools:text="GOSPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSD
 FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
         />
@@ -114,6 +116,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
             android:background="@color/cerulean"
             android:textColor="@color/white"
             android:textAllCaps="false"
+            style="?android:attr/borderlessButtonStyle"
             android:onClick="addressCopy"/>
 
         <View
@@ -127,6 +130,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
             android:background="@color/cerulean"
             android:textColor="@color/white"
             android:textAllCaps="false"
+            style="?android:attr/borderlessButtonStyle"
             android:onClick="share"/>
     </LinearLayout>
 

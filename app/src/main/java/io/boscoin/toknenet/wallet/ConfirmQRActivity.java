@@ -76,7 +76,7 @@ public class ConfirmQRActivity extends AppCompatActivity {
         BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
         try {
             Bitmap bitmap = barcodeEncoder.encodeBitmap(mInfo.get(1),
-                    BarcodeFormat.QR_CODE, Utils.convertDpToPixel(140,mContext), Utils.convertDpToPixel(140,mContext));
+                    BarcodeFormat.QR_CODE, Utils.convertDpToPixel(150,mContext), Utils.convertDpToPixel(150,mContext));
             ImageView imageViewQrCode = (ImageView) findViewById(R.id.img_qr);
             imageViewQrCode.setImageBitmap(bitmap);
         } catch (WriterException e) {

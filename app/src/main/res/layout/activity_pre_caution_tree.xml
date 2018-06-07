@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PreCationThreeActivity"
+    tools:context=".PreCautionThreeActivity"
     android:background="@color/blue_light_bg">
 
     <ImageView
@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="143dp"
-        android:background="@drawable/ic_icon_quit"/>
+        android:layout_marginLeft="51dp"
+        android:background="@drawable/icon_quit"/>
 
     <ImageButton
         android:id="@+id/btn_cancel"
@@ -27,6 +28,7 @@
         android:layout_marginRight="28dp"/>
 
 
+
     <TextView
         android:id="@+id/txt_ca1"
         android:layout_width="wrap_content"
@@ -37,11 +39,12 @@
         android:textColor="@color/white"
         android:lineSpacingExtra="8sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="362dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_ca2"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="28dp"
         android:text="@string/please_quit"
         />
+
 
     <TextView
         android:id="@+id/txt_ca2"
@@ -52,9 +55,10 @@
         android:textStyle="normal"
         android:textColor="@color/white_op50"
         android:lineSpacingExtra="8sp"
-        app:layout_constraintStart_toStartOf="@id/txt_ca1"
-        app:layout_constraintTop_toBottomOf="@id/txt_ca1"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/cw"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="28dp"
         android:text="@string/someone_can"
         />
 
@@ -63,10 +67,11 @@
         android:layout_width="8dp"
         android:layout_height="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ca2"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/ca_bottom"
+        android:layout_marginBottom="40dp"
         android:layout_marginLeft="28dp"
         android:background="@drawable/circle_b50"/>
+
 
 
     <View
@@ -74,22 +79,24 @@
         android:layout_width="8dp"
         android:layout_height="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ca2"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/ca_bottom"
+        android:layout_marginBottom="40dp"
         android:layout_marginLeft="44dp"
         android:background="@drawable/circle_b50"/>
+
 
     <View
         android:id="@+id/cb2"
         android:layout_width="8dp"
         android:layout_height="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ca2"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/ca_bottom"
+        android:layout_marginBottom="40dp"
         android:layout_marginLeft="60dp"
         android:background="@drawable/circle_w"/>
 
     <include
+        android:id="@+id/ca_bottom"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"

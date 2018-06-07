@@ -92,7 +92,7 @@
         android:layout_below="@+id/line1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="41dp">
+        android:layout_marginTop="38dp">
 
     <EditText
         android:id="@+id/edit_pw"
@@ -113,8 +113,6 @@
         />
     </android.support.design.widget.TextInputLayout>
 
-    <!-- android:layout_below="@+id/edit_pw"
-            android:layout_marginTop="10dp"-->
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"
@@ -165,14 +163,17 @@
 
     <Button
         android:id="@+id/btn_create"
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:text="@string/next"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:textAllCaps="false"
         android:layout_below="@+id/line3"
         android:background="@color/pinkish_grey"
+        style="?android:attr/borderlessButtonStyle"
         android:onClick="createWallet"/>
 
     <TextView
@@ -184,33 +185,10 @@
         android:textStyle="normal"
         android:textColor="@color/cerulean"
         android:lineSpacingExtra="8sp"
+        android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:text="@string/your_pw_is"
         android:layout_below="@+id/btn_create"
-        android:layout_marginTop="20dp" />
-
-    <TextView
-        android:id="@+id/txt_no2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/cerulean"
-        android:lineSpacingExtra="8sp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/and_import"
-        android:layout_below="@+id/txt_no1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/cerulean"
-        android:lineSpacingExtra="8sp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/you_cannot_find"
-        android:layout_below="@+id/txt_no2" />
+        android:layout_marginTop="20dp"
+        android:text="@string/your_pw_is"
+        />
 </RelativeLayout>

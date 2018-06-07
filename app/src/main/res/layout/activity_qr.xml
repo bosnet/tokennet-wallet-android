@@ -36,7 +36,7 @@
     <RelativeLayout
         android:id="@+id/ly_boskey"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/img_qr"
         android:layout_marginTop="18dp">
 
@@ -53,6 +53,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="65dp"
             android:layout_marginRight="65dp"
+            android:gravity="center_horizontal"
             tools:text="BOSPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSD
 FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
 
@@ -83,6 +84,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
         android:textColor="@color/white"
         android:textSize="14sp"
         android:fontFamily="sans-serif-medium"
+        style="?android:attr/borderlessButtonStyle"
         android:textStyle="normal" />
 
 
