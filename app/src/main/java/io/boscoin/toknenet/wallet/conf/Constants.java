@@ -16,6 +16,7 @@ public class Constants {
 		public static final String PASSWORD = "password";
 		public static final String QR_SEED = "qr-seed";
 		public static final String QR_BOS = "qr-bos";
+		public static final String SEITING = "setting";
 	}
 
     public static final class DB {
@@ -66,5 +67,6 @@ public class Constants {
 		public static final int DELETE_WALLET = 2;
 		public static final int ADDRESS = 3;
 		public static final int SEND = 4;
+		public static final int FINISH = 5;
 	}
 }

@@ -24,35 +24,40 @@
 
     <CheckBox
         android:id="@+id/check_min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:button="@null"
         android:background="@drawable/item_check"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="35dp"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="28dp"/>
+
+
 
     <TextView
         android:id="@+id/txt_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="13dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/white"
         android:lineSpacingExtra="10sp"
+        android:maxLines="3"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintStart_toEndOf="@id/check_min"
+        app:layout_constraintStart_toEndOf="@+id/check_min"
+
         android:layout_marginLeft="20dp"
         android:layout_marginTop="32dp"
+        android:paddingRight="16dp"
         android:text="@string/min_balance"
         />
 
     <CheckBox
         android:id="@+id/check_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:button="@null"
         android:background="@drawable/item_check"
         app:layout_constraintTop_toBottomOf="@+id/txt_min"
@@ -60,11 +65,13 @@
         android:layout_marginTop="27dp"
         android:layout_marginLeft="28dp"/>
 
+
     <TextView
         android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="13dp"
+        android:minLines="2"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/white"
@@ -73,13 +80,14 @@
         app:layout_constraintStart_toEndOf="@id/check_name"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
+        android:paddingRight="16dp"
         android:text="@string/wallet_name"
         />
 
     <CheckBox
         android:id="@+id/check_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:button="@null"
         android:background="@drawable/item_check"
         app:layout_constraintTop_toBottomOf="@+id/txt_name"
@@ -91,7 +99,8 @@
         android:id="@+id/txt_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="13dp"
+        android:minLines="2"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/white"
@@ -100,13 +109,14 @@
         app:layout_constraintStart_toEndOf="@id/check_pw"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
+        android:paddingRight="16dp"
         android:text="@string/your_pw"
         />
 
     <CheckBox
         android:id="@+id/check_seed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:button="@null"
         android:background="@drawable/item_check"
         app:layout_constraintTop_toBottomOf="@+id/txt_pw"
@@ -118,7 +128,8 @@
         android:id="@+id/txt_seed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="13dp"
+        android:minLines="2"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/white"
@@ -127,6 +138,7 @@
         app:layout_constraintStart_toEndOf="@id/check_seed"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
+        android:paddingRight="16dp"
         android:text="@string/secret_seed"
         />
 

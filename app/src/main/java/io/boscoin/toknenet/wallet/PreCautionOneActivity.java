@@ -10,13 +10,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
+import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class PreCautionOneActivity extends AppCompatActivity {
     private static final String TAG = "PreCautionOneActivity";
     private CheckBox mCheck;
     private Context mContext;
+    private boolean isSetting;
+    private TextView mTvView;
+    private static final int REQUEST_FINISH = 18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,56 +30,93 @@ public class PreCautionOneActivity extends AppCompatActivity {
 
         mContext = this;
 
+        Intent it = getIntent();
+        isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
+
+        if(!isSetting){
+            mCheck = findViewById(R.id.check);
+            mCheck.setVisibility(View.VISIBLE);
+            mTvView = findViewById(R.id.txt_caution);
+            mTvView.setVisibility(View.VISIBLE);
+            mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Log.e(TAG,"check = "+isChecked);
+                    if(mCheck.isChecked()){
+
+                        final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                        alert.setMessage(R.string.no_see_page).setCancelable(false).setPositiveButton(R.string.ok,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        WalletPreference.setSkipCaution(mContext,true);
+                                        Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
+                                        startActivity(it);
+                                        finish();
+                                    }
+                                }).setNegativeButton(R.string.cancel,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        mCheck.setChecked(false);
+                                    }
+                                });
+                        AlertDialog dialog = alert.create();
+                        dialog.show();
+
+                    }
+                }
+            });
+        } else{
+            mCheck = findViewById(R.id.check);
+            mCheck.setVisibility(View.GONE);
+            mTvView = findViewById(R.id.txt_caution);
+            mTvView.setVisibility(View.GONE);
+        }
+
         findViewById(R.id.caution_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WalletPreference.setSkipCaution(mContext,false);
+                if(!isSetting)
+                    WalletPreference.setSkipCaution(mContext,false);
+
                 Intent it = new Intent(PreCautionOneActivity.this,PreCautionTwoActivity.class);
-                startActivity(it);
+                it.putExtra(Constants.Invoke.SEITING, isSetting);
+                //startActivity(it);
+                startActivityForResult(it, REQUEST_FINISH);
             }
         });
 
-       mCheck = findViewById(R.id.check);
-       mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               Log.e(TAG,"check = "+isChecked);
-                if(mCheck.isChecked()){
 
-                    final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-                    alert.setMessage(R.string.no_see_page).setCancelable(false).setPositiveButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    WalletPreference.setSkipCaution(mContext,true);
-                                    Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
-                                    startActivity(it);
-                                    finish();
-                                }
-                            }).setNegativeButton("Cancel",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    mCheck.setChecked(false);
-                                }
-                            });
-                    AlertDialog dialog = alert.create();
-                    dialog.show();
-
-                }
-           }
-       });
 
        findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               WalletPreference.setSkipCaution(mContext,false);
-               Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
-               startActivity(it);
-               finish();
+               if(!isSetting){
+                   WalletPreference.setSkipCaution(mContext,false);
+                   Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
+                   startActivity(it);
+                   finish();
+               }else{
+                   finish();
+               }
+
            }
        });
+
+
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Constants.RssultCode.FINISH){
+            finish();
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
 
     }
 

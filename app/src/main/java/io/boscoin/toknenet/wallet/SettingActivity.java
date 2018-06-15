@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import io.boscoin.toknenet.wallet.conf.Constants;
+
 public class SettingActivity extends AppCompatActivity {
 
     private Context mContext;
@@ -30,7 +32,7 @@ public class SettingActivity extends AppCompatActivity {
         TextView ti = findViewById(R.id.title);
         ti.setText(R.string.title_activity_settings);
 
-       //getAppVersion();
+
        TextView tvVersion = findViewById(R.id.tv_version);
        tvVersion.setText("BOScoin wallet Version: "+getAppVersion());
     }
@@ -62,6 +64,7 @@ public class SettingActivity extends AppCompatActivity {
 
     public void viewPreCaution(View view) {
         Intent it = new Intent(SettingActivity.this, PreCautionOneActivity.class);
+        it.putExtra(Constants.Invoke.SEITING, true);
         startActivity(it);
     }
 }

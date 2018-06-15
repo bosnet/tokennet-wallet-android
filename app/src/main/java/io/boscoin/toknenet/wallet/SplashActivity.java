@@ -28,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(!WalletPreference.getSkipCaution(mContext)){
                     Intent it = new Intent(SplashActivity.this, PreCautionOneActivity.class);
+                    it.putExtra(Constants.Invoke.SEITING, false);
                     startActivity(it);
                     finish();
                 }else{

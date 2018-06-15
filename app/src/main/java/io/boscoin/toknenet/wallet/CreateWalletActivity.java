@@ -158,18 +158,19 @@ public class CreateWalletActivity extends AppCompatActivity {
             return;
         }
 
-        if(TextUtils.isEmpty(wName) || !isWNameValid(wName)){
-            mTvNameErr.setVisibility(View.GONE);
-            mTvLengthErr.setVisibility(View.VISIBLE);
-            mEInputName.requestFocus();
-            return;
-        }
-
+     
 
 
         if(TextUtils.isEmpty(wPw1) || TextUtils.isEmpty(wPw2)){
             Toast.makeText(getApplicationContext(), R.string.error_no_pw, Toast.LENGTH_LONG).show();
             mEInputPW.requestFocus();
+            return;
+        }
+
+
+
+        if(!wPw1.equals(wPw2)){
+            Toast.makeText(getApplicationContext(), R.string.error_match_pw, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -186,12 +187,6 @@ public class CreateWalletActivity extends AppCompatActivity {
                     });
             AlertDialog dialog = alert.create();
             dialog.show();
-            return;
-        }
-
-
-        if(!wPw1.equals(wPw2)){
-            Toast.makeText(getApplicationContext(), R.string.error_match_pw, Toast.LENGTH_LONG).show();
             return;
         }
 

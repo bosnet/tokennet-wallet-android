@@ -158,7 +158,7 @@ Keep your Secret Seed in a safe place.</string>
     <string name="send_detail">Remittance details</string>
     <string name="dlog_public">Public</string>
     <string name="dlog_address">Address</string>
-    <string name="dlog_pw">Enter a password </string>
+    <string name="dlog_pw">Enter a password</string>
     <string name="dlog_send_ok">Transfer completed </string>
     <string name="change_wallet_name">Change Wallet Name</string>
     <string name="change_wallet_pw">Change Password</string>
