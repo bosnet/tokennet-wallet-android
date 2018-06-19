@@ -110,7 +110,7 @@ public class PreCautionTwoActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e(TAG,"onActivityResult = "+resultCode);
+
         if(resultCode == Constants.RssultCode.FINISH){
             setResult(Constants.RssultCode.FINISH);
             finish();

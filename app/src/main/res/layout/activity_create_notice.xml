@@ -47,12 +47,11 @@
         android:maxLines="3"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintStart_toEndOf="@+id/check_min"
-
         android:layout_marginLeft="20dp"
         android:layout_marginTop="32dp"
-        android:paddingRight="16dp"
+        android:paddingRight="80dp"
         android:text="@string/min_balance"
-        />
+        android:onClick="checkMin"/>
 
     <CheckBox
         android:id="@+id/check_name"
@@ -80,9 +79,10 @@
         app:layout_constraintStart_toEndOf="@id/check_name"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
-        android:paddingRight="16dp"
+        android:paddingRight="90dp"
+        android:maxLines="3"
         android:text="@string/wallet_name"
-        />
+        android:onClick="checkName"/>
 
     <CheckBox
         android:id="@+id/check_pw"
@@ -109,9 +109,9 @@
         app:layout_constraintStart_toEndOf="@id/check_pw"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
-        android:paddingRight="16dp"
+        android:paddingRight="85dp"
         android:text="@string/your_pw"
-        />
+        android:onClick="checkPassWord"/>
 
     <CheckBox
         android:id="@+id/check_seed"
@@ -138,9 +138,9 @@
         app:layout_constraintStart_toEndOf="@id/check_seed"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
-        android:paddingRight="16dp"
+        android:paddingRight="80dp"
         android:text="@string/secret_seed"
-        />
+        android:onClick="checkSeed"/>
 
     <Button
         android:id="@+id/btnOk"

@@ -16,7 +16,9 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".CreateWalletActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:fitsSystemWindows="true"/>
         <activity android:name=".RecoveryQRActivity" />
         <activity
             android:name=".ImportActivity"

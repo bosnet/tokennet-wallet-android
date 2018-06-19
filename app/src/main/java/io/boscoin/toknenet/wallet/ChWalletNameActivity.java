@@ -27,7 +27,7 @@ public class ChWalletNameActivity extends AppCompatActivity {
     private EditText editName, editNewName;
     private String mWalletName;
     private TextView mErrAlreadyName, mErrNameLength;
-    private boolean mInValidName, mExistName, mIsNext;
+    private boolean mIsValidName, mExistName, mIsNext;
     private Cursor mCursor;
     private Context mContext;
     private Button mBtnChange;
@@ -87,7 +87,7 @@ public class ChWalletNameActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(mChName) || !Utils.isNameValid(mChName)){
                     mErrNameLength.setVisibility(View.VISIBLE);
                     mErrAlreadyName.setVisibility(View.GONE);
-                    mInValidName = true;
+                    mIsValidName = false;
                 }else{
                     mErrNameLength.setVisibility(View.GONE);
                     mDbOpenHelper = new DbOpenHelper(mContext);
@@ -108,7 +108,7 @@ public class ChWalletNameActivity extends AppCompatActivity {
                         }
                     }while (mCursor.moveToNext());
 
-                    mInValidName = false;
+                    mIsValidName = true;
                     mExistName = false;
 
                     mErrNameLength.setVisibility(View.GONE);
@@ -117,8 +117,10 @@ public class ChWalletNameActivity extends AppCompatActivity {
                     mCursor.close();
                     mDbOpenHelper.close();
 
-                    changeButton();
+
                 }
+
+                changeButton();
             }
         });
 
@@ -151,10 +153,12 @@ public class ChWalletNameActivity extends AppCompatActivity {
     }
 
     private void changeButton() {
-        if(!mInValidName && !mExistName ){
+        if(mIsValidName && !mExistName ){
             mBtnChange.setBackgroundColor(getResources().getColor(R.color.cerulean));
             mIsNext = true;
         }else{
+            mErrNameLength.setVisibility(View.VISIBLE);
+            mErrAlreadyName.setVisibility(View.GONE);
             mBtnChange.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
             mIsNext = false;
         }

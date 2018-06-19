@@ -30,9 +30,9 @@ import io.boscoin.toknenet.wallet.model.Payments;
 public class AllHistoryFragment extends Fragment {
 
     private static final String TAG = "AllHistoryFragment";
-    // TODO: Customize parameter argument names
+
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+
     private int mColumnCount = 1;
     private OnListAllFragInteractionListener mListener;
 
@@ -52,7 +52,7 @@ public class AllHistoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.e(TAG,"CREATE");
+
         if (getArguments() != null) {
             mPubkey = getArguments().getString(Constants.Invoke.PUBKEY);
             Log.e(TAG, "pubkey = "+mPubkey);
@@ -64,7 +64,7 @@ public class AllHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_all_his_list, container, false);
 
-        // Retrieve the SwipeRefreshLayout
+
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2,
                 R.color.swipe_color_3, R.color.swipe_color_4);
@@ -98,7 +98,7 @@ public class AllHistoryFragment extends Fragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                Log.e(TAG,"onScrollStateChanged");
+
                 if(newState == RecyclerView.SCROLL_STATE_IDLE){
                     isLastItem();
                 }
@@ -107,7 +107,7 @@ public class AllHistoryFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.e(TAG,"onScrolled");
+
             }
         });
 

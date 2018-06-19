@@ -103,7 +103,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         mEAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.e(TAG, "before = "+s.toString());
+
 
 
 

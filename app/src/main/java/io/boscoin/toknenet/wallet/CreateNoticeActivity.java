@@ -47,5 +47,36 @@ public class CreateNoticeActivity extends AppCompatActivity {
     }
 
 
+    public void checkMin(View view) {
+        if(!mCheckMin.isChecked()){
+            mCheckMin.setChecked(true);
+        }else{
+            mCheckMin.setChecked(false);
+        }
+    }
+
+    public void checkName(View view) {
+        if(!mCheckWallet.isChecked()){
+            mCheckWallet.setChecked(true);
+        }else{
+            mCheckWallet.setChecked(false);
+        }
+    }
+
+    public void checkPassWord(View view) {
+        if(!mCheckPw.isChecked()){
+            mCheckPw.setChecked(true);
+        }else{
+            mCheckPw.setChecked(false);
+        }
+    }
+
+    public void checkSeed(View view) {
+        if(!mCheckSeed.isChecked()){
+            mCheckSeed.setChecked(true);
+        }else{
+            mCheckSeed.setChecked(false);
+        }
+    }
 
 }

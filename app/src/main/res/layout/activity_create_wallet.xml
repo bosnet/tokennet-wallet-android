@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="70dp"
         android:focusable="true"
         android:focusableInTouchMode="true">
 
@@ -39,7 +39,8 @@
                 android:textSize="14sp"
                 android:singleLine="true"
                 android:background="@null"
-                android:textCursorDrawable="@drawable/edit_cursor_color" />
+                android:textCursorDrawable="@drawable/edit_cursor_color"
+                android:inputType="textNoSuggestions|textVisiblePassword"/>
 
 
         </android.support.design.widget.TextInputLayout>
@@ -71,6 +72,20 @@
         android:visibility="gone"/>
 
     <TextView
+        android:id="@+id/txt_err_name_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/line1"
+        android:layout_marginTop="8dp"
+        android:text="@string/error_no_name"
+        android:visibility="gone"/>
+
+    <TextView
         android:id="@+id/txt_err_name_length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,7 +107,7 @@
         android:layout_below="@+id/line1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="38dp">
+        android:layout_marginTop="30dp">
 
     <EditText
         android:id="@+id/edit_pw"
@@ -106,11 +121,10 @@
         android:textStyle="normal"
         android:textColor="@color/black"
         android:background="@null"
-        android:inputType="textPassword"
+        android:inputType="textPassword|textNoSuggestions"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
-        android:maxLines="1"
-        />
+        android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <View
@@ -122,7 +136,19 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
 
-
+    <TextView
+        android:id="@+id/txt_err_pw_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/line2"
+        android:layout_marginTop="8dp"
+        android:text="@string/error_no_pw"
+        android:visibility="gone"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/comfirm_layout"
@@ -131,7 +157,7 @@
         android:layout_below="@+id/line2"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="38dp">
+        android:layout_marginTop="30dp">
 
     <EditText
         android:id="@+id/confirm_pw"
@@ -145,7 +171,7 @@
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/black"
-        android:inputType="textPassword"
+        android:inputType="textPassword|textNoSuggestions"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
         android:maxLines="1"/>
@@ -160,6 +186,21 @@
         android:background="@color/white_line"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/txt_err_pw_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/red_error"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/line3"
+        android:layout_marginTop="8dp"
+        android:text="@string/error_match_pw"
+        android:visibility="gone"/>
+
 
     <Button
         android:id="@+id/btn_create"

@@ -1,13 +1,18 @@
 package io.boscoin.toknenet.wallet;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -21,8 +26,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
@@ -37,18 +40,24 @@ public class CreateWalletActivity extends AppCompatActivity {
     private static final String BOS_RECOVER = "boskey-recover";
     private static final int MAX_WALLET_NAME = 11;
     private static final int MIN_PASSWORD = 7;
+    private static final int MSG_INSERT_COMPLETE = 1;
+    private static final int MSG_STOP = 0;
+    private static final int MSG_REQUEST_COMPLETE = 0xff;
 
     private EditText mEInputName, mEInputPW, mEConfirmPW;
     private Context mContext;
     private KeyPair pair;
     private String isRecover, mKey;
-    private TextView mTvTitle, mTvLengthErr, mTvNameErr;
+    private TextView mTvTitle, mTvLengthErr, mTvNameAlready, mTvNameNone;
+    private TextView mTvPwNone, mTvPwMatch;
     private boolean isBosRecover, isSeedRecover;
     private DbOpenHelper mDbOpenHelper, mDbOpenHelperName;
     private long walletId;
     private static final boolean TEST_GET = true;
     private Cursor mCursor;
     private boolean mAleradyWallet;
+    private ProgressDialog mProgDialog;
+    private DbInsertThread mThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +67,11 @@ public class CreateWalletActivity extends AppCompatActivity {
         mContext = this;
 
         mEInputName = findViewById(R.id.input_wname);
-        mTvNameErr = findViewById(R.id.txt_err_name);
+        mTvNameAlready = findViewById(R.id.txt_err_name);
+        mTvNameNone = findViewById(R.id.txt_err_name_none);
+        mTvPwNone = findViewById(R.id.txt_err_pw_none);
+        mTvPwMatch = findViewById(R.id.txt_err_pw_confirm);
+
         mTvTitle = findViewById(R.id.title);
         mTvTitle.setText(R.string.create_wallet);
         mTvLengthErr = findViewById(R.id.txt_err_name_length);
@@ -70,51 +83,50 @@ public class CreateWalletActivity extends AppCompatActivity {
             }
         });
 
-        mEInputName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+       
+        mEInputName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                mTvNameErr.setVisibility(View.GONE);
-                mTvLengthErr.setVisibility(View.GONE);
+            }
 
-                if(mDbOpenHelperName != null){
-                    mDbOpenHelperName.close();
-                    mDbOpenHelperName = null;
-                }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(!hasFocus){
+            }
 
-                    String wName = mEInputName.getText().toString();
+            @Override
+            public void afterTextChanged(Editable s) {
+                String wName = s.toString();
+                if(TextUtils.isEmpty(wName)){
+                    setErrNameNone();
+                } else if(!Utils.isNameValid(wName)){
+                    setErrNameValid();
+                } else{
                     mDbOpenHelperName = new DbOpenHelper(mContext);
                     mDbOpenHelperName.open(Constants.DB.MY_WALLETS);
                     mCursor = null;
                     mCursor = mDbOpenHelperName.getColumnWalletName();
 
-                    Log.e(TAG,"count = "+mCursor.getCount());
                     if(mCursor.getCount() > 0){
                         do{
 
                             if(wName.equals(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_NAME)))){
 
-                                mTvNameErr.setVisibility(View.VISIBLE);
-                                mTvLengthErr.setVisibility(View.GONE);
+                                setErrNameAlready();
                                 mDbOpenHelperName.close();
-                                mDbOpenHelperName = null;
+                                mCursor.close();
                                 mAleradyWallet = true;
                                 return;
                             }
                         }while (mCursor.moveToNext());
                     }
 
-
-
-                    if(mDbOpenHelperName != null){
-                        mDbOpenHelperName.close();
-                        mDbOpenHelperName = null;
-                    }
+                    mDbOpenHelperName.close();
+                    mCursor.close();
                     mAleradyWallet = false;
+                    setErrNoVisible();
                 }
-
             }
         });
 
@@ -145,6 +157,54 @@ public class CreateWalletActivity extends AppCompatActivity {
 
     }
 
+    private void setErrNameAlready(){
+        mTvNameNone.setVisibility(View.GONE);
+        mTvNameAlready.setVisibility(View.VISIBLE);
+        mTvLengthErr.setVisibility(View.GONE);
+        mTvPwNone.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.GONE);
+    }
+
+    private void setErrNameValid() {
+        mTvNameNone.setVisibility(View.GONE);
+        mTvNameAlready.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.VISIBLE);
+        mTvPwNone.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.GONE);
+    }
+
+    private void setErrNameNone() {
+        mTvNameNone.setVisibility(View.VISIBLE);
+        mTvNameAlready.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.GONE);
+        mTvPwNone.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.GONE);
+    }
+
+    private void setErrPwNone(){
+        mTvNameNone.setVisibility(View.GONE);
+        mTvNameAlready.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.GONE);
+        mTvPwNone.setVisibility(View.VISIBLE);
+        mTvPwMatch.setVisibility(View.GONE);
+    }
+
+    private void setErrPwMatch(){
+        mTvNameNone.setVisibility(View.GONE);
+        mTvNameAlready.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.GONE);
+        mTvPwNone.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.VISIBLE);
+    }
+
+    private void setErrNoVisible(){
+        mTvNameNone.setVisibility(View.GONE);
+        mTvNameAlready.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.GONE);
+        mTvPwNone.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.GONE);
+    }
+
     public void createWallet(View view) {
 
         String wName = mEInputName.getText().toString();
@@ -152,17 +212,27 @@ public class CreateWalletActivity extends AppCompatActivity {
         String wPw2 = mEConfirmPW.getText().toString();
 
 
-        if(mAleradyWallet){
-            Toast.makeText(getApplicationContext(), R.string.error_already, Toast.LENGTH_LONG).show();
+
+        if(TextUtils.isEmpty(wName)){
+            setErrNameNone();
             mEInputName.requestFocus();
             return;
         }
 
-     
+        if(mAleradyWallet){
+
+            setErrNameAlready();
+            mEInputName.requestFocus();
+            return;
+        }
 
 
-        if(TextUtils.isEmpty(wPw1) || TextUtils.isEmpty(wPw2)){
-            Toast.makeText(getApplicationContext(), R.string.error_no_pw, Toast.LENGTH_LONG).show();
+
+
+
+        if(TextUtils.isEmpty(wPw1) ){
+
+            setErrPwNone();
             mEInputPW.requestFocus();
             return;
         }
@@ -170,17 +240,20 @@ public class CreateWalletActivity extends AppCompatActivity {
 
 
         if(!wPw1.equals(wPw2)){
-            Toast.makeText(getApplicationContext(), R.string.error_match_pw, Toast.LENGTH_LONG).show();
+
+            setErrPwMatch();
+            mEConfirmPW.requestFocus();
             return;
         }
 
         if(!Utils.isPasswordValid(wPw1) || !Utils.isPasswordValid(wPw2)){
             final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-            alert.setMessage(R.string.error_pw).setCancelable(false).setPositiveButton("OK",
+            alert.setMessage(R.string.error_pw).setCancelable(false).setPositiveButton(R.string.ok,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            setErrNoVisible();
                             mEInputPW.requestFocus();
 
                         }
@@ -190,91 +263,87 @@ public class CreateWalletActivity extends AppCompatActivity {
             return;
         }
 
+
         if(isBosRecover){
+
+            if(mThread != null &&  !mThread.getStoped()){
+
+                return;
+            }
+
             String tmp = mKey.substring(3);
             String tmp2 = tmp.substring(0,tmp.length()-2);
+
             try {
                 String dec =  AESCrypt.decrypt(wPw1,tmp2);
-                mDbOpenHelper = new DbOpenHelper(this);
-                mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-                int count = mDbOpenHelper.getWalletCount();
-                String time = Utils.getCreateTime(System.currentTimeMillis());
-                walletId = mDbOpenHelper.insertColumnWallet(wName,KeyPair.fromSecretSeed(dec).getAccountId(),mKey, ++count,"0", time);
-                mDbOpenHelper.close();
-                confirmRecoverAlert();
-
+                createWallet(wName,KeyPair.fromSecretSeed(dec).getAccountId(),mKey);
             } catch (GeneralSecurityException e) {
-                e.printStackTrace();
                 Toast.makeText(getApplicationContext(), R.string.error_bos_pw, Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+
+            }
+
+        }else if(isSeedRecover){
+            if(mThread != null &&  !mThread.getStoped()){
+
                 return;
             }
-        }else if(isSeedRecover){
             try {
                 final String aes =  AESCrypt.encrypt(wPw1, mKey);
-                mDbOpenHelper = new DbOpenHelper(this);
-                mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-                int count = mDbOpenHelper.getWalletCount();
-                String time = Utils.getCreateTime(System.currentTimeMillis());
-                walletId = mDbOpenHelper.insertColumnWallet(wName, KeyPair.fromSecretSeed(mKey).getAccountId(),aes,++count,"0",time);
-                mDbOpenHelper.close();
-                confirmPwAlert();
-
+                createWallet(wName,KeyPair.fromSecretSeed(mKey).getAccountId(),aes);
             } catch (GeneralSecurityException e) {
-                e.printStackTrace();
                 Toast.makeText(getApplicationContext(), R.string.error_create_wallet, Toast.LENGTH_LONG).show();
-                return;
+                e.printStackTrace();
             }
+
 
         } else{
             //create walllet
+            if(mThread != null &&  !mThread.getStoped()){
+
+               return;
+            }
+
             pair = KeyPair.random();
 
             try {
 
                 final String aes =  AESCrypt.encrypt(wPw1, new String(pair.getSecretSeed()));
-                mDbOpenHelper = new DbOpenHelper(this);
-                mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-
-                int count = mDbOpenHelper.getWalletCount();
-                String time = Utils.getCreateTime(System.currentTimeMillis());
-                walletId = mDbOpenHelper.insertColumnWallet(wName,pair.getAccountId(),aes, ++count, "0", time);
-                mDbOpenHelper.close();
-                confirmPwAlert();
-
-                if(TEST_GET){
-                    new Thread(){
-                        public void run(){
-                            String friendbotUrl = String.format(
-                                  Constants.Domain.BOS_HORIZON_TEST+"/friendbot?addr=%s",
-                                    pair.getAccountId());
-
-                            try {
-                                InputStream response = new URL(friendbotUrl).openStream();
-                                String body = new Scanner(response, "UTF-8").useDelimiter("\\A").next();
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
-
-
-                }
+                createWallet(wName,pair.getAccountId(),aes);
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), R.string.error_create_wallet, Toast.LENGTH_LONG).show();
-                return;
-            } 
+            }
+            
         }
 
+    }
 
+    private void  requestMoney(){
+        new Thread(){
+            @Override
+            public void run() {
+                String friendbotUrl = String.format(
+                        Constants.Domain.BOS_HORIZON_TEST+"/friendbot?addr=%s",
+                        pair.getAccountId());
+
+                try {
+                    InputStream response = new URL(friendbotUrl).openStream();
+                    String body = new Scanner(response, "UTF-8").useDelimiter("\\A").next();
+                    System.out.println("SUCCESS! You have a new account :)\n" + body);
+                    handler.sendEmptyMessage(MSG_REQUEST_COMPLETE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
 
     private void confirmPwAlert() {
+        handler.sendEmptyMessage(MSG_STOP);
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
         alert.setTitle(R.string.title_setup);
-        alert.setMessage(R.string.rember_recover).setCancelable(false).setPositiveButton("OK",
+        alert.setMessage(R.string.rember_recover).setCancelable(false).setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -290,8 +359,9 @@ public class CreateWalletActivity extends AppCompatActivity {
     }
 
     private void confirmRecoverAlert() {
+        handler.sendEmptyMessage(MSG_STOP);
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
-        alert.setMessage(R.string.restore).setCancelable(false).setPositiveButton("OK",
+        alert.setMessage(R.string.restore).setCancelable(false).setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -321,11 +391,93 @@ public class CreateWalletActivity extends AppCompatActivity {
         startActivity(it);
     }
 
-    private boolean isWNameValid(String wname) {
-        return wname.length() < MAX_WALLET_NAME;
+    private void showDialogWalt(){
+
+        mProgDialog = new ProgressDialog(mContext);
+        mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setCancelable(false);
+        mProgDialog.show();
     }
 
+    private void createWallet(String wname, String pubkey, String enckey){
+        mThread = new DbInsertThread(wname, pubkey, enckey);
+        mThread.start();
 
+    }
+
+    final Handler handler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case MSG_INSERT_COMPLETE:
+                    if(isBosRecover){
+                        confirmRecoverAlert();
+                    }else{
+                        if(TEST_GET && !isSeedRecover && !isBosRecover){
+                            showDialogWalt();
+                            requestMoney();
+                        }else{
+                            confirmPwAlert();
+                        }
+
+                    }
+                    break;
+
+                case MSG_STOP:
+                    mThread.stopThread();
+                    break;
+
+                case MSG_REQUEST_COMPLETE:
+
+                    mProgDialog.dismiss();
+                    confirmPwAlert();
+                    break;
+
+            }
+
+        }
+    };
+
+
+
+     class DbInsertThread extends Thread {
+        boolean stopped = false;
+        String pubkey;
+        String insertName;
+        String encKey;
+
+        public DbInsertThread(String name, String pkey, String ekey) {
+            this.stopped = false;
+            this.pubkey = pkey;
+            this.encKey = ekey;
+            this.insertName = name;
+        }
+
+        public void stopThread(){
+            stopped = true;
+        }
+
+        public boolean getStoped(){
+            return stopped;
+        }
+
+        @Override
+        public void run() {
+
+                mDbOpenHelper = new DbOpenHelper(mContext);
+                mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+                int count = mDbOpenHelper.getWalletCount();
+                String time = Utils.getCreateTime(System.currentTimeMillis());
+
+                walletId = mDbOpenHelper.insertColumnWallet(insertName,pubkey,encKey, ++count, "0", time);
+
+                handler.sendEmptyMessage(MSG_INSERT_COMPLETE);
+                stopped = false;
+
+        }
+    }
 
 
 }

@@ -13,7 +13,7 @@
     <!-- 언어변경 테스트 -->
     <string name="create_account">계좌 생성</string>
 
-    <string name="reg_account">계좌 등록</string>
+
 
 
     <string name="receives">받기</string>
@@ -60,10 +60,10 @@
     <string name="ca_do_not_lose">보안키, 복구키, 비밀번호를,\n잃어버리거나 타인에게 공유하지 마세요.</string>
     <string name="ca_sec_seed">보안키, 복구키, 비빌번호는 다시 찾을 수 없습니다.\n철저히 관리해 주세요.</string>
     <string name="no_see_page">정말로 다시 보지 않겠습니까?</string>
-    <string name="please_check">아래 주의사항을 확인해 주세요.</string>
+    <string name="please_check">아래 주의사항을 확인해 주세요</string>
     <string name="min_balance">유효한 계좌로 만들기 위해서는 최소 잔액이 필요합니다.\n비밀번호 설정 후에는 최소 잔액 0.1 BOS를 보내세요.</string>
     <string name="wallet_name">지갑 이름 및 주소록의 정보는 앱이 삭제되거나 지갑 가져오기를 할 때는 모두 사라집니다.</string>
-    <string name="your_pw">비밀번호는 송금, 보안키 조회, 지갑 가져오기 할 때 필요합니다.\n비밀번호는 잃어버려도 찾을 수 없으니 반드시 기억하세요.</string>
+    <string name="your_pw">비밀번호는 송금, 보안키 조회, 지갑 가져오기 할 때 필요합니다.\n비밀번호는 잃어버리면 찾을 수 없으니 반드시 기억하세요.</string>
     <string name="secret_seed">보안키와 복구키는 지갑 가져오기 할 때 필요합니다.\n잃어버리거나 타인에게 공유하지 마세요.</string>
     <string name="enter_wname">지갑이름 입력</string>
     <string name="enter_pw">비밀번호 입력</string>
@@ -151,13 +151,12 @@
     <string name="contacts">주소록</string>
 
 
-    <string name="error_no_name">지갑이름을 입력해 주세요</string>
-    <string name="error_no_pw">패스워드를 입력해 주세요</string>
-    <string name="error_match_pw">패스워드가 서로 다릅니다.</string>
+    <string name="error_no_name">지갑이름을 입력하세요.</string>
+    <string name="error_no_pw">비밀번호를 입력하세요.</string>
+    <string name="error_match_pw">비밀번호가 일치하지 않습니다.</string>
     <string name="error_create_wallet">오류가 발생했습니다. 다시 시도해 주십시오</string>
     <string name="error_no_key">복구를 위한 키가 필요합니다</string>
-    <string name="error_decode_seed_key">유효하지 않은 키 형식입니다</string>
-    <string name="error_decode_bos_key">유효하지 않은 키 형식입니다</string>
+
     <string name="error_two_key">하나의 키만 입력해 주세요</string>
     <string name="error_amount">소수점은 7번째 자리까지만 입력 가능합니다</string>
     <string name="error_all_check">모든 주의사항에 체크해 주세요</string>

@@ -77,17 +77,26 @@ public class DbOpenHelper {
 		return mDB.insert(DataBases.CreateWalletDB._TABLENAME, null, values);
 	}
 
-    public long insertColumnWallet(String name, String add, String key, int order, String bal, String time){
-        ContentValues values = new ContentValues();
-        values.put(DataBases.CreateWalletDB.COL_NAME, name);
-        values.put(DataBases.CreateWalletDB.COL_ADDRESS, add);
-        values.put(DataBases.CreateWalletDB.COL_KEY, key);
-        values.put(DataBases.CreateWalletDB.COL_ORDER, order);
-        values.put(DataBases.CreateWalletDB.COL_LASTEST, bal);
-		values.put(DataBases.CreateWalletDB.COL_TIME, time);
-        return mDB.insert(DataBases.CreateWalletDB._TABLENAME, null, values);
-    }
 
+
+	public long insertColumnWallet(String name, String add, String key, int order, String bal, String time){
+
+		long id;
+
+		ContentValues values = new ContentValues();
+		values.put(DataBases.CreateWalletDB.COL_NAME, name);
+		values.put(DataBases.CreateWalletDB.COL_ADDRESS, add);
+		values.put(DataBases.CreateWalletDB.COL_KEY, key);
+		values.put(DataBases.CreateWalletDB.COL_ORDER, order);
+		values.put(DataBases.CreateWalletDB.COL_LASTEST, bal);
+		values.put(DataBases.CreateWalletDB.COL_TIME, time);
+
+		id = mDB.insert(DataBases.CreateWalletDB._TABLENAME, null, values);
+
+		mDB.close();
+
+		return id;
+	}
 	// Update DB
 	public boolean updateColumnAddress(long id , String name, String add){
 		ContentValues values = new ContentValues();
@@ -192,6 +201,7 @@ public class DbOpenHelper {
 	public int getWalletCount(){
 		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, null, null, null, null, null, null);
 		int count = c.getCount();
+		c.close();
 		return count;
 	}
 

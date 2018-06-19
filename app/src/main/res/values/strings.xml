@@ -76,8 +76,8 @@
     <string name="please_quit">Please quit the app immediately\nafter use.</string>
     <string name="someone_can">Someone can always steal your secret seed.</string>
     <string name="no_see_page">Do you want to see this page again?</string>
-    <string name="please_check">Please check the following notes.</string>
-    <string name="min_balance">A minimum balance is required to create a valid\naccount. Please send a minimum balance of\n0.1BOS after setting the password.</string>
+    <string name="please_check">Please check the following notes</string>
+    <string name="min_balance">A minimum balance is required to create a valid\naccount. Please send a minimum balance of\n0.1 BOS after setting the password.</string>
     <string name="wallet_name">Wallet names and information in your contacts\nwill all disappear when the app is removed or\nyour wallet is imported.</string>
     <string name="your_pw">Your password is required to send BOS, check\nyour secret seed, and import your wallet.\nRemember, you cannot find your password\nif you lose it.</string>
     <string name="secret_seed">Secret seed and recovery key are required when\nimporting wallets. Do not lose it or share it with\nothers.</string>
