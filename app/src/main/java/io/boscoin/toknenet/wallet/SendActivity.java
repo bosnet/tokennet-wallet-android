@@ -55,7 +55,7 @@ import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = "Send2Activity";
+    private static final String TAG = "SendActivity";
     private long mWalletId;
     private String mPubKey, mBosKey, mSeed;
     private EditText editPubkey, editAmmount;
@@ -158,17 +158,18 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) {
 
                 mPubKey = s.toString();
+                mImgDel.setVisibility(View.VISIBLE);
                 if(!TextUtils.isEmpty(mPubKey)){
                     try{
                         Utils.decodeCheck(Utils.VersionByte.ACCOUNT_ID, mPubKey.toCharArray());
                         mTvAddressErr.setVisibility(View.GONE);
-                        mImgDel.setVisibility(View.VISIBLE);
+
                         mValidAddress = true;
                         changeButton();
                     }catch (Exception e){
                         mTvAddressErr.setText(R.string.error_invalid_pubkey);
                         mTvAddressErr.setVisibility(View.VISIBLE);
-                        mImgDel.setVisibility(View.GONE);
+
                         mValidAddress = false;
                     }
                 }
@@ -210,6 +211,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                mImgDel.setVisibility(View.GONE);
                 mAmount = s.toString();
                 if(!TextUtils.isEmpty(mAmount)){
                     mValidAmmount = true;
@@ -404,7 +407,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     private void alertDialogSend() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-        alert.setMessage(R.string.error_no_send).setPositiveButton("OK",
+        alert.setMessage(R.string.error_no_send).setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -418,7 +421,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     private void alertDialogFunds() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-        alert.setMessage(R.string.error_no_funds).setPositiveButton("OK",
+        alert.setMessage(R.string.error_no_funds).setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -432,7 +435,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     private void alertDialogAccount() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-        alert.setMessage(R.string.error_no_account).setPositiveButton("OK",
+        alert.setMessage(R.string.error_no_account).setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -452,23 +455,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
-    View.OnClickListener PwOklistener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-            EditText inputPw = mPwDialog.getEditPw();
-            TextView tvErrKey = mPwDialog.getmTvErrKey();
-
-            isValidPw(inputPw, tvErrKey);
-
-        }
-    };
 
     private void isValidPw(EditText pw, TextView err) {
+        TextView tvErrView = err;
         String seedkey = pw.getText().toString();
+
+        if(TextUtils.isEmpty(seedkey)){
+            tvErrView.setText(R.string.error_no_pw);
+            tvErrView.setVisibility(View.VISIBLE);
+            return;
+        }
+
         String tmp = mBosKey.substring(3);
         String tmp2 = tmp.substring(0,tmp.length()-2);
-        TextView tvErrView = err;
+
         try {
             String dec =  AESCrypt.decrypt(seedkey,tmp2);
             keyPair = KeyPair.fromSecretSeed(dec);
@@ -484,6 +485,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             sendBosTransation();
         } catch (GeneralSecurityException e) {
 
+            tvErrView.setText(R.string.error_invalid_password);
             tvErrView.setVisibility(View.VISIBLE);
         }
     }
@@ -700,11 +702,23 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         mCompleteDialog.show();
     }
 
+    View.OnClickListener PwOklistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            EditText inputPw = mPwDialog.getEditPw();
+            TextView tvErrKey = mPwDialog.getmTvErrKey();
+
+            isValidPw(inputPw, tvErrKey);
+
+        }
+    };
+
     View.OnClickListener PwCancellistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             mPwDialog.dismiss();
-            sendPwDialog();
+
         }
     };
 
@@ -745,7 +759,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             if(result != null) {
                 if(result.getContents() == null) {
-                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+
 
                 } else {
 

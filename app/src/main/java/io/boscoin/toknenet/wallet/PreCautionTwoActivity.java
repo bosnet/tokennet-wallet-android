@@ -1,9 +1,11 @@
 package io.boscoin.toknenet.wallet;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class PreCautionTwoActivity extends AppCompatActivity {
@@ -21,6 +24,14 @@ public class PreCautionTwoActivity extends AppCompatActivity {
     private Context mContext;
     private boolean isSetting;
     private TextView mTvView;
+    private DbOpenHelper mDbOpenHelper;
+
+    private BroadcastReceiver finishedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            PreCautionTwoActivity.this.finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +104,16 @@ public class PreCautionTwoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!isSetting){
                     WalletPreference.setSkipCaution(mContext,false);
-                    Intent it = new Intent(PreCautionTwoActivity.this,MainActivity.class);
-                    startActivity(it);
+                    Intent finishBroadcastIt =  new Intent(Constants.Invoke.BROAD_FINISH);
+                    sendBroadcast(finishBroadcastIt);
+                    if(getWalleetCount() > 0){
+                        Intent it = new Intent(PreCautionTwoActivity.this,WalletListActivity.class);
+                        startActivity(it);
+                    }else{
+                        Intent it = new Intent(PreCautionTwoActivity.this,MainActivity.class);
+                        startActivity(it);
+                    }
+
                     finish();
                 }else{
                     setResult(Constants.RssultCode.FINISH);
@@ -104,8 +123,22 @@ public class PreCautionTwoActivity extends AppCompatActivity {
             }
         });
 
+        registerFinishedReceiver();
 
+    }
+    @Override
+    protected void onDestroy() {
+        unregisterFinishedReceiver();
+        super.onDestroy();
+    }
 
+    private void unregisterFinishedReceiver() {
+        unregisterReceiver(finishedReceiver);
+    }
+
+    private void registerFinishedReceiver() {
+        IntentFilter intentFilter = new IntentFilter(Constants.Invoke.BROAD_FINISH);
+        registerReceiver(finishedReceiver, intentFilter);
     }
 
     @Override
@@ -118,5 +151,13 @@ public class PreCautionTwoActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
 
+    }
+
+    private int getWalleetCount() {
+        mDbOpenHelper = new DbOpenHelper(mContext);
+        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+        int count = mDbOpenHelper.getWalletCount();
+        Log.e(TAG, "count = "+count);
+        return count;
     }
 }

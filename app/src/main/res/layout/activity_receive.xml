@@ -117,7 +117,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
             android:textColor="@color/white"
             android:textAllCaps="false"
             style="?android:attr/borderlessButtonStyle"
-            android:onClick="addressCopy"/>
+            android:onClick="copy"/>
 
         <View
             android:layout_width="12dp"

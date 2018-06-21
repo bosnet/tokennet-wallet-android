@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -58,6 +59,7 @@ public class CreateWalletActivity extends AppCompatActivity {
     private boolean mAleradyWallet;
     private ProgressDialog mProgDialog;
     private DbInsertThread mThread;
+    private TextInputLayout mlayoutName, mlayoutPw, mlayoutConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,11 @@ public class CreateWalletActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_wallet);
 
         mContext = this;
+
+
+        mlayoutName = findViewById(R.id.input_wallet_name);
+        mlayoutPw = findViewById(R.id.pw_layout);
+        mlayoutConfirm = findViewById(R.id.comfirm_layout);
 
         mEInputName = findViewById(R.id.input_wname);
         mTvNameAlready = findViewById(R.id.txt_err_name);
@@ -76,6 +83,38 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvTitle.setText(R.string.create_wallet);
         mTvLengthErr = findViewById(R.id.txt_err_name_length);
 
+        Intent it = getIntent();
+        isRecover = it.getStringExtra(Constants.Invoke.RECOVER_WALLET);
+        mKey = it.getStringExtra(Constants.Invoke.KEY);
+
+
+        if(isRecover != null && isRecover.equals(BOS_RECOVER)){
+            isBosRecover = true;
+            isSeedRecover =  false;
+            mTvTitle.setText(R.string.import_wallet);
+
+            mlayoutName.setHint(getResources().getString(R.string.input_new_wallet_name));
+            mlayoutPw.setHint(getResources().getString(R.string.input_new_pw));
+            mlayoutConfirm.setHint(getResources().getString(R.string.confirm_new_pw));
+
+        } else if(isRecover != null && isRecover.equals(SEED_RECOVER)){
+            isBosRecover = false;
+            isSeedRecover = true;
+            mTvTitle.setText(R.string.import_wallet);
+
+            mlayoutName.setHint(getResources().getString(R.string.input_new_wallet_name));
+            mlayoutPw.setHint(getResources().getString(R.string.input_new_pw));
+            mlayoutConfirm.setHint(getResources().getString(R.string.confirm_new_pw));
+        } else{
+            isBosRecover = false;
+            isSeedRecover = false;
+
+            mlayoutName.setHint(getResources().getString(R.string.input_wallet_name));
+            mlayoutPw.setHint(getResources().getString(R.string.enter_pw));
+            mlayoutConfirm.setHint(getResources().getString(R.string.confirm_pw));
+        }
+
+
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +122,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             }
         });
 
-       
+
         mEInputName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,24 +175,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
         mContext = this;
 
-        Intent it = getIntent();
-        isRecover = it.getStringExtra(Constants.Invoke.RECOVER_WALLET);
-        mKey = it.getStringExtra(Constants.Invoke.KEY);
 
-
-        if(isRecover != null && isRecover.equals(BOS_RECOVER)){
-            isBosRecover = true;
-            isSeedRecover =  false;
-            mTvTitle.setText(R.string.import_wallet);
-            
-        } else if(isRecover != null && isRecover.equals(SEED_RECOVER)){
-            isBosRecover = false;
-            isSeedRecover = true;
-            mTvTitle.setText(R.string.import_wallet);
-        } else{
-            isBosRecover = false;
-            isSeedRecover = false;
-        }
 
     }
 

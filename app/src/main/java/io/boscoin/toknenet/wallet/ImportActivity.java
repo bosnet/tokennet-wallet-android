@@ -20,7 +20,7 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
 
-public class ImportActivity extends AppCompatActivity /*implements TextWatcher*/{
+public class ImportActivity extends AppCompatActivity {
 
     private static final String TAG = "ImportActivity";
     private final int SEED_REQUEST_CODE = 0x0000ffff;
@@ -86,9 +86,9 @@ public class ImportActivity extends AppCompatActivity /*implements TextWatcher*/
 
         if(result != null) {
             if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+
             } else {
-                // TODO: 2018. 4. 5. string -> byte
+
                 switch (requestCode){
                     case SEED_REQUEST_CODE:
                         eSeedKey.setText(result.getContents());
@@ -178,10 +178,12 @@ public class ImportActivity extends AppCompatActivity /*implements TextWatcher*/
 
                     if(!TextUtils.isEmpty(mBosKey) && Utils.isValidRecoveryKey(mBosKey)){
                         mErrBosKey.setVisibility(View.GONE);
+                        mBosDel.setVisibility(View.VISIBLE);
                         mIsNextBos = true;
                         mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
                     }else{
                         mErrBosKey.setVisibility(View.VISIBLE);
+                        mBosDel.setVisibility(View.VISIBLE);
                         mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
                         mIsNextBos = false;
                         return;

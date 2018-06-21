@@ -31,6 +31,7 @@ public class ChPassWordActivity extends AppCompatActivity {
     private String mKey;
     private EditText editNew, editConfirm;
     private TextView mTitle;
+    private TextView mTvPwNone, mTvPwMatch;
 
 
     @Override
@@ -61,21 +62,42 @@ public class ChPassWordActivity extends AppCompatActivity {
         editConfirm = findViewById(R.id.confirm_pw);
         mTitle = findViewById(R.id.title);
         mTitle.setText(R.string.change_wallet_pw);
+
+        mTvPwNone = findViewById(R.id.txt_err_pw_none);
+        mTvPwMatch = findViewById(R.id.txt_err_pw_confirm);
+    }
+
+    private void setErrPwNone(){
+        mTvPwNone.setVisibility(View.VISIBLE);
+        mTvPwMatch.setVisibility(View.GONE);
+    }
+
+    private void setErrPwMatch(){
+        mTvPwNone.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.VISIBLE);
     }
 
     public void checkPassWord(View view) {
         String newPw = editNew.getText().toString();
         String confirmPw = editConfirm.getText().toString();
 
-        if(TextUtils.isEmpty(newPw) || TextUtils.isEmpty(confirmPw)){
-            Toast.makeText(getApplicationContext(), R.string.error_no_pw, Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(newPw) ){
+           
+            setErrPwNone();
             editNew.requestFocus();
+            return;
+        }
+
+        if(!newPw.equals(confirmPw)){
+
+            setErrPwMatch();
+            editConfirm.requestFocus();
             return;
         }
 
         if(!Utils.isPasswordValid(newPw) || !Utils.isPasswordValid(confirmPw)){
             final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-            alert.setMessage(R.string.error_pw).setCancelable(false).setPositiveButton("OK",
+            alert.setMessage(R.string.error_pw).setCancelable(false).setPositiveButton(R.string.ok,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

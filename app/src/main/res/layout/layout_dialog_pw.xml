@@ -103,7 +103,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="24dp"
         android:text="@string/ok"
         />
 
@@ -117,7 +117,7 @@
         android:textColor="@color/cerulean"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btn_ok"
+        app:layout_constraintEnd_toStartOf="@+id/btn_ok"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="20dp"
         android:text="@string/cancel"

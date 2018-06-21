@@ -2,189 +2,237 @@
     <string name="app_name">BosTokennetWallet</string>
 
     <!-- 가져다 쓰기 -->
-    <string name="transaction_his">Payments</string>
+    <string name="transaction_his">Transaction Details</string>
     <string name="send">Send</string>
     <string name="receive">Receive</string>
-    <string name="address">Address</string>
-    <string name="his_all">All</string>
+    <string name="address">Contacts</string>
+    <string name="his_all">Transactions</string>
     <string name="his_receive">Receive</string>
     <string name="his_send">Send</string>
-    <string name="toast_text_clipboard_address">Address Copyed.</string>
+    <string name="toast_text_clipboard_address">It has been copied</string>
     <string name="title_activity_settings">Settings</string>
     <string name="contacts">Contacts</string>
 
-    <!-- 언어변경 테스트 -->
+
     <string name="create_account">Create Account</string>
 
-    <string name="reg_account">Regist Account</string>
+    <string name="reg_account">Register Account</string>
 
 
     <string name="receives">Receive</string>
 
-    <string name="make_address">Address</string>
-    <string name="make_qr">Make QR</string>
-    <string name="setting">Setting</string>
-    <string name="setting_wallets">Setting_Wallets</string>
-    <string name="create_wallets">Create Wallets</string>
-    <string name="install_wallets">Install Wallets</string>
-    <string name="change_wallets">Change Order Wallets</string>
+    <string name="make_address">Contacts</string>
+    <string name="make_qr">QR Code</string>
+    <string name="setting">Settings</string>
+    <string name="setting_wallets">Wallet Setting</string>
+    <string name="create_wallets">Create Wallet</string>
+    <string name="install_wallets">Import Wallet</string>
+    <string name="change_wallets">Wallet Order Customizing</string>
 
 
-    <string name="setting_lang">Setting Language</string>
+    <string name="setting_lang">Language</string>
     <string name="english">English</string>
     <string name="korea">Korean</string>
-    <string name="import_seed">Import Seed Key</string>
-    <string name="import_secure">Import Secure Key</string>
+    <string name="import_seed">Input Secret Seed</string>
+    <string name="import_secure">Input Recovery Key</string>
 
-    <string name="done">Done</string>
+    <string name="done">Completed</string>
     <string name="slan">Language</string>
 
     <string name="create_wallet">Create Wallet</string>
     <string name="import_wallet">Import Wallet</string>
     <string name="input_wallet_name">Input Wallet Name</string>
-    <string name="input_new_pw">Input New PassWord</string>
+    <string name="input_new_wallet_name">Input New Wallet Name</string>
+    <string name="input_new_pw">Input New Password</string>
     <string name="confirm_new_pw">Confirm New Password</string>
-    <string name="ok">OK</string>
+    <string name="ok">Confirm</string>
     <string name="qr_c">QR Code</string>
-    <string name="input_already_pw">Input Already PassWord</string>
-    <string name="confirm_already_pw">Confirm Already Password</string>
+    <string name="input_already_pw">Input Existing Password</string>
+    <string name="confirm_already_pw">Confirm Existing Password</string>
     <string name="input_pub_key">Input Public Address</string>
-    <string name="send_fee">Fee</string>
-    <string name="ammount">Ammount</string>
-    <string name="my_wallet">My Wallet</string>
-    <string name="change_wallet_order">Change Wallet Order</string>
+    <string name="send_fee">Transaction Fee</string>
+    <string name="ammount">Amount</string>
+    <string name="my_wallet">My Wallets</string>
+    <string name="change_wallet_order">Wallet Order Customizing</string>
 
-    <string name="history">History</string>
-    <string name="request_amount">(Option) Request a specific amount</string>
+    <string name="history">Transaction History</string>
+    <string name="request_amount">Input Requested Ammount</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
-    <string name="req_amount">Request Amount</string>
+    <string name="req_amount">Requested Ammount</string>
+    <string name="dont_show">Do Not Show Again</string>
+    <string name="next">Next</string>
+    <string name="ca_do_not_lose">Do not share your Secret Seed and password to anyone</string>
+    <string name="ca_sec_seed">Do not loose your Secret Seed and password. You can not retrieve your Secret Seed</string>
+    <string name="no_see_page">Are you sure you want to close current page?</string>
+    <string name="please_check">Please check the following Precautions</string>
+    <string name="min_balance">You need a minimum balance of 0.1 BOS to make your account valid.\n
+Please deposit minimum balance of 0.1 BOS to activate your wallet.</string>
+    <string name="wallet_name">Information in the wallet will be lost when the app is deleted or when you import the wallet</string>
+    <string name="your_pw">Password is required for all wallet activities.\nDO NOT loose or share your password to anyone.</string>
+    <string name="secret_seed">Secret Seed is required to import your wallet.\nDO NOT loose or share your
+Secret Seed to anyone.</string>
+    <string name="enter_wname">Input Wallet Name</string>
+    <string name="enter_pw">Input Wallet Password</string>
+    <string name="confirm_pw">Confirm Wallet Password</string>
+    <string name="rember_recover">Remember the Recovery Key you see on the next screen in order to recover your wallet</string>
+    <string name="title_setup">Password setting completed</string>
+    <string name="double_check">Please check whether you have stored the Recovery Key or not.\nYou can check the recovery key in the settings screen</string>
+    <string name="check_reckey">Confirm Recovery Key</string>
+    <string name="enter_skey">Input Secret Seed</string>
+    <string name="enter_rkey">Input Recovery Key</string>
+    <string name="p_enter_your">Input your Secret Seed or Recovery Key</string>
+    <string name="wallet_restore">Your wallet has been recovered</string>
+    <string name="y_pass_is">Password is required for remittance, secret seed inquiry, and wallet importing.\n
+Each wallet need to set a password</string>
+    <string name="t_new_pw">New Password Setting</string>
+    <string name="title_contact">Contacts</string>
+    <string name="no_contact">Need to create Contacts</string>
+    <string name="add_contact">Add contact</string>
+    <string name="add_cname">Name</string>
+    <string name="pub_address">Public Address</string>
+    <string name="inform_you">The information you have registered can not be recovered if the app is deleted.\nYou can register up to 100 contacts.</string>
+    <string name="enter_name">Input Name</string>
+    <string name="enter_pub_address">Input Public Address</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_delete">Delete</string>
+    <string name="edit_no">Can not edit Public Address</string>
+    <string name="delete_title">Are you sure you want to delete it?</string>
+    <string name="delete">delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="fee">Transaction Fee 0.001 BOS</string>
+    <string name="send_detail">Remittance details</string>
+    <string name="dlog_public">Public</string>
+    <string name="dlog_address">Address</string>
+    <string name="send_total">Total Amount</string>
+    <string name="dlog_pw">Input Your Password</string>
+    <string name="dlog_send_ok">Transaction Completed </string>
+    <string name="change_wallet_name">Change Name of the Wallet</string>
+    <string name="change_wallet_pw">Change Password</string>
+    <string name="check_seed">Confirm Secret Seed</string>
+    <string name="check_rckey">Confirm Recovery Key</string>
+    <string name="delete_wallet">Delete Wallet</string>
+    <string name="info_endit">The information you have registered can not be recovered if the app is deleted.\nYou can register up to 100 contacts.</string>
+    <string name="cur_wname">Current Wallet Name</string>
+    <string name="new_wname">New Wallet Name</string>
+    <string name="cur_pw">Current Password</string>
+    <string name="noti_pw">Changing the password will remove the existing Recovery Key.\n
+You can find new Recovery Key in settings.</string>
+    <string name="new_pw">Input New Password</string>
+    <string name="conf_pw">Confirm New password</string>
+    <string name="screen_cap">For security reasons, screenshot is inhibited.\n
+To recover your wallet, you need Secret Seed or Recovery Key.</string>
+    <string name="be_care">Do not loose your Secret Seed or Recovery Key.\nYou can not retrieve your wallet without them.</string>
+    <string name="ck_seed">Confirm Secret Seed</string>
+    <string name="ck_rckey">Confirm Recovery Key</string>
+    <string name="sec_key_noti">Secret Seed starts with letter \'S\' and 56 characters in total.\nPlease store your
+Secret Seed securely</string>
+    <string name="rc_key_noti">Recovery Key starts with letter \' B\'. Please store your Recovery Key securely.</string>
+    <string name="delete_w">Are you sure you want to delete it?</string>
+    <string name="if_you_delete">If you delete your wallet without saving them, you can not recover your wallet</string>
+    <string name="sent">Send</string>
+    <string name="received">Receive</string>
+    <string name="create_ac">Create Account</string>
+    <string name="detail">Transaction Details</string>
+    <string name="d_date">Transaction Time</string>
+    <string name="d_type">Transaction Type</string>
+    <string name="d_from">From</string>
+    <string name="d_to">To</string>
+    <string name="d_amount">Amount</string>
+    <string name="min_bal">You need a minimum balance of 0.1 BOS to make your acoount valid.\nPlease deposit minimum balance of 0.1 BOS to activate your wallet.</string>
+    <string name="receive_bos">Receive 0.1 BOS</string>
+    <string name="restore">Your wallet has been restored.</string>
+    <string name="error_no_account">This wallet is not valid. Please activate your wallet (minimum balance of 0.1 BOS)</string>
+    <string name="error_no_funds">The wallet is out of balance</string>
+    <string name="error_no_send">Minimum balance of the wallet after any remittance is at least 0.1 BOS</string>
+    <string name="error_fail_send">Remittance Failed</string>
+    <string name="error_fail_send_msg">Your remmitance has failed.\nPlease try again </string>
+    <string name="let_start">Precautions before</string>
+    <string name="using_yw">activating the Wallet</string>
+    <string name="users_using">All the Wallet users shall agreed upon</string>
+    <string name="agree_all_precautions">the precautions of the Wallet activation</string>
+    <string name="please_quit">Please close the App Wallet when not in use</string>
+    <string name="someone_can">Your Secret Seed and Recovery Key may be stolen</string>
+    <string name="noti_key">Secret Seed or Recovery Key is required to restore your Wallet</string>
+    <string name="s_precautions">Precautions</string>
+
+
+
+    <string name="error_no_name">Input Wallet Name</string>
+    <string name="error_no_pw">Input Your Password</string>
+    <string name="error_match_pw">Password incorrect</string>
+    <string name="error_create_wallet">An Error Occurred. Please try Again</string>
+    <string name="error_no_key">Recovery Key is needed to recover your wallet</string>
+    <string name="error_amount">You can enter decimal places up to the seventh digit</string>
+    <string name="error_all_check">Please check all precautions</string>
+    <string name="error_already">This name is already in used</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="error_wname_length">Please enter at least one character and no more than ten character for the name of the wallet</string>
+    <string name="error_book_length">Please enter at least one character and no more than ten character for the name of the contact</string>
+    <string name="error_pw">Password must be at least 8 characters long, mixing English, lowercase, uppercase,
+numbers, and special characters.</string>
+    <string name="error_seed_invalid">Secret Seed is invalid</string>
+    <string name="error_bos_invalid">Recovery Key is invalid</string>
+    <string name="error_bos_pw">Password is invalid.\nPlease check again</string>
+    <string name="error_invalid_pubkey">Incorrect Public Address</string>
+    <string name="error_invalid_password">Password is invalid. Please check again</string>
+    <string name="error_no_count_address">Need to create Contacts</string>
+
 
 
 
     <string name="bos_p_f">BOS Platform Foundation</string>
     <string name="wellcome_t">Welcome to</string>
     <string name="bos_tk_w">BOScoin Tokennet Wallet</string>
-    <string name="let_start">Let\'s start with the notes before</string>
-    <string name="using_yw">using your wallet.</string>
-    <string name="users_using">Users using this wallet are deemed to have</string>
-    <string name="agree_all_precautions">agreed to all precautions.</string>
-    <string name="dont_show">Don\'t show again</string>
-    <string name="next">Next</string>
-    <string name="ca_do_not_lose">Do not lose or share your secret seed,\nrecovery key, or password.</string>
-    <string name="ca_sec_seed">Secret seed, recovery key, and password can\nnot be found again. Please manage it\nthoroughly.</string>
-    <string name="please_quit">Please quit the app immediately\nafter use.</string>
-    <string name="someone_can">Someone can always steal your secret seed.</string>
-    <string name="no_see_page">Do you want to see this page again?</string>
-    <string name="please_check">Please check the following notes</string>
-    <string name="min_balance">A minimum balance is required to create a valid\naccount. Please send a minimum balance of\n0.1 BOS after setting the password.</string>
-    <string name="wallet_name">Wallet names and information in your contacts\nwill all disappear when the app is removed or\nyour wallet is imported.</string>
-    <string name="your_pw">Your password is required to send BOS, check\nyour secret seed, and import your wallet.\nRemember, you cannot find your password\nif you lose it.</string>
-    <string name="secret_seed">Secret seed and recovery key are required when\nimporting wallets. Do not lose it or share it with\nothers.</string>
-    <string name="enter_wname">Enter Wallet Name</string>
-    <string name="enter_pw">Enter Password</string>
-    <string name="confirm_pw">Confirm Password</string>
-
-    <string name="your_pw_is">Your password is required to send BOS, check your secret seed,\n
-    and import your wallet. Remember,\nyou cannot find your password if you lose it.</string>
-    <string name="rember_recover">Remember the recovery key show\non the next screen so you can\nrecover your wallet again.</string>
-    <string name="title_setup">Password setup is complete.</string>
-    <string name="double_check">Double-check that you have kept a recovery key that you can\nsee now.
-        The recovery key and secret seed can be found on\nthe Settings screen of the individual wallet.</string>
-    <string name="check_reckey">Check Recovery Key.</string>
-    <string name="enter_skey">Enter Secret Seed</string>
-    <string name="enter_rkey">Enter Recovery Key</string>
-    <string name="p_enter_your">Please enter your secret seed or recovery key.</string>
-    <string name="wallet_restore">Your wallet has been restored.</string>
-    <string name="y_pass_is">Your password is required to send money,\ncheck your secret seed and import your wallet.\nEach wallet must set a password.</string>
-    <string name="t_new_pw">Set a new password</string>
-    <string name="s_precautions">Precautions</string>
-    <string name="pub_address">Public Address</string>
-    <string name="inform_you">The information you register now will disappear once the app is\n
-removed or reinstalled, and you can only register up to 100 contacts.</string>
-    <string name="enter_name">Enter a name</string>
-    <string name="enter_pub_address">Enter a public address</string>
-    <string name="edit_no">Can’t edit</string>
-    <string name="send_total">Total Amount</string>
-    <string name="new_pw2">New Password</string>
-    <string name="sec_key_noti">The secret seed starts with \'S\' and is a total of 56 characters.\n
-Keep your Secret Seed in a safe place.</string>
-    <string name="rc_key_noti">The secret seed starts with \'B\' and is a total of 56 characters.\n
-Keep your Secret Seed in a safe place.</string>
-    <string name="delete_w">Are you sure you want to deletethis wallet?</string>
-    <string name="if_you_delete">If you delete your wallet without\nbacking it up, you will not be able to\nrestore your wallet!</string>
-    <string name="d_date">Date</string>
-    <string name="d_type">Type</string>
-    <string name="d_from">From</string>
-    <string name="d_to">To</string>
-    <string name="d_amount">Amount</string>
-    <string name="min_bal">You must have a minimum balance (0.1BOS)\nto make the created account a valid account.\n
-        Get a minimum balance of 0.1BOS\nat the public address above.</string>
-    <string name="receive_bos">Receive 0.1 BOS</string>
-    <string name="restore">Your wallet has been restored.</string>
 
 
 
 
 
-    <string name="error_no_name">Please Input Wallnet Name</string>
-    <string name="error_no_pw">Please Input Wallnet PassWord</string>
-    <string name="error_match_pw">Different PassWord</string>
-    <string name="error_create_wallet">Please ReTry</string>
-    <string name="error_no_key">We needs recover key.</string>
-    <string name="error_decode_seed_key">Invalid Seed key.</string>
-    <string name="error_decode_bos_key">Invalid Bos key.</string>
-    <string name="error_two_key">Please Only One Key</string>
-    <string name="title_activity_wallet_order">WalletOrderActivity</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="error_amount">The decimal point can only be entered to the 7th digit</string>
-    <string name="error_all_check">Please check all notice.</string>
-    <string name="error_already">The name is already taken</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="title_contact">Contacts</string>
-    <string name="no_contact">You have no contacts in your address book.</string>
-    <string name="add_contact">Add contacts</string>
-    <string name="add_cname">Name</string>
-    <string name="menu_edit">Edit</string>
-    <string name="menu_send">Send</string>
-    <string name="menu_delete">Delete</string>
-    <string name="delete_title">Are you sure you want to delete it?</string>
-    <string name="delete">Delete</string>
-    <string name="cancel">Cancel</string>
-    <string name="fee">Fee 0.001 BOS</string>
-    <string name="send_detail">Remittance details</string>
-    <string name="dlog_public">Public</string>
-    <string name="dlog_address">Address</string>
-    <string name="dlog_pw">Enter a password</string>
-    <string name="dlog_send_ok">Transfer completed </string>
-    <string name="change_wallet_name">Change Wallet Name</string>
-    <string name="change_wallet_pw">Change Password</string>
-    <string name="check_seed">Check secret seed</string>
-    <string name="delete_wallet">Delete Wallet</string>
-    <string name="info_endit">The information you edit now will be lost when you remove the app
-or import your wallet.</string>
-    <string name="check_rckey">Check Recovery Key</string>
-    <string name="cur_wname">Current Wallet Name</string>
-    <string name="new_wname">New Wallet Name</string>
-    <string name="cur_pw">Current Password</string>
-    <string name="noti_pw">If you change the password, the existing recovery key will be lost.
-The new recovery key can be checked in the settings.</string>
-    <string name="new_pw">Enter New Password</string>
-    <string name="conf_pw">Confirm New Password</string>
-    <string name="screen_cap">Screen capture is prohibited for security
-reasons. To restore your wallet, you need to
-know your secret seed or recovery key.</string>
-    <string name="be_care">Be careful not to lose them or be exposed to others.</string>
-    <string name="ck_seed">Check Secret Seed</string>
-    <string name="ck_rckey">Check Recovery Key</string>
-    <string name="sent">Sent</string>
-    <string name="received">Received</string>
-    <string name="create_ac">Create Account</string>
-    <string name="detail">Detail</string>
-    <string name="noti_key">To restore your wallet, you need to know your secret seed or recovery key.</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -197,23 +245,15 @@ know your secret seed or recovery key.</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">Invalid password</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-    <string name="error_wname_length">Wallet name can be up to 10.</string>
-    <string name="error_book_length">Address Book can be up to 10.</string>
-    <string name="error_pw">The password must be at least 8\ncharacters long and must include\nnumbers, uppercase English,\nlowercase letters, and special\ncharacters.</string>
-    <string name="error_seed_invalid">security key is invalid.</string>
-    <string name="error_bos_invalid">recovery key is invalid.</string>
-    <string name="error_bos_pw">Wrong password for recovery key</string>
-    <string name="error_invalid_pubkey">Invalid Public Address.</string>
-    <string name="error_no_count_address">No registered contacts.</string>
-    <string name="error_no_account">This wallet is not a valid account.\nOnly valid accounts can be sent.</string>
-    <string name="error_no_funds">Your wallet has run out of funds.</string>
-    <string name="error_no_send">Minimum balance after sending must be 0.1 BOS or higher.</string>
-    <string name="error_fail_send">Fail to Send.</string>
-    <string name="error_fail_send_msg">Send was Fail\nPlease try again later.</string>
+
+
+
+
+
+
+
 
 
 

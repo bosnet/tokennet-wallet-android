@@ -31,7 +31,7 @@
         <activity android:name=".WalletActivity" />
         <activity
             android:name=".WalletOrderActivity"
-            android:label="@string/title_activity_wallet_order"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ReceiveActivity"

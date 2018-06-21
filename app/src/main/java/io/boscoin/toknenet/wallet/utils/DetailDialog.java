@@ -35,8 +35,9 @@ public class DetailDialog extends Dialog{
             this.mType = context.getResources().getString(R.string.create_ac);
             this.mFrom = item.getSource_account();
             this.mTo = item.getAccount();
-            this.mAmount = item.getStarting_balance();
 
+            String tmp = Utils.fitDigit(item.getStarting_balance());
+            this.mAmount =  tmp+" BOS";
         }
 
 
@@ -48,7 +49,9 @@ public class DetailDialog extends Dialog{
             }
             this.mFrom = item.getFrom();
             this.mTo = item.getTo();
-            this.mAmount = item.getAmount();
+
+            String tmp = Utils.fitDigit(item.getAmount());
+            this.mAmount =  tmp+" BOS";
         }
 
     }
@@ -89,7 +92,8 @@ public class DetailDialog extends Dialog{
         mTvTo.setText(mTo);
 
         mTvAmount = findViewById(R.id.ammount);
-        mTvAmount.setText(mAmount);
+
+        mTvAmount.setText(Utils.dispayBalance(mAmount));
 
 
     }

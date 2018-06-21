@@ -87,7 +87,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
         BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
         try {
-            Bitmap bitmap = barcodeEncoder.encodeBitmap(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_KET)),
+            Bitmap bitmap = barcodeEncoder.encodeBitmap(mPubKey,
                     BarcodeFormat.QR_CODE, Utils.convertDpToPixel(150,mContext), Utils.convertDpToPixel(150,mContext));
             ImageView imageViewQrCode = (ImageView) findViewById(R.id.img_qr);
             imageViewQrCode.setImageBitmap(bitmap);
@@ -186,7 +186,8 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
     public void share(View view) {
         Intent it = new Intent(android.content.Intent.ACTION_SEND);
         it.setType("text/plain");
-        String message = mPubKey+ "\n"+mEAmount.getText().toString();
+        String amount = getResources().getString(R.string.ammount);
+        String message = mPubKey+ "\n"+amount+" : "+mEAmount.getText().toString()+" BOS";
         it.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(it);
 
@@ -203,9 +204,10 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    public void addressCopy(View view) {
+    public void copy(View view) {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("address", mPubKey);
+        String amount = getResources().getString(R.string.ammount);
+        ClipData clipData = ClipData.newPlainText("address", mPubKey+"\n"+amount+" : "+mEAmount.getText().toString()+" BOS");
         clipboard.setPrimaryClip(clipData);
         Toast.makeText(mContext, mContext.getString(R.string.toast_text_clipboard_address), Toast.LENGTH_SHORT).show();
     }
@@ -239,4 +241,6 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
+
 }

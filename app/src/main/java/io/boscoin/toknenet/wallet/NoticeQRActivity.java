@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -39,10 +41,10 @@ public class NoticeQRActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notice);
+
         mContext = this;
 
-        initUI();
+
 
         Intent it = getIntent();
         mIdSeed = it.getLongExtra(Constants.Invoke.QR_SEED,0);
@@ -52,14 +54,16 @@ public class NoticeQRActivity extends AppCompatActivity {
             checkSeed = true;
             checkBos = false;
             getWalletInfo(mIdSeed);
+
         }else{
             checkBos = true;
             checkSeed = false;
             getWalletInfo(mIdBos);
         }
 
+        setContentView(R.layout.activity_notice);
 
-
+        initUI();
     }
 
     private void getWalletInfo(long id){
@@ -137,10 +141,18 @@ public class NoticeQRActivity extends AppCompatActivity {
     }
 
     private void isValidPw(EditText pw, TextView err) {
+        TextView tvErrView = err;
         String seedkey = pw.getText().toString();
+
+        if(TextUtils.isEmpty(seedkey)){
+            tvErrView.setText(R.string.error_no_pw);
+            tvErrView.setVisibility(View.VISIBLE);
+            return;
+        }
+
         String tmp = mBosKey.substring(3);
         String tmp2 = tmp.substring(0,tmp.length()-2);
-        TextView tvErrView = err;
+
         try {
             String dec =  AESCrypt.decrypt(seedkey,tmp2);
             keyPair = KeyPair.fromSecretSeed(dec);
@@ -156,7 +168,7 @@ public class NoticeQRActivity extends AppCompatActivity {
 
             startActivityForResult(it,KEY_REQUEST);
         } catch (GeneralSecurityException e) {
-
+            tvErrView.setText(R.string.error_invalid_password);
             tvErrView.setVisibility(View.VISIBLE);
         }
     }

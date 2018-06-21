@@ -22,6 +22,7 @@
         android:focusableInTouchMode="true">
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_wallet_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -31,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:paddingBottom="10dp"
-                android:hint="@string/enter_wname"
                 android:textColorHint="@color/brownish_grey"
                 android:fontFamily="sans-serif"
                 android:textStyle="normal"
@@ -113,7 +113,7 @@
         android:id="@+id/edit_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_pw"
+
         android:textColorHint="@color/brownish_grey"
         android:singleLine="true"
         android:textSize="14sp"
@@ -163,7 +163,7 @@
         android:id="@+id/confirm_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/confirm_pw"
+
         android:singleLine="true"
         android:background="@null"
         android:textColorHint="@color/brownish_grey"
@@ -230,6 +230,6 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_create"
         android:layout_marginTop="20dp"
-        android:text="@string/your_pw_is"
+        android:text="@string/your_pw"
         />
 </RelativeLayout>

@@ -91,10 +91,14 @@ public class AddContactActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 mName = s.toString();
 
-                if(TextUtils.isEmpty(mName)){
+                if(TextUtils.isEmpty(mName)|| !Utils.isNameValid(mName)){
                     mNameEmpty = true;
+                    mTvNameErr.setText(R.string.error_book_length);
+                    mTvNameErr.setVisibility(View.VISIBLE);
+                    changeButton();
                     return;
                 }else{
+                    mTvNameErr.setVisibility(View.GONE);
                     mNameEmpty = false;
                     mDbOpenHelper = new DbOpenHelper(mContext);
                     mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
@@ -218,7 +222,7 @@ public class AddContactActivity extends AppCompatActivity {
 
         if(result != null) {
             if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+
             } else {
 
                 switch (requestCode){

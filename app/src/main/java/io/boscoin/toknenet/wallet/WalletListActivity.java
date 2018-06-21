@@ -45,6 +45,7 @@ public class WalletListActivity extends AppCompatActivity {
     private ProgressDialog mProgDialog;
     private DbOpenHelper mDbOpenWalletHelper;
     private int mCount = 0;
+    private long mWalletIdx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +171,7 @@ public class WalletListActivity extends AppCompatActivity {
                 }catch (Exception e){
 
                     e.printStackTrace();
+                    mProgDialog.dismiss();
                 }finally {
                     mDbOpenWalletHelper.close();
                     mDbOpenWalletHelper = null;
@@ -192,6 +194,7 @@ public class WalletListActivity extends AppCompatActivity {
                                 mCount = 0;
                             }
                         });
+
 
                     }
 
@@ -236,6 +239,7 @@ public class WalletListActivity extends AppCompatActivity {
             @Override
             public void onSendClicked(int postion) {
                 Intent it = new Intent(WalletListActivity.this, SendActivity.class);
+                setSendWalletId(walletList.get(postion).getWalletId());
                 it.putExtra(Constants.Invoke.SEND, walletList.get(postion).getWalletId());
                 startActivityForResult(it, SEND_REQUEST);
 
@@ -260,6 +264,10 @@ public class WalletListActivity extends AppCompatActivity {
         rv.setAdapter(mAdapter);
     }
 
+    private void setSendWalletId(long id) {
+        mWalletIdx = id;
+    }
+
 
 
     @Override
@@ -272,8 +280,11 @@ public class WalletListActivity extends AppCompatActivity {
             mAdapter.setWalletList(walletList);
 
         } else if(requestCode == SEND_REQUEST && resultCode == Constants.RssultCode.SEND){
-            showDialogWalt();
-            getBalances();
+
+            Intent it = new Intent( WalletListActivity.this, WalletActivity.class);
+            it.putExtra(Constants.Invoke.HISTORY, mWalletIdx);
+
+            startActivityForResult(it, WALLET_DETAIL_VIEW);
         }
     }
 

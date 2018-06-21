@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class ConfirmQRActivity extends AppCompatActivity {
         if(mKey.startsWith("S")){
             mTitle.setText(R.string.check_seed);
             mNoti.setText(R.string.sec_key_noti);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }else{
             mTitle.setText(R.string.check_reckey);
             mNoti.setText(R.string.rc_key_noti);

@@ -48,17 +48,7 @@
 
     </LinearLayout>
 
-  <!--  <ImageButton
-        android:id="@+id/btn_del"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/ic_icon_delete_text"
-        android:visibility="gone"
-        android:layout_above="@+id/line1"
-        android:layout_marginBottom="8dp"
-        android:onClick="deleteAddName"/> -->
+
 
 
     <View
@@ -144,7 +134,6 @@
         android:visibility="gone"
         />
 
-    <!-- android:onClick="createAddress" -->
     <Button
         android:id="@+id/btn_add_ok"
         android:layout_width="match_parent"

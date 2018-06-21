@@ -101,15 +101,13 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(ContactActivity.this, AddContactActivity.class);
-                startActivity(it);
+                startActivityForResult(it, ADD_REQUEST_CODE);
             }
         });
 
-        mDbOpenHelper = new DbOpenHelper(this);
-        mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
-        int count = mDbOpenHelper.getAddressCount();
 
-        if(count == 0){
+
+        if(getAddressBookCount() == 0){
             mEmpty.setVisibility(View.VISIBLE);
             mRV.setVisibility(View.GONE);
             mIsEmpty = true;
@@ -179,6 +177,14 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
+    private int getAddressBookCount(){
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
+        int count = mDbOpenHelper.getAddressCount();
+        mDbOpenHelper.close();
+        return count;
+    }
+
     private void confirmDelete(int pos) {
         final int where = pos;
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
@@ -195,9 +201,15 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 mDbOpenHelper.close();
                 dialog.dismiss();
 
-                bookList.clear();
-                getAddressList();
-                mAdapter.setAddBooktList(bookList);
+                if(getAddressBookCount() > 0){
+                    bookList.clear();
+                    getAddressList();
+                    mAdapter.setAddBooktList(bookList);
+                }else{
+                    mEmpty.setVisibility(View.VISIBLE);
+                    mRV.setVisibility(View.GONE);
+                }
+
             }
         });
 
@@ -253,7 +265,14 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(requestCode == ADD_REQUEST_CODE || requestCode == EDIT_REQUEST_CODE){
-            if(mIsEmpty){
+
+
+            if(getAddressBookCount() == 0){
+
+                mEmpty.setVisibility(View.VISIBLE);
+                mRV.setVisibility(View.GONE);
+            } else{
+
                 mEmpty.setVisibility(View.GONE);
                 mRV.setVisibility(View.VISIBLE);
                 mRV.setLayoutManager(new LinearLayoutManager(mContext));
@@ -271,9 +290,9 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                     public void onEditClicked(int postion) {
 
                         AddressBook book = bookList.get(postion);
-                       Intent it = new Intent(ContactActivity.this, EditContactActivity.class);
-                       it.putExtra(Constants.Invoke.ADDRESS_BOOK, book);
-                       startActivityForResult(it, EDIT_REQUEST_CODE);
+                        Intent it = new Intent(ContactActivity.this, EditContactActivity.class);
+                        it.putExtra(Constants.Invoke.ADDRESS_BOOK, book);
+                        startActivityForResult(it, EDIT_REQUEST_CODE);
                     }
 
                     @Override
@@ -290,11 +309,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 },mIsFromSend);
                 mRV.setAdapter(mAdapter);
                 mRV.setHasFixedSize(true);
-            }else{
-                bookList.clear();
-                getAddressList();
-                mAdapter.setAddBooktList(bookList);
             }
+
 
 
         }

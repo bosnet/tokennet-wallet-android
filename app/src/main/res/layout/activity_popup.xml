@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/txt_dec"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:fontFamily="sans-serif"
@@ -50,8 +50,8 @@
         android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@+id/txt_rctitle"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginLeft="35dp"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
         android:text="@string/y_pass_is"
         />
     

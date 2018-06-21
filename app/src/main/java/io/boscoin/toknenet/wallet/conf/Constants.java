@@ -17,6 +17,7 @@ public class Constants {
 		public static final String QR_SEED = "qr-seed";
 		public static final String QR_BOS = "qr-bos";
 		public static final String SEITING = "setting";
+		public static final String BROAD_FINISH = "io.boscoin.tokennet.wallet.finish";
 	}
 
     public static final class DB {

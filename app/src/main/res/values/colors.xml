@@ -18,7 +18,7 @@
 
 
     <color name="line_nav_back">#fafafa</color>
-
+    <color name="transparent">#00000000</color>
 
     <!-- black style -->
     <color name="black">#000000</color>

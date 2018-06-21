@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class PreCautionThreeActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class PreCautionThreeActivity extends AppCompatActivity {
     private Context mContext;
     private boolean isSetting;
     private TextView mTvView;
+    private DbOpenHelper mDbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,18 @@ public class PreCautionThreeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!isSetting){
-                    Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
-                    startActivity(it);
+                    if(getWalleetCount() > 0){
+                        Intent finishBroadcastIt =  new Intent(Constants.Invoke.BROAD_FINISH);
+                        sendBroadcast(finishBroadcastIt);
+
+                        Intent it = new Intent(PreCautionThreeActivity.this,WalletListActivity.class);
+                        startActivity(it);
+                        finish();
+                    }else{
+                        Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
+                        startActivity(it);
+                    }
+
                 }else{
                     setResult(Constants.RssultCode.FINISH);
                     finish();
@@ -92,8 +104,16 @@ public class PreCautionThreeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!isSetting){
                     WalletPreference.setSkipCaution(mContext,false);
-                    Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
-                    startActivity(it);
+                    Intent finishBroadcastIt =  new Intent(Constants.Invoke.BROAD_FINISH);
+                    sendBroadcast(finishBroadcastIt);
+                    if(getWalleetCount() > 0){
+                        Intent it = new Intent(PreCautionThreeActivity.this,WalletListActivity.class);
+                        startActivity(it);
+                    }else{
+                        Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
+                        startActivity(it);
+                    }
+
                     finish();
                 }else{
                     setResult(Constants.RssultCode.FINISH);
@@ -102,5 +122,13 @@ public class PreCautionThreeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private int getWalleetCount() {
+        mDbOpenHelper = new DbOpenHelper(mContext);
+        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+        int count = mDbOpenHelper.getWalletCount();
+        Log.e(TAG, "count = "+count);
+        return count;
     }
 }

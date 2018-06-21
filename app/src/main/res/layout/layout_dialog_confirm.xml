@@ -126,9 +126,10 @@
         android:fontFamily="sans-serif"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/ammount"
+        app:layout_constraintStart_toEndOf="@+id/fee_title"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="212dp"
+        android:layout_marginLeft="10dp"
         android:text="@string/fee"
         />
 
