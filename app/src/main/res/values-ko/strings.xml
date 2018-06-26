@@ -150,6 +150,8 @@
     <string name="noti_key">지갑을 복구하려면 보안키 또는 복구 키를\n알고 있어야 합니다</string>
     <string name="contacts">주소록</string>
     <string name="s_precautions">주의사항</string>
+    <string name="d_walit">잠시만 기다려 주세요</string>
+
 
     <string name="error_no_name">지갑 이름을 입력하세요</string>
     <string name="error_no_pw">비밀번호를 입력하세요</string>

@@ -223,7 +223,7 @@ public class WalletListActivity extends AppCompatActivity {
     private void showDialogWalt(){
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setMessage(getResources().getString(R.string.d_walit));
         mProgDialog.setCancelable(false);
         mProgDialog.show();
     }

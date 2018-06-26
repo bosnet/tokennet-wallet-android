@@ -156,7 +156,7 @@ Secret Seed securely</string>
     <string name="someone_can">Your Secret Seed and Recovery Key may be stolen</string>
     <string name="noti_key">Secret Seed or Recovery Key is required to restore your Wallet</string>
     <string name="s_precautions">Precautions</string>
-
+    <string name="d_walit">Please Wait</string>
 
 
     <string name="error_no_name">Input Wallet Name</string>

@@ -132,7 +132,7 @@ public class AllHistoryFragment extends Fragment {
 
 
         if (lastVisibleItemPos +firstVisbleItemPos >= itemTotalCount) {
-            Toast.makeText(getContext(), "Last Position", Toast.LENGTH_SHORT).show();
+
 
              int size = mPayHistoryList.size();
              String cur = mPayHistoryList.get(size-1).getPaging_token();

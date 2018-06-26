@@ -117,7 +117,7 @@ public class SendHistoryFragment extends Fragment {
         }
 
         if (lastVisibleItemPos +firstVisbleItemPos >= itemTotalCount) {
-            Toast.makeText(getContext(), "Last Position", Toast.LENGTH_SHORT).show();
+
 
             getPrevHistory(mLastOff);
         }

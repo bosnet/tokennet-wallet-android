@@ -272,6 +272,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 mEmpty.setVisibility(View.VISIBLE);
                 mRV.setVisibility(View.GONE);
             } else{
+                Log.e(TAG,"주소록 갱신");
 
                 mEmpty.setVisibility(View.GONE);
                 mRV.setVisibility(View.VISIBLE);

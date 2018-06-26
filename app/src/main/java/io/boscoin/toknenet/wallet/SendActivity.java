@@ -47,6 +47,7 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Account;
+import io.boscoin.toknenet.wallet.model.Payments;
 import io.boscoin.toknenet.wallet.utils.SendDialogComplete;
 import io.boscoin.toknenet.wallet.utils.SendDialogConfirm;
 import io.boscoin.toknenet.wallet.utils.SendDialogFail;
@@ -85,6 +86,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private static final String BALANCE_FAIL = "op_underfunded";
     private static final int ADD = 1;
     private static final int SUB = 2;
+    private Payments mPayments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -297,7 +299,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setMessage(getResources().getString(R.string.d_walit));
         mProgDialog.setCancelable(false);
         mProgDialog.show();
     }
@@ -628,8 +630,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mProgDialog.dismiss();
-                                    sendCompleteDialog();
+
+                                    updateTransTime();
                                 }
                             });
                         }else{
@@ -671,6 +673,61 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         }.start();
+    }
+
+    private void updateTransTime(){
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        params.put(Constants.Params.LIMIT, "1");
+        params.put(Constants.Params.ORDER, Constants.Params.DESC);
+
+        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+        url.append("/");
+        url.append(Constants.Params.ACCOUNTS);
+        url.append("/");
+        url.append(mMyPubKey);
+        url.append("/");
+        url.append(Constants.Params.PAYMENTS);
+
+
+        client.get(String.valueOf(url),params,new TextHttpResponseHandler(){
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String res) {
+                Gson gson = new GsonBuilder().create();
+                mPayments =  gson.fromJson(res, Payments.class);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(mPayments.get_embedded().getRecordList().size() > 0){
+                            String time = Utils.convertUtcToLocal(mPayments.get_embedded().getRecordList().get(0).getCreated_at());
+                            mDbOpenHelper = new DbOpenHelper(mContext);
+                            mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+                            mDbOpenHelper.updateColumnWalletTransTime(mWalletId,time);
+                            mDbOpenHelper.close();
+                        }
+
+                        mProgDialog.dismiss();
+                        sendCompleteDialog();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mProgDialog.dismiss();
+                        sendFailDialog();
+                    }
+                });
+            }
+
+
+        });
     }
 
     View.OnClickListener Okfaillistener = new View.OnClickListener() {

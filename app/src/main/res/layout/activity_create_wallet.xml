@@ -40,7 +40,9 @@
                 android:singleLine="true"
                 android:background="@null"
                 android:textCursorDrawable="@drawable/edit_cursor_color"
-                android:inputType="textNoSuggestions|textVisiblePassword"/>
+                android:inputType="text"
+
+               />
 
 
         </android.support.design.widget.TextInputLayout>

@@ -59,7 +59,7 @@ public class AESCrypt {
      *
      * @param password used to generated key
      * @param message the thing you want to encrypt assumed String UTF-8
-     * @return Base64 encoded CipherText
+     * @return Base58 encoded CipherText
      * @throws GeneralSecurityException if problems occur during encryption
      */
     public static String encrypt(final String password, String message)

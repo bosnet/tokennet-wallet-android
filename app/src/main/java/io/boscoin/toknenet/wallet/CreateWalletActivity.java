@@ -12,6 +12,7 @@ import android.os.Message;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -417,7 +418,8 @@ public class CreateWalletActivity extends AppCompatActivity {
 
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgDialog.setMessage("Please Wait");
+
+        mProgDialog.setMessage(getResources().getString(R.string.d_walit));
         mProgDialog.setCancelable(false);
         mProgDialog.show();
     }

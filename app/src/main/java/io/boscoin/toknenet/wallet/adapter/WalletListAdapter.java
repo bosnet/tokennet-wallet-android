@@ -46,7 +46,10 @@ public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.Wa
         holder.walletName.setText(mWalletList.get(position).getWalletName());
         holder.walletTime.setText( mWalletList.get(position).getWalletTime());
         
-        String bal = mWalletList.get(position).getWalletBalance() + " BOS";
+
+        String tmp = Utils.fitDigit(mWalletList.get(position).getWalletBalance());
+        String bal = tmp + " BOS";
+
         holder.walletBalance.setText(Utils.dispayBalance(bal));
     }
 

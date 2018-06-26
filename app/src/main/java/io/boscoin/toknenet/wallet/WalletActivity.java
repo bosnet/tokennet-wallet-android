@@ -88,7 +88,10 @@ public class WalletActivity extends AppCompatActivity implements
             wBalance = findViewById(R.id.tv_balances);
             mBal = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LASTEST));
 
-            wBalance.setText(Utils.dispayBalance(mBal));
+            String tmp = Utils.fitDigit(mBal);
+            String amount = tmp + " BOS";
+
+            wBalance.setText(Utils.dispayBalance(amount));
 
             wPubKey = findViewById(R.id.tv_pub_key);
             mMyPublicKey = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
@@ -194,8 +197,11 @@ public class WalletActivity extends AppCompatActivity implements
 
                 final String val =  mCurBal.replaceAll(" BOS", "");
 
+                String tmp = Utils.fitDigit(val);
+                String amount = tmp+" BOS";
 
-                wBalance.setText(Utils.dispayBalance(mCurBal));
+
+                wBalance.setText(Utils.dispayBalance(amount));
 
                 try{
                     mDbOpenWalletHelper = new DbOpenHelper(mContext);
@@ -441,7 +447,7 @@ public class WalletActivity extends AppCompatActivity implements
         }
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setMessage(getResources().getString(R.string.d_walit));
         mProgDialog.setCancelable(false);
         mProgDialog.show();
         getWalletBalances();
@@ -461,7 +467,7 @@ public class WalletActivity extends AppCompatActivity implements
         }
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setMessage(getResources().getString(R.string.d_walit));
         mProgDialog.setCancelable(false);
         mProgDialog.show();
         getWalletBalances();
@@ -481,7 +487,7 @@ public class WalletActivity extends AppCompatActivity implements
         }
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgDialog.setMessage("Please Wait");
+        mProgDialog.setMessage(getResources().getString(R.string.d_walit));
         mProgDialog.setCancelable(false);
         mProgDialog.show();
         getWalletBalances();

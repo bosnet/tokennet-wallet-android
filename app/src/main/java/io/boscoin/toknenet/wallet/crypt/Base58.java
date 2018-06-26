@@ -73,4 +73,22 @@ public class Base58 {
 
         return bi;
     }
+
+    public static boolean IsBase58Enc(String input) throws IllegalArgumentException
+    {
+        BigInteger bi = BigInteger.valueOf(0);
+
+
+        for (int i = input.length() - 1; i >= 0; i--)
+        {
+            int alphaIndex = ALPHABET.indexOf(input.charAt(i));
+            if (alphaIndex == -1)
+            {
+                throw new IllegalArgumentException("In Base58.decodeToBigInteger(), Illegal character " + input.charAt(i) + " at index " + i + ". Throwing new IlleglArgumentException.");
+            }
+            bi = bi.add(BigInteger.valueOf(alphaIndex).multiply(BASE.pow(input.length() - 1 - i)));
+        }
+
+        return true;
+    }
 }

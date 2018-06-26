@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 
 import io.boscoin.toknenet.wallet.R;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
+import io.boscoin.toknenet.wallet.crypt.Base58;
 
 
 public class Utils {
@@ -243,18 +244,27 @@ public class Utils {
 
     }
 
+    private static final int AES_KEY_LENGTH = 64;
+    private static final String PRE_FIX = "BOS";
+    private static final String SU_FFIX = "A1";
     public static boolean isValidRecoveryKey(String key){
-        if(key.length() < 64){
+
+        if(key.length() < AES_KEY_LENGTH+5 || !key.startsWith(PRE_FIX) || !key.endsWith(SU_FFIX)){
+
             return false;
         }
 
-        String suffix = key.substring(key.length() - 2, key.length()-1);
-        if(key.startsWith("BOS") && suffix.endsWith("A")){
-            return true;
-        }else{
+        String parsing = key.substring(3);
+        try{
+            if(Base58.IsBase58Enc(parsing)){
+                return true;
+            }
+        }catch (IllegalArgumentException e){
+            Log.e(TAG,"거짓");
             return false;
         }
 
+        return false;
     }
 
     public static SpannableStringBuilder dispayBalance(String bal){
@@ -307,6 +317,9 @@ public class Utils {
     {
         int dpos = str.indexOf(".");
 
+        if(dpos == -1){
+            return str;
+        }
 
         String fstr = String.format("%,d",Integer.parseInt(str.substring(0, dpos)));
         String lstr = str.substring(dpos+1, str.length());

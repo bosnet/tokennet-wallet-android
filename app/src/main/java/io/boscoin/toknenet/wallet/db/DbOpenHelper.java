@@ -142,6 +142,12 @@ public class DbOpenHelper {
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 
+	public boolean updateColumnWalletTransTime(long id , String time){
+		ContentValues values = new ContentValues();
+		values.put(DataBases.CreateWalletDB.COL_TIME, time);
+		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
+	}
+
 	// Delete ID
 	public boolean deleteColumnAddress(long id){
 		return mDB.delete(DataBases.CreateAddressDB._TABLENAME, "_id="+id, null) > 0;
