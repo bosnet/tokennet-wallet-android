@@ -218,10 +218,12 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 mAmount = s.toString();
                 if(!TextUtils.isEmpty(mAmount)){
                     mValidAmmount = true;
-                    changeButton();
+
                 }else{
                     mValidAmmount = false;
+
                 }
+                changeButton();
             }
         });
 
@@ -859,7 +861,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.menu_contact:
                 it = new Intent(SendActivity.this, ContactActivity.class);
-                it.putExtra(Constants.Invoke.SEND, mWalletId);
+
+                it.putExtra(Constants.Invoke.ADDRESS_BOOK, mWalletId);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
                 break;

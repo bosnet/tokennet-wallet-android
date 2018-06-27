@@ -277,6 +277,14 @@ public class WalletListActivity extends AppCompatActivity {
 
             walletList.clear();
             getWalletList();
+            if(walletList.size() == 0){
+                Intent it = new Intent(WalletListActivity.this, MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(it);
+                finish();
+
+            }
+
             mAdapter.setWalletList(walletList);
 
         } else if(requestCode == SEND_REQUEST && resultCode == Constants.RssultCode.SEND){

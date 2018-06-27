@@ -130,7 +130,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="212dp"
         android:layout_marginLeft="10dp"
-        android:text="@string/fee"
+        android:text="@string/d_confirm_fee"
         />
 
     <TextView

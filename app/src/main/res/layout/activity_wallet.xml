@@ -15,11 +15,12 @@
 
         <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/ic_icon_arrow"/>
+            android:src="@drawable/ic_icon_arrow"
+            android:background="@drawable/bg_box"/>
 
         <TextView
             android:id="@+id/tv_wname"
@@ -35,11 +36,12 @@
 
         <ImageButton
             android:id="@+id/btn_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="21dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/ic_icon_edit"
+            android:src="@drawable/ic_icon_edit"
+            android:background="@drawable/bg_box"
             android:onClick="editWallet"/>
 
 

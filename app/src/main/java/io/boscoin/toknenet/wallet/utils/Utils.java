@@ -260,7 +260,7 @@ public class Utils {
                 return true;
             }
         }catch (IllegalArgumentException e){
-            Log.e(TAG,"거짓");
+
             return false;
         }
 

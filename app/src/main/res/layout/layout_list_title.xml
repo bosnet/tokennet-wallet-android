@@ -18,8 +18,8 @@
 
     <ImageButton
         android:id="@+id/btn_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
@@ -27,8 +27,8 @@
 
     <ImageButton
         android:id="@+id/btn_import"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_toLeftOf="@+id/btn_setting"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
@@ -36,8 +36,8 @@
 
     <ImageButton
         android:id="@+id/btn_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/btn_import"
         android:layout_marginRight="20dp"

@@ -173,6 +173,25 @@ public class CreateWalletActivity extends AppCompatActivity {
         mEInputPW = (EditText)findViewById(R.id.edit_pw);
         mEConfirmPW = (EditText)findViewById(R.id.confirm_pw);
 
+        mEInputPW.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String sPw = s.toString();
+                if(sPw.length() > 0){
+                    mTvPwNone.setVisibility(View.GONE);
+                }
+            }
+        });
 
         mContext = this;
 
@@ -225,6 +244,15 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.GONE);
         mTvPwNone.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.GONE);
+    }
+
+    private void setErrRecoverPwVisible(){
+        mTvNameNone.setVisibility(View.GONE);
+        mTvNameAlready.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.GONE);
+        mTvPwNone.setText(R.string.error_bos_pw);
+        mTvPwNone.setVisibility(View.VISIBLE);
         mTvPwMatch.setVisibility(View.GONE);
     }
 
@@ -301,7 +329,8 @@ public class CreateWalletActivity extends AppCompatActivity {
                 String dec =  AESCrypt.decrypt(wPw1,tmp2);
                 createWallet(wName,KeyPair.fromSecretSeed(dec).getAccountId(),mKey);
             } catch (GeneralSecurityException e) {
-                Toast.makeText(getApplicationContext(), R.string.error_bos_pw, Toast.LENGTH_LONG).show();
+
+                setErrRecoverPwVisible();
                 e.printStackTrace();
 
             }

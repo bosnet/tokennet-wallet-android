@@ -27,7 +27,6 @@
         <activity
             android:name=".WalletListActivity"
             android:theme="@style/NoTitle" />
-        <activity android:name=".Send_oldActivity" />
         <activity android:name=".WalletActivity" />
         <activity
             android:name=".WalletOrderActivity"

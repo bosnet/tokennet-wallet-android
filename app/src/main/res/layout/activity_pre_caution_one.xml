@@ -9,11 +9,12 @@
 
     <ImageButton
         android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_icon_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_box"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_icon_close"
         android:layout_marginTop="28dp"
         android:layout_marginRight="28dp"/>
 
@@ -146,7 +147,7 @@
     <include
         android:id="@+id/ca_bottom"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         layout="@layout/layout_bottom_caution"
         />

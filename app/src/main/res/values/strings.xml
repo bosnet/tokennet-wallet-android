@@ -102,6 +102,7 @@ Each wallet need to set a password</string>
     <string name="delete">delete</string>
     <string name="cancel">Cancel</string>
     <string name="fee">Transaction Fee 0.001 BOS</string>
+    <string name="d_confirm_fee">0.001 BOS</string>
     <string name="send_detail">Remittance details</string>
     <string name="dlog_public">Public</string>
     <string name="dlog_address">Address</string>

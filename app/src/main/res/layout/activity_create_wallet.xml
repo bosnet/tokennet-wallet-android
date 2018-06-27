@@ -40,7 +40,7 @@
                 android:singleLine="true"
                 android:background="@null"
                 android:textCursorDrawable="@drawable/edit_cursor_color"
-                android:inputType="text"
+
 
                />
 

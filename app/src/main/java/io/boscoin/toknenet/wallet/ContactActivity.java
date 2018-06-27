@@ -188,7 +188,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private void confirmDelete(int pos) {
         final int where = pos;
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
-       // alert.setTitle(R.string.delete_title);
+
         alert.setMessage(R.string.delete_title);
 
 
@@ -300,6 +300,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                     public void onSendClicked(int postion) {
                         Intent it = new Intent(ContactActivity.this, SendActivity.class);
                         it.putExtra(Constants.Invoke.SEND, mWalletIdx);
+                        it.putExtra(Constants.Invoke.PUBKEY, bookList.get(postion).getAddress());
                         startActivity(it);
                     }
 
