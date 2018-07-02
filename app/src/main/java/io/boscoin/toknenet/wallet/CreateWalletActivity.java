@@ -532,6 +532,8 @@ public class CreateWalletActivity extends AppCompatActivity {
                 int count = mDbOpenHelper.getWalletCount();
                 String time = Utils.getCreateTime(System.currentTimeMillis());
 
+                mDbOpenHelper = new DbOpenHelper(mContext);
+                mDbOpenHelper.open(Constants.DB.MY_WALLETS);
                 walletId = mDbOpenHelper.insertColumnWallet(insertName,pubkey,encKey, ++count, "0", time);
 
                 handler.sendEmptyMessage(MSG_INSERT_COMPLETE);
