@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ReceiveHisViewAdapter extends RecyclerView.Adapter<ReceiveHisViewAdapter.ViewHolder> {
 
-    private static final String TAG = "SendHisViewAdapter";
+    private static final String TAG = "ReceiveHisViewAdapter";
     private ArrayList<Payments.PayRecords> mValues;
     private final OnListReceiveFragInteractionListener mListener;
     private String mPubKey;
@@ -97,6 +97,11 @@ public class ReceiveHisViewAdapter extends RecyclerView.Adapter<ReceiveHisViewAd
     public int getItemCount() {
 
         return mValues.size();
+    }
+
+    public void addReceiveHisList(ArrayList<Payments.PayRecords> list) {
+        this.mValues = list;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

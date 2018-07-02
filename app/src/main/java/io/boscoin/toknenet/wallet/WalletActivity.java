@@ -36,7 +36,7 @@ public class WalletActivity extends AppCompatActivity implements
         AllHistoryFragment.OnListAllFragInteractionListener, SendHistoryFragment.OnListSendFragInteractionListener
         , ReceiveHistoryFragment.OnListReceiveFragInteractionListener, View.OnClickListener {
 
-    private static final String TAG = "WalletActivity";
+
     private DbOpenHelper mDbOpenHelper;
     private DbOpenHelper mDbOpenWalletHelper;
     private TextView wName , wBalance, wPubKey;
@@ -56,6 +56,8 @@ public class WalletActivity extends AppCompatActivity implements
     private ProgressDialog mProgDialog;
     private Cursor mCursor;
     private boolean mIsGetBalanceProcess;
+    private static final int PORT_HTTP = 80;
+    private static final int PORT_HTTPS = 443;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,7 @@ public class WalletActivity extends AppCompatActivity implements
             wName.setText(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_NAME)));
 
             wBalance = findViewById(R.id.tv_balances);
+
             mBal = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_LASTEST));
 
             String tmp = Utils.fitDigit(mBal);
@@ -178,7 +181,8 @@ public class WalletActivity extends AppCompatActivity implements
             return;
         }
         mIsGetBalanceProcess = true;
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
         url.append("/");

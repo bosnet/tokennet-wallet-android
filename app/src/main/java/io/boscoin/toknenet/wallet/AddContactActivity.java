@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class AddContactActivity extends AppCompatActivity {
     private String mName, mPubKey;
     private Button mBtnOk;
     private final int ADDRESS_REQUEST_CODE = 0x0000ff00;
+    private ImageButton mDelAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class AddContactActivity extends AppCompatActivity {
             }
         });
 
+        mDelAdress =  findViewById(R.id.btn_del);
 
 
         mEName.addTextChangedListener(new TextWatcher() {
@@ -105,7 +108,7 @@ public class AddContactActivity extends AppCompatActivity {
                     mCursor = null;
                     mCursor = mDbOpenHelper.getColumnAddressName();
 
-                    Log.e(TAG,"count = "+mCursor.getCount());
+
 
                     if(mCursor.getCount() > 0){
                         do{
@@ -149,13 +152,14 @@ public class AddContactActivity extends AppCompatActivity {
                     mAddressEmpty = true;
                     return;
                 }else{
+                    mDelAdress.setVisibility(View.VISIBLE);
                     mAddressEmpty = false;
                     try{
                         Utils.decodeCheck(Utils.VersionByte.ACCOUNT_ID, mPubKey.toCharArray());
                         mIsAddress = true;
                         mTvAddressErr.setVisibility(View.GONE);
 
-                        changeButton();
+
 
                     }catch (Exception e){
                         mTvAddressErr.setText(R.string.error_invalid_pubkey);
@@ -164,6 +168,7 @@ public class AddContactActivity extends AppCompatActivity {
                         return;
                     }
 
+                    changeButton();
                 }
 
             }
@@ -235,5 +240,12 @@ public class AddContactActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void delAddress(View view) {
+        mEPubKey.setText("");
+        mDelAdress.setVisibility(View.GONE);
+        mAddressEmpty = true;
+        changeButton();
     }
 }

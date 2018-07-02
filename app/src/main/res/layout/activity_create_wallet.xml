@@ -215,7 +215,8 @@
         android:layout_marginRight="100dp"
         android:textAllCaps="false"
         android:layout_below="@+id/line3"
-        android:background="@color/pinkish_grey"
+        android:background="@color/cerulean"
+        android:textColor="@color/white"
         style="?android:attr/borderlessButtonStyle"
         android:onClick="createWallet"/>
 

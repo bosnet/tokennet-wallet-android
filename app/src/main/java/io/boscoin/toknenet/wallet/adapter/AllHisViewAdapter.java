@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.AllHistoryFragment.OnListAllFragInteractionListener;
 import io.boscoin.toknenet.wallet.R;
+import io.boscoin.toknenet.wallet.model.Wallet;
 import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.model.Payments;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.ViewHolder> {
@@ -122,6 +124,11 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
 
 
         return mValues.size();
+    }
+
+    public void addAllHisList(ArrayList<Payments.PayRecords> list) {
+        this.mValues = list;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -54,6 +54,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
     private RelativeLayout mNavHis, mNavSend, mNavReceive, mNavContact;
     private ImageView mIcHis, mIcSend, mIcReceive, mIcContact;
     private TextView navTvhis, navTvSend, navTvReceive, navTvContact;
+    private static final String AMOUNT_NONE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +138,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
             public void afterTextChanged(Editable s) {
 
 
-
+               createReceiveQR(s.toString());
             }
         });
 
@@ -149,6 +150,33 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         setNavBottom();
+    }
+
+    private void createReceiveQR(String amount) {
+
+
+        BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+        if(TextUtils.isEmpty(amount)){
+            try {
+                Bitmap bitmap = barcodeEncoder.encodeBitmap(mPubKey,
+                        BarcodeFormat.QR_CODE, Utils.convertDpToPixel(150,mContext), Utils.convertDpToPixel(150,mContext));
+                ImageView imageViewQrCode = (ImageView) findViewById(R.id.img_qr);
+                imageViewQrCode.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+        }else{
+            String message;
+            try {
+                Bitmap bitmap = barcodeEncoder.encodeBitmap(mPubKey,
+                        BarcodeFormat.QR_CODE, Utils.convertDpToPixel(150,mContext), Utils.convertDpToPixel(150,mContext));
+                ImageView imageViewQrCode = (ImageView) findViewById(R.id.img_qr);
+                imageViewQrCode.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private void setNavBottom() {
@@ -184,10 +212,23 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
 
     public void share(View view) {
+
+
+
+        String message;
         Intent it = new Intent(android.content.Intent.ACTION_SEND);
         it.setType("text/plain");
+
         String amount = getResources().getString(R.string.ammount);
-        String message = mPubKey+ "\n"+amount+" : "+mEAmount.getText().toString()+" BOS";
+
+        if(TextUtils.isEmpty(mEAmount.getText().toString())){
+
+             message = mPubKey ;
+        }else{
+             message = mPubKey+ "\n"+amount+" : "+mEAmount.getText().toString()+" BOS";
+        }
+
+
         it.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(it);
 
@@ -206,9 +247,16 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
     public void copy(View view) {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        String amount = getResources().getString(R.string.ammount);
-        ClipData clipData = ClipData.newPlainText("address", mPubKey+"\n"+amount+" : "+mEAmount.getText().toString()+" BOS");
-        clipboard.setPrimaryClip(clipData);
+        if(TextUtils.isEmpty(mEAmount.getText().toString())){
+            String amount = getResources().getString(R.string.ammount);
+            ClipData clipData = ClipData.newPlainText("address", mPubKey);
+            clipboard.setPrimaryClip(clipData);
+        }else{
+            String amount = getResources().getString(R.string.ammount);
+            ClipData clipData = ClipData.newPlainText("address", mPubKey+"\n"+amount+" : "+mEAmount.getText().toString()+" BOS");
+            clipboard.setPrimaryClip(clipData);
+        }
+
         Toast.makeText(mContext, mContext.getString(R.string.toast_text_clipboard_address), Toast.LENGTH_SHORT).show();
     }
 

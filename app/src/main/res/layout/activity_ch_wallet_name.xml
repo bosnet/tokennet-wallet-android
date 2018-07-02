@@ -40,6 +40,7 @@
                 android:background="@null"
                 android:focusable="false"
                 android:clickable="false"
+                android:inputType="text"
                 android:textCursorDrawable="@drawable/edit_cursor_color" />
 
 
@@ -81,7 +82,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="10dp"
             android:maxLines="1"
-            />
+            android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
 
     <View
@@ -126,16 +127,17 @@
         android:layout_width="160dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/white"
         android:text="@string/next"
         android:textAllCaps="false"
-        android:layout_below="@+id/txt_err_name_length"
+        android:layout_below="@+id/line2"
         android:background="@color/pinkish_grey" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/cerulean"
@@ -145,6 +147,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
         android:text="@string/info_endit"
         />
 </RelativeLayout>

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.ViewHolder> {
 
-    private static final String TAG = "SendHisViewAdapter";
+
     private ArrayList<Payments.PayRecords> mValues;
     private final OnListSendFragInteractionListener mListener;
     private String mPubKey;
@@ -58,8 +58,7 @@ public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
+
                     mListener.ListSendFragInteraction(holder.mItem);
                 }
             }
@@ -92,6 +91,11 @@ public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.
     public int getItemCount() {
 
         return mValues.size();
+    }
+
+    public void addSendHisList(ArrayList<Payments.PayRecords> list) {
+        this.mValues = list;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

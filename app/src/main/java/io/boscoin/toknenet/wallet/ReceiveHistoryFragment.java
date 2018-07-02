@@ -30,19 +30,19 @@ public class ReceiveHistoryFragment extends Fragment {
 
     private static final String TAG = "ReceiveHistoryFragment";
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-
-    private int mColumnCount = 1;
     private OnListReceiveFragInteractionListener mListener;
     private String mPubkey;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ArrayList<Payments.PayRecords> mPayHistoryList = new ArrayList<>();
     private Context mContext;
-    private RecyclerView recyclerView;
+
+    private RecyclerView mReceiveHisRv;
+    private ReceiveHisViewAdapter mRhisAdapter;
     private Payments mPayments;
     private String mSartOff, mLastOff;
     private static final int NO_VISIBLE_ITEM = -1;
-
+    private static final int PORT_HTTP = 80;
+    private static final int PORT_HTTPS = 443;
 
     public ReceiveHistoryFragment() {
     }
@@ -80,12 +80,14 @@ public class ReceiveHistoryFragment extends Fragment {
         });
 
         mContext = view.getContext();
-        recyclerView = (RecyclerView)view.findViewById(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
+        mReceiveHisRv = (RecyclerView)view.findViewById(R.id.list);
+
+        mReceiveHisRv.setLayoutManager(new LinearLayoutManager(mContext));
         getStartHistory();
         mListener.getCurrentBalanceReceive();
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mReceiveHisRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -108,15 +110,17 @@ public class ReceiveHistoryFragment extends Fragment {
     }
 
     private void isLastItem() {
-        int lastVisibleItemPos = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-        int firstVisbleItemPos = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+       
+        int lastVisibleItemPos = ((LinearLayoutManager) mReceiveHisRv.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+        int firstVisbleItemPos = ((LinearLayoutManager) mReceiveHisRv.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
 
 
         if(lastVisibleItemPos == NO_VISIBLE_ITEM || firstVisbleItemPos == NO_VISIBLE_ITEM){
             return;
         }
 
-        int itemTotalCount = recyclerView.getAdapter().getItemCount();
+
+        int itemTotalCount = mReceiveHisRv.getAdapter().getItemCount();
 
 
         if (lastVisibleItemPos +firstVisbleItemPos >= itemTotalCount) {
@@ -131,7 +135,8 @@ public class ReceiveHistoryFragment extends Fragment {
             return;
         }
 
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
@@ -157,7 +162,8 @@ public class ReceiveHistoryFragment extends Fragment {
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setReceiveHistoryAfter(mPayments.get_embedded().getRecordList());
 
-                    recyclerView.setAdapter(new ReceiveHisViewAdapter(mPayHistoryList, mListener,mPubkey));
+                    mRhisAdapter.addReceiveHisList(mPayHistoryList);
+
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else{
 
@@ -200,7 +206,8 @@ public class ReceiveHistoryFragment extends Fragment {
 
     }
     private void getStartHistory() {
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
 
@@ -226,7 +233,9 @@ public class ReceiveHistoryFragment extends Fragment {
                     mSartOff = mPayments.get_embedded().getRecordList().get(0).getPaging_token();
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setReceiveHistoryAfter(mPayments.get_embedded().getRecordList());
-                    recyclerView.setAdapter(new ReceiveHisViewAdapter( mPayHistoryList, mListener,mPubkey));
+                    mRhisAdapter = new ReceiveHisViewAdapter( mPayHistoryList, mListener,mPubkey);
+                    mReceiveHisRv.setAdapter( mRhisAdapter);
+                    mReceiveHisRv.setHasFixedSize(true);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else {
 
@@ -244,7 +253,8 @@ public class ReceiveHistoryFragment extends Fragment {
 
     private void getRecentHistory(String cursor) {
 
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.ASC);
@@ -271,7 +281,8 @@ public class ReceiveHistoryFragment extends Fragment {
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setReceiveHistoryBefore(mPayments.get_embedded().getRecordList());
 
-                    recyclerView.setAdapter(new ReceiveHisViewAdapter( mPayHistoryList, mListener,mPubkey));
+                    mRhisAdapter.addReceiveHisList(mPayHistoryList);
+
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else{
 

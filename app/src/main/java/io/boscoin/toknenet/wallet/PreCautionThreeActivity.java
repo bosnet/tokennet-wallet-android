@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class PreCautionThreeActivity extends AppCompatActivity {
     private boolean isSetting;
     private TextView mTvView;
     private DbOpenHelper mDbOpenHelper;
+    private Button mNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class PreCautionThreeActivity extends AppCompatActivity {
         isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
 
 
+        mNext = findViewById(R.id.caution_next);
+        mNext.setText(R.string.ok);
         findViewById(R.id.caution_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +132,7 @@ public class PreCautionThreeActivity extends AppCompatActivity {
         mDbOpenHelper = new DbOpenHelper(mContext);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
         int count = mDbOpenHelper.getWalletCount();
-        Log.e(TAG, "count = "+count);
+
         return count;
     }
 }

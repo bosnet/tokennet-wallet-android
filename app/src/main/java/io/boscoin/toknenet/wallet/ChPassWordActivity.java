@@ -69,11 +69,13 @@ public class ChPassWordActivity extends AppCompatActivity {
 
     private void setErrPwNone(){
         mTvPwNone.setVisibility(View.VISIBLE);
-        mTvPwMatch.setVisibility(View.GONE);
+
+        mTvPwMatch.setVisibility(View.INVISIBLE);
     }
 
     private void setErrPwMatch(){
-        mTvPwNone.setVisibility(View.GONE);
+
+        mTvPwNone.setVisibility(View.INVISIBLE);
         mTvPwMatch.setVisibility(View.VISIBLE);
     }
 

@@ -9,7 +9,7 @@
     <string name="his_receive">입금 내역</string>
     <string name="his_send">송금 내역</string>
     <string name="toast_text_clipboard_address">주소가 복사되었습니다</string>
-
+    <string name="title_activity_settings">설정</string>
 
     <string name="create_account">계좌 생성</string>
 
@@ -152,6 +152,8 @@
     <string name="contacts">주소록</string>
     <string name="s_precautions">주의사항</string>
     <string name="d_walit">잠시만 기다려 주세요</string>
+    <string name="a_walit_max">지갑은 최대 100개까지만\n생성할 수 있습니다</string>
+    <string name="a_address_max">주소록은 최대 100개를 넘을 수 없습니다</string>
 
 
     <string name="error_no_name">지갑 이름을 입력하세요</string>

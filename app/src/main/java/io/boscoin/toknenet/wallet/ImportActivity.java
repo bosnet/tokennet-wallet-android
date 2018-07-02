@@ -22,7 +22,7 @@ import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class ImportActivity extends AppCompatActivity {
 
-    private static final String TAG = "ImportActivity";
+
     private final int SEED_REQUEST_CODE = 0x0000ffff;
     private final int BOSKEY_REQUEST_CODE = 0x0000fff0;
     private EditText eSeedKey, eBosKey;
@@ -118,7 +118,7 @@ public class ImportActivity extends AppCompatActivity {
             it.putExtra(Constants.Invoke.KEY, mBosKey);
             startActivity(it);
         } else{
-            Toast.makeText(this, R.string.p_enter_your, Toast.LENGTH_LONG).show();
+
             return;
         }
 

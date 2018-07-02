@@ -68,18 +68,18 @@ public class AESCrypt {
         try {
             final SecretKeySpec key = generateKey(password);
 
-            log("message", message);
+
 
             byte[] cipherText = encrypt(key, ivBytes, message.getBytes(CHARSET));
 
             String encoded = Base58.encode(cipherText);
-            log("Base58", encoded);
-           // return encoded;
-            log("final = ", PRE_FIX + encoded + OS +VERSION);
+
+
+
             return  PRE_FIX + encoded + OS +VERSION;
         } catch (UnsupportedEncodingException e) {
             if (DEBUG_LOG_ENABLED)
-                Log.e(TAG, "UnsupportedEncodingException ", e);
+
             throw new GeneralSecurityException(e);
         }
     }
@@ -100,7 +100,7 @@ public class AESCrypt {
         cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
         byte[] cipherText = cipher.doFinal(message);
 
-        log("cipherText", cipherText);
+
 
         return cipherText;
     }
@@ -122,19 +122,18 @@ public class AESCrypt {
 
             //base58
             byte[] decodedCipherText = Base58.decode(base58EncodedCipherText);
-            log("decodedCipherText", decodedCipherText);
+
 
             byte[] decryptedBytes = decrypt(key, ivBytes, decodedCipherText);
 
-            log("decryptedBytes", decryptedBytes);
+
             String message = new String(decryptedBytes, CHARSET);
-            log("message", message);
+
 
 
             return message;
         } catch (UnsupportedEncodingException e) {
-            if (DEBUG_LOG_ENABLED)
-                Log.e(TAG, "UnsupportedEncodingException ", e);
+
 
             throw new GeneralSecurityException(e);
         }
@@ -157,7 +156,7 @@ public class AESCrypt {
             cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
             byte[] decryptedBytes = cipher.doFinal(decodedCipherText);
 
-            log("decryptedBytes", decryptedBytes);
+
 
             return decryptedBytes;
     }

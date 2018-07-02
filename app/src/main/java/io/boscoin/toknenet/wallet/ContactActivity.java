@@ -42,6 +42,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private static final int EDIT_REQUEST_CODE = 4;
     private boolean mIsEmpty;
     private boolean mIsFromSend;
+    private static final int MAX_ADDRESS = 100;
 
     public interface MenuClickListener {
         void onEditClicked(int postion);
@@ -100,8 +101,22 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.add_contact).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(ContactActivity.this, AddContactActivity.class);
-                startActivityForResult(it, ADD_REQUEST_CODE);
+                if(getAddressBookCount() > 100){
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                    alert.setMessage(R.string.a_address_max).setPositiveButton(R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog dialog = alert.create();
+                    dialog.show();
+                }else{
+                    Intent it = new Intent(ContactActivity.this, AddContactActivity.class);
+                    startActivityForResult(it, ADD_REQUEST_CODE);
+                }
+               
             }
         });
 
@@ -181,7 +196,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
         int count = mDbOpenHelper.getAddressCount();
-        mDbOpenHelper.close();
+
         return count;
     }
 
@@ -272,7 +287,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 mEmpty.setVisibility(View.VISIBLE);
                 mRV.setVisibility(View.GONE);
             } else{
-                Log.e(TAG,"주소록 갱신");
+
 
                 mEmpty.setVisibility(View.GONE);
                 mRV.setVisibility(View.VISIBLE);

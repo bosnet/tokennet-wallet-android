@@ -31,18 +31,17 @@ public class AllHistoryFragment extends Fragment {
 
     private static final String TAG = "AllHistoryFragment";
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-
-    private int mColumnCount = 1;
     private OnListAllFragInteractionListener mListener;
-
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private String mPubkey;
     private Context mContext;
     private RecyclerView recyclerView;
+    private AllHisViewAdapter mAhisAdapter;
     private Payments mPayments;
     private ArrayList<Payments.PayRecords> mPayHistoryList = new ArrayList<>();
     private static final int NO_VISIBLE_ITEM = -1;
+    private static final int PORT_HTTP = 80;
+    private static final int PORT_HTTPS = 443;
 
     public AllHistoryFragment() {
     }
@@ -162,7 +161,8 @@ public class AllHistoryFragment extends Fragment {
 
 
     private void getStartHistory() {
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
 
@@ -183,8 +183,10 @@ public class AllHistoryFragment extends Fragment {
                 mPayments =  gson.fromJson(res, Payments.class);
                 if(mPayments.get_embedded().getRecordList().size() > 0){
                     mPayHistoryList.addAll(0, mPayments.get_embedded().getRecordList());
+                    mAhisAdapter = new AllHisViewAdapter( mPayHistoryList, mListener,mPubkey);
 
-                    recyclerView.setAdapter(new AllHisViewAdapter( mPayHistoryList/*mPayments.get_embedded().getRecordList()*/, mListener,mPubkey));
+                    recyclerView.setAdapter( mAhisAdapter);
+                    recyclerView.setHasFixedSize(true);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else {
 
@@ -202,7 +204,8 @@ public class AllHistoryFragment extends Fragment {
 
 
     private void getRecentHistory(String cursor) {
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.ASC);
@@ -225,8 +228,8 @@ public class AllHistoryFragment extends Fragment {
                 mPayments =  gson.fromJson(res, Payments.class);
                 if(mPayments.get_embedded().getRecordList().size() > 0){
                     mPayHistoryList.addAll(0,mPayments.get_embedded().getRecordList());
-
-                    recyclerView.setAdapter(new AllHisViewAdapter( mPayHistoryList/*payments.get_embedded().getRecordList()*/, mListener,mPubkey));
+                    mAhisAdapter.addAllHisList(mPayHistoryList);
+                    
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else{
 
@@ -247,7 +250,8 @@ public class AllHistoryFragment extends Fragment {
             return;
         }
 
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
@@ -265,12 +269,19 @@ public class AllHistoryFragment extends Fragment {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String res) {
+                int addCount ;
+                int prevCount = mPayHistoryList.size();
                 Gson gson = new GsonBuilder().create();
                 mPayments =  gson.fromJson(res, Payments.class);
-                if(mPayments.get_embedded().getRecordList().size() > 0){
-                    mPayHistoryList.addAll(mPayments.get_embedded().getRecordList());
+                addCount = mPayments.get_embedded().getRecordList().size();
+                if( addCount  > 0){
 
-                    recyclerView.setAdapter(new AllHisViewAdapter( mPayHistoryList, mListener,mPubkey));
+                    mPayHistoryList.addAll(mPayments.get_embedded().getRecordList());
+                   
+                    mAhisAdapter.addAllHisList(mPayHistoryList);
+                  
+                   
+
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else{
 

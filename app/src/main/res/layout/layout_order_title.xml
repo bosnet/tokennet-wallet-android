@@ -8,11 +8,12 @@
 
     <ImageButton
         android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/ic_icon_arrow"/>
+        android:background="@drawable/bg_box"
+        android:src="@drawable/ic_icon_arrow"/>
 
     <TextView
         android:id="@+id/tv_title"

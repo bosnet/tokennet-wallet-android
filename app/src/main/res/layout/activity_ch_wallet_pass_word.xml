@@ -69,14 +69,14 @@
         android:layout_below="@+id/line1"
         android:layout_marginTop="8dp"
         android:text="@string/error_invalid_password"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/btn_next"
         android:layout_width="160dp"
         android:layout_height="48dp"
-        android:layout_below="@+id/line1"
-        android:layout_marginTop="28dp"
+        android:layout_below="@+id/txt_err_key"
+        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:background="@color/pinkish_grey"
         android:textSize="14sp"

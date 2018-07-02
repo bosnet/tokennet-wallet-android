@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -87,6 +88,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private static final int ADD = 1;
     private static final int SUB = 2;
     private Payments mPayments;
+    private TextInputLayout mAmountInputly;
+    private static final int PORT_HTTP = 80;
+    private static final int PORT_HTTPS = 443;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +124,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         mTvAddressErr = findViewById(R.id.err_pubkey);
         mBtnSend = findViewById(R.id.btn_send2);
 
+        mAmountInputly = findViewById(R.id.amount_inputlayout);
 
         findViewById(R.id.btn_contact).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,19 +166,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
                 mPubKey = s.toString();
                 mImgDel.setVisibility(View.VISIBLE);
-                if(!TextUtils.isEmpty(mPubKey)){
+                if(!TextUtils.isEmpty(mPubKey) && !mMyPubKey.equals(mPubKey)){
                     try{
                         Utils.decodeCheck(Utils.VersionByte.ACCOUNT_ID, mPubKey.toCharArray());
                         mTvAddressErr.setVisibility(View.GONE);
 
                         mValidAddress = true;
-                        changeButton();
+
                     }catch (Exception e){
                         mTvAddressErr.setText(R.string.error_invalid_pubkey);
                         mTvAddressErr.setVisibility(View.VISIBLE);
 
                         mValidAddress = false;
                     }
+
+                    changeButton();
                 }
             }
         });
@@ -181,6 +188,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         if(mPubKey != null){
             editPubkey.setText(mPubKey);
         }
+
 
 
         editAmmount.addTextChangedListener(new TextWatcher() {
@@ -279,7 +287,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         mDbOpenHelper = new DbOpenHelper(mContext);
         mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
         int count = mDbOpenHelper.getAddressCount();
-        mDbOpenHelper.close();
+
         return count;
     }
 
@@ -307,7 +315,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getWalletBalances() {
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
         url.append("/");
@@ -483,7 +492,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             mPwDialog.dismiss();
             mProgDialog = new ProgressDialog(mContext);
             mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgDialog.setMessage("Please Wait");
+            mProgDialog.setMessage(getResources().getString(R.string.d_walit));
             mProgDialog.setCancelable(false);
             mProgDialog.show();
             sendBosTransation();
@@ -495,7 +504,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void sendBosTransation() {
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
         url.append("/");
@@ -678,7 +688,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateTransTime(){
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
 
         params.put(Constants.Params.LIMIT, "1");

@@ -21,9 +21,9 @@ import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class EditContactActivity extends AppCompatActivity {
 
-    private static final String TAG = "EditContactActivity";
+
     private EditText editName, editAdress;
-    //private long mIdx;
+
     private AddressBook mBook;
     private TextView mErrName;
     private boolean mInValidName, mExistName, mIsNext;
@@ -106,8 +106,10 @@ public class EditContactActivity extends AppCompatActivity {
                     mCursor.close();
                     mDbOpenHelper.close();
 
-                    changeButton();
+
                 }
+
+                changeButton();
             }
 
 

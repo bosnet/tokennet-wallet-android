@@ -26,7 +26,7 @@ import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 
 public class ConfirmPassWordActivity extends AppCompatActivity {
 
-    private static final String TAG = "ConfirmPassWordActivity";
+
 
     private long mIdx;
     private Context mContext;
@@ -121,7 +121,7 @@ public class ConfirmPassWordActivity extends AppCompatActivity {
     private void changeButton(boolean next) {
         if(next){
             mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
-            mTvErr.setVisibility(View.GONE);
+            mTvErr.setVisibility(View.INVISIBLE);
             mIsNext = true;
         }else{
             mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));

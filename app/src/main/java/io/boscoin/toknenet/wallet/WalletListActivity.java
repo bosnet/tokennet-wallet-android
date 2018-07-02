@@ -1,7 +1,9 @@
 package io.boscoin.toknenet.wallet;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +29,7 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Wallet;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
 public class WalletListActivity extends AppCompatActivity {
@@ -46,6 +49,9 @@ public class WalletListActivity extends AppCompatActivity {
     private DbOpenHelper mDbOpenWalletHelper;
     private int mCount = 0;
     private long mWalletIdx;
+    private static final int PORT_HTTP = 80;
+    private static final int PORT_HTTPS = 443;
+    private static final int MAX_WALLET = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +80,45 @@ public class WalletListActivity extends AppCompatActivity {
         findViewById(R.id.btn_import).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(WalletListActivity.this, ImportActivity.class);
-                startActivity(it);
+                if(getWalletCount() > MAX_WALLET){
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                    alert.setMessage(R.string.a_walit_max).setPositiveButton(R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog dialog = alert.create();
+                    dialog.show();
+                }else{
+                    Intent it = new Intent(WalletListActivity.this, ImportActivity.class);
+                    startActivity(it);
+                }
+
             }
         });
 
         findViewById(R.id.btn_create).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(WalletListActivity.this, CreateNoticeActivity.class);
-                startActivity(it);
+                if(getWalletCount() > MAX_WALLET){
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                    alert.setMessage(R.string.a_walit_max).setPositiveButton(R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog dialog = alert.create();
+                    dialog.show();
+                }else{
+                    Intent it = new Intent(WalletListActivity.this, CreateNoticeActivity.class);
+                    startActivity(it);
+                }
+
+               
             }
         });
         
@@ -115,11 +150,24 @@ public class WalletListActivity extends AppCompatActivity {
         });
     }
 
+    private int getWalletCount(){
+        mDbOpenHelper = new DbOpenHelper(mContext);
+        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+        int count = mDbOpenHelper.getWalletCount();
+        return count;
+    }
+
     private void getBalances(){
         int firstVisibleItemPosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstVisibleItemPosition();
         int lastVisibleItemPos = ((LinearLayoutManager)rv.getLayoutManager()).findLastCompletelyVisibleItemPosition();
         int idx = firstVisibleItemPosition;
         mCount = idx;
+
+        if(lastVisibleItemPos == 0 && mProgDialog.isShowing()){
+
+            mProgDialog.dismiss();
+            return;
+        }
 
         for(; idx <= lastVisibleItemPos; idx++){
           Wallet wallet =  mAdapter.getWalletListItem(idx);
@@ -139,7 +187,11 @@ public class WalletListActivity extends AppCompatActivity {
 
 
         String pubKey = wallet.getWalletAccountId();
-        AsyncHttpClient client = new AsyncHttpClient();
+
+
+
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
         url.append("/");
@@ -224,7 +276,7 @@ public class WalletListActivity extends AppCompatActivity {
         mProgDialog = new ProgressDialog(mContext);
         mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgDialog.setMessage(getResources().getString(R.string.d_walit));
-        mProgDialog.setCancelable(false);
+
         mProgDialog.show();
     }
 

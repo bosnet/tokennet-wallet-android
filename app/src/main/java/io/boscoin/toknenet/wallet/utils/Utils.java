@@ -269,9 +269,14 @@ public class Utils {
 
     public static SpannableStringBuilder dispayBalance(String bal){
         int pos = bal.indexOf(".");
-        Log.e(TAG,"pos = "+pos);
+
         SpannableStringBuilder ssb = new SpannableStringBuilder(bal);
-        ssb.setSpan(new StyleSpan(Typeface.BOLD),0, pos+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if(pos == -1){
+            ssb.setSpan(new StyleSpan(Typeface.BOLD),0, bal.length()-4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }else{
+            ssb.setSpan(new StyleSpan(Typeface.BOLD),0, pos+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
         return ssb;
     }
 

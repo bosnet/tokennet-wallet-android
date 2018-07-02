@@ -37,7 +37,7 @@ import io.boscoin.toknenet.wallet.utils.Utils;
 
 public class CreateWalletActivity extends AppCompatActivity {
 
-    private static final String TAG = "CreateWalletActivity";
+
     private static final String SEED_RECOVER = "seedkey-recover";
     private static final String BOS_RECOVER = "boskey-recover";
     private static final int MAX_WALLET_NAME = 11;
@@ -45,6 +45,7 @@ public class CreateWalletActivity extends AppCompatActivity {
     private static final int MSG_INSERT_COMPLETE = 1;
     private static final int MSG_STOP = 0;
     private static final int MSG_REQUEST_COMPLETE = 0xff;
+    private static final int MSG_REQUEST_ERROR = 0xf0;
 
     private EditText mEInputName, mEInputPW, mEConfirmPW;
     private Context mContext;
@@ -95,8 +96,8 @@ public class CreateWalletActivity extends AppCompatActivity {
             mTvTitle.setText(R.string.import_wallet);
 
             mlayoutName.setHint(getResources().getString(R.string.input_new_wallet_name));
-            mlayoutPw.setHint(getResources().getString(R.string.input_new_pw));
-            mlayoutConfirm.setHint(getResources().getString(R.string.confirm_new_pw));
+            mlayoutPw.setHint(getResources().getString(R.string.input_already_pw));
+            mlayoutConfirm.setHint(getResources().getString(R.string.confirm_already_pw));
 
         } else if(isRecover != null && isRecover.equals(SEED_RECOVER)){
             isBosRecover = false;
@@ -384,6 +385,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                     System.out.println("SUCCESS! You have a new account :)\n" + body);
                     handler.sendEmptyMessage(MSG_REQUEST_COMPLETE);
                 } catch (IOException e) {
+                    handler.sendEmptyMessage(MSG_REQUEST_ERROR);
                     e.printStackTrace();
                 }
             }
@@ -481,6 +483,12 @@ public class CreateWalletActivity extends AppCompatActivity {
                 case MSG_STOP:
                     mThread.stopThread();
                     break;
+
+                case MSG_REQUEST_ERROR:
+                    mProgDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), R.string.error_create_wallet, Toast.LENGTH_LONG).show();
+                    break;
+
 
                 case MSG_REQUEST_COMPLETE:
 

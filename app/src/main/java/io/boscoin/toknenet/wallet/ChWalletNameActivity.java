@@ -94,13 +94,12 @@ public class ChWalletNameActivity extends AppCompatActivity {
                     mDbOpenHelper.open(Constants.DB.MY_WALLETS);
                     mCursor = null;
                     mCursor = mDbOpenHelper.getColumnWalletName();
-
+                    mIsValidName = true;
                     do{
 
                         if(mChName.equals(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_NAME)))){
 
-                            mErrAlreadyName.setVisibility(View.VISIBLE);
-                            mErrNameLength.setVisibility(View.GONE);
+
                             mDbOpenHelper.close();
                             mExistName = true;
                             changeButton();
@@ -108,11 +107,10 @@ public class ChWalletNameActivity extends AppCompatActivity {
                         }
                     }while (mCursor.moveToNext());
 
-                    mIsValidName = true;
+
                     mExistName = false;
 
-                    mErrNameLength.setVisibility(View.GONE);
-                    mErrAlreadyName.setVisibility(View.GONE);
+
 
                     mCursor.close();
                     mDbOpenHelper.close();
@@ -154,9 +152,16 @@ public class ChWalletNameActivity extends AppCompatActivity {
 
     private void changeButton() {
         if(mIsValidName && !mExistName ){
+            mErrNameLength.setVisibility(View.GONE);
+            mErrAlreadyName.setVisibility(View.GONE);
             mBtnChange.setBackgroundColor(getResources().getColor(R.color.cerulean));
             mIsNext = true;
-        }else{
+        }else if(mIsValidName && mExistName){
+            mErrNameLength.setVisibility(View.GONE);
+            mErrAlreadyName.setVisibility(View.VISIBLE);
+            mBtnChange.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+            mIsNext = false;
+        } else{
             mErrNameLength.setVisibility(View.VISIBLE);
             mErrAlreadyName.setVisibility(View.GONE);
             mBtnChange.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));

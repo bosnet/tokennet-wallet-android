@@ -61,7 +61,7 @@ public class DbOpenHelper {
 	public SQLiteDatabase getmDB(){
 	    return mDB;
     }
-	// Insert DB
+
 	public long insertColumnAddress(String name, String add){
 		ContentValues values = new ContentValues();
 		values.put(DataBases.CreateAddressDB.COL_NAME, name);
@@ -97,7 +97,7 @@ public class DbOpenHelper {
 
 		return id;
 	}
-	// Update DB
+
 	public boolean updateColumnAddress(long id , String name, String add){
 		ContentValues values = new ContentValues();
 		values.put(DataBases.CreateAddressDB.COL_NAME, name);
@@ -148,18 +148,18 @@ public class DbOpenHelper {
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 
-	// Delete ID
+
 	public boolean deleteColumnAddress(long id){
 		return mDB.delete(DataBases.CreateAddressDB._TABLENAME, "_id="+id, null) > 0;
 	}
 
-	// Delete ID
+
 	public boolean deleteColumnWallet(long id){
 		return mDB.delete(DataBases.CreateWalletDB._TABLENAME, "_id="+id, null) > 0;
 	}
 
 
-	// Select All
+
 	public Cursor getAllColumnsAddress(){
 		return mDB.query(DataBases.CreateAddressDB._TABLENAME, null, null, null, null, null, null);
 	}
@@ -208,12 +208,15 @@ public class DbOpenHelper {
 		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, null, null, null, null, null, null);
 		int count = c.getCount();
 		c.close();
+		mDB.close();
 		return count;
 	}
 
 	public int getAddressCount(){
 		Cursor c = mDB.query(DataBases.CreateAddressDB._TABLENAME, null, null, null, null, null, null);
 		int count = c.getCount();
+		c.close();
+		mDB.close();
 		return count;
 	}
 

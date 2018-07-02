@@ -21,6 +21,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import io.boscoin.toknenet.wallet.adapter.ReceiveHisViewAdapter;
 import io.boscoin.toknenet.wallet.adapter.SendHisViewAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.model.Payments;
@@ -35,10 +36,12 @@ public class SendHistoryFragment extends Fragment {
     private ArrayList<Payments.PayRecords> mPayHistoryList = new ArrayList<>();
     private Context mContext;
     private RecyclerView recyclerView;
+    private SendHisViewAdapter mShisAdapter;
     private Payments mPayments;
     private String mSartOff, mLastOff;
     private static final int NO_VISIBLE_ITEM = -1;
-
+    private static final int PORT_HTTP = 80;
+    private static final int PORT_HTTPS = 443;
 
     public SendHistoryFragment() {
     }
@@ -69,9 +72,6 @@ public class SendHistoryFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
-
-
 
                 getRecentHistory(mSartOff);
                 mListener.getCurrentBalanceSend();
@@ -128,7 +128,8 @@ public class SendHistoryFragment extends Fragment {
             return;
         }
 
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
@@ -155,7 +156,8 @@ public class SendHistoryFragment extends Fragment {
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setSendHistoryAfter(mPayments.get_embedded().getRecordList());
 
-                    recyclerView.setAdapter(new SendHisViewAdapter( mPayHistoryList, mListener,mPubkey));
+                    mShisAdapter.addSendHisList(mPayHistoryList);
+
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else{
 
@@ -173,7 +175,8 @@ public class SendHistoryFragment extends Fragment {
     }
 
     private void getStartHistory() {
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
 
@@ -197,9 +200,9 @@ public class SendHistoryFragment extends Fragment {
                     mSartOff = mPayments.get_embedded().getRecordList().get(0).getPaging_token();
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setSendHistoryAfter(mPayments.get_embedded().getRecordList());
-
-
-                    recyclerView.setAdapter(new SendHisViewAdapter( mPayHistoryList, mListener,mPubkey));
+                    mShisAdapter = new SendHisViewAdapter( mPayHistoryList, mListener,mPubkey);
+                    recyclerView.setAdapter(mShisAdapter);
+                    recyclerView.setHasFixedSize(true);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else {
 
@@ -232,16 +235,19 @@ public class SendHistoryFragment extends Fragment {
 
         for(int i = 0; i< his.size(); i++){
             if(his.get(i).getType_i().equals("0") && his.get(i).getFunder().equals(mPubkey)){
-                mPayHistoryList.add(0, his.get(i));
+
+                mPayHistoryList.add(his.get(i));
             } else if(!his.get(i).getType_i().equals("0") && his.get(i).getFrom().equals(mPubkey)){
-                mPayHistoryList.add(0, his.get(i));
+
+                mPayHistoryList.add(his.get(i));
             }
         }
 
 
     }
     private void getRecentHistory(String cursor) {
-        AsyncHttpClient client = new AsyncHttpClient();
+
+        AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.ASC);
@@ -269,7 +275,7 @@ public class SendHistoryFragment extends Fragment {
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setSendHistoryBefore(mPayments.get_embedded().getRecordList());
 
-                    recyclerView.setAdapter(new SendHisViewAdapter( mPayHistoryList, mListener,mPubkey));
+                    mShisAdapter.addSendHisList(mPayHistoryList);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }else{
 
