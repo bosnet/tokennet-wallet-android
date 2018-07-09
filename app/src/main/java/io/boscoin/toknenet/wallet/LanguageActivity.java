@@ -17,7 +17,7 @@ import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class LanguageActivity extends AppCompatActivity {
 
-    private static final String TAG = "LanguageActivity";
+
     private TextView mTvTitle;
     private RadioButton mEng, mKo;
     private Context mContext;

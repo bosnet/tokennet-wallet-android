@@ -401,7 +401,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
             }
-            
+
         }
 
     }
@@ -429,7 +429,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
 
     private void confirmPwAlert() {
-        handler.sendEmptyMessage(MSG_STOP);
+
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
         alert.setTitle(R.string.title_setup);
         alert.setMessage(R.string.rember_recover).setCancelable(false).setPositiveButton(R.string.ok,
@@ -448,7 +448,7 @@ public class CreateWalletActivity extends AppCompatActivity {
     }
 
     private void confirmRecoverAlert() {
-        handler.sendEmptyMessage(MSG_STOP);
+
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext );
         alert.setMessage(R.string.restore).setCancelable(false).setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
@@ -491,6 +491,8 @@ public class CreateWalletActivity extends AppCompatActivity {
     }
 
     private void createWallet(String wname, String pubkey, String enckey){
+
+        showDialogWalt();
         mThread = new DbInsertThread(wname, pubkey, enckey);
         mThread.start();
 
@@ -502,13 +504,18 @@ public class CreateWalletActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case MSG_INSERT_COMPLETE:
+
                     if(isBosRecover){
+                        mProgDialog.dismiss();
+                        mThread.stopThread();
                         confirmRecoverAlert();
                     }else{
                         if(TEST_GET && !isSeedRecover && !isBosRecover){
-                            showDialogWalt();
+
                             requestMoney();
                         }else{
+                            mProgDialog.dismiss();
+                            mThread.stopThread();
                             confirmPwAlert();
                         }
 
@@ -516,7 +523,9 @@ public class CreateWalletActivity extends AppCompatActivity {
                     break;
 
                 case MSG_STOP:
+                    mProgDialog.dismiss();
                     mThread.stopThread();
+
                     break;
 
                 case MSG_REQUEST_ERROR:

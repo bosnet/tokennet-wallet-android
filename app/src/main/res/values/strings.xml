@@ -45,7 +45,7 @@
     <string name="input_new_wallet_name">Input New Wallet Name</string>
     <string name="input_new_pw">Input New Password</string>
     <string name="confirm_new_pw">Confirm New Password</string>
-    <string name="ok">Confirm</string>
+    <string name="ok">OK</string>
     <string name="qr_c">QR Code</string>
     <string name="input_already_pw">Input Existing Password</string>
     <string name="confirm_already_pw">Confirm Existing Password</string>
@@ -63,7 +63,7 @@
     <string name="dont_show">Do Not Show Again</string>
     <string name="next">Next</string>
     <string name="ca_do_not_lose">Do not share your Secret Seed and password to anyone</string>
-    <string name="ca_sec_seed">Do not loose your Secret Seed and password. You can not retrieve your Secret Seed</string>
+    <string name="ca_sec_seed">Do not loose your Secret Seed and password.\nYou can not retrieve your Secret Seed</string>
     <string name="no_see_page">Are you sure you want to close current page?</string>
     <string name="please_check">Please check the following Precautions</string>
     <string name="min_balance">You need a minimum balance of 0.1 BOS to make your account valid.\n
@@ -109,7 +109,7 @@ Each wallet need to set a password</string>
     <string name="dlog_address">Address</string>
     <string name="send_total">Total Amount</string>
     <string name="dlog_pw">Input Your Password</string>
-    <string name="dlog_send_ok">Transaction Completed </string>
+    <string name="dlog_send_ok">Transaction Completed</string>
     <string name="change_wallet_name">Change Name of the Wallet</string>
     <string name="change_wallet_pw">Change Password</string>
     <string name="check_seed">Confirm Secret Seed</string>
@@ -180,7 +180,7 @@ Secret Seed securely</string>
 numbers, and special characters.</string>
     <string name="error_seed_invalid">Secret Seed is invalid</string>
     <string name="error_bos_invalid">Recovery Key is invalid</string>
-    <string name="error_bos_pw">Password is invalid.\nPlease check again</string>
+    <string name="error_bos_pw">Password is invalid. Please check again</string>
     <string name="error_invalid_pubkey">Incorrect Public Address</string>
     <string name="error_invalid_password">Password is invalid. Please check again</string>
     <string name="error_no_count_address">Need to create Contacts</string>

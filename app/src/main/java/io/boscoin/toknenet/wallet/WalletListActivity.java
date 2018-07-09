@@ -78,10 +78,12 @@ public class WalletListActivity extends AppCompatActivity {
 
         mContext = this;
 
-        setContentView(R.layout.activity_wallet_list);
-
         String lang = WalletPreference.getWalletLanguage(mContext);
         Utils.changeLanguage(mContext,lang);
+
+        setContentView(R.layout.activity_wallet_list);
+
+
 
         initUI();
 
@@ -192,11 +194,6 @@ public class WalletListActivity extends AppCompatActivity {
         int idx = firstVisibleItemPosition;
         mCount = idx;
 
-        if(lastVisibleItemPos == 0 && mProgDialog.isShowing()){
-
-            mProgDialog.dismiss();
-            return;
-        }
 
         for(; idx <= lastVisibleItemPos; idx++){
           Wallet wallet =  mAdapter.getWalletListItem(idx);
@@ -252,7 +249,8 @@ public class WalletListActivity extends AppCompatActivity {
                 }catch (Exception e){
 
                     e.printStackTrace();
-                    mProgDialog.dismiss();
+
+                    dismissDialog();
                 }finally {
                     mDbOpenWalletHelper.close();
                     mDbOpenWalletHelper = null;
@@ -267,12 +265,13 @@ public class WalletListActivity extends AppCompatActivity {
                             @Override
                             public void run() {
 
-                                mProgDialog.dismiss();
 
                                 walletList.clear();
                                 getWalletList();
                                 mAdapter.setWalletList(walletList);
                                 mCount = 0;
+
+                                dismissDialog();
                             }
                         });
 
@@ -290,28 +289,50 @@ public class WalletListActivity extends AppCompatActivity {
 
                 mCount++;
                 if(mCount > lastPos ){
-                    mProgDialog.dismiss();
+
                     mAdapter.notifyItemRangeChanged(pos, lastPos);
                     mCount = 0;
 
                 }
-                mProgDialog.dismiss();
+
+                dismissDialog();
 
             }
         });
     }
 
     private void showDialogWalt(){
-        mProgDialog = new ProgressDialog(mContext);
-        mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgDialog.setMessage(getResources().getString(R.string.d_walit));
 
-        mProgDialog.show();
+
+        if(mProgDialog == null){
+            mProgDialog = new ProgressDialog(mContext);
+            mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgDialog.setMessage(getResources().getString(R.string.d_walit));
+            mProgDialog.setCancelable(false);
+            mProgDialog.show();
+        }
+
+
+    }
+
+    private void dismissDialog(){
+        if(mProgDialog != null){
+            mProgDialog.dismiss();
+            mProgDialog = null;
+        }
     }
 
     private void initializeData() {
 
        getWalletList();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
 
     }
 

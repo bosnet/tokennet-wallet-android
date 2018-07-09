@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/ic_lock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="112dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/txt_ca1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18dp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/white"
@@ -49,7 +49,7 @@
         android:id="@+id/txt_ca2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="16dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/white_op50"
@@ -58,6 +58,7 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="28dp"
+        android:paddingRight="20dp"
         android:text="@string/ca_sec_seed"
         />
 

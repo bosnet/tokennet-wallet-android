@@ -75,7 +75,7 @@ public class Utils {
 
     public static String getCreateTime(long createTime){
         String localTime = "";
-        SimpleDateFormat dateLocalFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateLocalFormat =  new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
         Date dateLocalTime = new Date(createTime);
         localTime = dateLocalFormat.format(dateLocalTime);

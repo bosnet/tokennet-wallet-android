@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -68,6 +70,9 @@ public class AddContactActivity extends AppCompatActivity {
 
         mEName = findViewById(R.id.input_cname);
         mEPubKey = findViewById(R.id.input_address);
+
+        mEPubKey.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        mEPubKey.setRawInputType(InputType.TYPE_CLASS_TEXT);
         mTvNameErr = findViewById(R.id.err_name);
         mTvAddressErr = findViewById(R.id.err_pubkey);
         mBtnOk = findViewById(R.id.btn_add_ok);

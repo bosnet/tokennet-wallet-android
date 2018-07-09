@@ -34,7 +34,7 @@
         android:id="@+id/txt_ca1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18dp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/white"
@@ -43,6 +43,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txt_ca2"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="28dp"
+        android:paddingRight="25dp"
         android:text="@string/please_quit"
         />
 
@@ -51,7 +52,7 @@
         android:id="@+id/txt_ca2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="16dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/white_op50"
@@ -60,6 +61,7 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="28dp"
+        android:paddingRight="25dp"
         android:text="@string/someone_can"
         />
 

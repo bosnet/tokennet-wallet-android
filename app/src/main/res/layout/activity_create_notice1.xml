@@ -63,6 +63,7 @@
                android:layout_toRightOf="@+id/check_min"
                android:layout_marginLeft="20dp"
                android:text="@string/min_balance"
+               android:paddingRight="20dp"
                android:onClick="checkMin"/>
 
            <CheckBox
@@ -90,6 +91,7 @@
                android:layout_toRightOf="@+id/check_name"
                android:layout_marginLeft="20dp"
                android:text="@string/wallet_name"
+               android:paddingRight="20dp"
                android:onClick="checkName"/>
 
            <CheckBox
@@ -116,6 +118,7 @@
                android:layout_marginTop="20dp"
                android:layout_marginLeft="20dp"
                android:text="@string/your_pw"
+               android:paddingRight="20dp"
                android:onClick="checkPassWord"/>
 
            <CheckBox

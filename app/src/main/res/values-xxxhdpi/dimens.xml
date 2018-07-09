@@ -15,4 +15,6 @@
     <dimen name="receive_wallet_qr_top">16dp</dimen>
     <dimen name="receive_wallet_qr_b_top">10dp</dimen>
     <dimen name="receive_wallet_bottom">32dp</dimen>
+
+    <dimen name="pc_one_top">162dp</dimen>
 </resources>

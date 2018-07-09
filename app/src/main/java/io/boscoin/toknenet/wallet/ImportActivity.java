@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -54,7 +56,13 @@ public class ImportActivity extends AppCompatActivity {
 
     private void initUI() {
         eSeedKey = findViewById(R.id.input_seedkey);
+        eSeedKey.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        eSeedKey.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
         eBosKey = findViewById(R.id.input_boskey);
+        eBosKey.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        eBosKey.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
         eSeedKey.addTextChangedListener(whichTextWatcher(eSeedKey, true));
         eBosKey.addTextChangedListener(whichTextWatcher(eBosKey, false));
 

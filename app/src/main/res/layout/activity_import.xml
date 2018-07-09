@@ -43,6 +43,7 @@
                 android:background="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:inputType="textMultiLine|textVisiblePassword|textNoSuggestions"
                 tools:text="SAKPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSDFKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKFL"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -124,6 +125,7 @@
            android:background="@null"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
+           android:inputType="textMultiLine|textVisiblePassword|textNoSuggestions"
            tools:text="SAKPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSDFKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKFL"/>
 
    </android.support.design.widget.TextInputLayout>

@@ -49,6 +49,8 @@ public class NoticeQRActivity extends AppCompatActivity {
         mContext = this;
 
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         Intent it = getIntent();
         mIdSeed = it.getLongExtra(Constants.Invoke.QR_SEED,0);
@@ -67,8 +69,6 @@ public class NoticeQRActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_notice);
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
 
         initUI();
     }

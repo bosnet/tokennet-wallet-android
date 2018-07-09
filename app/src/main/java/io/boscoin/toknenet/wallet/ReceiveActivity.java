@@ -232,15 +232,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
         it.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(it);
 
-        Intent chooserIntent = Intent.createChooser(it, getString(R.string.req_amount));
-        if (chooserIntent == null) {
-            return;
-        }
-        try {
-            startActivity(chooserIntent);
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, R.string.error_create_wallet, Toast.LENGTH_SHORT).show();
-        }
+
 
 
     }
