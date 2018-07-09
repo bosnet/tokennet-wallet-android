@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="86dp"
         android:focusable="true"
         android:focusableInTouchMode="true">
 
@@ -68,8 +68,8 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line1"
         android:layout_marginTop="6dp"
-        android:text="@string/error_no_pw"
-        android:visibility="invisible"/>
+        android:text="@string/rule_pw"
+        android:visibility="visible"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ly_confirm_pw"

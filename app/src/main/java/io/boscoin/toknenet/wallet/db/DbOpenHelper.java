@@ -79,7 +79,7 @@ public class DbOpenHelper {
 
 
 
-	public long insertColumnWallet(String name, String add, String key, int order, String bal, String time){
+	public long insertColumnWallet( String name, String add, String key, int order, String bal, String time){
 
 		long id;
 

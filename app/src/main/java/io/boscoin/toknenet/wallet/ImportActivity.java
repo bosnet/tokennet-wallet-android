@@ -1,11 +1,13 @@
 package io.boscoin.toknenet.wallet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
 public class ImportActivity extends AppCompatActivity {
@@ -31,6 +34,7 @@ public class ImportActivity extends AppCompatActivity {
     private String mSeedKey, mBosKey;
     private Button mBtnNext;
     private boolean mIsNextSeed, mIsNextBos;
+    private Context mContext;
 
 
     @Override
@@ -38,6 +42,17 @@ public class ImportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import);
 
+        mContext = this;
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+        initUI();
+
+
+    }
+
+    private void initUI() {
         eSeedKey = findViewById(R.id.input_seedkey);
         eBosKey = findViewById(R.id.input_boskey);
         eSeedKey.addTextChangedListener(whichTextWatcher(eSeedKey, true));
@@ -63,9 +78,7 @@ public class ImportActivity extends AppCompatActivity {
 
 
         mBtnNext = findViewById(R.id.btn_next);
-
     }
-
 
 
     public void readQRSeed(View view) {

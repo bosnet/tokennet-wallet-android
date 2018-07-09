@@ -20,6 +20,15 @@
         android:lineSpacingExtra="6sp" />
 
     <item
+        android:id="@+id/navi_copy"
+        android:title="@string/menu_copy"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="@color/black_87"
+        android:lineSpacingExtra="6sp" />
+
+    <item
         android:id="@+id/navi_del"
         android:title="@string/menu_delete"
         android:textSize="14sp"

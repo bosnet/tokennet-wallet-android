@@ -1,6 +1,7 @@
 package io.boscoin.toknenet.wallet;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,16 +9,31 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
+
 public class CreateNoticeActivity extends AppCompatActivity {
 
     private CheckBox mCheckMin, mCheckWallet, mCheckPw, mCheckSeed;
+    private Context mContext;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_notice);
+        setContentView(R.layout.activity_create_notice1);
 
+        mContext = this;
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+        initUI();
+
+
+    }
+
+    private void initUI() {
         mCheckMin = findViewById(R.id.check_min);
 
 
@@ -43,7 +59,6 @@ public class CreateNoticeActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
 

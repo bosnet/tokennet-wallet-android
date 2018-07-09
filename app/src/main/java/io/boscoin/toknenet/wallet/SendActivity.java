@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,6 +53,7 @@ import io.boscoin.toknenet.wallet.utils.SendDialogConfirm;
 import io.boscoin.toknenet.wallet.utils.SendDialogFail;
 import io.boscoin.toknenet.wallet.utils.SendDialogPw;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -113,6 +113,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         mDbOpenHelper.close();
         mCursor.close();
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
         initUI();
     }
 
@@ -135,7 +138,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     startActivityForResult(it,ADDRESS_REQUEST_CODE );
                 }else{
                     final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-                    alert.setMessage(R.string.error_no_count_address).setPositiveButton("OK",
+                    alert.setMessage(R.string.error_no_count_address).setPositiveButton(R.string.ok,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -375,6 +378,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     if(sendMoney >= curMoney){
                         alertDialogFunds();
                         isNext = false;
+                        mValidAmmount = false;
+                        changeButton();
                     } else {
                         BigDecimal tmp = Utils.MoneyCalcualtion(curAmount,sendAmount,SUB);
                         String tmp2 = tmp.toString();
@@ -383,6 +388,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                         if(result < MIN_BALANCE){
                             alertDialogSend();
                             isNext = false;
+                            mValidAmmount = false;
+                            changeButton();
                         }
 
                     }
@@ -761,7 +768,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onClick(View v) {
             mCompleteDialog.dismiss();
-            setResult(Constants.RssultCode.SEND);
+            setResult(Constants.ResultCode.SEND);
             finish();
         }
     };
@@ -821,7 +828,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == ADDRESS_REQUEST_CODE && resultCode == Constants.RssultCode.ADDRESS){
+        if(requestCode == ADDRESS_REQUEST_CODE && resultCode == Constants.ResultCode.ADDRESS){
             String address = data.getStringExtra(Constants.Invoke.SEND);
             editPubkey.setText(address);
         } else{

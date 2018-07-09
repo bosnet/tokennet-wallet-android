@@ -18,6 +18,7 @@ public class Constants {
 		public static final String QR_BOS = "qr-bos";
 		public static final String SEITING = "setting";
 		public static final String BROAD_FINISH = "io.boscoin.tokennet.wallet.finish";
+		public static final String BROAD_CHANGE_LANG = "io.boscoin.tokennet.wallet.change.language";
 	}
 
     public static final class DB {
@@ -64,11 +65,12 @@ public class Constants {
 
 	}
 
-	public static final class RssultCode{
+	public static final class ResultCode {
 		public static final int CHANGE_NAME = 1;
 		public static final int DELETE_WALLET = 2;
 		public static final int ADDRESS = 3;
 		public static final int SEND = 4;
 		public static final int FINISH = 5;
+		public static final int LANGUAGE = 6;
 	}
 }

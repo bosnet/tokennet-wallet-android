@@ -2,9 +2,11 @@ package io.boscoin.toknenet.wallet;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Wallet;
+import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
@@ -42,7 +45,8 @@ public class WalletListActivity extends AppCompatActivity {
     private Context mContext;
     private ImageButton mBtnSetting;
     private WalletListAdapter mAdapter;
-    private static final int ORDER_REQUEST = 1;
+
+    private static final int SETTING_REQUEST = 1;
     private static final int WALLET_DETAIL_VIEW = 2;
     private static final int SEND_REQUEST = 16;
     private ProgressDialog mProgDialog;
@@ -53,6 +57,21 @@ public class WalletListActivity extends AppCompatActivity {
     private static final int PORT_HTTPS = 443;
     private static final int MAX_WALLET = 100;
 
+
+    private BroadcastReceiver changeLanguageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String lang = WalletPreference.getWalletLanguage(mContext);
+
+            Utils.changeLanguage(mContext, lang);
+
+            Intent it = new Intent(WalletListActivity.this , WalletListActivity.class);
+            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(it);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +80,16 @@ public class WalletListActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_wallet_list);
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+        initUI();
+
+
+        registerChangeLangdReceiver();
+    }
+
+    private void initUI() {
         rv=(RecyclerView)findViewById(R.id.rv_walletlist);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -73,14 +102,14 @@ public class WalletListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(WalletListActivity.this, SettingActivity.class);
 
-                startActivityForResult(it, ORDER_REQUEST);
+                startActivityForResult(it, SETTING_REQUEST);
             }
         });
 
         findViewById(R.id.btn_import).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getWalletCount() > MAX_WALLET){
+                if(getWalletCount() >= MAX_WALLET){
                     final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
                     alert.setMessage(R.string.a_walit_max).setPositiveButton(R.string.ok,
                             new DialogInterface.OnClickListener() {
@@ -100,9 +129,10 @@ public class WalletListActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_create).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if(getWalletCount() > MAX_WALLET){
+                if(getWalletCount() >= MAX_WALLET){
                     final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
                     alert.setMessage(R.string.a_walit_max).setPositiveButton(R.string.ok,
                             new DialogInterface.OnClickListener() {
@@ -118,10 +148,9 @@ public class WalletListActivity extends AppCompatActivity {
                     startActivity(it);
                 }
 
-               
             }
         });
-        
+
         initializeData();
         initializeAdapter();
 
@@ -325,21 +354,25 @@ public class WalletListActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == ORDER_REQUEST || requestCode == WALLET_DETAIL_VIEW ){
+        if(requestCode == SETTING_REQUEST || requestCode == WALLET_DETAIL_VIEW ){
 
-            walletList.clear();
-            getWalletList();
-            if(walletList.size() == 0){
-                Intent it = new Intent(WalletListActivity.this, MainActivity.class);
-                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(it);
-                finish();
+              {
 
+                walletList.clear();
+                getWalletList();
+                if(walletList.size() == 0){
+                    Intent it = new Intent(WalletListActivity.this, MainActivity.class);
+                    it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(it);
+                    finish();
+
+                }
+
+                mAdapter.setWalletList(walletList);
             }
 
-            mAdapter.setWalletList(walletList);
 
-        } else if(requestCode == SEND_REQUEST && resultCode == Constants.RssultCode.SEND){
+        } else if(requestCode == SEND_REQUEST && resultCode == Constants.ResultCode.SEND){
 
             Intent it = new Intent( WalletListActivity.this, WalletActivity.class);
             it.putExtra(Constants.Invoke.HISTORY, mWalletIdx);
@@ -378,9 +411,24 @@ public class WalletListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        unregisterChangeLangReceiver();
+        super.onDestroy();
+    }
+
     public interface ClickListener {
         void onSendClicked(int postion);
         void onReceivedClicked(int postion);
         void onItemClicked(int postion);
+    }
+
+    private void unregisterChangeLangReceiver() {
+        unregisterReceiver(changeLanguageReceiver);
+    }
+
+    private void registerChangeLangdReceiver() {
+        IntentFilter intentFilter = new IntentFilter(Constants.Invoke.BROAD_CHANGE_LANG);
+        registerReceiver(changeLanguageReceiver, intentFilter);
     }
 }

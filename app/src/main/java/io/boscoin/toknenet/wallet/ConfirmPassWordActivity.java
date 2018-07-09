@@ -23,6 +23,8 @@ import java.security.GeneralSecurityException;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class ConfirmPassWordActivity extends AppCompatActivity {
 
@@ -57,6 +59,9 @@ public class ConfirmPassWordActivity extends AppCompatActivity {
         Log.e(TAG,"key = "+mBosKey);
         mDbOpenHelper.close();
         cursor.close();
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         initUI();
     }

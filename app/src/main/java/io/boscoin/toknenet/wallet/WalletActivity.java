@@ -6,7 +6,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,13 +23,13 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
-import io.boscoin.toknenet.wallet.adapter.AllHisViewAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Account;
 import io.boscoin.toknenet.wallet.model.Payments;
 import io.boscoin.toknenet.wallet.utils.DetailDialog;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class WalletActivity extends AppCompatActivity implements
         AllHistoryFragment.OnListAllFragInteractionListener, SendHistoryFragment.OnListSendFragInteractionListener
@@ -66,6 +65,9 @@ public class WalletActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_wallet);
 
         mContext = this;
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         initUI();
 
@@ -383,9 +385,9 @@ public class WalletActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == EDIT_REQUEST && resultCode == Constants.RssultCode.CHANGE_NAME){
+        if(requestCode == EDIT_REQUEST && resultCode == Constants.ResultCode.CHANGE_NAME){
             checkWallet();
-        } else if(requestCode == EDIT_REQUEST && resultCode == Constants.RssultCode.DELETE_WALLET){
+        } else if(requestCode == EDIT_REQUEST && resultCode == Constants.ResultCode.DELETE_WALLET){
             finish();
         } else if(requestCode == SEND_REQUEST){
 

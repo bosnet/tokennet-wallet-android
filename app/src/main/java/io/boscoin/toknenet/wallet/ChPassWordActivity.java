@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
 public class ChPassWordActivity extends AppCompatActivity {
@@ -45,7 +48,8 @@ public class ChPassWordActivity extends AppCompatActivity {
         mIdx = it.getLongExtra(Constants.Invoke.EDIT,0);
         mKey = it.getStringExtra(Constants.Invoke.PASSWORD);
 
-
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         initUI();
     }
@@ -59,7 +63,54 @@ public class ChPassWordActivity extends AppCompatActivity {
         });
 
         editNew = findViewById(R.id.new_pw);
+        editNew.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String newPw = s.toString();
+                if(Utils.isPasswordValid(newPw) ){
+                    mTvPwNone.setVisibility(View.GONE);
+                }else{
+                    mTvPwNone.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+
         editConfirm = findViewById(R.id.confirm_pw);
+
+        editConfirm.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String cPw = s.toString();
+                mTvPwMatch.setVisibility(View.GONE);
+                if(!Utils.isPasswordValid(cPw) ){
+                    mTvPwMatch.setText(R.string.rule_pw);
+                    mTvPwMatch.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         mTitle = findViewById(R.id.title);
         mTitle.setText(R.string.change_wallet_pw);
 
@@ -92,25 +143,16 @@ public class ChPassWordActivity extends AppCompatActivity {
 
         if(!newPw.equals(confirmPw)){
 
-            setErrPwMatch();
+
+            mTvPwMatch.setText(R.string.error_match_pw);
+            mTvPwMatch.setVisibility(View.VISIBLE);
             editConfirm.requestFocus();
             return;
         }
 
-        if(!Utils.isPasswordValid(newPw) || !Utils.isPasswordValid(confirmPw)){
-            final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-            alert.setMessage(R.string.error_pw).setCancelable(false).setPositiveButton(R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            editNew.requestFocus();
 
-                        }
-                    });
-            AlertDialog dialog = alert.create();
-            dialog.show();
-            return;
+        if(Utils.isPasswordValid(newPw) ){
+            mTvPwNone.setVisibility(View.GONE);
         }
 
 

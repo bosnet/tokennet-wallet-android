@@ -1,6 +1,8 @@
 package io.boscoin.toknenet.wallet;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,10 +12,12 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,8 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.AddressBook;
 import io.boscoin.toknenet.wallet.utils.RecyclerViewItemClickListener;
+import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class ContactActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -47,6 +53,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     public interface MenuClickListener {
         void onEditClicked(int postion);
         void onSendClicked(int postion);
+        void onCopyClicked(int postion);
         void onDeleteClicked(int postion);
     }
 
@@ -58,9 +65,12 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         mContext = this;
 
         Intent it = getIntent();
-        //wallet
+
         mWalletIdx = it.getLongExtra(Constants.Invoke.ADDRESS_BOOK,0);
         mIsFromSend = it.getBooleanExtra(Constants.Invoke.SEND,false);
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         initUI();
     }
@@ -101,7 +111,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.add_contact).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getAddressBookCount() > 100){
+                if(getAddressBookCount() >= MAX_ADDRESS){
                     final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
                     alert.setMessage(R.string.a_address_max).setPositiveButton(R.string.ok,
                             new DialogInterface.OnClickListener() {
@@ -158,6 +168,15 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 @Override
+                public void onCopyClicked(int postion) {
+
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("contact-address", bookList.get(postion).getAddress());
+                    clipboard.setPrimaryClip(clipData);
+                    Toast.makeText(mContext, mContext.getString(R.string.toast_text_clipboard_address), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
                 public void onDeleteClicked(int postion) {
                     confirmDelete(postion);
                 }
@@ -172,7 +191,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
                     Intent it = new Intent();
                     it.putExtra(Constants.Invoke.SEND, bookList.get(position).getAddress());
-                    setResult(Constants.RssultCode.ADDRESS,it);
+                    setResult(Constants.ResultCode.ADDRESS,it);
                     finish();
 
                 }
@@ -317,6 +336,14 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                         it.putExtra(Constants.Invoke.SEND, mWalletIdx);
                         it.putExtra(Constants.Invoke.PUBKEY, bookList.get(postion).getAddress());
                         startActivity(it);
+                    }
+
+                    @Override
+                    public void onCopyClicked(int postion) {
+                        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        ClipData clipData = ClipData.newPlainText("contact-address", bookList.get(postion).getAddress());
+                        clipboard.setPrimaryClip(clipData);
+                        Toast.makeText(mContext, mContext.getString(R.string.toast_text_clipboard_address), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

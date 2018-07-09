@@ -73,6 +73,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
                                 listenerWeakReference.get().onSendClicked(position);
                                 break;
 
+                            case R.id.navi_copy:
+
+                                listenerWeakReference.get().onCopyClicked(position);
+                                break;
+
                             case R.id.navi_del:
 
                                 listenerWeakReference.get().onDeleteClicked(position);

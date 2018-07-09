@@ -1,9 +1,15 @@
 package io.boscoin.toknenet.wallet.utils;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.v4.content.IntentCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -26,6 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -378,6 +385,26 @@ public class Utils {
     }
 
 
+
+    public static void changeLanguage(Context context, String lang){
+        Locale mLocale = new Locale(lang);
+        Configuration config = new Configuration();
+        config.locale = mLocale;
+        context.getResources().updateConfiguration(config, null);
+
+
+
+
+    }
+
+    public static void restartApp(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+        ComponentName componentName = intent.getComponent();
+        Intent mainIntent = IntentCompat.makeRestartActivityTask(componentName);
+        context.startActivity(mainIntent);
+        System.exit(0);
+    }
 
 
 

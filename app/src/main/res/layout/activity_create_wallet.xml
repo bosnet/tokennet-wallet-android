@@ -149,8 +149,8 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line2"
         android:layout_marginTop="8dp"
-        android:text="@string/error_no_pw"
-        android:visibility="gone"/>
+        android:text="@string/rule_pw"
+        android:visibility="visible"/>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/comfirm_layout"
@@ -209,7 +209,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="30dp"
         android:text="@string/next"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"

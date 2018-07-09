@@ -22,6 +22,7 @@ import io.boscoin.toknenet.wallet.adapter.WalletOrderAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Wallet;
+import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class WalletOrderActivity extends AppCompatActivity {
@@ -42,6 +43,15 @@ public class WalletOrderActivity extends AppCompatActivity {
         mContext = this;
 
         setContentView(R.layout.activity_wallet_order);
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+        initUI();
+
+    }
+
+    private void initUI() {
         RecyclerView walletRV = findViewById(R.id.rv_worder_list);
         walletRV.setLayoutManager(new LinearLayoutManager(this));
 
@@ -77,7 +87,7 @@ public class WalletOrderActivity extends AppCompatActivity {
 
                     ordering --;
                     mDbOpenHelper.updateColumnWallet(w.getWalletId(),w.getWalletName(),w.getWalletAccountId(),
-                    w.getWalletKey(),ordering,w.getWalletBalance(),w.getWalletTime());
+                            w.getWalletKey(),ordering,w.getWalletBalance(),w.getWalletTime());
                 }
                 mDbOpenHelper.close();
                 WalletPreference.setWalletIsChangeOrder(mContext,true);

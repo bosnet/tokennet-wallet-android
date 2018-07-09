@@ -96,6 +96,7 @@ Each wallet need to set a password</string>
     <string name="enter_pub_address">Input Public Address</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_send">Send</string>
+    <string name="menu_copy">Copy</string>
     <string name="menu_delete">Delete</string>
     <string name="edit_no">Can not edit Public Address</string>
     <string name="delete_title">Are you sure you want to delete it?</string>
@@ -160,6 +161,9 @@ Secret Seed securely</string>
     <string name="d_walit">Please Wait</string>
     <string name="a_walit_max">You can only create up to 100\nwallets</string>
     <string name="a_address_max">You can only create up to 100\nContacts</string>
+    <string name="change_eng">English</string>
+    <string name="change_ko">Korean</string>
+    <string name="rule_pw">Minimum 8 charaters of (upper,lower case,special character)</string>
 
     <string name="error_no_name">Input Wallet Name</string>
     <string name="error_no_pw">Input Your Password</string>
@@ -182,64 +186,9 @@ numbers, and special characters.</string>
     <string name="error_no_count_address">Need to create Contacts</string>
 
 
-
-
     <string name="bos_p_f">BOS Platform Foundation</string>
     <string name="wellcome_t">Welcome to</string>
     <string name="bos_tk_w">BOScoin Tokennet Wallet</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <string name="prompt_email">Email</string>

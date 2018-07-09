@@ -33,6 +33,7 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
 public class CreateWalletActivity extends AppCompatActivity {
@@ -71,6 +72,16 @@ public class CreateWalletActivity extends AppCompatActivity {
         mContext = this;
 
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+
+
+        initUI();
+
+    }
+
+    private void initUI() {
         mlayoutName = findViewById(R.id.input_wallet_name);
         mlayoutPw = findViewById(R.id.pw_layout);
         mlayoutConfirm = findViewById(R.id.comfirm_layout);
@@ -188,15 +199,37 @@ public class CreateWalletActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String sPw = s.toString();
-                if(sPw.length() > 0){
+
+                mTvPwMatch.setVisibility(View.GONE);
+                if(Utils.isPasswordValid(sPw) ){
                     mTvPwNone.setVisibility(View.GONE);
+                }else{
+                    mTvPwNone.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        mContext = this;
+        mEConfirmPW.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String confirmPw = s.toString();
+                mTvPwMatch.setVisibility(View.GONE);
+                if(!Utils.isPasswordValid(confirmPw) ){
+                    mTvPwMatch.setText(R.string.rule_pw);
+                    mTvPwMatch.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 
@@ -204,7 +237,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.VISIBLE);
         mTvLengthErr.setVisibility(View.GONE);
-        mTvPwNone.setVisibility(View.GONE);
+
         mTvPwMatch.setVisibility(View.GONE);
     }
 
@@ -212,7 +245,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.VISIBLE);
-        mTvPwNone.setVisibility(View.GONE);
+
         mTvPwMatch.setVisibility(View.GONE);
     }
 
@@ -220,7 +253,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameNone.setVisibility(View.VISIBLE);
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.GONE);
-        mTvPwNone.setVisibility(View.GONE);
+
         mTvPwMatch.setVisibility(View.GONE);
     }
 
@@ -228,7 +261,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.GONE);
-        mTvPwNone.setVisibility(View.VISIBLE);
+
         mTvPwMatch.setVisibility(View.GONE);
     }
 
@@ -236,7 +269,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.GONE);
-        mTvPwNone.setVisibility(View.GONE);
+
         mTvPwMatch.setVisibility(View.VISIBLE);
     }
 
@@ -244,7 +277,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.GONE);
-        mTvPwNone.setVisibility(View.GONE);
+
         mTvPwMatch.setVisibility(View.GONE);
     }
 
@@ -293,7 +326,9 @@ public class CreateWalletActivity extends AppCompatActivity {
 
         if(!wPw1.equals(wPw2)){
 
-            setErrPwMatch();
+
+            mTvPwMatch.setText(R.string.error_match_pw);
+            mTvPwMatch.setVisibility(View.VISIBLE);
             mEConfirmPW.requestFocus();
             return;
         }

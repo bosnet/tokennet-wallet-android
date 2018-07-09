@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.stellar.sdk.KeyPair;
@@ -22,10 +23,12 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.SendDialogPw;
+import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class NoticeQRActivity extends AppCompatActivity {
 
-    private static final String TAG = "NoticeActivity";
+
 
     private SendDialogPw mPwDialog;
     private Context mContext;
@@ -37,6 +40,7 @@ public class NoticeQRActivity extends AppCompatActivity {
     private DbOpenHelper mDbOpenHelper;
     private String mName;
     private static final  int KEY_REQUEST = 10;
+    private ImageView mIcImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,9 @@ public class NoticeQRActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_notice);
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         initUI();
     }
@@ -95,6 +102,11 @@ public class NoticeQRActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        mIcImg = findViewById(R.id.ic_notice);
+        if(checkBos){
+            mIcImg.setBackgroundResource(R.drawable.ic_icon_lock);
+        }
 
     }
 
@@ -157,7 +169,7 @@ public class NoticeQRActivity extends AppCompatActivity {
             String dec =  AESCrypt.decrypt(seedkey,tmp2);
             keyPair = KeyPair.fromSecretSeed(dec);
             mSeed = new String(keyPair.getSecretSeed());
-            Log.e(TAG, "seed key = "+mSeed);
+
             tvErrView.setVisibility(View.GONE);
             mPwDialog.dismiss();
             ArrayList<String> info = new ArrayList<String>();

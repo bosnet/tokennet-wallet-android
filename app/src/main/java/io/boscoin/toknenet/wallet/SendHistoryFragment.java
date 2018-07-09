@@ -29,7 +29,7 @@ import io.boscoin.toknenet.wallet.model.Payments;
 
 public class SendHistoryFragment extends Fragment {
 
-    private static final String TAG = "SendHistoryFragment";
+
     private OnListSendFragInteractionListener mListener;
     private String mPubkey;
     private SwipeRefreshLayout mSwipeRefreshLayout;

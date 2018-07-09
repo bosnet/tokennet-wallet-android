@@ -1,7 +1,6 @@
 package io.boscoin.toknenet.wallet;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,19 +9,19 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-
+import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 
 public class EditWalletActivity extends AppCompatActivity {
 
-    private static final String TAG = "EditWalletActivity";
+
     private long mIdx;
     private DbOpenHelper mDbOpenHelper;
     private TextView mTitle;
@@ -51,6 +50,9 @@ public class EditWalletActivity extends AppCompatActivity {
         mDbOpenHelper.close();
         cursor.close();
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +60,7 @@ public class EditWalletActivity extends AppCompatActivity {
 
                     Intent it = new Intent();
                     it.putExtra(Constants.Invoke.EDIT, mChName);
-                    setResult(Constants.RssultCode.CHANGE_NAME, it);
+                    setResult(Constants.ResultCode.CHANGE_NAME, it);
                 }
                 finish();
             }
@@ -68,7 +70,7 @@ public class EditWalletActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == EDIT_REQUEST_NAME && resultCode == Constants.RssultCode.CHANGE_NAME){
+        if(requestCode == EDIT_REQUEST_NAME && resultCode == Constants.ResultCode.CHANGE_NAME){
             mChName = data.getStringExtra(Constants.Invoke.EDIT);
 
 
@@ -151,7 +153,7 @@ public class EditWalletActivity extends AppCompatActivity {
         mDbOpenHelper.deleteColumnWallet(mIdx);
 
         mDbOpenHelper.close();
-        setResult(Constants.RssultCode.DELETE_WALLET);
+        setResult(Constants.ResultCode.DELETE_WALLET);
         finish();
 
     }
@@ -164,7 +166,7 @@ public class EditWalletActivity extends AppCompatActivity {
 
                     Intent it = new Intent();
                     it.putExtra(Constants.Invoke.EDIT, mChName);
-                    setResult(Constants.RssultCode.CHANGE_NAME, it);
+                    setResult(Constants.ResultCode.CHANGE_NAME, it);
                 }
             }
         }

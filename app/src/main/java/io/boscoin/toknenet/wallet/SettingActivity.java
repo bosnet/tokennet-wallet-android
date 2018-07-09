@@ -10,10 +10,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class SettingActivity extends AppCompatActivity {
 
+    private static final String TAG = "SettingActivity";
     private Context mContext;
+    private static final int LANGUAGE_REQUEST = 20;
+    private static boolean mChangeLang = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +28,19 @@ public class SettingActivity extends AppCompatActivity {
 
         mContext = this;
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+        initUI();
+
+
+    }
+
+    private void initUI() {
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });
@@ -33,8 +49,8 @@ public class SettingActivity extends AppCompatActivity {
         ti.setText(R.string.title_activity_settings);
 
 
-       TextView tvVersion = findViewById(R.id.tv_version);
-       tvVersion.setText("BOScoin wallet Version: "+getAppVersion());
+        TextView tvVersion = findViewById(R.id.tv_version);
+        tvVersion.setText("BOScoin wallet Version: "+getAppVersion());
     }
 
     private String getAppVersion() {
@@ -60,6 +76,12 @@ public class SettingActivity extends AppCompatActivity {
 
     public void changeLanguage(View view) {
 
+
+        Intent it = new Intent(SettingActivity.this, LanguageActivity.class);
+
+        startActivity(it);
+
+
     }
 
     public void viewPreCaution(View view) {
@@ -67,4 +89,23 @@ public class SettingActivity extends AppCompatActivity {
         it.putExtra(Constants.Invoke.SEITING, true);
         startActivity(it);
     }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

@@ -10,6 +10,7 @@ public class WalletPreference {
 
     private static final String WALLET_IS_CHANGE_ORDER = "wallet.change.order";
     private static final String SKIP_CAUTIONS = "wallet.skip.caution";
+    private static final String SETTING_LANG = "wallet.setting.language";
 
 
     public static void defaultPreference(Context context) {
@@ -33,6 +34,15 @@ public class WalletPreference {
 
     public static void setSkipCaution(Context context, boolean set) {
         setBoolean(context, SKIP_CAUTIONS, set);
+    }
+
+
+    public static void setWalletLanguage(Context context, String lang) {
+        setString(context, SETTING_LANG, lang);
+    }
+
+    public static String getWalletLanguage(Context context) {
+        return getString(context,SETTING_LANG, "");
     }
 
     public static void setBoolean(Context context, String key, boolean value) {

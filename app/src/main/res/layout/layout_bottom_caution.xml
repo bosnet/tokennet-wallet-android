@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="28dp"
         android:button="@null"
-        android:background="@drawable/item_check"/>
+        android:background="@drawable/item_check" />
 
     <TextView
         android:id="@+id/txt_caution"

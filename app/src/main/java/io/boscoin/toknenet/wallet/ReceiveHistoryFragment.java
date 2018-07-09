@@ -28,7 +28,7 @@ import io.boscoin.toknenet.wallet.model.Payments;
 
 public class ReceiveHistoryFragment extends Fragment {
 
-    private static final String TAG = "ReceiveHistoryFragment";
+
 
     private OnListReceiveFragInteractionListener mListener;
     private String mPubkey;

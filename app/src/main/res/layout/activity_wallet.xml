@@ -77,14 +77,15 @@
 
         <ImageButton
             android:id="@+id/btn_copy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="14dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tv_balances"
             android:layout_toRightOf="@+id/tv_pub_key"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/ic_icon_copy_white"
+            android:src="@drawable/ic_icon_copy_white"
+            android:background="@drawable/bg_box"
             android:onClick="addressCopy"/>
         
         <LinearLayout

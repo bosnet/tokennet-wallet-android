@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="144dp"
-        android:background="@drawable/ic_icon_lock"/>
+        android:background="@drawable/ic_icon_pre_lock"/>
 
     <ImageButton
         android:id="@+id/btn_cancel"

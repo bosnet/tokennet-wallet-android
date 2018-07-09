@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class PreCautionTwoActivity extends AppCompatActivity {
@@ -43,6 +44,17 @@ public class PreCautionTwoActivity extends AppCompatActivity {
         Intent it = getIntent();
         isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+        initUI();
+
+
+        registerFinishedReceiver();
+
+    }
+
+    private void initUI() {
         if(!isSetting){
             mCheck = findViewById(R.id.check);
             mCheck.setVisibility(View.VISIBLE);
@@ -116,16 +128,15 @@ public class PreCautionTwoActivity extends AppCompatActivity {
 
                     finish();
                 }else{
-                    setResult(Constants.RssultCode.FINISH);
+                    setResult(Constants.ResultCode.FINISH);
                     finish();
                 }
 
             }
         });
 
-        registerFinishedReceiver();
-
     }
+
     @Override
     protected void onDestroy() {
         unregisterFinishedReceiver();
@@ -144,8 +155,8 @@ public class PreCautionTwoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(resultCode == Constants.RssultCode.FINISH){
-            setResult(Constants.RssultCode.FINISH);
+        if(resultCode == Constants.ResultCode.FINISH){
+            setResult(Constants.ResultCode.FINISH);
             finish();
         }else{
             super.onActivityResult(requestCode, resultCode, data);
@@ -157,7 +168,7 @@ public class PreCautionTwoActivity extends AppCompatActivity {
         mDbOpenHelper = new DbOpenHelper(mContext);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
         int count = mDbOpenHelper.getWalletCount();
-        Log.e(TAG, "count = "+count);
+
         return count;
     }
 }

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +16,7 @@ import android.widget.TextView;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class ChWalletNameActivity extends AppCompatActivity {
 
@@ -51,6 +51,9 @@ public class ChWalletNameActivity extends AppCompatActivity {
         mWalletName = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_NAME));
         mDbOpenHelper.close();
         cursor.close();
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         initUI();
 
@@ -146,7 +149,7 @@ public class ChWalletNameActivity extends AppCompatActivity {
         mDbOpenHelper.close();
         Intent it = new Intent();
         it.putExtra(Constants.Invoke.EDIT, mChName);
-        setResult(Constants.RssultCode.CHANGE_NAME, it);
+        setResult(Constants.ResultCode.CHANGE_NAME, it);
         finish();
     }
 

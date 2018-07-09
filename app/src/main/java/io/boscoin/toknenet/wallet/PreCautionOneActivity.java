@@ -16,10 +16,11 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class PreCautionOneActivity extends AppCompatActivity {
-    private static final String TAG = "PreCautionOneActivity";
+
     private CheckBox mCheck;
     private Context mContext;
     private boolean isSetting;
@@ -44,6 +45,17 @@ public class PreCautionOneActivity extends AppCompatActivity {
         Intent it = getIntent();
         isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+        initUI();
+
+
+
+      registerFinishedReceiver();
+    }
+
+    private void initUI() {
         if(!isSetting){
             mCheck = findViewById(R.id.check);
             mCheck.setVisibility(View.VISIBLE);
@@ -52,7 +64,7 @@ public class PreCautionOneActivity extends AppCompatActivity {
             mCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Log.e(TAG,"check = "+isChecked);
+
                     if(mCheck.isChecked()){
 
                         final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
@@ -94,36 +106,33 @@ public class PreCautionOneActivity extends AppCompatActivity {
 
                 Intent it = new Intent(PreCautionOneActivity.this,PreCautionTwoActivity.class);
                 it.putExtra(Constants.Invoke.SEITING, isSetting);
-                //startActivity(it);
+
                 startActivityForResult(it, REQUEST_FINISH);
             }
         });
 
 
 
-       findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               if(!isSetting){
-                   WalletPreference.setSkipCaution(mContext,false);
-                   if(getWalleetCount() > 0){
-                       Intent it = new Intent(PreCautionOneActivity.this,WalletListActivity.class);
-                       startActivity(it);
-                   }else{
-                       Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
-                       startActivity(it);
-                   }
+        findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isSetting){
+                    WalletPreference.setSkipCaution(mContext,false);
+                    if(getWalleetCount() > 0){
+                        Intent it = new Intent(PreCautionOneActivity.this,WalletListActivity.class);
+                        startActivity(it);
+                    }else{
+                        Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
+                        startActivity(it);
+                    }
 
-                   finish();
-               }else{
-                   finish();
-               }
+                    finish();
+                }else{
+                    finish();
+                }
 
-           }
-       });
-
-
-      registerFinishedReceiver();
+            }
+        });
     }
 
     @Override
@@ -144,7 +153,7 @@ public class PreCautionOneActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == Constants.RssultCode.FINISH){
+        if(resultCode == Constants.ResultCode.FINISH){
             finish();
         }else{
             super.onActivityResult(requestCode, resultCode, data);
@@ -156,7 +165,7 @@ public class PreCautionOneActivity extends AppCompatActivity {
         mDbOpenHelper = new DbOpenHelper(mContext);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
         int count = mDbOpenHelper.getWalletCount();
-        Log.e(TAG, "count = "+count);
+
         return count;
     }
 }

@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/wallet_name"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="@dimen/receive_wallet_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/wallet_name"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="@dimen/receive_wallet_qr_top"/>
 
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_marginRight="43dp"
         android:layout_marginLeft="43dp"
         android:layout_below="@+id/img_qr"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/receive_wallet_qr_b_top"
         android:maxLines="3"
         android:gravity="center_horizontal"
         tools:text="GOSPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSD
@@ -65,7 +65,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
         android:layout_below="@+id/txt_address"
         android:inputType="numberDecimal"
         android:singleLine="true"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="@dimen/receive_wallet_option_top"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@null"
@@ -106,7 +106,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
         android:layout_marginRight="20dp"
         android:orientation="horizontal"
         android:layout_above="@+id/bottom_nav"
-        android:layout_marginBottom="32dp">
+        android:layout_marginBottom="@dimen/receive_wallet_bottom">
         
         <Button
             android:layout_width="0dp"

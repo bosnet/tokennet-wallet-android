@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class PreCautionThreeActivity extends AppCompatActivity {
@@ -35,7 +36,14 @@ public class PreCautionThreeActivity extends AppCompatActivity {
         Intent it = getIntent();
         isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
 
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
+        initUI();
+
+    }
+
+    private void initUI() {
         mNext = findViewById(R.id.caution_next);
         mNext.setText(R.string.ok);
         findViewById(R.id.caution_next).setOnClickListener(new View.OnClickListener() {
@@ -55,7 +63,7 @@ public class PreCautionThreeActivity extends AppCompatActivity {
                     }
 
                 }else{
-                    setResult(Constants.RssultCode.FINISH);
+                    setResult(Constants.ResultCode.FINISH);
                     finish();
                 }
 
@@ -120,7 +128,7 @@ public class PreCautionThreeActivity extends AppCompatActivity {
 
                     finish();
                 }else{
-                    setResult(Constants.RssultCode.FINISH);
+                    setResult(Constants.ResultCode.FINISH);
                     finish();
                 }
 

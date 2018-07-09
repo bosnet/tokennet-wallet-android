@@ -18,6 +18,7 @@ import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.AddressBook;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class EditContactActivity extends AppCompatActivity {
 
@@ -41,6 +42,9 @@ public class EditContactActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         mBook = (AddressBook) it.getSerializableExtra(Constants.Invoke.ADDRESS_BOOK);
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
 
         initUI();
     }
@@ -74,7 +78,7 @@ public class EditContactActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String name = s.toString();
-                Log.e(TAG, "afterTextChanged");
+
                 if(TextUtils.isEmpty(name) || !Utils.isNameValid(name)){
                     mErrName.setText(R.string.error_book_length);
                     mErrName.setVisibility(View.VISIBLE);
@@ -89,7 +93,7 @@ public class EditContactActivity extends AppCompatActivity {
                     do{
 
                         if(name.equals(mCursor.getString(mCursor.getColumnIndex(Constants.DB.BOOK_NAME)))){
-                            Log.e(TAG,"값이 존재");
+
                             mErrName.setText(R.string.error_already);
                             mErrName.setVisibility(View.VISIBLE);
                             mDbOpenHelper.close();

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class ConfirmQRActivity extends AppCompatActivity {
 
@@ -42,6 +43,10 @@ public class ConfirmQRActivity extends AppCompatActivity {
 
         mName = mInfo.get(0);
         mKey = mInfo.get(1);
+
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
         iniUI();
 
     }
