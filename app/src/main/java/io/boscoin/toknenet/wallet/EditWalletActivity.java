@@ -13,8 +13,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.toknenet.wallet.model.Wallet;
 import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
@@ -34,9 +38,23 @@ public class EditWalletActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_wallet);
+
 
         mContext =  this;
+
+        setLanguage();
+
+        initUI();
+
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void initUI() {
+        setContentView(R.layout.activity_edit_wallet);
 
         Intent it = getIntent();
         mIdx = it.getLongExtra(Constants.Invoke.EDIT,0);
@@ -50,8 +68,7 @@ public class EditWalletActivity extends AppCompatActivity {
         mDbOpenHelper.close();
         cursor.close();
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +82,6 @@ public class EditWalletActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     @Override
@@ -152,10 +168,36 @@ public class EditWalletActivity extends AppCompatActivity {
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
         mDbOpenHelper.deleteColumnWallet(mIdx);
 
+        int maxCount = mDbOpenHelper.getWalletCount();
         mDbOpenHelper.close();
+
+        reOrderingWallet(maxCount);
+
         setResult(Constants.ResultCode.DELETE_WALLET);
         finish();
 
+    }
+
+    private void reOrderingWallet(int divCount) {
+        mDbOpenHelper = new DbOpenHelper(mContext);
+        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+
+
+        Cursor cursor = mDbOpenHelper.getAllColumnsWallet();
+
+        if(cursor.getCount() > 0){
+            do{
+
+                int wOrder = cursor.getInt(cursor.getColumnIndex(Constants.DB.WALLET_ORDER));
+                long idx = cursor.getLong(cursor.getColumnIndex("_id"));
+
+                if( wOrder >= divCount){
+                    mDbOpenHelper.updateColumnWalletOrder(idx,Integer.toString( --wOrder));
+                }
+            }while (cursor.moveToNext());
+
+        }
+        mDbOpenHelper.close();
     }
 
     @Override

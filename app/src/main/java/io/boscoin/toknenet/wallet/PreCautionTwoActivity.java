@@ -37,15 +37,12 @@ public class PreCautionTwoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pre_caution_two);
+
 
         mContext = this;
 
-        Intent it = getIntent();
-        isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
+        setLanguage();
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
 
         initUI();
 
@@ -54,7 +51,19 @@ public class PreCautionTwoActivity extends AppCompatActivity {
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+
+    }
+
     private void initUI() {
+        setContentView(R.layout.activity_pre_caution_two);
+
+        Intent it = getIntent();
+        isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
+
+
         if(!isSetting){
             mCheck = findViewById(R.id.check);
             mCheck.setVisibility(View.VISIBLE);

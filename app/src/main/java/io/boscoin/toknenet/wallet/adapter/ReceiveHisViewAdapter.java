@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ReceiveHisViewAdapter extends RecyclerView.Adapter<ReceiveHisViewAdapter.ViewHolder> {
 
-    private static final String TAG = "ReceiveHisViewAdapter";
+
     private ArrayList<Payments.PayRecords> mValues;
     private final OnListReceiveFragInteractionListener mListener;
     private String mPubKey;

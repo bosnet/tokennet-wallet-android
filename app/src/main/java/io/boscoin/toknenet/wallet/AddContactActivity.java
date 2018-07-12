@@ -45,12 +45,11 @@ public class AddContactActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_contact);
+
 
         mContext = this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
 
         initUI();
 
@@ -58,7 +57,15 @@ public class AddContactActivity extends AppCompatActivity {
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+
+        setContentView(R.layout.activity_add_contact);
+
         findViewById(R.id.add_contact).setVisibility(View.INVISIBLE);
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
@@ -101,7 +108,7 @@ public class AddContactActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mName = s.toString();
+                mName = s.toString().trim();
 
                 if(TextUtils.isEmpty(mName)|| !Utils.isNameValid(mName)){
                     mNameEmpty = true;
@@ -156,7 +163,7 @@ public class AddContactActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mPubKey = s.toString();
+                mPubKey = s.toString().trim();
                 if(TextUtils.isEmpty(mPubKey)){
                     mAddressEmpty = true;
                     return;
@@ -200,8 +207,8 @@ public class AddContactActivity extends AppCompatActivity {
 
 
     private void checkInput(){
-        String name = mEName.getText().toString();
-        String address = mEPubKey.getText().toString();
+        String name = mEName.getText().toString().trim();
+        String address = mEPubKey.getText().toString().trim();
 
         if(TextUtils.isEmpty(name)){
             mTvNameErr.setText(R.string.enter_name);

@@ -37,11 +37,26 @@ public class RecoveryQRActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr);
+
         mContext = this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+
+        setLanguage(mContext);
+
+
+
+        initUI();
+
+    }
+
+    private void setLanguage(Context context) {
+        String lang = WalletPreference.getWalletLanguage(context);
+        Utils.changeLanguage(context,lang);
+    }
+
+    private void initUI() {
+
+        setContentView(R.layout.activity_qr);
 
         Intent it = getIntent();
 
@@ -68,13 +83,12 @@ public class RecoveryQRActivity extends AppCompatActivity {
         BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
         try {
             Bitmap bitmap = barcodeEncoder.encodeBitmap(mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_KET)),
-                              BarcodeFormat.QR_CODE, Utils.convertDpToPixel(150,mContext), Utils.convertDpToPixel(150,mContext));
+                    BarcodeFormat.QR_CODE, Utils.convertDpToPixel(150,mContext), Utils.convertDpToPixel(150,mContext));
             ImageView imageViewQrCode = (ImageView) findViewById(R.id.img_qr);
             imageViewQrCode.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
-
     }
 
     public void viewWallet(View view) {

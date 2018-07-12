@@ -36,20 +36,27 @@ public class EditContactActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_contact);
+
 
         mContext = this;
 
-        Intent it = getIntent();
-        mBook = (AddressBook) it.getSerializableExtra(Constants.Invoke.ADDRESS_BOOK);
-
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
 
         initUI();
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+        setContentView(R.layout.activity_edit_contact);
+
+        Intent it = getIntent();
+        mBook = (AddressBook) it.getSerializableExtra(Constants.Invoke.ADDRESS_BOOK);
+
+
         findViewById(R.id.add_contact).setVisibility(View.GONE);
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +84,7 @@ public class EditContactActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String name = s.toString();
+                String name = s.toString().trim();
 
                 if(TextUtils.isEmpty(name) || !Utils.isNameValid(name)){
                     mErrName.setText(R.string.error_book_length);

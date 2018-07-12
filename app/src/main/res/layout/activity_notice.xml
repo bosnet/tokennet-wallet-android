@@ -18,7 +18,7 @@
         app:layout_constraintTop_toBottomOf="parent"
         android:layout_marginTop="156dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="106dp"
+        android:layout_marginLeft="@dimen/notice_img_l_margin"
         android:background="@drawable/ic_icon_nocamera"/>
 
     <ImageView
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="parent"
         android:layout_marginTop="156dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="105dp"
+        android:layout_marginRight="@dimen/notice_img_r_margin"
         android:background="@drawable/ic_icon_thief"/>
 
     <TextView

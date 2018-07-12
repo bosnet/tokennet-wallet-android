@@ -42,16 +42,23 @@ public class WalletOrderActivity extends AppCompatActivity {
 
         mContext = this;
 
-        setContentView(R.layout.activity_wallet_order);
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
+
 
         initUI();
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+
+        setContentView(R.layout.activity_wallet_order);
+
         RecyclerView walletRV = findViewById(R.id.rv_worder_list);
         walletRV.setLayoutManager(new LinearLayoutManager(this));
 

@@ -40,21 +40,28 @@ public class ChPassWordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ch_pass_word);
+
 
         mContext = this;
+
+        setLanguage();
+
+        initUI();
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void initUI() {
+
+        setContentView(R.layout.activity_ch_pass_word);
 
         Intent it = getIntent();
         mIdx = it.getLongExtra(Constants.Invoke.EDIT,0);
         mKey = it.getStringExtra(Constants.Invoke.PASSWORD);
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
-        initUI();
-    }
-
-    private void initUI() {
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +83,7 @@ public class ChPassWordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String newPw = s.toString();
+                String newPw = s.toString().trim();
                 if(Utils.isPasswordValid(newPw) ){
                     mTvPwNone.setVisibility(View.GONE);
                 }else{
@@ -102,7 +109,7 @@ public class ChPassWordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String cPw = s.toString();
+                String cPw = s.toString().trim();
                 mTvPwMatch.setVisibility(View.GONE);
                 if(!Utils.isPasswordValid(cPw) ){
                     mTvPwMatch.setText(R.string.rule_pw);
@@ -131,8 +138,8 @@ public class ChPassWordActivity extends AppCompatActivity {
     }
 
     public void checkPassWord(View view) {
-        String newPw = editNew.getText().toString();
-        String confirmPw = editConfirm.getText().toString();
+        String newPw = editNew.getText().toString().trim();
+        String confirmPw = editConfirm.getText().toString().trim();
 
         if(TextUtils.isEmpty(newPw) ){
            

@@ -14,7 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 public class AESCrypt {
-    private static final String TAG = "AESCrypt";
+
 
     //AESCrypt-ObjC uses CBC and PKCS7Padding
     private static final String AES_MODE = "AES/CBC/PKCS7Padding";
@@ -46,7 +46,6 @@ public class AESCrypt {
         digest.update(bytes, 0, bytes.length);
         byte[] key = digest.digest();
 
-        log("SHA-256 key ", key);
 
         SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
         return secretKeySpec;

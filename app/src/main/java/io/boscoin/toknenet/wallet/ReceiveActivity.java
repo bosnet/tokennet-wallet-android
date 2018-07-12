@@ -38,10 +38,11 @@ import javax.validation.Constraint;
 import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class ReceiveActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = "ReceiveActivity";
+
     private long mWalletIdx;
     private DbOpenHelper mDbOpenHelper;
     private Cursor mCursor;
@@ -60,9 +61,31 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_receive);
+
 
         mContext =  this;
+
+
+        setLanguage();
+
+
+
+
+
+
+
+        initUI();
+        setNavBottom();
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void initUI() {
+
+        setContentView(R.layout.activity_receive);
 
         Intent it = getIntent();
 
@@ -96,11 +119,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
             e.printStackTrace();
         }
 
-
         mEAmount = findViewById(R.id.edit_amount);
-
-
-
         mEAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -115,7 +134,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-                String input = s.toString();
+                String input = s.toString().trim();
 
                 if(input.contains(".") && s.charAt(s.length()-1) != '.'){
 
@@ -148,8 +167,6 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
             }
         });
-
-        setNavBottom();
     }
 
     private void createReceiveQR(String amount) {
@@ -231,9 +248,6 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
         it.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(it);
-
-
-
 
     }
 

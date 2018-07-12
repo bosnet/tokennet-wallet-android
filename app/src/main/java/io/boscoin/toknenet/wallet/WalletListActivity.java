@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.adapter.WalletListAdapter;
@@ -78,11 +80,7 @@ public class WalletListActivity extends AppCompatActivity {
 
         mContext = this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
-        setContentView(R.layout.activity_wallet_list);
-
+        setLanguage();
 
 
         initUI();
@@ -91,7 +89,15 @@ public class WalletListActivity extends AppCompatActivity {
         registerChangeLangdReceiver();
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+
+        setContentView(R.layout.activity_wallet_list);
+
         rv=(RecyclerView)findViewById(R.id.rv_walletlist);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);

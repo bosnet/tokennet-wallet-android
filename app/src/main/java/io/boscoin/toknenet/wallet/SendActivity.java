@@ -57,7 +57,7 @@ import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = "SendActivity";
+
     private long mWalletId;
     private String mPubKey, mBosKey, mSeed;
     private EditText editPubkey, editAmmount;
@@ -95,10 +95,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send);
+
 
         mContext = this;
 
+        setLanguage(mContext);
+
+        initUI();
+    }
+
+    private void setLanguage(Context context) {
+        String lang = WalletPreference.getWalletLanguage(context);
+        Utils.changeLanguage(context,lang);
+    }
+
+    private void getWalletResource() {
         Intent it = getIntent();
         mWalletId = it.getLongExtra(Constants.Invoke.SEND, 0);
         mPubKey = it.getStringExtra(Constants.Invoke.PUBKEY);
@@ -112,15 +123,14 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
         mDbOpenHelper.close();
         mCursor.close();
-
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
-        initUI();
     }
 
 
     private void initUI() {
+        setContentView(R.layout.activity_send);
+
+        getWalletResource();
+
         editPubkey = findViewById(R.id.input_address);
         editAmmount = findViewById(R.id.input_ammount);
         mImgDel = findViewById(R.id.del_address);

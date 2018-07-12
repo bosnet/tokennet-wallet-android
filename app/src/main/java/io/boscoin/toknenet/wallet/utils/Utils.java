@@ -327,6 +327,7 @@ public class Utils {
 
     public static String fitDigit(String str)
     {
+
         int dpos = str.indexOf(".");
 
         if(dpos == -1){

@@ -42,19 +42,26 @@ public class ImportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_import);
+
 
         mContext = this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
+
 
         initUI();
 
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+        setContentView(R.layout.activity_import);
+
         eSeedKey = findViewById(R.id.input_seedkey);
         eSeedKey.setImeOptions(EditorInfo.IME_ACTION_DONE);
         eSeedKey.setRawInputType(InputType.TYPE_CLASS_TEXT);

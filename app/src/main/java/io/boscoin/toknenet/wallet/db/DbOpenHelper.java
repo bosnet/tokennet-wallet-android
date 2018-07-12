@@ -55,7 +55,7 @@ public class DbOpenHelper {
 
 	public void close(){
 		mDB.close();
-		mDB = null;
+
 	}
 
 	public SQLiteDatabase getmDB(){
@@ -148,6 +148,11 @@ public class DbOpenHelper {
 		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
 	}
 
+	public boolean updateColumnWalletOrder(long id , String order){
+		ContentValues values = new ContentValues();
+		values.put(DataBases.CreateWalletDB.COL_ORDER, order);
+		return mDB.update(DataBases.CreateWalletDB._TABLENAME, values, "_id="+id, null) > 0;
+	}
 
 	public boolean deleteColumnAddress(long id){
 		return mDB.delete(DataBases.CreateAddressDB._TABLENAME, "_id="+id, null) > 0;
@@ -165,7 +170,13 @@ public class DbOpenHelper {
 	}
 
 	public Cursor getAllColumnsWallet(){
-		return mDB.query(DataBases.CreateWalletDB._TABLENAME, null, null, null, null, null, null);
+
+		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, null,
+				null, null, null, null, null);
+
+		if(c != null && c.getCount() != 0)
+			c.moveToFirst();
+		return c;
 	}
 
 	public Cursor getColumnAddress(long id){
@@ -193,7 +204,7 @@ public class DbOpenHelper {
 	}
 
 
-	public Cursor getColumnWalletName(){
+	public Cursor getAllColumnWalletName(){
 		String[] columns = {Constants.DB.WALLET_NAME};
 
 		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, columns,

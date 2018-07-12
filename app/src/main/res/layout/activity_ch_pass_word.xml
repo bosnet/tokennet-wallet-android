@@ -136,7 +136,7 @@
         android:textStyle="normal"
         android:textColor="@color/white"
         android:textAllCaps="false"
-        android:text="@string/next"
+        android:text="@string/ok"
         android:onClick="checkPassWord"
         />
 

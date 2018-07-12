@@ -129,7 +129,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:textColor="@color/white"
-        android:text="@string/next"
+        android:text="@string/ok"
         android:textAllCaps="false"
         android:layout_below="@+id/line2"
         android:background="@color/pinkish_grey" />
@@ -137,7 +137,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/cerulean"

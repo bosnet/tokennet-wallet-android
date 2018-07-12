@@ -21,19 +21,25 @@ public class CreateNoticeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_notice1);
+
 
         mContext = this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
 
         initUI();
 
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+        setContentView(R.layout.activity_create_notice1);
+
         mCheckMin = findViewById(R.id.check_min);
 
 
@@ -54,7 +60,7 @@ public class CreateNoticeActivity extends AppCompatActivity {
 
                     startActivity(it);
                 }else{
-                    Toast.makeText(getApplicationContext(), R.string.error_all_check, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, R.string.error_all_check, Toast.LENGTH_LONG).show();
                     return;
                 }
             }

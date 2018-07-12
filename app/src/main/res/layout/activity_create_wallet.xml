@@ -159,7 +159,7 @@
         android:layout_below="@+id/line2"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="40dp">
 
     <EditText
         android:id="@+id/confirm_pw"
@@ -209,7 +209,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="@string/next"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"

@@ -33,9 +33,25 @@ public class ConfirmQRActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirm_qr);
+
 
         mContext = this;
+
+        setLanguage();
+
+
+        iniUI();
+
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void iniUI() {
+
+        setContentView(R.layout.activity_confirm_qr);
 
         Intent it = getIntent();
 
@@ -44,14 +60,6 @@ public class ConfirmQRActivity extends AppCompatActivity {
         mName = mInfo.get(0);
         mKey = mInfo.get(1);
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
-        iniUI();
-
-    }
-
-    private void iniUI() {
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

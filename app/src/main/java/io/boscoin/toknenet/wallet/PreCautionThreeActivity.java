@@ -29,21 +29,31 @@ public class PreCautionThreeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pre_caution_tree);
+
+
+
 
         mContext = this;
 
-        Intent it = getIntent();
-        isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
+        setLanguage();
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+
 
         initUI();
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+        setContentView(R.layout.activity_pre_caution_tree);
+
+        Intent it = getIntent();
+        isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
+
         mNext = findViewById(R.id.caution_next);
         mNext.setText(R.string.ok);
         findViewById(R.id.caution_next).setOnClickListener(new View.OnClickListener() {

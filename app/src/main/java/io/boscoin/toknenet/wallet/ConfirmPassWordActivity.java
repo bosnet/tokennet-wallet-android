@@ -45,9 +45,24 @@ public class ConfirmPassWordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ch_wallet_pass_word);
+
 
         mContext = this;
+
+        setLanguage();
+
+
+        initUI();
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void initUI() {
+
+        setContentView(R.layout.activity_ch_wallet_pass_word);
 
         Intent it = getIntent();
         mIdx = it.getLongExtra(Constants.Invoke.EDIT,0);
@@ -60,13 +75,7 @@ public class ConfirmPassWordActivity extends AppCompatActivity {
         mDbOpenHelper.close();
         cursor.close();
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
 
-        initUI();
-    }
-
-    private void initUI() {
         editPw = findViewById(R.id.input_pw);
         mTvErr = findViewById(R.id.txt_err_key);
         mBtnNext = findViewById(R.id.btn_next);

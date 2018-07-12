@@ -27,12 +27,12 @@ public class LanguageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_language);
+
 
         mContext =  this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
+
 
         initUI();
 
@@ -40,7 +40,16 @@ public class LanguageActivity extends AppCompatActivity {
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+
+        setContentView(R.layout.activity_language);
+
+
         mTvTitle = findViewById(R.id.title);
         mTvTitle.setText(R.string.setting_lang);
 
@@ -52,6 +61,9 @@ public class LanguageActivity extends AppCompatActivity {
             mKo.setChecked(true);
         }else if(WalletPreference.getWalletLanguage(mContext).equals(ENG)){
             mEng.setChecked(true);
+        }else{
+            mEng.setChecked(true);
+
         }
 
         mEng.setOnClickListener(new View.OnClickListener() {

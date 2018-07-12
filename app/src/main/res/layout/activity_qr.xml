@@ -21,7 +21,7 @@
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/dark_blue_grey"
-        android:layout_marginTop="119dp"
+        android:layout_marginTop="@dimen/qr_top"
         tools:text="BOS Wallet A01"/>
 
 
@@ -31,14 +31,14 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/title_wallet"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="@dimen/qr_img_top"/>
 
     <RelativeLayout
         android:id="@+id/ly_boskey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_qr"
-        android:layout_marginTop="18dp">
+        android:layout_marginTop="@dimen/qr_img_below_top">
 
 
         <TextView
@@ -77,7 +77,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
         android:layout_below="@+id/ly_boskey"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        android:layout_marginTop="47.8dp"
+        android:layout_marginTop="@dimen/qr_btn_top"
         android:background="@color/cerulean"
         android:onClick="viewWallet"
         android:text="@string/ok"
@@ -101,7 +101,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:layout_below="@+id/btn_view_wallet"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/qr_notice_top"
         android:text="@string/double_check" />
 
 </RelativeLayout>

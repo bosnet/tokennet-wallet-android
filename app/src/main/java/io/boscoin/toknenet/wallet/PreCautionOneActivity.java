@@ -38,24 +38,28 @@ public class PreCautionOneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pre_caution_one);
+
 
         mContext = this;
+
+        setLanguage();
+
+        initUI();
+
+        registerFinishedReceiver();
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void initUI() {
+        setContentView(R.layout.activity_pre_caution_one);
 
         Intent it = getIntent();
         isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
-        initUI();
-
-
-
-      registerFinishedReceiver();
-    }
-
-    private void initUI() {
         if(!isSetting){
             mCheck = findViewById(R.id.check);
             mCheck.setVisibility(View.VISIBLE);

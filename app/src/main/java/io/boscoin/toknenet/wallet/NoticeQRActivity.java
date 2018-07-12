@@ -48,9 +48,32 @@ public class NoticeQRActivity extends AppCompatActivity {
 
         mContext = this;
 
+        setLanguage();
 
+
+        initUI();
+    }
+
+    private void setLanguage() {
         String lang = WalletPreference.getWalletLanguage(mContext);
         Utils.changeLanguage(mContext,lang);
+    }
+
+    private void getWalletInfo(long id){
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+        Cursor cursor = mDbOpenHelper.getColumnWallet(id);
+        mBosKey = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_KET));
+        mName = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_NAME));
+
+        mDbOpenHelper.close();
+        cursor.close();
+
+    }
+
+    private void initUI() {
+
+        setContentView(R.layout.activity_notice);
 
         Intent it = getIntent();
         mIdSeed = it.getLongExtra(Constants.Invoke.QR_SEED,0);
@@ -67,25 +90,7 @@ public class NoticeQRActivity extends AppCompatActivity {
             getWalletInfo(mIdBos);
         }
 
-        setContentView(R.layout.activity_notice);
 
-
-        initUI();
-    }
-
-    private void getWalletInfo(long id){
-        mDbOpenHelper = new DbOpenHelper(this);
-        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-        Cursor cursor = mDbOpenHelper.getColumnWallet(id);
-        mBosKey = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_KET));
-        mName = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_NAME));
-        Log.e(TAG,"key = "+mBosKey);
-        mDbOpenHelper.close();
-        cursor.close();
-
-    }
-
-    private void initUI() {
         mTvTitle = findViewById(R.id.title);
         mTvNoti = findViewById(R.id.noti_1);
         if(checkSeed){

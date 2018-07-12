@@ -38,9 +38,25 @@ public class ChWalletNameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_ch_wallet_name);
+
 
         mContext = this;
+
+        setLanguage();
+
+
+        initUI();
+
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void initUI() {
+
+        setContentView(R.layout.activity_ch_wallet_name);
 
         Intent it = getIntent();
         mIdx = it.getLongExtra(Constants.Invoke.EDIT,0);
@@ -52,14 +68,6 @@ public class ChWalletNameActivity extends AppCompatActivity {
         mDbOpenHelper.close();
         cursor.close();
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
-        initUI();
-
-    }
-
-    private void initUI() {
 
         mTitle = findViewById(R.id.title);
         mTitle.setText(R.string.change_wallet_name);
@@ -86,7 +94,7 @@ public class ChWalletNameActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mChName = s.toString();
+                mChName = s.toString().trim();
                 if(TextUtils.isEmpty(mChName) || !Utils.isNameValid(mChName)){
                     mErrNameLength.setVisibility(View.VISIBLE);
                     mErrAlreadyName.setVisibility(View.GONE);
@@ -96,7 +104,7 @@ public class ChWalletNameActivity extends AppCompatActivity {
                     mDbOpenHelper = new DbOpenHelper(mContext);
                     mDbOpenHelper.open(Constants.DB.MY_WALLETS);
                     mCursor = null;
-                    mCursor = mDbOpenHelper.getColumnWalletName();
+                    mCursor = mDbOpenHelper.getAllColumnWalletName();
                     mIsValidName = true;
                     do{
 

@@ -23,7 +23,7 @@ import io.boscoin.toknenet.wallet.R;
 import io.boscoin.toknenet.wallet.model.AddressBook;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressViewHolder> {
-    private static final String TAG = "AddressAdapter";
+
     private List<AddressBook> mAddBookList;
     private Context mContext;
     private ContactActivity.MenuClickListener listener;

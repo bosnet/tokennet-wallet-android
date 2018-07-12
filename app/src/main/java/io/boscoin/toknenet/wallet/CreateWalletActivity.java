@@ -12,7 +12,6 @@ import android.os.Message;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -41,8 +40,6 @@ public class CreateWalletActivity extends AppCompatActivity {
 
     private static final String SEED_RECOVER = "seedkey-recover";
     private static final String BOS_RECOVER = "boskey-recover";
-    private static final int MAX_WALLET_NAME = 11;
-    private static final int MIN_PASSWORD = 7;
     private static final int MSG_INSERT_COMPLETE = 1;
     private static final int MSG_STOP = 0;
     private static final int MSG_REQUEST_COMPLETE = 0xff;
@@ -67,21 +64,26 @@ public class CreateWalletActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_wallet);
+
 
         mContext = this;
 
-
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
+        setLanguage();
 
 
         initUI();
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
     private void initUI() {
+
+        setContentView(R.layout.activity_create_wallet);
+
         mlayoutName = findViewById(R.id.input_wallet_name);
         mlayoutPw = findViewById(R.id.pw_layout);
         mlayoutConfirm = findViewById(R.id.comfirm_layout);
@@ -149,7 +151,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String wName = s.toString();
+                String wName = s.toString().trim();
                 if(TextUtils.isEmpty(wName)){
                     setErrNameNone();
                 } else if(!Utils.isNameValid(wName)){
@@ -158,7 +160,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                     mDbOpenHelperName = new DbOpenHelper(mContext);
                     mDbOpenHelperName.open(Constants.DB.MY_WALLETS);
                     mCursor = null;
-                    mCursor = mDbOpenHelperName.getColumnWalletName();
+                    mCursor = mDbOpenHelperName.getAllColumnWalletName();
 
                     if(mCursor.getCount() > 0){
                         do{
@@ -198,7 +200,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String sPw = s.toString();
+                String sPw = s.toString().trim();
 
                 mTvPwMatch.setVisibility(View.GONE);
                 if(Utils.isPasswordValid(sPw) ){
@@ -222,7 +224,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String confirmPw = s.toString();
+                String confirmPw = s.toString().trim();
                 mTvPwMatch.setVisibility(View.GONE);
                 if(!Utils.isPasswordValid(confirmPw) ){
                     mTvPwMatch.setText(R.string.rule_pw);
@@ -292,9 +294,9 @@ public class CreateWalletActivity extends AppCompatActivity {
 
     public void createWallet(View view) {
 
-        String wName = mEInputName.getText().toString();
-        String wPw1 = mEInputPW.getText().toString();
-        String wPw2 = mEConfirmPW.getText().toString();
+        String wName = mEInputName.getText().toString().trim();
+        String wPw1 = mEInputPW.getText().toString().trim();
+        String wPw2 = mEConfirmPW.getText().toString().trim();
 
 
 
@@ -579,6 +581,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                 mDbOpenHelper = new DbOpenHelper(mContext);
                 mDbOpenHelper.open(Constants.DB.MY_WALLETS);
                 walletId = mDbOpenHelper.insertColumnWallet(insertName,pubkey,encKey, ++count, "0", time);
+
 
                 handler.sendEmptyMessage(MSG_INSERT_COMPLETE);
                 stopped = false;

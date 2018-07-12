@@ -16,12 +16,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         mContext = this;
 
         String lang = WalletPreference.getWalletLanguage(mContext);
         Utils.changeLanguage(mContext,lang);
+
+        setContentView(R.layout.activity_main);
+
     }
 
     public void makeWallet(View view) {

@@ -60,22 +60,30 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact);
+
 
         mContext = this;
+
+        setLanguage();
+
+
+        initUI();
+    }
+
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
+    private void initUI() {
+
+        setContentView(R.layout.activity_contact);
 
         Intent it = getIntent();
 
         mWalletIdx = it.getLongExtra(Constants.Invoke.ADDRESS_BOOK,0);
         mIsFromSend = it.getBooleanExtra(Constants.Invoke.SEND,false);
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
-
-        initUI();
-    }
-
-    private void initUI() {
         mEmpty = findViewById(R.id.empty);
         mRV = findViewById(R.id.rv_contact_list);
 

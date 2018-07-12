@@ -18,4 +18,6 @@
     <dimen name="receive_wallet_bottom">20dp</dimen>
 
     <dimen name="pc_one_top">100dp</dimen>
+    <dimen name="confirm_qr_top">79dp</dimen>
+    <dimen name="confirm_qr_img_top">10dp</dimen>
 </resources>

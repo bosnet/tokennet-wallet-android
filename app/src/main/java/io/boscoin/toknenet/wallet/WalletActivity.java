@@ -62,19 +62,27 @@ public class WalletActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_wallet);
+
+
 
         mContext = this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
 
         initUI();
 
     }
 
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
+    }
+
 
     private void initUI() {
+
+        setContentView(R.layout.activity_wallet);
+
         Intent it = getIntent();
 
         mIdx = it.getLongExtra(Constants.Invoke.HISTORY,0);

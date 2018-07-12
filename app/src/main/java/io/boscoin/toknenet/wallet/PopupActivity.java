@@ -19,12 +19,22 @@ public class PopupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popup);
+
 
         mContext = this;
 
-        String lang = WalletPreference.getWalletLanguage(mContext);
-        Utils.changeLanguage(mContext,lang);
+        setLanguage();
+
+        initUI();
+    }
+
+
+    private void initUI() {
+        setContentView(R.layout.activity_popup);
+
+        Intent it = getIntent();
+        isRecover = it.getStringExtra(Constants.Invoke.RECOVER_WALLET);
+        mKey = it.getStringExtra(Constants.Invoke.KEY);
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,10 +45,11 @@ public class PopupActivity extends AppCompatActivity {
 
         TextView ti = findViewById(R.id.title);
         ti.setText(R.string.t_new_pw);
+    }
 
-        Intent it = getIntent();
-        isRecover = it.getStringExtra(Constants.Invoke.RECOVER_WALLET);
-        mKey = it.getStringExtra(Constants.Invoke.KEY);
+    private void setLanguage() {
+        String lang = WalletPreference.getWalletLanguage(mContext);
+        Utils.changeLanguage(mContext,lang);
     }
 
     public void newWallet(View view) {

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.util.Locale;
+
 
 public class WalletPreference {
     private static final String TAG = WalletPreference.class.getSimpleName();
@@ -42,7 +44,10 @@ public class WalletPreference {
     }
 
     public static String getWalletLanguage(Context context) {
-        return getString(context,SETTING_LANG, "");
+        Locale systemLocale = context.getResources().getConfiguration().locale;
+        String strLanguage = systemLocale.getLanguage();
+
+        return getString(context,SETTING_LANG, strLanguage);
     }
 
     public static void setBoolean(Context context, String key, boolean value) {
