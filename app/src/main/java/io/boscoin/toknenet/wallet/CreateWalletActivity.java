@@ -532,7 +532,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
                 case MSG_REQUEST_ERROR:
                     mProgDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), R.string.error_create_wallet, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.error_request_wallet, Toast.LENGTH_LONG).show();
                     break;
 
 

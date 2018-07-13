@@ -24,7 +24,8 @@ public class PreCautionThreeActivity extends AppCompatActivity {
     private boolean isSetting;
     private TextView mTvView;
     private DbOpenHelper mDbOpenHelper;
-    private Button mNext;
+
+    private TextView mNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

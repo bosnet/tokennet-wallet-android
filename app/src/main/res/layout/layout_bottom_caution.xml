@@ -29,10 +29,10 @@
         />
 
 
-    <Button
+    <TextView
         android:id="@+id/caution_next"
-        android:layout_width="26dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="14dp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
@@ -40,7 +40,5 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="28dp"
-        android:textAllCaps="false"
-        android:background="#00ff0000"
         android:text="@string/next"/>
 </RelativeLayout>

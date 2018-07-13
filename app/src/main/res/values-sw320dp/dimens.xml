@@ -6,21 +6,30 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="text_tab_size">14sp</dimen>
-    <dimen name="qr_img_width">140dp</dimen>
-    <dimen name="qr_img_height">140dp</dimen>
+    <dimen name="qr_img_width">46.7dp</dimen>
+    <dimen name="qr_img_height">46.7dp</dimen>
 
     <dimen name="create_notice_txt_width">300dp</dimen>
     <dimen name="create_notice_btn_top">50dp</dimen>
 
     <dimen name="receive_wallet_top">70dp</dimen>
-    <dimen name="receive_wallet_qr_top">10dp</dimen>
-    <dimen name="receive_wallet_qr_b_top">10dp</dimen>
+    <dimen name="receive_wallet_qr_top">5dp</dimen>
+    <dimen name="receive_wallet_qr_b_top">5dp</dimen>
     <dimen name="receive_wallet_option_top">10dp</dimen>
     <dimen name="receive_wallet_bottom">20dp</dimen>
 
-    <dimen name="pc_one_top">100dp</dimen>
     <dimen name="confirm_qr_top">79dp</dimen>
     <dimen name="confirm_qr_img_top">10dp</dimen>
+    <dimen name="confirm_qr_img_below_top">10dp</dimen>
+    <dimen name="confirm_qr_btn_top">27dp</dimen>
+    <dimen name="confirm_qr_notice_top">10dp</dimen>
 
-    <dimen name="qr_top">119dp</dimen>
+ <!--   <dimen name="qr_top">70dp</dimen>
+    <dimen name="qr_img_top">10dp</dimen>
+    <dimen name="qr_img_below_top">10dp</dimen>
+    <dimen name="qr_btn_top">20dp</dimen>
+    <dimen name="qr_notice_top">10dp</dimen> -->
+
+    <dimen name="notice_img_l_margin">86dp</dimen>
+    <dimen name="notice_img_r_margin">85dp</dimen>
 </resources>

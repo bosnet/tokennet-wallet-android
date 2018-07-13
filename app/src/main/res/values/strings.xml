@@ -27,7 +27,7 @@
     <string name="setting_wallets">Wallet Setting</string>
     <string name="create_wallets">Create Wallet</string>
     <string name="install_wallets">Import Wallet</string>
-    <string name="change_wallets">Wallet Order Customizing</string>
+
 
 
     <string name="setting_lang">Language</string>
@@ -50,12 +50,13 @@
     <string name="input_already_pw">Input Existing Password</string>
     <string name="confirm_already_pw">Confirm Existing Password</string>
     <string name="input_pub_key">Input Public Address</string>
-    <string name="send_fee">Transaction Fee</string>
+    <string name="send_fee">Fee</string>
     <string name="ammount">Amount</string>
     <string name="my_wallet">My Wallets</string>
-    <string name="change_wallet_order">Wallet Order Customizing</string>
+    <string name="change_wallet_order">Wallet Sequence</string>
 
-    <string name="history">Transaction History</string>
+
+    <string name="history">History</string>
     <string name="request_amount">Input Requested Ammount</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
@@ -100,7 +101,7 @@ Each wallet need to set a password</string>
     <string name="menu_delete">Delete</string>
     <string name="edit_no">Can not edit Public Address</string>
     <string name="delete_title">Are you sure you want to delete it?</string>
-    <string name="delete">delete</string>
+    <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="fee">Transaction Fee 0.001 BOS</string>
     <string name="d_confirm_fee">0.001 BOS</string>
@@ -108,9 +109,10 @@ Each wallet need to set a password</string>
     <string name="dlog_public">Public</string>
     <string name="dlog_address">Address</string>
     <string name="send_total">Total Amount</string>
-    <string name="dlog_pw">Input Your Password</string>
+
+    <string name="dlog_pw">Input Wallet Password</string>
     <string name="dlog_send_ok">Transaction Completed</string>
-    <string name="change_wallet_name">Change Name of the Wallet</string>
+    <string name="change_wallet_name">Change Wallet Name</string>
     <string name="change_wallet_pw">Change Password</string>
     <string name="check_seed">Confirm Secret Seed</string>
     <string name="check_rckey">Confirm Recovery Key</string>
@@ -130,15 +132,16 @@ To recover your wallet, you need Secret Seed or Recovery Key.</string>
     <string name="ck_rckey">Confirm Recovery Key</string>
     <string name="sec_key_noti">Secret Seed starts with letter \'S\' and 56 characters in total.\nPlease store your
 Secret Seed securely</string>
-    <string name="rc_key_noti">Recovery Key starts with letter \' B\'. Please store your Recovery Key securely.</string>
+    <string name="rc_key_noti">Recovery Key starts with letter \' B\'.\nPlease store your Recovery Key securely.</string>
     <string name="delete_w">Are you sure you want to delete it?</string>
-    <string name="if_you_delete">If you delete your wallet without saving them, you can not recover your wallet</string>
+   
+    <string name="if_you_delete">Please save Wallet Password, Recovery Key, and Secret Seed somewhere safe before deleting your wallet!</string>
     <string name="sent">Send</string>
     <string name="received">Receive</string>
     <string name="create_ac">Create Account</string>
     <string name="detail">Transaction Details</string>
-    <string name="d_date">Transaction Time</string>
-    <string name="d_type">Transaction Type</string>
+    <string name="d_date">Time</string>
+    <string name="d_type">Type</string>
     <string name="d_from">From</string>
     <string name="d_to">To</string>
     <string name="d_amount">Amount</string>
@@ -166,7 +169,7 @@ Secret Seed securely</string>
     <string name="rule_pw">Minimum 8 charaters of (upper,lower case,special character)</string>
 
     <string name="error_no_name">Input Wallet Name</string>
-    <string name="error_no_pw">Input Your Password</string>
+    <string name="error_no_pw">Input Wallet Password</string>
     <string name="error_match_pw">Password incorrect</string>
     <string name="error_create_wallet">An Error Occurred. Please try Again</string>
     <string name="error_no_key">Recovery Key is needed to recover your wallet</string>
@@ -174,8 +177,8 @@ Secret Seed securely</string>
     <string name="error_all_check">Please check all precautions</string>
     <string name="error_already">This name is already in used</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="error_wname_length">Please enter at least one character and no more than ten character for the name of the wallet</string>
-    <string name="error_book_length">Please enter at least one character and no more than ten character for the name of the contact</string>
+    <string name="error_wname_length">Please enter at least one character and no more than ten character</string>
+    <string name="error_book_length">Please enter at least one character and no more than ten character</string>
     <string name="error_pw">Password must be at least 8 characters long, mixing English, lowercase, uppercase,
 numbers, and special characters.</string>
     <string name="error_seed_invalid">Secret Seed is invalid</string>
@@ -197,8 +200,7 @@ numbers, and special characters.</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
 
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-
+    <string name="error_request_wallet">Error Server Response</string>
 
 
 

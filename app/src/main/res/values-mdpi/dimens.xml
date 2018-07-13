@@ -13,4 +13,7 @@
     <dimen name="create_notice_btn_top">32dp</dimen>
 
     <dimen name="confirm_qr_top">79dp</dimen>
+
+    <dimen name="receive_wallet_top">10dp</dimen>
+
 </resources>

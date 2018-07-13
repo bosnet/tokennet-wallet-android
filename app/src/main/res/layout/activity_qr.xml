@@ -97,7 +97,7 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/cerulean"
-        android:lineSpacingExtra="8sp"
+        android:lineSpacingExtra="5sp"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:layout_below="@+id/btn_view_wallet"

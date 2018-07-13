@@ -30,7 +30,7 @@ import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
 public class AddContactActivity extends AppCompatActivity {
 
-    private static final String TAG = "AddContactActivity";
+
     private EditText mEName, mEPubKey;
     private Context mContext;
     private Cursor mCursor;

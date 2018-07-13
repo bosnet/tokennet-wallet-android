@@ -11,4 +11,7 @@
 
     <dimen name="create_notice_txt_width">300dp</dimen>
     <dimen name="create_notice_btn_top">50dp</dimen>
+
+    <dimen name="receive_wallet_top">50dp</dimen>
+
 </resources>
