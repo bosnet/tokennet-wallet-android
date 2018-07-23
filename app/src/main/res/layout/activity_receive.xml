@@ -117,7 +117,8 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
             android:textColor="@color/white"
             android:textAllCaps="false"
             style="?android:attr/borderlessButtonStyle"
-            android:onClick="copy"/>
+            android:onClick="copy"
+            android:filterTouchesWhenObscured="true"/>
 
         <View
             android:layout_width="12dp"
@@ -131,7 +132,8 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"
             android:textColor="@color/white"
             android:textAllCaps="false"
             style="?android:attr/borderlessButtonStyle"
-            android:onClick="share"/>
+            android:onClick="share"
+            android:filterTouchesWhenObscured="true"/>
     </LinearLayout>
 
     <include

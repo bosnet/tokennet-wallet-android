@@ -197,6 +197,8 @@ public class ReceiveHistoryFragment extends Fragment {
         for(int i = 0; i< his.size(); i++){
             if(his.get(i).getType_i().equals("0") && !his.get(i).getFunder().equals(mPubkey)){
                 mPayHistoryList.add(his.get(i));
+            } else if(his.get(i).getType_i().equals("0") && his.get(i).getFunder().equals(mPubkey)){
+                continue; //because create account from me
             } else if(!his.get(i).getFrom().equals(mPubkey)){
                 mPayHistoryList.add(his.get(i));
             } else if(his.get(i).getFrom().equals(mPubkey) && his.get(i).getTo().equals(mPubkey)){

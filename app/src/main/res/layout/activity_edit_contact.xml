@@ -109,16 +109,9 @@
         android:layout_below="@+id/ly_address"
         android:background="@color/white_line"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="60dp" />
+        android:layout_marginRight="20dp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_above="@+id/line2"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/ic_qr_code_disable" />
+
 
     <TextView
         android:id="@+id/err_pubkey"
@@ -149,7 +142,7 @@
         android:textStyle="normal"
         android:textColor="@color/white"
         android:text="@string/ok"
-        />
+        android:filterTouchesWhenObscured="true"/>
 
     <TextView
         android:layout_width="wrap_content"

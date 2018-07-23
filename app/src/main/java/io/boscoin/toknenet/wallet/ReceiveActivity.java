@@ -157,7 +157,7 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
             public void afterTextChanged(Editable s) {
 
 
-               createReceiveQR(s.toString());
+                createReceiveQR(s.toString());
             }
         });
 
@@ -247,7 +247,17 @@ public class ReceiveActivity extends AppCompatActivity implements View.OnClickLi
 
 
         it.putExtra(Intent.EXTRA_TEXT, message);
-        startActivity(it);
+
+
+        Intent chooserIntent = Intent.createChooser(it, getString(R.string.req_amount));
+        if(chooserIntent == null){
+            return;
+        }
+        try{
+            startActivity(chooserIntent);
+        } catch (android.content.ActivityNotFoundException e){
+            Toast.makeText(this, R.string.error_create_wallet, Toast.LENGTH_SHORT).show();
+        }
 
     }
 

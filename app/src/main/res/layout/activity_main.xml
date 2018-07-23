@@ -54,7 +54,8 @@
         app:layout_constraintBottom_toTopOf="@id/btn_import"
         android:background="@drawable/round_button_b"
         style="?android:attr/borderlessButtonStyle"
-        android:onClick="makeWallet"/>
+        android:onClick="makeWallet"
+        android:filterTouchesWhenObscured="true"/>
 
     <Button
         android:id="@+id/btn_import"
@@ -74,7 +75,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/round_button_w"
         android:onClick="importWallet"
-        style="?android:attr/borderlessButtonStyle"/>
+        style="?android:attr/borderlessButtonStyle"
+        android:filterTouchesWhenObscured="true"/>
 
 
 </android.support.constraint.ConstraintLayout>

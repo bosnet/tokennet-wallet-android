@@ -40,7 +40,8 @@
                 android:singleLine="true"
                 android:background="@null"
                 android:inputType="textPassword"
-                android:textCursorDrawable="@drawable/edit_cursor_color" />
+                android:textCursorDrawable="@drawable/edit_cursor_color"
+                android:filterTouchesWhenObscured="true"/>
 
 
         </android.support.design.widget.TextInputLayout>
@@ -95,7 +96,8 @@
             android:inputType="textPassword"
             android:paddingTop="8dp"
             android:paddingBottom="10dp"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:filterTouchesWhenObscured="true"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -138,6 +140,7 @@
         android:textAllCaps="false"
         android:text="@string/ok"
         android:onClick="checkPassWord"
+        android:filterTouchesWhenObscured="true"
         />
 
     <TextView

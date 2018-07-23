@@ -8,8 +8,8 @@
 
     <ImageButton
         android:id="@+id/btn_back"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="56dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_icon_arrow"
@@ -40,7 +40,8 @@
         android:textStyle="normal"
         android:textColor="#ffffff"
         android:gravity="end"
-        android:text="@string/title_contact"/>
+        android:text="@string/title_contact"
+        android:filterTouchesWhenObscured="true"/>
 
 
 

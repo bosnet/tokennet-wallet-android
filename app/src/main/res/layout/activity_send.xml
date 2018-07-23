@@ -13,10 +13,11 @@
         layout="@layout/layout_send_title"
         />
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:id="@+id/address_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_below="@+id/contact_title"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="120dp"
@@ -24,22 +25,33 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-        <EditText
-            android:id="@+id/input_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/pub_address"
-            android:textColorHint="@color/brownish_grey"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif"
-            android:textStyle="normal"
-            android:textColor="@color/black"
-            android:background="@null"
-            android:paddingTop="8dp"
-            android:paddingBottom="10dp"
-            />
 
-    </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/input_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pub_address"
+                android:textColorHint="@color/brownish_grey"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:background="@null"
+                android:paddingTop="8dp"
+                android:paddingBottom="10dp"
+                android:inputType="textMultiLine|textVisiblePassword|textNoSuggestions"
+                android:privateImeOptions="defaultInputmode=english;"
+                tools:text="SAKPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSDFKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKFL"
+                android:filterTouchesWhenObscured="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/del_address"
@@ -88,8 +100,9 @@
         android:visibility="gone"
         />
 
-    <LinearLayout
-        android:id="@+id/ammount_layout"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/amount_inputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -97,37 +110,32 @@
         android:layout_below="@+id/line1"
         android:layout_marginTop="40dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/amount_inputlayout"
+        <EditText
+            android:id="@+id/input_ammount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="10dp"
+            android:hint="@string/ammount"
+            android:textColorHint="@color/brownish_grey"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:background="@null"
+            android:inputType="numberDecimal"
+            android:textCursorDrawable="@drawable/edit_cursor_color" />
 
-            <EditText
-                android:id="@+id/input_ammount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:paddingBottom="10dp"
-                android:hint="@string/ammount"
-                android:textColorHint="@color/brownish_grey"
-                android:fontFamily="sans-serif"
-                android:textStyle="normal"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:singleLine="true"
-                android:background="@null"
-                android:inputType="numberDecimal"
-                android:textCursorDrawable="@drawable/edit_cursor_color" />
+    </android.support.design.widget.TextInputLayout>
 
-        </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
 
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/ammount_layout"
+        android:layout_below="@+id/amount_inputlayout"
         android:background="@color/white_line"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
@@ -159,7 +167,8 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:text="@string/send"
-        android:onClick="showSendBos"/>
+        android:onClick="showSendBos"
+        android:filterTouchesWhenObscured="true"/>
 
 
     <include

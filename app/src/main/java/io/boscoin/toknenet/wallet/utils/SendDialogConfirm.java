@@ -53,6 +53,7 @@ public class SendDialogConfirm extends Dialog {
         mTvAmount.setText(mAmount);
 
         mTvtotal = findViewById(R.id.total);
-        mTvtotal.setText(mTotal);
+
+        mTvtotal.setText(mTotal + " BOS");
     }
 }

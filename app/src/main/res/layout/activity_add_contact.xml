@@ -118,7 +118,7 @@
          android:layout_height="wrap_content"
          android:layout_alignParentRight="true"
          android:layout_alignTop="@+id/address_layout"
-         android:layout_marginTop="8dp"
+         android:layout_marginTop="18dp"
 
          android:layout_marginBottom="8dp"
          android:layout_marginRight="20dp"
@@ -168,7 +168,7 @@
             android:textStyle="normal"
             android:textColor="@color/white"
             android:text="@string/ok"
-            />
+            android:filterTouchesWhenObscured="true"/>
 
         <TextView
             android:layout_width="wrap_content"

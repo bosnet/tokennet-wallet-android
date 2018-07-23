@@ -2,7 +2,7 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="text_tab_size">14sp</dimen>
@@ -12,10 +12,12 @@
     <dimen name="create_notice_txt_width">300dp</dimen>
     <dimen name="create_notice_btn_top">60dp</dimen>
 
+
     <dimen name="receive_wallet_top">96dp</dimen>
     <dimen name="receive_wallet_qr_top">16dp</dimen>
     <dimen name="receive_wallet_qr_b_top">10dp</dimen>
     <dimen name="receive_wallet_bottom">32dp</dimen>
+    <dimen name="receive_wallet_option_top">26dp</dimen>
 
     <dimen name="pc_one_top">162dp</dimen>
 
@@ -33,4 +35,13 @@
 
     <dimen name="notice_img_l_margin">106dp</dimen>
     <dimen name="notice_img_r_margin">105dp</dimen>
+
+    <dimen name="create_w_pw1_top">30dp</dimen>
+    <dimen name="create_w_err_top">8dp</dimen>
+    <dimen name="create_w_pw2_top">40dp</dimen>
+    <dimen name="create_w_btn_top">50dp</dimen>
+
+    <dimen name="create_w_notice_top">20dp</dimen>
+    <dimen name="create_w_btn_left_m">100dp</dimen>
+    <dimen name="create_w_btn_right_m">100dp</dimen>
 </resources>

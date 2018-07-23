@@ -315,10 +315,12 @@ public class Utils {
     private static final int MIN_PASSWORD = 7;
     public static boolean isPasswordValid(String password) {
 
-        Pattern p = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+
+        Pattern p = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+=]).{8,}$");
+
         Matcher match = p.matcher(password);
 
-        if(match.matches() && password.length() > MIN_PASSWORD){
+        if(match.matches()){
             return  true;
         }
 

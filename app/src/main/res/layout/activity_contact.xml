@@ -51,7 +51,7 @@
              android:text="@string/add_contact"
              android:textAllCaps="false"
              android:onClick="addContact"
-             />
+             android:filterTouchesWhenObscured="true"/>
 
      </RelativeLayout>
 

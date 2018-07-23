@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -13,54 +14,106 @@
         android:supportsRtl="true"
         android:testOnly="false"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".CreateWalletActivity"
             android:fitsSystemWindows="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".RecoveryQRActivity" />
+
+        <activity android:name=".RecoveryQRActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ImportActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".SmallCaptureActivity" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".SmallCaptureActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".WalletListActivity"
-            android:theme="@style/NoTitle" />
-        <activity android:name=".WalletActivity" />
+            android:theme="@style/NoTitle"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".WalletActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".WalletOrderActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+
         <activity
             android:name=".ReceiveActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreCautionOneActivity" />
-        <activity android:name=".PreCautionTwoActivity" />
-        <activity android:name=".PreCautionThreeActivity" />
-        <activity android:name=".CreateNoticeActivity" />
-        <activity android:name=".PopupActivity" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".ContactActivity" />
-        <activity android:name=".AddContactActivity" />
-        <activity android:name=".EditContactActivity" />
-        <activity android:name=".SendActivity" />
-        <activity android:name=".EditWalletActivity" />
-        <activity android:name=".ChWalletNameActivity" />
-        <activity android:name=".ConfirmPassWordActivity" />
-        <activity android:name=".ChPassWordActivity" />
-        <activity android:name=".NoticeQRActivity" />
-        <activity android:name=".ConfirmQRActivity" />
-        <activity android:name=".LanguageActivity"></activity>
+
+        <activity android:name=".PreCautionOneActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".PreCautionTwoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".PreCautionThreeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".CreateNoticeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".PopupActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".SettingActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ContactActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".AddContactActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".EditContactActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".SendActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".EditWalletActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ChWalletNameActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ConfirmPassWordActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ChPassWordActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".NoticeQRActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ConfirmQRActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".LanguageActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

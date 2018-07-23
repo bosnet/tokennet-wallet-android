@@ -198,5 +198,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginRight="20dp"
-        />
+        android:filterTouchesWhenObscured="true"/>
 </android.support.constraint.ConstraintLayout>

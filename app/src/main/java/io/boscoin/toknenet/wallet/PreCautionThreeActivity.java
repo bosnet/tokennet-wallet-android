@@ -22,10 +22,10 @@ public class PreCautionThreeActivity extends AppCompatActivity {
     private CheckBox mCheck;
     private Context mContext;
     private boolean isSetting;
-    private TextView mTvView;
+    private TextView mTvView, mTvNext;
     private DbOpenHelper mDbOpenHelper;
 
-    private TextView mNext;
+    private RelativeLayout mNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +55,10 @@ public class PreCautionThreeActivity extends AppCompatActivity {
         Intent it = getIntent();
         isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
 
-        mNext = findViewById(R.id.caution_next);
-        mNext.setText(R.string.ok);
+
+        mTvNext = findViewById(R.id.tv_caution_next);
+
+        mTvNext.setText(R.string.ok);
         findViewById(R.id.caution_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,9 +98,19 @@ public class PreCautionThreeActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         WalletPreference.setSkipCaution(mContext,true);
-                                        Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
-                                        startActivity(it);
-                                        finish();
+                                        mDbOpenHelper = new DbOpenHelper(mContext);
+                                        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+                                        int count = mDbOpenHelper.getWalletCount();
+                                        if(count > 0){
+                                            Intent it = new Intent(PreCautionThreeActivity.this, WalletListActivity.class);
+                                            startActivity(it);
+                                            finish();
+                                        }else{
+                                            Intent it = new Intent(PreCautionThreeActivity.this,MainActivity.class);
+                                            startActivity(it);
+                                            finish();
+                                        }
+
                                     }
                                 }).setNegativeButton(R.string.cancel,
                                 new DialogInterface.OnClickListener() {
@@ -121,6 +133,12 @@ public class PreCautionThreeActivity extends AppCompatActivity {
             mTvView.setVisibility(View.GONE);
         }
 
+        findViewById(R.id.txt_caution).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCheck.setChecked(true);
+            }
+        });
 
         findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,5 +171,11 @@ public class PreCautionThreeActivity extends AppCompatActivity {
         int count = mDbOpenHelper.getWalletCount();
 
         return count;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0,0);
     }
 }

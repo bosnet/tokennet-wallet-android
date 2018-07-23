@@ -36,7 +36,7 @@
     <string name="import_seed">Input Secret Seed</string>
     <string name="import_secure">Input Recovery Key</string>
 
-    <string name="done">Completed</string>
+    <string name="done">Done</string>
     <string name="slan">Language</string>
 
     <string name="create_wallet">Create Wallet</string>
@@ -57,22 +57,20 @@
 
 
     <string name="history">History</string>
-    <string name="request_amount">Input Requested Ammount</string>
+    <string name="request_amount">Input Requested Amount</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
-    <string name="req_amount">Requested Ammount</string>
+    <string name="req_amount">Requested Amount</string>
     <string name="dont_show">Do Not Show Again</string>
     <string name="next">Next</string>
     <string name="ca_do_not_lose">Do not share your Secret Seed and password to anyone</string>
     <string name="ca_sec_seed">Do not loose your Secret Seed and password.\nYou can not retrieve your Secret Seed</string>
     <string name="no_see_page">Are you sure you want to close current page?</string>
     <string name="please_check">Please check the following Precautions</string>
-    <string name="min_balance">You need a minimum balance of 0.1 BOS to make your account valid.\n
-Please deposit minimum balance of 0.1 BOS to activate your wallet.</string>
+    <string name="min_balance">You need a minimum balance of 0.1 BOS to make your account valid. Please deposit minimum balance of 0.1 BOS to activate your wallet.</string>
     <string name="wallet_name">Information in the wallet will be lost when the app is deleted or when you import the wallet</string>
-    <string name="your_pw">Password is required for all wallet activities.\nDO NOT loose or share your password to anyone.</string>
-    <string name="secret_seed">Secret Seed is required to import your wallet.\nDO NOT loose or share your
-Secret Seed to anyone.</string>
+    <string name="your_pw">Password is required for all wallet activities. DO NOT loose or share your password to anyone.</string>
+    <string name="secret_seed">Secret Seed is required to import your wallet. DO NOT loose or share your Secret Seed to anyone.</string>
     <string name="enter_wname">Input Wallet Name</string>
     <string name="enter_pw">Input Wallet Password</string>
     <string name="confirm_pw">Confirm Wallet Password</string>
@@ -165,7 +163,7 @@ Secret Seed securely</string>
     <string name="a_walit_max">You can only create up to 100\nwallets</string>
     <string name="a_address_max">You can only create up to 100\nContacts</string>
     <string name="change_eng">English</string>
-    <string name="change_ko">Korean</string>
+    <string name="change_ko">한국어</string>
     <string name="rule_pw">Minimum 8 charaters of (upper,lower case,special character)</string>
 
     <string name="error_no_name">Input Wallet Name</string>
@@ -186,7 +184,7 @@ numbers, and special characters.</string>
     <string name="error_bos_pw">Password is invalid. Please check again</string>
     <string name="error_invalid_pubkey">Incorrect Public Address</string>
     <string name="error_invalid_password">Password is invalid. Please check again</string>
-    <string name="error_no_count_address">Need to create Contacts</string>
+    <string name="error_no_count_address">Need to create Contact list first</string>
 
 
     <string name="bos_p_f">BOS Platform Foundation</string>

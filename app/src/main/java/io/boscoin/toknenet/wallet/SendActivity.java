@@ -132,6 +132,12 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         getWalletResource();
 
         editPubkey = findViewById(R.id.input_address);
+        editPubkey.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+
+        editPubkey.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+
+
         editAmmount = findViewById(R.id.input_ammount);
         mImgDel = findViewById(R.id.del_address);
         mTvAddressErr = findViewById(R.id.err_pubkey);
@@ -178,8 +184,16 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) {
 
                 mPubKey = s.toString();
-                mImgDel.setVisibility(View.VISIBLE);
-                if(!TextUtils.isEmpty(mPubKey) && !mMyPubKey.equals(mPubKey)){
+
+                if(TextUtils.isEmpty(mPubKey)){
+
+                    mImgDel.setVisibility(View.GONE);
+                    mTvAddressErr.setText(R.string.enter_pub_address);
+                    mTvAddressErr.setVisibility(View.VISIBLE);
+                    mValidAddress = false;
+                }else{
+
+                    mImgDel.setVisibility(View.VISIBLE);
                     try{
                         Utils.decodeCheck(Utils.VersionByte.ACCOUNT_ID, mPubKey.toCharArray());
                         mTvAddressErr.setVisibility(View.GONE);
@@ -192,9 +206,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
                         mValidAddress = false;
                     }
-
-                    changeButton();
                 }
+                changeButton();
+
             }
         });
 

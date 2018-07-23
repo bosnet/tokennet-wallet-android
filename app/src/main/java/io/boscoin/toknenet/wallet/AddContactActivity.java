@@ -92,6 +92,7 @@ public class AddContactActivity extends AppCompatActivity {
             }
         });
 
+        mNameEmpty = true;
         mDelAdress =  findViewById(R.id.btn_del);
 
 
@@ -166,6 +167,8 @@ public class AddContactActivity extends AppCompatActivity {
                 mPubKey = s.toString().trim();
                 if(TextUtils.isEmpty(mPubKey)){
                     mAddressEmpty = true;
+                    mDelAdress.setVisibility(View.GONE);
+                    changeButton();
                     return;
                 }else{
                     mDelAdress.setVisibility(View.VISIBLE);
@@ -174,17 +177,18 @@ public class AddContactActivity extends AppCompatActivity {
                         Utils.decodeCheck(Utils.VersionByte.ACCOUNT_ID, mPubKey.toCharArray());
                         mIsAddress = true;
                         mTvAddressErr.setVisibility(View.GONE);
-
+                        changeButton();
 
 
                     }catch (Exception e){
                         mTvAddressErr.setText(R.string.error_invalid_pubkey);
                         mTvAddressErr.setVisibility(View.VISIBLE);
                         mIsAddress = false;
+                        changeButton();
                         return;
                     }
 
-                    changeButton();
+
                 }
 
             }

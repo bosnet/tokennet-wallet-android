@@ -91,6 +91,13 @@ public class RecoveryQRActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent it = new Intent(RecoveryQRActivity.this, WalletListActivity.class);
+        startActivity(it);
+        finish();
+    }
+
     public void viewWallet(View view) {
         Intent it = new Intent(RecoveryQRActivity.this, WalletListActivity.class);
         startActivity(it);

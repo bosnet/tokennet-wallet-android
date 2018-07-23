@@ -23,7 +23,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_icon_setting"/>
+        android:background="@drawable/ic_icon_setting"
+        android:filterTouchesWhenObscured="true"/>
 
     <ImageButton
         android:id="@+id/btn_import"
@@ -32,7 +33,8 @@
         android:layout_toLeftOf="@+id/btn_setting"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_icon_import" />
+        android:background="@drawable/ic_icon_import"
+        android:filterTouchesWhenObscured="true"/>
 
     <ImageButton
         android:id="@+id/btn_create"
@@ -41,7 +43,8 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/btn_import"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_icon_create" />
+        android:background="@drawable/ic_icon_create"
+        android:filterTouchesWhenObscured="true"/>
 
 
 </RelativeLayout>

@@ -38,7 +38,7 @@ public class CreateNoticeActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        setContentView(R.layout.activity_create_notice1);
+        setContentView(R.layout.activity_create_notice);
 
         mCheckMin = findViewById(R.id.check_min);
 
@@ -62,6 +62,51 @@ public class CreateNoticeActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(mContext, R.string.error_all_check, Toast.LENGTH_LONG).show();
                     return;
+                }
+            }
+        });
+
+        findViewById(R.id.box_check_min).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mCheckMin.isChecked()){
+                    mCheckMin.setChecked(true);
+                }else{
+                    mCheckMin.setChecked(false);
+                }
+            }
+        });
+
+        findViewById(R.id.box_check_name).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mCheckWallet.isChecked()){
+                    mCheckWallet.setChecked(true);
+                }else{
+                    mCheckWallet.setChecked(false);
+                }
+            }
+        });
+
+        findViewById(R.id.box_check_pw).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mCheckPw.isChecked()){
+                    mCheckPw.setChecked(true);
+                }else{
+                    mCheckPw.setChecked(false);
+                }
+            }
+        });
+
+
+        findViewById(R.id.box_check_seed).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mCheckSeed.isChecked()){
+                    mCheckSeed.setChecked(true);
+                }else{
+                    mCheckSeed.setChecked(false);
                 }
             }
         });

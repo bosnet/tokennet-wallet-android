@@ -37,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
                     it.putExtra(Constants.Invoke.SEITING, false);
                     startActivity(it);
                     finish();
+                    overridePendingTransition(0,0);
                 }else{
                     mDbOpenHelper = new DbOpenHelper(mContext);
                     mDbOpenHelper.open(Constants.DB.MY_WALLETS);

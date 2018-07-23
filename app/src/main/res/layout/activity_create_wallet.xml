@@ -40,8 +40,6 @@
                 android:singleLine="true"
                 android:background="@null"
                 android:textCursorDrawable="@drawable/edit_cursor_color"
-
-
                />
 
 
@@ -63,13 +61,12 @@
         android:id="@+id/txt_err_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/red_error"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line1"
-        android:layout_marginTop="8dp"
         android:text="@string/error_already"
         android:visibility="gone"/>
 
@@ -77,13 +74,12 @@
         android:id="@+id/txt_err_name_none"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/red_error"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line1"
-        android:layout_marginTop="8dp"
         android:text="@string/error_no_name"
         android:visibility="gone"/>
 
@@ -91,13 +87,12 @@
         android:id="@+id/txt_err_name_length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/red_error"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line1"
-        android:layout_marginTop="8dp"
         android:text="@string/error_wname_length"
         android:visibility="gone"/>
 
@@ -109,13 +104,12 @@
         android:layout_below="@+id/line1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="@dimen/create_w_pw1_top">
 
     <EditText
         android:id="@+id/edit_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:textColorHint="@color/brownish_grey"
         android:singleLine="true"
         android:textSize="14sp"
@@ -126,7 +120,8 @@
         android:inputType="textPassword|textNoSuggestions"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:filterTouchesWhenObscured="true"/>
     </android.support.design.widget.TextInputLayout>
 
     <View
@@ -142,13 +137,12 @@
         android:id="@+id/txt_err_pw_none"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/red_error"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line2"
-        android:layout_marginTop="8dp"
         android:text="@string/rule_pw"
         android:visibility="visible"/>
 
@@ -159,13 +153,12 @@
         android:layout_below="@+id/line2"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="@dimen/create_w_pw2_top">
 
     <EditText
         android:id="@+id/confirm_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:singleLine="true"
         android:background="@null"
         android:textColorHint="@color/brownish_grey"
@@ -176,7 +169,8 @@
         android:inputType="textPassword|textNoSuggestions"
         android:paddingTop="8dp"
         android:paddingBottom="10dp"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:filterTouchesWhenObscured="true"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -193,13 +187,12 @@
         android:id="@+id/txt_err_pw_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="12dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/red_error"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line3"
-        android:layout_marginTop="8dp"
         android:text="@string/error_match_pw"
         android:visibility="gone"/>
 
@@ -209,22 +202,23 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/create_w_btn_top"
         android:text="@string/next"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginLeft="@dimen/create_w_btn_left_m"
+        android:layout_marginRight="@dimen/create_w_btn_right_m"
         android:textAllCaps="false"
         android:layout_below="@+id/line3"
         android:background="@color/cerulean"
         android:textColor="@color/white"
         style="?android:attr/borderlessButtonStyle"
+        android:filterTouchesWhenObscured="true"
         android:onClick="createWallet"/>
 
     <TextView
         android:id="@+id/txt_no1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
+        android:textSize="11dp"
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/cerulean"
@@ -232,7 +226,7 @@
         android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_create"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/create_w_notice_top"
         android:text="@string/your_pw"
         />
 </RelativeLayout>

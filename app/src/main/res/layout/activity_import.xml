@@ -44,6 +44,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:inputType="textMultiLine|textVisiblePassword|textNoSuggestions"
+                android:filterTouchesWhenObscured="true"
                 tools:text="SAKPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSDFKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKFL"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -126,6 +127,7 @@
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            android:inputType="textMultiLine|textVisiblePassword|textNoSuggestions"
+           android:filterTouchesWhenObscured="true"
            tools:text="SAKPOQKEORKDJSKLDJAKSDLFSKDFKSDFKSDFKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKFL"/>
 
    </android.support.design.widget.TextInputLayout>
@@ -200,7 +202,8 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         style="?android:attr/borderlessButtonStyle"
-        android:onClick="recoverWallet"/>
+        android:onClick="recoverWallet"
+        android:filterTouchesWhenObscured="true"/>
 
 
     <TextView

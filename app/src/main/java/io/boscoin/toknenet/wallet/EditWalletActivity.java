@@ -166,12 +166,15 @@ public class EditWalletActivity extends AppCompatActivity {
 
         mDbOpenHelper = new DbOpenHelper(this);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+
+        Cursor c = mDbOpenHelper.getColumnWallet(mIdx);
+        long  count = c.getLong(c.getColumnIndex(Constants.DB.WALLET_ORDER));
         mDbOpenHelper.deleteColumnWallet(mIdx);
 
 
         mDbOpenHelper.close();
 
-        reOrderingWallet(mIdx);
+        reOrderingWallet(count);
 
         setResult(Constants.ResultCode.DELETE_WALLET);
         finish();
@@ -191,8 +194,8 @@ public class EditWalletActivity extends AppCompatActivity {
                 long wOrder = cursor.getLong(cursor.getColumnIndex(Constants.DB.WALLET_ORDER));
                 long idx = cursor.getLong(cursor.getColumnIndex("_id"));
 
-                if( wOrder >= divCount){
-                    mDbOpenHelper.updateColumnWalletOrder(idx, Long.toString( --wOrder));
+                if(  wOrder > divCount){
+                    mDbOpenHelper.updateColumnWalletOrder(idx, Long.toString(/*--iWorder*/ --wOrder));
                 }
             }while (cursor.moveToNext());
 

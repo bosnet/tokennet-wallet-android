@@ -66,7 +66,8 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
             android:layout_marginRight="39dp"
             android:layout_centerVertical="true"
             android:background="@drawable/ic_icon_copy"
-            android:onClick="copyRecoveryKey"/>
+            android:onClick="copyRecoveryKey"
+            android:filterTouchesWhenObscured="true"/>
     </RelativeLayout>
 
 
@@ -85,7 +86,8 @@ FKSKDFSKKDKQKQKQDJCNCMZLLIQKDKAJSDKA1"/>
         android:textSize="14sp"
         android:fontFamily="sans-serif-medium"
         style="?android:attr/borderlessButtonStyle"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        android:filterTouchesWhenObscured="true"/>
 
 
     <TextView

@@ -40,7 +40,8 @@
                 android:singleLine="true"
                 android:background="@null"
                 android:inputType="textPassword"
-                android:textCursorDrawable="@drawable/edit_cursor_color" />
+                android:textCursorDrawable="@drawable/edit_cursor_color"
+                android:filterTouchesWhenObscured="true"/>
 
 
         </android.support.design.widget.TextInputLayout>
@@ -85,7 +86,7 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:text="@string/next"
-        />
+        android:filterTouchesWhenObscured="true"/>
 
     <TextView
         android:layout_width="wrap_content"

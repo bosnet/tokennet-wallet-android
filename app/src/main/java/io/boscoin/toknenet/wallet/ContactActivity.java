@@ -149,6 +149,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             mEmpty.setVisibility(View.GONE);
             mRV.setVisibility(View.VISIBLE);
             mRV.setLayoutManager(new LinearLayoutManager(mContext));
+            mRV.setHasFixedSize(true);
 
             DividerItemDecoration dividerItemDecoration =
                     new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());

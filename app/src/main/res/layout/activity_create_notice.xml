@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CreateNoticeActivity"
     android:background="@color/blue_light_bg">
 
@@ -15,139 +16,175 @@
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="36dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:text="@string/please_check"
-        />
+        tools:text="@string/please_check"/>
 
-    <CheckBox
-        android:id="@+id/check_min"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:button="@null"
-        android:background="@drawable/item_check"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        android:layout_marginTop="35dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="28dp"/>
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:layout_below="@+id/title"
+       android:layout_above="@+id/btnOk"
+       android:layout_marginTop="20dp"
+       android:layout_marginBottom="20dp"
+       android:fillViewport="true">
 
-
-
-    <TextView
-        android:id="@+id/txt_min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13dp"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/white"
-        android:lineSpacingExtra="10sp"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintStart_toEndOf="@+id/check_min"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="32dp"
-        android:paddingRight="80dp"
-        android:text="@string/min_balance"
-        android:onClick="checkMin"/>
-
-    <CheckBox
-        android:id="@+id/check_name"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:button="@null"
-        android:background="@drawable/item_check"
-        app:layout_constraintTop_toBottomOf="@+id/txt_min"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="28dp"/>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginLeft="28dp"
+           android:layout_marginRight="20dp"
+           >
 
 
-    <TextView
-        android:id="@+id/txt_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13dp"
-        android:minLines="2"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/white"
-        android:lineSpacingExtra="10sp"
-        app:layout_constraintTop_toBottomOf="@+id/txt_min"
-        app:layout_constraintStart_toEndOf="@id/check_name"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="20dp"
-        android:paddingRight="90dp"
-        android:text="@string/wallet_name"
-        android:onClick="checkName"/>
+           <RelativeLayout
+               android:id="@+id/box_check_min"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:layout_alignTop="@+id/txt_min"
+               android:layout_marginTop="3dp">
 
-    <CheckBox
-        android:id="@+id/check_pw"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:button="@null"
-        android:background="@drawable/item_check"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="28dp"/>
+               <CheckBox
+                   android:id="@+id/check_min"
+                   android:layout_width="18dp"
+                   android:layout_height="18dp"
+                   android:button="@null"
+                   android:background="@drawable/item_check"
+                   android:layout_alignParentLeft="true" />
 
-    <TextView
-        android:id="@+id/txt_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13dp"
-        android:minLines="2"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/white"
-        android:lineSpacingExtra="10sp"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name"
-        app:layout_constraintStart_toEndOf="@id/check_pw"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="20dp"
-        android:paddingRight="85dp"
-        android:text="@string/your_pw"
-        android:onClick="checkPassWord"/>
+           </RelativeLayout>
 
-    <CheckBox
-        android:id="@+id/check_seed"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:button="@null"
-        android:background="@drawable/item_check"
-        app:layout_constraintTop_toBottomOf="@+id/txt_pw"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="28dp"/>
+           <TextView
+               android:id="@+id/txt_min"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="16dp"
+               android:fontFamily="sans-serif"
+               android:textStyle="normal"
+               android:textColor="@color/white"
+               android:lineSpacingExtra="10sp"
+               android:layout_toRightOf="@+id/box_check_min"
+               android:layout_marginLeft="10dp"
+               android:text="@string/min_balance"
+               android:paddingRight="20dp"
+               android:onClick="checkMin"/>
 
-    <TextView
-        android:id="@+id/txt_seed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="13dp"
-        android:minLines="2"
-        android:fontFamily="sans-serif"
-        android:textStyle="normal"
-        android:textColor="@color/white"
-        android:lineSpacingExtra="10sp"
-        app:layout_constraintTop_toBottomOf="@+id/txt_pw"
-        app:layout_constraintStart_toEndOf="@id/check_seed"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="20dp"
-        android:paddingRight="80dp"
-        android:text="@string/secret_seed"
-        android:onClick="checkSeed"/>
+           <RelativeLayout
+               android:id="@+id/box_check_name"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:layout_alignTop="@+id/txt_name"
+               android:layout_marginTop="3dp">
+
+               <CheckBox
+                   android:id="@+id/check_name"
+                   android:layout_width="18dp"
+                   android:layout_height="18dp"
+                   android:button="@null"
+                   android:background="@drawable/item_check"
+                   android:layout_alignParentLeft="true" />
+           </RelativeLayout>
+
+
+
+           <TextView
+               android:id="@+id/txt_name"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="16dp"
+               android:fontFamily="sans-serif"
+               android:textStyle="normal"
+               android:textColor="@color/white"
+               android:lineSpacingExtra="10sp"
+               android:layout_below="@+id/txt_min"
+               android:layout_marginTop="20dp"
+               android:layout_toRightOf="@+id/box_check_name"
+               android:layout_marginLeft="10dp"
+               android:text="@string/wallet_name"
+               android:paddingRight="20dp"
+               android:onClick="checkName"/>
+
+           <RelativeLayout
+               android:id="@+id/box_check_pw"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:layout_alignTop="@+id/txt_pw"
+               android:layout_marginTop="3dp">
+
+               <CheckBox
+                   android:id="@+id/check_pw"
+                   android:layout_width="18dp"
+                   android:layout_height="18dp"
+                   android:button="@null"
+                   android:background="@drawable/item_check"
+                   android:layout_alignParentLeft="true"
+                   />
+           </RelativeLayout>
+
+
+           <TextView
+               android:id="@+id/txt_pw"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="16dp"
+               android:fontFamily="sans-serif"
+               android:textStyle="normal"
+               android:textColor="@color/white"
+               android:lineSpacingExtra="10sp"
+               android:layout_below="@+id/txt_name"
+               android:layout_toRightOf="@+id/box_check_pw"
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="10dp"
+               android:text="@string/your_pw"
+               android:paddingRight="20dp"
+               android:onClick="checkPassWord"/>
+
+           <RelativeLayout
+               android:id="@+id/box_check_seed"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:layout_alignTop="@+id/txt_seed"
+               android:layout_marginTop="3dp">
+
+               <CheckBox
+                   android:id="@+id/check_seed"
+                   android:layout_width="18dp"
+                   android:layout_height="18dp"
+                   android:button="@null"
+                   android:background="@drawable/item_check"
+                   android:layout_alignParentLeft="true"/>
+           </RelativeLayout>
+
+
+           <TextView
+               android:id="@+id/txt_seed"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textSize="16dp"
+               android:fontFamily="sans-serif"
+               android:textStyle="normal"
+               android:textColor="@color/white"
+               android:lineSpacingExtra="10sp"
+               android:layout_below="@+id/txt_pw"
+               android:layout_marginTop="20dp"
+               android:layout_toRightOf="@+id/box_check_seed"
+               android:layout_marginLeft="10dp"
+               android:paddingRight="20dp"
+               android:text="@string/secret_seed"
+               android:onClick="checkSeed"/>
+       </RelativeLayout>
+
+   </ScrollView>
+
 
     <Button
         android:id="@+id/btnOk"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/cerulean"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="35dp"
@@ -155,7 +192,8 @@
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/white"
-        android:text="@string/ok"/>
+        android:text="@string/ok"
+        android:filterTouchesWhenObscured="true"/>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

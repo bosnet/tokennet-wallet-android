@@ -27,7 +27,7 @@
 
         >
 
-        <!-- android:layout_alignParentTop="true" -->
+
         <TextView
             android:id="@+id/wallet_name"
             android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/cerulean"
                 android:text="@string/receive"
-                />
+                android:filterTouchesWhenObscured="true"/>
 
             <TextView
                 android:id="@+id/btn_send"
@@ -113,7 +113,7 @@
                 android:layout_marginRight="18dp"
                 android:textColor="@color/cerulean"
                 android:text="@string/send"
-                />
+                android:filterTouchesWhenObscured="true"/>
         </RelativeLayout>
 
     </RelativeLayout>

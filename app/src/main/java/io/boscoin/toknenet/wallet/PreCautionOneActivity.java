@@ -77,9 +77,19 @@ public class PreCautionOneActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         WalletPreference.setSkipCaution(mContext,true);
-                                        Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
-                                        startActivity(it);
-                                        finish();
+                                        mDbOpenHelper = new DbOpenHelper(mContext);
+                                        mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+                                        int count = mDbOpenHelper.getWalletCount();
+                                        if(count > 0 ){
+                                            Intent it = new Intent(PreCautionOneActivity.this, WalletListActivity.class);
+                                            startActivity(it);
+                                            finish();
+                                        }else{
+                                            Intent it = new Intent(PreCautionOneActivity.this,MainActivity.class);
+                                            startActivity(it);
+                                            finish();
+                                        }
+
                                     }
                                 }).setNegativeButton(R.string.cancel,
                                 new DialogInterface.OnClickListener() {
@@ -112,6 +122,15 @@ public class PreCautionOneActivity extends AppCompatActivity {
                 it.putExtra(Constants.Invoke.SEITING, isSetting);
 
                 startActivityForResult(it, REQUEST_FINISH);
+                overridePendingTransition(0,0);
+            }
+        });
+
+        findViewById(R.id.txt_caution).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCheck.setChecked(true);
+
             }
         });
 
@@ -137,6 +156,12 @@ public class PreCautionOneActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0,0);
     }
 
     @Override
