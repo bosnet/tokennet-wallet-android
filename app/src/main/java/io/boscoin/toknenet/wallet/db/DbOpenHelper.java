@@ -166,7 +166,55 @@ public class DbOpenHelper {
 
 
 	public Cursor getAllColumnsAddress(){
-		return mDB.query(DataBases.CreateAddressDB._TABLENAME, null, null, null, null, null, null);
+
+		Cursor c = mDB.query(DataBases.CreateAddressDB._TABLENAME, null,
+				null, null, null, null, null);
+
+		if(c != null && c.getCount() != 0)
+			c.moveToFirst();
+		return c;
+	}
+
+	public boolean isSameAddress(String adress){
+		Cursor c = mDB.query(DataBases.CreateAddressDB._TABLENAME, new String[] {DataBases.CreateAddressDB.COL_ADDRESS},
+				DataBases.CreateAddressDB.COL_ADDRESS+ " LIKE '" + adress + "'",
+				null, null, null, null);
+
+		if(c.getCount() > 0 ){
+
+			return true;
+		}else{
+
+			return false;
+		}
+	}
+
+	public boolean isSamePubKey(String key){
+		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, new String[] {DataBases.CreateWalletDB.COL_ADDRESS},
+				DataBases.CreateWalletDB.COL_ADDRESS+ " LIKE '" + key + "'",
+				null, null, null, null);
+
+		if(c.getCount() > 0 ){
+
+			return true;
+		}else{
+
+			return false;
+		}
+	}
+
+	public boolean isSameBosKey(String key){
+		Cursor c = mDB.query(DataBases.CreateWalletDB._TABLENAME, new String[] {DataBases.CreateWalletDB.COL_KEY},
+				DataBases.CreateWalletDB.COL_KEY+ " LIKE '" + key + "'",
+				null, null, null, null);
+
+		if(c.getCount() > 0 ){
+
+			return true;
+		}else{
+
+			return false;
+		}
 	}
 
 	public Cursor getAllColumnsWallet(){

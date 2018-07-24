@@ -171,28 +171,49 @@ public class AddContactActivity extends AppCompatActivity {
                     changeButton();
                     return;
                 }else{
-                    mDelAdress.setVisibility(View.VISIBLE);
-                    mAddressEmpty = false;
-                    try{
-                        Utils.decodeCheck(Utils.VersionByte.ACCOUNT_ID, mPubKey.toCharArray());
-                        mIsAddress = true;
-                        mTvAddressErr.setVisibility(View.GONE);
-                        changeButton();
-
-
-                    }catch (Exception e){
-                        mTvAddressErr.setText(R.string.error_invalid_pubkey);
-                        mTvAddressErr.setVisibility(View.VISIBLE);
+                    if(isSameAddress()){
                         mIsAddress = false;
                         changeButton();
+                        Toast.makeText(mContext,R.string.error_same_address,Toast.LENGTH_SHORT).show();
                         return;
-                    }
+                    }else{
+                        mDelAdress.setVisibility(View.VISIBLE);
+                        mAddressEmpty = false;
+                        try{
+                            Utils.decodeCheck(Utils.VersionByte.ACCOUNT_ID, mPubKey.toCharArray());
+                            mIsAddress = true;
+                            mTvAddressErr.setVisibility(View.GONE);
 
+                            changeButton();
+
+
+                        }catch (Exception e){
+                            mTvAddressErr.setText(R.string.error_invalid_pubkey);
+                            mTvAddressErr.setVisibility(View.VISIBLE);
+                            mIsAddress = false;
+                            changeButton();
+                            return;
+                        }
+                    }
 
                 }
 
             }
         });
+
+    }
+
+    private boolean isSameAddress() {
+
+        mDbOpenHelper = new DbOpenHelper(mContext);
+        mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
+        if(mDbOpenHelper.isSameAddress(mPubKey)){
+            mDbOpenHelper.close();
+            return true;
+        }else{
+            mDbOpenHelper.close();
+            return false;
+        }
 
     }
 

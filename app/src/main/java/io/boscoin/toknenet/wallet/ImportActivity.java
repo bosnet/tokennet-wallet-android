@@ -20,7 +20,10 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.stellar.sdk.KeyPair;
+
 import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.utils.WalletPreference;
 
@@ -37,7 +40,7 @@ public class ImportActivity extends AppCompatActivity {
     private Button mBtnNext;
     private boolean mIsNextSeed, mIsNextBos;
     private Context mContext;
-
+    private DbOpenHelper mDbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +192,11 @@ public class ImportActivity extends AppCompatActivity {
                     if(!TextUtils.isEmpty(mSeedKey)){
                         try{
                             Utils.decodeCheck(Utils.VersionByte.SEED, mSeedKey.toCharArray());
+                            if(isSamePubKey()){
+                                Toast.makeText(mContext,R.string.error_same_wallet,Toast.LENGTH_SHORT).show();
+                                mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+                                return;
+                            }
                             mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
                             mErrSeedKey.setVisibility(View.GONE);
                             mSeedDel.setVisibility(View.VISIBLE);
@@ -205,6 +213,11 @@ public class ImportActivity extends AppCompatActivity {
                     mBosKey = s.toString();
 
                     if(!TextUtils.isEmpty(mBosKey) && Utils.isValidRecoveryKey(mBosKey)){
+                        if(isSameBosKey()){
+                            Toast.makeText(mContext,R.string.error_same_wallet,Toast.LENGTH_SHORT).show();
+                            mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+                            return;
+                        }
                         mErrBosKey.setVisibility(View.GONE);
                         mBosDel.setVisibility(View.VISIBLE);
                         mIsNextBos = true;
@@ -219,5 +232,30 @@ public class ImportActivity extends AppCompatActivity {
                 }
            }
        };
+   }
+   private boolean isSamePubKey(){
+       String pubKey = KeyPair.fromSecretSeed(mSeedKey).getAccountId();
+       mDbOpenHelper = new DbOpenHelper(mContext);
+       mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+       if(mDbOpenHelper.isSamePubKey(pubKey)){
+           mDbOpenHelper.close();
+           return true;
+       }else{
+           mDbOpenHelper.close();
+           return false;
+       }
+
+   }
+
+   private boolean isSameBosKey(){
+       mDbOpenHelper = new DbOpenHelper(mContext);
+       mDbOpenHelper.open(Constants.DB.MY_WALLETS);
+       if(mDbOpenHelper.isSameBosKey(mBosKey)){
+           mDbOpenHelper.close();
+           return true;
+       }else{
+           mDbOpenHelper.close();
+           return false;
+       }
    }
 }
