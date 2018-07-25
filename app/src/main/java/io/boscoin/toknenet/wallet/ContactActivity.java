@@ -149,7 +149,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             mEmpty.setVisibility(View.GONE);
             mRV.setVisibility(View.VISIBLE);
             mRV.setLayoutManager(new LinearLayoutManager(mContext));
-            mRV.setHasFixedSize(true);
+
 
             DividerItemDecoration dividerItemDecoration =
                     new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
@@ -221,7 +221,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private int getAddressBookCount(){
-        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper = new DbOpenHelper(mContext);
         mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);
         int count = mDbOpenHelper.getAddressCount();
 
@@ -283,20 +283,24 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
         mCursor = mDbOpenHelper.getAllColumnsAddress();
 
-        while (mCursor.moveToNext()){
+  
 
-            mBook = new AddressBook(
-                    mCursor.getLong(mCursor.getColumnIndex("_id")),
-                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.BOOK_NAME)),
-                    mCursor.getString(mCursor.getColumnIndex(Constants.DB.BOOK_ADDRESS))
+        if(mCursor.getCount() > 0){
+            do{
+                mBook = new AddressBook(
+                        mCursor.getLong(mCursor.getColumnIndex("_id")),
+                        mCursor.getString(mCursor.getColumnIndex(Constants.DB.BOOK_NAME)),
+                        mCursor.getString(mCursor.getColumnIndex(Constants.DB.BOOK_ADDRESS))
 
 
-            );
+                );
 
-            bookList.add(0,mBook);
+                bookList.add(0,mBook);
+            }while (mCursor.moveToNext());
+
+            mCursor.close();
+            mDbOpenHelper.close();
         }
-        mCursor.close();
-        mDbOpenHelper.close();
     }
 
     public void addContact(View view) {

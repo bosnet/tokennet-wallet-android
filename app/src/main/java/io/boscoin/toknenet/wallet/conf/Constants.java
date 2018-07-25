@@ -34,6 +34,7 @@ public class Constants {
 
         public static final String BOOK_NAME = "name";
         public static final String BOOK_ADDRESS = "address";
+        public static final int DATABASE_VERSION = 1;
     }
 
     public static final class Domain {

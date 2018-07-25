@@ -24,6 +24,7 @@ import cz.msebera.android.httpclient.Header;
 import io.boscoin.toknenet.wallet.adapter.AllHisViewAdapter;
 import io.boscoin.toknenet.wallet.conf.Constants;
 
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Payments;
 
 
@@ -183,7 +184,9 @@ public class AllHistoryFragment extends Fragment {
                 mPayments =  gson.fromJson(res, Payments.class);
                 if(mPayments.get_embedded().getRecordList().size() > 0){
                     mPayHistoryList.addAll(0, mPayments.get_embedded().getRecordList());
-                    mAhisAdapter = new AllHisViewAdapter( mPayHistoryList, mListener,mPubkey);
+
+
+                    mAhisAdapter = new AllHisViewAdapter( mPayHistoryList, mListener,mPubkey,  mContext);
 
                     recyclerView.setAdapter( mAhisAdapter);
                     recyclerView.setHasFixedSize(true);

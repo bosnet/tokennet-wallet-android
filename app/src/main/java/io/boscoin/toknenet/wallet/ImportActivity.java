@@ -135,6 +135,15 @@ public class ImportActivity extends AppCompatActivity {
         }
     }
 
+    private void changeButton(){
+        if(mIsNextSeed && !mIsNextBos){
+            mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
+        }else if(!mIsNextSeed && mIsNextBos){
+            mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
+        }else{
+            mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+        }
+    }
     public void recoverWallet(View view) {
 
 
@@ -190,6 +199,7 @@ public class ImportActivity extends AppCompatActivity {
                 if(isSeedkey){
                     mSeedKey = s.toString();
                     if(!TextUtils.isEmpty(mSeedKey)){
+
                         try{
                             Utils.decodeCheck(Utils.VersionByte.SEED, mSeedKey.toCharArray());
                             if(isSamePubKey()){
@@ -197,15 +207,17 @@ public class ImportActivity extends AppCompatActivity {
                                 mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
                                 return;
                             }
-                            mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
+
                             mErrSeedKey.setVisibility(View.GONE);
                             mSeedDel.setVisibility(View.VISIBLE);
                             mIsNextSeed = true;
+                            changeButton();
                         } catch (Exception e){
                             mErrSeedKey.setVisibility(View.VISIBLE);
                             mSeedDel.setVisibility(View.VISIBLE);
-                            mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+
                             mIsNextSeed = false;
+                            changeButton();
                             return;
                         }
                     }
@@ -221,12 +233,19 @@ public class ImportActivity extends AppCompatActivity {
                         mErrBosKey.setVisibility(View.GONE);
                         mBosDel.setVisibility(View.VISIBLE);
                         mIsNextBos = true;
-                        mBtnNext.setBackgroundColor(getResources().getColor(R.color.cerulean));
+
+                        changeButton();
                     }else{
-                        mErrBosKey.setVisibility(View.VISIBLE);
-                        mBosDel.setVisibility(View.VISIBLE);
-                        mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+                        if(TextUtils.isEmpty(mBosKey)){
+                            mErrBosKey.setVisibility(View.GONE);
+                            mBosDel.setVisibility(View.GONE);
+                        }else{
+                            mErrBosKey.setVisibility(View.VISIBLE);
+                            mBosDel.setVisibility(View.VISIBLE);
+                        }
+
                         mIsNextBos = false;
+                        changeButton();
                         return;
                     }
                 }

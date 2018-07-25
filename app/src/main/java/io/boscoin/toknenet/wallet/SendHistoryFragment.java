@@ -200,7 +200,7 @@ public class SendHistoryFragment extends Fragment {
                     mSartOff = mPayments.get_embedded().getRecordList().get(0).getPaging_token();
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setSendHistoryAfter(mPayments.get_embedded().getRecordList());
-                    mShisAdapter = new SendHisViewAdapter( mPayHistoryList, mListener,mPubkey);
+                    mShisAdapter = new SendHisViewAdapter( mPayHistoryList, mListener,mPubkey, mContext);
                     recyclerView.setAdapter(mShisAdapter);
                     recyclerView.setHasFixedSize(true);
                     mSwipeRefreshLayout.setRefreshing(false);

@@ -1,5 +1,6 @@
 package io.boscoin.toknenet.wallet.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.R;
 import io.boscoin.toknenet.wallet.ReceiveHistoryFragment.OnListReceiveFragInteractionListener;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Payments;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
@@ -22,11 +24,20 @@ public class ReceiveHisViewAdapter extends RecyclerView.Adapter<ReceiveHisViewAd
     private final OnListReceiveFragInteractionListener mListener;
     private String mPubKey;
     private static final String CREATE_ACCOUNT = "create_account";
+    private Context mContext;
 
     public ReceiveHisViewAdapter(ArrayList<Payments.PayRecords> items, OnListReceiveFragInteractionListener listener, String pubkey) {
         this.mValues = items;
         this.mListener = listener;
         this.mPubKey = pubkey;
+    }
+
+    public ReceiveHisViewAdapter(ArrayList<Payments.PayRecords> items, OnListReceiveFragInteractionListener listener
+            , String pubkey, Context contx) {
+        this.mValues = items;
+        this.mListener = listener;
+        this.mPubKey = pubkey;
+        this.mContext = contx;
     }
 
     @Override
@@ -72,8 +83,16 @@ public class ReceiveHisViewAdapter extends RecyclerView.Adapter<ReceiveHisViewAd
     }
 
     private void receiveDisplay(ViewHolder holder, int pos) {
+        String receiveName;
+
         holder.mTvType.setText(R.string.received);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFrom()));
+        receiveName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getFrom());
+        if(receiveName != null){
+            holder.mTvAddress.setText(receiveName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFrom()));
+        }
+
 
         String tmp = Utils.fitDigit(mValues.get(pos).getAmount());
         String amount = tmp+" BOS";
@@ -83,8 +102,16 @@ public class ReceiveHisViewAdapter extends RecyclerView.Adapter<ReceiveHisViewAd
     }
 
     private void createDisplay(ViewHolder holder, int pos) {
+        String funderName;
         holder.mTvType.setText(R.string.create_ac);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFunder()));
+
+        funderName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getFunder());
+        if(funderName != null){
+            holder.mTvAddress.setText(funderName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFunder()));
+        }
+
 
         String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
         String amount = tmp+" BOS";

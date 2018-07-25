@@ -218,16 +218,8 @@ public class WalletActivity extends AppCompatActivity implements
                 wBalance.setText(Utils.dispayBalance(amount));
 
                 try{
-                    mDbOpenWalletHelper = new DbOpenHelper(mContext);
-                    mDbOpenWalletHelper.open(Constants.DB.MY_WALLETS);
-                    mDbOpenWalletHelper.getmDB().acquireReference();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mDbOpenWalletHelper.updateColumnWalletBalance(mAccountId, val);
 
-                        }
-                    });
+                   DbOpenHelper.updateColumnWalletBalance(mContext,mAccountId,val);
 
                 }catch (Exception e){
 
@@ -238,8 +230,7 @@ public class WalletActivity extends AppCompatActivity implements
                         mProgDialog.dismiss();
                     }
                 }finally {
-                    mDbOpenWalletHelper.close();
-                    mDbOpenWalletHelper = null;
+
                     if(mProgDialog != null){
                         mProgDialog.dismiss();
                     }

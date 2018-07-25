@@ -162,7 +162,6 @@ public class ChPassWordActivity extends AppCompatActivity {
             mTvPwNone.setVisibility(View.GONE);
         }
 
-
         if(!newPw.equals(confirmPw)){
             Toast.makeText(getApplicationContext(), R.string.error_match_pw, Toast.LENGTH_LONG).show();
             return;

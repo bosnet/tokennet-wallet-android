@@ -6,7 +6,7 @@
     <string name="send">Send</string>
     <string name="receive">Receive</string>
     <string name="address">Contacts</string>
-    <string name="his_all">Transactions</string>
+    <string name="his_all">All</string>
     <string name="his_receive">Receive</string>
     <string name="his_send">Send</string>
     <string name="toast_text_clipboard_address">It has been copied</string>

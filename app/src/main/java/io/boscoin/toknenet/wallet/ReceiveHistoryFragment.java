@@ -235,7 +235,7 @@ public class ReceiveHistoryFragment extends Fragment {
                     mSartOff = mPayments.get_embedded().getRecordList().get(0).getPaging_token();
                     mLastOff = mPayments.get_embedded().getRecordList().get( mPayments.get_embedded().getRecordList().size() -1).getPaging_token();
                     setReceiveHistoryAfter(mPayments.get_embedded().getRecordList());
-                    mRhisAdapter = new ReceiveHisViewAdapter( mPayHistoryList, mListener,mPubkey);
+                    mRhisAdapter = new ReceiveHisViewAdapter( mPayHistoryList, mListener,mPubkey, mContext);
                     mReceiveHisRv.setAdapter( mRhisAdapter);
                     mReceiveHisRv.setHasFixedSize(true);
                     mSwipeRefreshLayout.setRefreshing(false);

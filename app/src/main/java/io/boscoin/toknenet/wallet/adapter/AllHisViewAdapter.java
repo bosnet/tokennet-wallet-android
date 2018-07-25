@@ -1,5 +1,6 @@
 package io.boscoin.toknenet.wallet.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.AllHistoryFragment.OnListAllFragInteractionListener;
 import io.boscoin.toknenet.wallet.R;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Wallet;
 import io.boscoin.toknenet.wallet.utils.Utils;
 import io.boscoin.toknenet.wallet.model.Payments;
@@ -25,10 +27,20 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
     private String mPubKey;
     private static final String CREATE_ACCOUNT = "create_account";
 
+    private Context mContext;
+
     public AllHisViewAdapter(ArrayList<Payments.PayRecords> items, OnListAllFragInteractionListener listener, String pubkey) {
         this.mValues = items;
         this.mListener = listener;
         this.mPubKey = pubkey;
+    }
+
+    public AllHisViewAdapter(ArrayList<Payments.PayRecords> items, OnListAllFragInteractionListener listener
+            , String pubkey, Context cont) {
+        this.mValues = items;
+        this.mListener = listener;
+        this.mPubKey = pubkey;
+        this.mContext = cont;
     }
 
     @Override
@@ -72,8 +84,16 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
     }
 
     private void sentCreateDisplay(ViewHolder holder, int pos) {
+        String sendName;
         holder.mTvType.setText(R.string.sent);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getAccount()));
+
+        sendName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getAccount());
+        if( sendName!= null){
+            holder.mTvAddress.setText(sendName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getAccount()));
+        }
+
 
         String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
         String amount = tmp+" BOS";
@@ -83,8 +103,16 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
     }
 
     private void receiveDisplay(ViewHolder holder, int pos) {
+        String receveName;
         holder.mTvType.setText(R.string.received);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFrom()));
+
+        receveName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getFrom());
+        if(receveName != null){
+            holder.mTvAddress.setText(receveName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFrom()));
+        }
+
 
         String tmp = Utils.fitDigit(mValues.get(pos).getAmount());
         String amount = tmp+" BOS";
@@ -94,8 +122,16 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
     }
 
     private void createDisplay(ViewHolder holder, int pos) {
+        String funderName;
+
         holder.mTvType.setText(R.string.create_ac);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFunder()));
+        funderName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getFunder());
+        if(funderName != null){
+            holder.mTvAddress.setText(funderName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getFunder()));
+        }
+
 
         String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
         String amount = tmp+" BOS";
@@ -105,8 +141,18 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
     }
 
     private void sentDisplay(ViewHolder holder, int pos) {
+        String sendName;
+
         holder.mTvType.setText(R.string.sent);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getTo()));
+
+
+        sendName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getTo());
+        if(sendName != null){
+            holder.mTvAddress.setText(sendName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getTo()));
+
+        }
 
         String tmp = Utils.fitDigit(mValues.get(pos).getAmount());
         String amount = tmp+" BOS";

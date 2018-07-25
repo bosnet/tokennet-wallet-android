@@ -1,5 +1,6 @@
 package io.boscoin.toknenet.wallet.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import io.boscoin.toknenet.wallet.SendHistoryFragment.OnListSendFragInteractionListener;
 import io.boscoin.toknenet.wallet.R;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 import io.boscoin.toknenet.wallet.model.Payments;
 import io.boscoin.toknenet.wallet.utils.Utils;
 
@@ -22,12 +24,21 @@ public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.
     private final OnListSendFragInteractionListener mListener;
     private String mPubKey;
     private static final String CREATE_ACCOUNT = "create_account";
+    private Context mContext;
 
 
     public SendHisViewAdapter(ArrayList<Payments.PayRecords> items, OnListSendFragInteractionListener listener,  String pubkey) {
         this.mValues = items;
         this.mListener = listener;
         this.mPubKey = pubkey;
+    }
+
+    public SendHisViewAdapter(ArrayList<Payments.PayRecords> items, OnListSendFragInteractionListener listener
+            , String pubkey, Context contx) {
+        this.mValues = items;
+        this.mListener = listener;
+        this.mPubKey = pubkey;
+        this.mContext = contx;
     }
 
     @Override
@@ -66,8 +77,17 @@ public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.
     }
 
     private void sentCreateDisplay(SendHisViewAdapter.ViewHolder holder, int pos) {
+        String funderName;
         holder.mTvType.setText(R.string.sent);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getAccount()));
+
+        funderName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getAccount());
+
+        if(funderName != null){
+            holder.mTvAddress.setText(funderName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getAccount()));
+        }
+
 
         String tmp = Utils.fitDigit(mValues.get(pos).getStarting_balance());
         String amount = tmp+" BOS";
@@ -77,8 +97,17 @@ public class SendHisViewAdapter extends RecyclerView.Adapter<SendHisViewAdapter.
     }
 
     private void sentDisplay(SendHisViewAdapter.ViewHolder holder, int pos) {
+        String sentName;
+
         holder.mTvType.setText(R.string.sent);
-        holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getTo()));
+        sentName = DbOpenHelper.getAddressName(mContext, mValues.get(pos).getTo());
+
+        if(sentName != null){
+            holder.mTvAddress.setText(sentName);
+        }else{
+            holder.mTvAddress.setText(Utils.contractionAddress(mValues.get(pos).getTo()));
+        }
+
 
         String tmp = Utils.fitDigit(mValues.get(pos).getAmount());
         String amount = tmp+" BOS";
