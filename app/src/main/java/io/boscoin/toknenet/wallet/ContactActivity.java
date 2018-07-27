@@ -149,7 +149,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             mEmpty.setVisibility(View.GONE);
             mRV.setVisibility(View.VISIBLE);
             mRV.setLayoutManager(new LinearLayoutManager(mContext));
-
+            mRV.setHasFixedSize(true);
 
             DividerItemDecoration dividerItemDecoration =
                     new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
@@ -191,7 +191,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 }
             }, mIsFromSend);
             mRV.setAdapter(mAdapter);
-            mRV.setHasFixedSize(true);
+
         }
         if(mIsFromSend){
             mRV.addOnItemTouchListener(new RecyclerViewItemClickListener(mContext, mRV, new RecyclerViewItemClickListener.OnItemClickListener() {
@@ -331,6 +331,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 mRV.addItemDecoration(dividerItemDecoration);
+                mRV.setHasFixedSize(true);
                 initializeData();
 
                 mAdapter = new AddressAdapter(bookList, mContext, new MenuClickListener() {
@@ -365,7 +366,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 },mIsFromSend);
                 mRV.setAdapter(mAdapter);
-                mRV.setHasFixedSize(true);
+
             }
 
 

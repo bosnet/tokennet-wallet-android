@@ -326,6 +326,20 @@ public class DbOpenHelper {
 		return count;
 	}
 
+    public static int getWalletCount(Context context){
+
+        SQLiteDatabase wDb;
+        DatabaseHelper wDbHelper;
+        wDbHelper = new DatabaseHelper(context, Constants.DB.MY_WALLETS, null, Constants.DB.DATABASE_VERSION);
+        wDb = wDbHelper.getWritableDatabase();
+
+        Cursor c = wDb.query(DataBases.CreateWalletDB._TABLENAME, null, null, null, null, null, null);
+        int count = c.getCount();
+        c.close();
+        wDb.close();
+        return count;
+    }
+
 	public int getAddressCount(){
 		Cursor c = mDB.query(DataBases.CreateAddressDB._TABLENAME, null, null, null, null, null, null);
 		int count = c.getCount();

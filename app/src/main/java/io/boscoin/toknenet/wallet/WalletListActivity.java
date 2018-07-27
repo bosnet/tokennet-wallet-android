@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,11 +54,14 @@ public class WalletListActivity extends AppCompatActivity {
     private static final int SEND_REQUEST = 16;
     private ProgressDialog mProgDialog;
     private DbOpenHelper mDbOpenWalletHelper;
-    private int mCount = 0;
+    private static int mCount = 0, mLastCount = 0;
     private long mWalletIdx;
     private static final int PORT_HTTP = 80;
     private static final int PORT_HTTPS = 443;
     private static final int MAX_WALLET = 100;
+    private int mMaxWallcount;
+    private boolean isUp, isDown;
+    private SwipeRefreshLayout mListSwipeRefresh;
 
 
     private BroadcastReceiver changeLanguageReceiver = new BroadcastReceiver() {
@@ -168,21 +172,37 @@ public class WalletListActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if(newState == RecyclerView.SCROLL_STATE_IDLE){
-                    showDialogWalt();
+
                     getBalances();
-                }
+                } 
+
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if(dx == 0 && dy == 0){
-
-                    showDialogWalt();
-                    getBalances();
+                if(dy < 0){
+                    isUp = true;
+                    isDown = false;
+                } else if(dy > 0 ){
+                    isUp = false;
+                    isDown = true;
                 }
+                
 
+            }
+        });
+
+        mListSwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.wlistswiperefresh);
+        mListSwipeRefresh.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2,
+                R.color.swipe_color_3, R.color.swipe_color_4);
+
+        mListSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               mListSwipeRefresh.setRefreshing(false);
+               getResumeBalances();
             }
         });
     }
@@ -190,28 +210,11 @@ public class WalletListActivity extends AppCompatActivity {
     private int getWalletCount(){
         mDbOpenHelper = new DbOpenHelper(mContext);
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
-        int count = mDbOpenHelper.getWalletCount();
-        return count;
+        mMaxWallcount = mDbOpenHelper.getWalletCount();
+        return mMaxWallcount;
     }
 
-    private void getBalances(){
-        int firstVisibleItemPosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstVisibleItemPosition();
-        int lastVisibleItemPos = ((LinearLayoutManager)rv.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-        int idx = firstVisibleItemPosition;
-        mCount = idx;
 
-
-        for(; idx <= lastVisibleItemPos; idx++){
-          Wallet wallet =  mAdapter.getWalletListItem(idx);
-
-          getWalletBalances(wallet, idx, lastVisibleItemPos);
-
-        }
-
-
-
-
-    }
 
 
 
@@ -241,25 +244,15 @@ public class WalletListActivity extends AppCompatActivity {
                 final String curBal = account.getBalances().get(0).getBalance();
 
                 try{
-                    mDbOpenWalletHelper = new DbOpenHelper(mContext);
-                    mDbOpenWalletHelper.open(Constants.DB.MY_WALLETS);
-                    mDbOpenWalletHelper.getmDB().acquireReference();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mDbOpenWalletHelper.updateColumnWalletBalance(wallet.getWalletId(), curBal);
-
-                        }
-                    });
-
+                    
+                    DbOpenHelper.updateColumnWalletBalance(mContext,wallet.getWalletId(), curBal);
                 }catch (Exception e){
 
                     e.printStackTrace();
 
                     dismissDialog();
                 }finally {
-                    mDbOpenWalletHelper.close();
-                    mDbOpenWalletHelper = null;
+
 
 
                     mCount++;
@@ -267,23 +260,16 @@ public class WalletListActivity extends AppCompatActivity {
 
                     if(mCount > lastPos ){
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+                        walletList.clear();
+                        getWalletList();
+                        mAdapter.setWalletList(walletList);
+                        mCount = 0;
 
-
-                                walletList.clear();
-                                getWalletList();
-                                mAdapter.setWalletList(walletList);
-                                mCount = 0;
-
-                                dismissDialog();
-                            }
-                        });
+                        dismissDialog();
+                        
 
 
                     }
-
 
                 }
 
@@ -314,7 +300,7 @@ public class WalletListActivity extends AppCompatActivity {
             mProgDialog = new ProgressDialog(mContext);
             mProgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             mProgDialog.setMessage(getResources().getString(R.string.d_walit));
-            mProgDialog.setCancelable(false);
+            mProgDialog.setCancelable(true);
             mProgDialog.show();
         }
 
@@ -339,8 +325,120 @@ public class WalletListActivity extends AppCompatActivity {
         super.onResume();
 
 
+        getResumeBalances();
+
 
     }
+
+    private void getResumeBalances() {
+        int ADD_COUNT = 10;
+        int start = 0;
+        getWalletCount();
+
+
+        mCount = 0;
+
+        if(mCount == 0 ){
+            mLastCount = ADD_COUNT;
+
+            if(mLastCount <= mMaxWallcount -1){
+                showDialogWalt();
+                for(;  mCount<= mLastCount; mCount++){
+                    Wallet wallet =  mAdapter.getWalletListItem(mCount);
+
+                    getWalletBalances(wallet, mCount, mLastCount);
+
+                }
+            }else{
+                mLastCount = mMaxWallcount -1;
+                showDialogWalt();
+                for(;  mCount<= mLastCount; mCount++){
+                    Wallet wallet =  mAdapter.getWalletListItem(mCount);
+
+                    getWalletBalances(wallet, mCount, mLastCount);
+
+                }
+            }
+        }
+    }
+
+    private void getInitBalances() {
+
+
+        int itemTotalCount = rv.getAdapter().getItemCount();
+
+
+        int firstVisibleItemPosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+    }
+
+    private void getBalances(){
+        int ADD_COUNT = 10;
+
+
+        int firstVisibleItemPosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstVisibleItemPosition();
+        int lastVisibleItemPos = ((LinearLayoutManager)rv.getLayoutManager()).findLastVisibleItemPosition();
+
+
+
+        if(isUp){
+
+            if(firstVisibleItemPosition < mLastCount){
+
+                mCount = firstVisibleItemPosition -ADD_COUNT;
+                mLastCount = lastVisibleItemPos - ADD_COUNT;
+
+                if(mCount < 0){
+                    dismissDialog();
+
+                    return;
+                } else if(mCount >= 0 && mLastCount <= 0){
+                    mLastCount = lastVisibleItemPos;
+                }
+
+
+                showDialogWalt();
+                for(; mCount <= mLastCount; mCount++){
+                    Wallet wallet =  mAdapter.getWalletListItem(firstVisibleItemPosition);
+
+                    getWalletBalances(wallet, mCount, mLastCount);
+
+                }
+
+            }
+        }else{
+
+            if(firstVisibleItemPosition > mLastCount){
+
+                showDialogWalt();
+                mCount = firstVisibleItemPosition;
+                mLastCount = lastVisibleItemPos + ADD_COUNT;
+
+                if(mLastCount >= mMaxWallcount){
+                    mLastCount = mMaxWallcount -1;
+                }
+
+                for(; firstVisibleItemPosition <= mLastCount; firstVisibleItemPosition++){
+                    Wallet wallet =  mAdapter.getWalletListItem(firstVisibleItemPosition);
+
+                    getWalletBalances(wallet, mCount, mLastCount);
+
+                }
+
+            } 
+        }
+        
+
+
+
+
+
+       
+
+
+
+
+    }
+
 
     private void initializeAdapter(){
         mAdapter = new WalletListAdapter(walletList, new ClickListener() {
@@ -383,8 +481,6 @@ public class WalletListActivity extends AppCompatActivity {
 
         if(requestCode == SETTING_REQUEST || requestCode == WALLET_DETAIL_VIEW ){
 
-              {
-
                 walletList.clear();
                 getWalletList();
                 if(walletList.size() == 0){
@@ -396,7 +492,7 @@ public class WalletListActivity extends AppCompatActivity {
                 }
 
                 mAdapter.setWalletList(walletList);
-            }
+
 
 
         } else if(requestCode == SEND_REQUEST && resultCode == Constants.ResultCode.SEND){

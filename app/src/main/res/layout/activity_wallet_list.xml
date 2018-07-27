@@ -11,13 +11,20 @@
        layout="@layout/layout_list_title"
        />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/wlistswiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_walletlist"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_walletlist"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 
 </LinearLayout>
