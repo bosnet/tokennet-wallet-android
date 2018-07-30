@@ -308,7 +308,16 @@ public class Utils {
 
     private static final int MAX_NAME = 11;
     public static boolean isNameValid(String name) {
-        return name.length() < MAX_NAME;
+
+
+        int n = 0;
+        for (int i = 0; i < name.length(); ++n) {
+            int cp = name.codePointAt(i);
+            i += Character.charCount(cp);
+
+        }
+
+        return n < MAX_NAME;
     }
 
 

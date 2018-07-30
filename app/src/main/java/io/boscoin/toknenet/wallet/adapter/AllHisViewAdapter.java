@@ -21,7 +21,7 @@ import java.util.List;
 
 public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.ViewHolder> {
 
-    private static final String TAG = "AllHisViewAdapter";
+
     private ArrayList<Payments.PayRecords> mValues;
     private final OnListAllFragInteractionListener mListener;
     private String mPubKey;
@@ -75,8 +75,7 @@ public class AllHisViewAdapter extends RecyclerView.Adapter<AllHisViewAdapter.Vi
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
+
                     mListener.ListAllFragInteraction(holder.mItem);
                 }
             }
