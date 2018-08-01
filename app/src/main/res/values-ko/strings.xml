@@ -159,7 +159,7 @@
     <string name="d_walit">잠시만 기다려 주세요</string>
     <string name="a_walit_max">지갑은 최대 100개까지만\n생성할 수 있습니다</string>
     <string name="a_address_max">주소록은 최대 100개를 넘을 수 없습니다</string>
-    <string name="change_eng">영어</string>
+    <string name="change_eng">English</string>
     <string name="change_ko">한국어</string>
     <string name="rule_pw">영문 대소문자/숫자/특수문자 포함,8자 이상</string>
 
@@ -184,6 +184,7 @@
     <string name="error_no_count_address">등록되어있는 주소록이 없습니다</string>
     <string name="error_same_address">등록되어있는 주소록이 있습니다</string>
     <string name="error_same_wallet">등록되어있는 지갑이 있습니다</string>
+    <string name="error_same_edit">같은 이름으로 저장할 수 없습니다</string>
 
 
     <string name="error_request_wallet">서버 오류</string>

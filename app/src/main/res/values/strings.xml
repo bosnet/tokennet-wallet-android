@@ -101,7 +101,7 @@ Each wallet need to set a password</string>
     <string name="delete_title">Are you sure you want to delete it?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
-    <string name="fee">Transaction Fee 0.001 BOS</string>
+    <string name="fee">Fee 0.001 BOS</string>
     <string name="d_confirm_fee">0.001 BOS</string>
     <string name="send_detail">Remittance details</string>
     <string name="dlog_public">Public</string>
@@ -164,7 +164,7 @@ Secret Seed securely</string>
     <string name="a_address_max">You can only create up to 100\nContacts</string>
     <string name="change_eng">English</string>
     <string name="change_ko">한국어</string>
-    <string name="rule_pw">Minimum 8 charaters of (upper,lower case,special character)</string>
+    <string name="rule_pw">Minimum 8 charaters of(upper,lower case,number,special character)</string>
 
     <string name="error_no_name">Input Wallet Name</string>
     <string name="error_no_pw">Input Wallet Password</string>
@@ -199,6 +199,7 @@ numbers, and special characters.</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_same_address">This is already existing contact</string>
     <string name="error_same_wallet">This is already existing wallet</string>
+    <string name="error_same_edit">Do not use the same name</string>
 
     <string name="error_request_wallet">Error Server Response</string>
 

@@ -91,6 +91,13 @@ public class EditContactActivity extends AppCompatActivity {
                     mErrName.setVisibility(View.VISIBLE);
                     mInValidName = true;
                 }else{
+                    if(mBook.getAddressName().equals(name)){
+                        mErrName.setVisibility(View.GONE);
+                        mErrName.setText(R.string.error_same_edit);
+                        mErrName.setVisibility(View.VISIBLE);
+                        return;
+                    }
+
                     mErrName.setVisibility(View.GONE);
                     mDbOpenHelper = new DbOpenHelper(mContext);
                     mDbOpenHelper.open(Constants.DB.ADDRESS_BOOK);

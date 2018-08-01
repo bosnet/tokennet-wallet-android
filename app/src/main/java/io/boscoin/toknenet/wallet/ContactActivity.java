@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private boolean mIsEmpty;
     private boolean mIsFromSend;
     private static final int MAX_ADDRESS = 100;
+    private ImageButton mAddContact;
 
     public interface MenuClickListener {
         void onEditClicked(int postion);
@@ -84,6 +86,14 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         mWalletIdx = it.getLongExtra(Constants.Invoke.ADDRESS_BOOK,0);
         mIsFromSend = it.getBooleanExtra(Constants.Invoke.SEND,false);
 
+        mAddContact = findViewById(R.id.add_contact);
+        if(mIsFromSend){
+
+            mAddContact.setVisibility(View.GONE);
+        }else{
+            mAddContact.setVisibility(View.VISIBLE);
+        }
+
         mEmpty = findViewById(R.id.empty);
         mRV = findViewById(R.id.rv_contact_list);
 
@@ -116,7 +126,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         navTvReceive.setTextColor(getResources().getColor(R.color.brownish_grey));
         navTvContact.setTextColor(getResources().getColor(R.color.cerulean));
 
-        findViewById(R.id.add_contact).setOnClickListener(new View.OnClickListener() {
+        mAddContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(getAddressBookCount() >= MAX_ADDRESS){

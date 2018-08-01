@@ -110,4 +110,11 @@ public class ConfirmQRActivity extends AppCompatActivity {
         setResult(RESULT_OK);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+
+        setResult(RESULT_OK);
+        finish();
+    }
 }

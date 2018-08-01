@@ -251,7 +251,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void afterTextChanged(Editable s) {
 
-                mImgDel.setVisibility(View.GONE);
                 mAmount = s.toString();
                 if(!TextUtils.isEmpty(mAmount)){
                     mValidAmmount = true;
