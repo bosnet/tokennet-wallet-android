@@ -10,12 +10,13 @@
 
     <ImageView
         android:id="@+id/ic_lock"
-        android:layout_width="100dp"
-        android:layout_height="112dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="144dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_ca1"
+
         android:background="@drawable/ic_icon_pre_lock"/>
 
     <ImageButton
@@ -31,23 +32,25 @@
 
     <TextView
         android:id="@+id/txt_ca1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/white"
         android:lineSpacingExtra="8sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cw"
         app:layout_constraintBottom_toTopOf="@+id/txt_ca2"
+        app:layout_constraintEnd_toEndOf="@+id/btn_cancel"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="28dp"
+        android:paddingRight="30dp"
         android:text="@string/ca_do_not_lose"
         />
 
     <TextView
         android:id="@+id/txt_ca2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:fontFamily="sans-serif"
@@ -55,10 +58,10 @@
         android:textColor="@color/white_op50"
         android:lineSpacingExtra="8sp"
         app:layout_constraintBottom_toTopOf="@+id/cw"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="28dp"
-        android:paddingRight="20dp"
+        android:paddingRight="30dp"
         android:text="@string/ca_sec_seed"
         />
 

@@ -31,12 +31,22 @@
     <dimen name="qr_btn_top">47.8dp</dimen>
     <dimen name="qr_notice_top">20dp</dimen>
 
-    <dimen name="notice_img_l_margin">106dp</dimen>
+
+    <dimen name="notice_img_l_margin">26.5dp</dimen>
     <dimen name="notice_img_r_margin">105dp</dimen>
 
-    <dimen name="create_w_pw1_top">40dp</dimen>
+    <dimen name="notice_img_top">50dp</dimen>
+
+
+    <dimen name="create_w_pw1_top">30dp</dimen>
     <dimen name="create_w_err_top">2dp</dimen>
     <dimen name="create_w_pw2_top">20dp</dimen>
-    <dimen name="create_w_btn_top">10dp</dimen>
+
+    <dimen name="create_w_btn_top">40dp</dimen>
     <dimen name="create_w_notice_top">5dp</dimen>
+
+    <dimen name="caution_two_top">90dp</dimen>
+    <dimen name="caution_two_txt1_r_margin">40dp</dimen>
+
+
 </resources>

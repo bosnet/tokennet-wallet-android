@@ -8,6 +8,7 @@
     android:background="@color/white">
 
     <include
+        android:id="@+id/container_title"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         layout="@layout/layout_title"/>
@@ -21,6 +22,7 @@
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/dark_blue_grey"
+        android:layout_below="@+id/container_title"
         android:layout_marginTop="@dimen/qr_top"
         tools:text="BOS Wallet A01"/>
 

@@ -7,28 +7,37 @@
     tools:context=".NoticeQRActivity">
 
     <include
+        android:id="@+id/notice_container_title"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         layout="@layout/layout_title"/>
 
-    <ImageView
-        android:id="@+id/ic_notice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="parent"
-        android:layout_marginTop="156dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="@dimen/notice_img_l_margin"
-        android:background="@drawable/ic_icon_nocamera"/>
 
-    <ImageView
+
+    <LinearLayout
+        android:id="@+id/ic_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="parent"
-        android:layout_marginTop="156dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="@dimen/notice_img_r_margin"
-        android:background="@drawable/ic_icon_thief"/>
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/notice_container_title"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="@+id/btn_noti_ok">
+
+        <ImageView
+            android:id="@+id/ic_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_icon_nocamera"
+            android:layout_gravity="left"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/ic_icon_thief"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/noti_1"
@@ -45,7 +54,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ic_notice"
+        app:layout_constraintTop_toBottomOf="@+id/ic_container"
         android:layout_marginTop="33dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
@@ -72,7 +81,8 @@
         />
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/btn_noti_ok"
+        android:layout_width="160dp"
         android:layout_height="48dp"
         android:background="@color/cerulean"
         android:textSize="14sp"
@@ -84,8 +94,6 @@
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
         android:onClick="notiOk"
         />
 

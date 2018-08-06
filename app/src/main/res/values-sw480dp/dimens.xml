@@ -28,6 +28,7 @@
 
     <dimen name="notice_img_l_margin">86dp</dimen>
     <dimen name="notice_img_r_margin">85dp</dimen>
+    <dimen name="notice_img_top">50dp</dimen>
 
     <dimen name="create_w_pw1_top">40dp</dimen>
     <dimen name="create_w_err_top">2dp</dimen>

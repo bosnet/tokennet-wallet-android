@@ -59,7 +59,7 @@
 
     <TextView
         android:id="@+id/txt_err_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:fontFamily="sans-serif"
@@ -72,7 +72,7 @@
 
     <TextView
         android:id="@+id/txt_err_name_none"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:fontFamily="sans-serif"
@@ -85,7 +85,7 @@
 
     <TextView
         android:id="@+id/txt_err_name_length"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:fontFamily="sans-serif"
@@ -94,17 +94,17 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line1"
         android:text="@string/error_wname_length"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
 
    <android.support.design.widget.TextInputLayout
         android:id="@+id/pw_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line1"
+        android:layout_below="@+id/txt_err_name_length"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="@dimen/create_w_pw1_top">
+        android:layout_marginTop="10dp">
 
     <EditText
         android:id="@+id/edit_pw"
@@ -135,7 +135,7 @@
 
     <TextView
         android:id="@+id/txt_err_pw_none"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:fontFamily="sans-serif"
@@ -150,10 +150,10 @@
         android:id="@+id/comfirm_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line2"
+        android:layout_below="@+id/txt_err_pw_none"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="@dimen/create_w_pw2_top">
+        android:layout_marginTop="10dp">
 
     <EditText
         android:id="@+id/confirm_pw"
@@ -185,7 +185,7 @@
 
     <TextView
         android:id="@+id/txt_err_pw_confirm"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:fontFamily="sans-serif"
@@ -194,20 +194,20 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/line3"
         android:text="@string/error_match_pw"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
 
     <Button
         android:id="@+id/btn_create"
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/create_w_btn_top"
+        android:layout_below="@+id/txt_err_pw_confirm"
+        android:layout_marginTop="20dp"
         android:text="@string/next"
-        android:layout_marginLeft="@dimen/create_w_btn_left_m"
-        android:layout_marginRight="@dimen/create_w_btn_right_m"
+
         android:textAllCaps="false"
-        android:layout_below="@+id/line3"
+
         android:background="@color/cerulean"
         android:textColor="@color/white"
         style="?android:attr/borderlessButtonStyle"

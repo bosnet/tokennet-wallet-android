@@ -13,7 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="143dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_ca1"
+
         android:layout_marginLeft="51dp"
         android:background="@drawable/icon_quit"/>
 
@@ -32,7 +33,7 @@
 
     <TextView
         android:id="@+id/txt_ca1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:fontFamily="sans-serif-medium"
@@ -43,14 +44,14 @@
         app:layout_constraintBottom_toTopOf="@+id/txt_ca2"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="28dp"
-        android:paddingRight="25dp"
+        android:paddingRight="30dp"
         android:text="@string/please_quit"
         />
 
 
     <TextView
         android:id="@+id/txt_ca2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:fontFamily="sans-serif"
@@ -61,7 +62,7 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="28dp"
-        android:paddingRight="25dp"
+        android:paddingRight="30dp"
         android:text="@string/someone_can"
         />
 

@@ -69,7 +69,7 @@
     <string name="please_check">Please check the following Precautions</string>
     <string name="min_balance">You need a minimum balance of 0.1 BOS to make your account valid. Please deposit minimum balance of 0.1 BOS to activate your wallet.</string>
     <string name="wallet_name">Information in the wallet will be lost when the app is deleted or when you import the wallet</string>
-    <string name="your_pw">Password is required for all wallet activities. DO NOT loose or share your password to anyone.</string>
+    <string name="your_pw">Password is required for all wallet activities.\nDO NOT loose or share your password to anyone.</string>
     <string name="secret_seed">Secret Seed is required to import your wallet. DO NOT loose or share your Secret Seed to anyone.</string>
     <string name="enter_wname">Input Wallet Name</string>
     <string name="enter_pw">Input Wallet Password</string>
@@ -175,8 +175,8 @@ Secret Seed securely</string>
     <string name="error_all_check">Please check all precautions</string>
     <string name="error_already">This name is already in used</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="error_wname_length">Please enter at least one character and no more than ten character</string>
-    <string name="error_book_length">Please enter at least one character and no more than ten character</string>
+    <string name="error_wname_length">Enter at least one character and no more than ten character</string>
+    <string name="error_book_length">Enter at least one character and no more than ten character</string>
     <string name="error_pw">Password must be at least 8 characters long, mixing English, lowercase, uppercase,
 numbers, and special characters.</string>
     <string name="error_seed_invalid">Secret Seed is invalid</string>
@@ -200,6 +200,7 @@ numbers, and special characters.</string>
     <string name="error_same_address">This is already existing contact</string>
     <string name="error_same_wallet">This is already existing wallet</string>
     <string name="error_same_edit">Do not use the same name</string>
+    <string name="error_same_send">Can not make transactions to the same Public Address</string>
 
     <string name="error_request_wallet">Error Server Response</string>
 

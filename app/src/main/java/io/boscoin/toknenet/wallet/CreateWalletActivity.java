@@ -202,7 +202,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String sPw = s.toString().trim();
 
-                mTvPwMatch.setVisibility(View.GONE);
+                mTvPwMatch.setVisibility(View.INVISIBLE);
                 if(Utils.isPasswordValid(sPw) ){
                     mTvPwNone.setVisibility(View.GONE);
                 }else{
@@ -225,7 +225,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String confirmPw = s.toString().trim();
-                mTvPwMatch.setVisibility(View.GONE);
+                mTvPwMatch.setVisibility(View.INVISIBLE);
                 if(!Utils.isPasswordValid(confirmPw) ){
                     mTvPwMatch.setText(R.string.rule_pw);
                     mTvPwMatch.setVisibility(View.VISIBLE);
@@ -238,9 +238,9 @@ public class CreateWalletActivity extends AppCompatActivity {
     private void setErrNameAlready(){
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.VISIBLE);
-        mTvLengthErr.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.INVISIBLE);
 
-        mTvPwMatch.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.INVISIBLE);
     }
 
     private void setErrNameValid() {
@@ -248,7 +248,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.VISIBLE);
 
-        mTvPwMatch.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.INVISIBLE);
     }
 
     private void setErrNameNone() {
@@ -256,15 +256,15 @@ public class CreateWalletActivity extends AppCompatActivity {
         mTvNameAlready.setVisibility(View.GONE);
         mTvLengthErr.setVisibility(View.GONE);
 
-        mTvPwMatch.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.INVISIBLE);
     }
 
     private void setErrPwNone(){
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.GONE);
-        mTvLengthErr.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.INVISIBLE);
 
-        mTvPwMatch.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.INVISIBLE);
     }
 
     private void setErrPwMatch(){
@@ -278,18 +278,18 @@ public class CreateWalletActivity extends AppCompatActivity {
     private void setErrNoVisible(){
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.GONE);
-        mTvLengthErr.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.INVISIBLE);
 
-        mTvPwMatch.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.INVISIBLE);
     }
 
     private void setErrRecoverPwVisible(){
         mTvNameNone.setVisibility(View.GONE);
         mTvNameAlready.setVisibility(View.GONE);
-        mTvLengthErr.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.INVISIBLE);
         mTvPwNone.setText(R.string.error_bos_pw);
         mTvPwNone.setVisibility(View.VISIBLE);
-        mTvPwMatch.setVisibility(View.GONE);
+        mTvPwMatch.setVisibility(View.INVISIBLE);
     }
 
     public void createWallet(View view) {
@@ -302,6 +302,12 @@ public class CreateWalletActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(wName)){
             setErrNameNone();
+            mEInputName.requestFocus();
+            return;
+        }
+
+        if(!Utils.isNameValid(wName)){
+            setErrNameValid();
             mEInputName.requestFocus();
             return;
         }

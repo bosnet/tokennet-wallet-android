@@ -55,6 +55,7 @@ public class WalletListActivity extends AppCompatActivity {
     private ProgressDialog mProgDialog;
     private DbOpenHelper mDbOpenWalletHelper;
     private static int mCount = 0, mLastCount = 0;
+    private static int mRepCount = 0, mStartIdx;
     private long mWalletIdx;
     private static final int PORT_HTTP = 80;
     private static final int PORT_HTTPS = 443;
@@ -62,6 +63,7 @@ public class WalletListActivity extends AppCompatActivity {
     private int mMaxWallcount;
     private boolean isUp, isDown;
     private SwipeRefreshLayout mListSwipeRefresh;
+    private int ADD_COUNT = 10;
 
 
     private BroadcastReceiver changeLanguageReceiver = new BroadcastReceiver() {
@@ -254,16 +256,17 @@ public class WalletListActivity extends AppCompatActivity {
                 }finally {
 
 
+                    mStartIdx++;
 
-                    mCount++;
 
-
-                    if(mCount > lastPos ){
+                    if( mStartIdx >= lastPos ){
 
                         walletList.clear();
                         getWalletList();
                         mAdapter.setWalletList(walletList);
                         mCount = 0;
+
+                        mStartIdx =0;
 
                         dismissDialog();
                         
@@ -278,12 +281,13 @@ public class WalletListActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
-
-                mCount++;
-                if(mCount > lastPos ){
+                mStartIdx++;
+                if(  mStartIdx >= lastPos ){
 
                     mAdapter.notifyItemRangeChanged(pos, lastPos);
                     mCount = 0;
+
+                    mStartIdx = 0;
 
                 }
 
@@ -337,23 +341,23 @@ public class WalletListActivity extends AppCompatActivity {
 
 
         mCount = 0;
-
+        int idx = mCount;
         if(mCount == 0 ){
             mLastCount = ADD_COUNT;
 
             if(mLastCount <= mMaxWallcount -1){
                 showDialogWalt();
-                for(;  mCount<= mLastCount; mCount++){
-                    Wallet wallet =  mAdapter.getWalletListItem(mCount);
+                for(;  idx<= mLastCount; idx++){
+                    Wallet wallet =  mAdapter.getWalletListItem(idx);
 
-                    getWalletBalances(wallet, mCount, mLastCount);
+                    getWalletBalances(wallet, idx, mLastCount);
 
                 }
             }else{
                 mLastCount = mMaxWallcount -1;
                 showDialogWalt();
-                for(;  mCount<= mLastCount; mCount++){
-                    Wallet wallet =  mAdapter.getWalletListItem(mCount);
+                for(; mCount<= mLastCount; mCount++){
+                    Wallet wallet =  mAdapter.getWalletListItem( idx);
 
                     getWalletBalances(wallet, mCount, mLastCount);
 
@@ -372,7 +376,7 @@ public class WalletListActivity extends AppCompatActivity {
     }
 
     private void getBalances(){
-        int ADD_COUNT = 10;
+
 
 
         int firstVisibleItemPosition = ((LinearLayoutManager)rv.getLayoutManager()).findFirstVisibleItemPosition();
@@ -385,42 +389,47 @@ public class WalletListActivity extends AppCompatActivity {
             if(firstVisibleItemPosition < mLastCount){
 
                 mCount = firstVisibleItemPosition -ADD_COUNT;
-                mLastCount = lastVisibleItemPos - ADD_COUNT;
+
+                mLastCount = mCount + ADD_COUNT;
 
                 if(mCount < 0){
                     dismissDialog();
 
                     return;
-                } else if(mCount >= 0 && mLastCount <= 0){
-                    mLastCount = lastVisibleItemPos;
-                }
+                }  
 
 
                 showDialogWalt();
-                for(; mCount <= mLastCount; mCount++){
-                    Wallet wallet =  mAdapter.getWalletListItem(firstVisibleItemPosition);
+                mStartIdx = mCount;
+                for(; mCount < mLastCount; mCount++){
+                    Wallet wallet =  mAdapter.getWalletListItem(mCount);
 
-                    getWalletBalances(wallet, mCount, mLastCount);
+                    getWalletBalances(wallet, mStartIdx, mLastCount);
+
 
                 }
 
             }
         }else{
 
-            if(firstVisibleItemPosition > mLastCount){
+            if(firstVisibleItemPosition >= mLastCount){
 
                 showDialogWalt();
                 mCount = firstVisibleItemPosition;
-                mLastCount = lastVisibleItemPos + ADD_COUNT;
+
+                mLastCount = mCount + ADD_COUNT;
 
                 if(mLastCount >= mMaxWallcount){
                     mLastCount = mMaxWallcount -1;
                 }
 
-                for(; firstVisibleItemPosition <= mLastCount; firstVisibleItemPosition++){
-                    Wallet wallet =  mAdapter.getWalletListItem(firstVisibleItemPosition);
+                mStartIdx = mCount;
+                for(; mCount < mLastCount; mCount++){
 
-                    getWalletBalances(wallet, mCount, mLastCount);
+                    Wallet wallet =  mAdapter.getWalletListItem(mCount);
+
+                    getWalletBalances(wallet, mStartIdx, mLastCount);
+
 
                 }
 

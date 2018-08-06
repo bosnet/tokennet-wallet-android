@@ -194,6 +194,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                     mTvAddressErr.setVisibility(View.VISIBLE);
                     mValidAddress = false;
                 }else{
+                    if(mMyPubKey.equals(mPubKey)){
+                        mValidAddress = false;
+                        Toast.makeText(mContext,R.string.error_same_send,Toast.LENGTH_SHORT).show();
+                        mValidAddress = false;
+                        changeButton();
+                        return;
+                    }
 
                     mImgDel.setVisibility(View.VISIBLE);
                     try{

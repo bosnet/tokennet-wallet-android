@@ -48,7 +48,8 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_welcome"
+        />
 
     <TextView
         android:id="@+id/txt_ls"
@@ -105,12 +106,12 @@
         android:textStyle="normal"
         android:textColor="@color/white_op50"
         android:lineSpacingExtra="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/ca_bottom"
+        app:layout_constraintBottom_toTopOf="@+id/cw"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginLeft="28dp"
         android:layout_marginRight="32dp"
-        android:lines="2"
+
         android:text="@string/agree_all_precautions"
         />
 

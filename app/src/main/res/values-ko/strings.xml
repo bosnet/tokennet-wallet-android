@@ -67,7 +67,7 @@
    
     <string name="wallet_name">지갑 이름 및 주소록의 정보는 앱이 삭제되거나 지갑 가져오기를 할 때는 모두 사라집니다</string>
 
-    <string name="your_pw">비밀번호는 송금, 보안키 조회, 지갑 가져오기 할 때 필요합니다. 비밀번호를 잃어버리면 찾을 수 없으니 반드시 기억하세요</string>
+    <string name="your_pw">비밀번호는 송금, 보안키 조회, 지갑 가져오기 할 때 필요합니다.\n비밀번호를 잃어버리면 찾을 수 없으니 반드시 기억하세요</string>
     <string name="secret_seed">보안키와 복구키는 지갑 가져오기 할 때 필요합니다. 잃어버리거나 타인에게 공유하지 마세요</string>
     <string name="enter_wname">지갑 이름 입력</string>
     <string name="enter_pw">비밀번호 입력</string>
@@ -185,7 +185,7 @@
     <string name="error_same_address">등록되어있는 주소록이 있습니다</string>
     <string name="error_same_wallet">등록되어있는 지갑이 있습니다</string>
     <string name="error_same_edit">같은 이름으로 저장할 수 없습니다</string>
-
+    <string name="error_same_send">같은 공개 주소로는 보낼 수 없습니다</string>
 
     <string name="error_request_wallet">서버 오류</string>
 

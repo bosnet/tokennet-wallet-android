@@ -16,4 +16,6 @@
 
     <dimen name="receive_wallet_top">10dp</dimen>
 
+    <dimen name="caution_two_top">144dp</dimen>
+    <dimen name="caution_two_txt1_r_margin">20dp</dimen>
 </resources>

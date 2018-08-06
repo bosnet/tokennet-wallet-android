@@ -14,4 +14,13 @@
 
     <dimen name="receive_wallet_top">50dp</dimen>
 
+
+    <dimen name="caution_two_top">144dp</dimen>
+    <dimen name="caution_two_txt1_r_margin">20dp</dimen>
+
+    <dimen name="qr_top">160dp</dimen>
+
+    <dimen name="notice_img_l_margin">36dp</dimen>
+    <dimen name="notice_img_r_margin">85dp</dimen>
+    <dimen name="notice_img_top">100dp</dimen>
 </resources>

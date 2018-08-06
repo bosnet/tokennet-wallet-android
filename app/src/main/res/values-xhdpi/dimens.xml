@@ -22,5 +22,35 @@
     <dimen name="confirm_qr_top">79dp</dimen>
     <dimen name="confirm_qr_img_top">10dp</dimen>
 
-    <dimen name="qr_top">119dp</dimen>
+
+    <dimen name="qr_top">70dp</dimen>
+    <dimen name="qr_img_top">10dp</dimen>
+    <dimen name="qr_img_below_top">10dp</dimen>
+    <dimen name="qr_btn_top">20dp</dimen>
+    <dimen name="qr_notice_top">10dp</dimen>
+
+    <dimen name="confirm_qr_img_below_top">10dp</dimen>
+    <dimen name="confirm_qr_btn_top">27dp</dimen>
+    <dimen name="confirm_qr_notice_top">10dp</dimen>
+
+
+
+
+    <dimen name="notice_img_l_margin">56dp</dimen>
+    <dimen name="notice_img_r_margin">85dp</dimen>
+    <dimen name="notice_img_top">100dp</dimen>
+
+    <dimen name="create_w_pw1_top">35dp</dimen>
+    <dimen name="create_w_err_top">5dp</dimen>
+    <dimen name="create_w_pw2_top">30dp</dimen>
+
+    <dimen name="create_w_btn_top">55dp</dimen>
+    <dimen name="create_w_notice_top">10dp</dimen>
+    <dimen name="create_w_btn_left_m">80dp</dimen>
+    <dimen name="create_w_btn_right_m">80dp</dimen>
+
+    <dimen name="caution_two_top">144dp</dimen>
+    <dimen name="caution_two_txt1_r_margin">20dp</dimen>
+
+
 </resources>

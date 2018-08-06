@@ -17,7 +17,7 @@
         android:textStyle="normal"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:text="@string/please_check"
         tools:text="@string/please_check"/>
 
@@ -27,7 +27,7 @@
        android:orientation="vertical"
        android:layout_below="@+id/title"
        android:layout_above="@+id/btnOk"
-       android:layout_marginTop="20dp"
+       android:layout_marginTop="30dp"
        android:layout_marginBottom="20dp"
        android:fillViewport="true">
 
