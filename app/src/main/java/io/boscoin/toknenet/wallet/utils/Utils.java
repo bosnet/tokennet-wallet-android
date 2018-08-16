@@ -1,11 +1,14 @@
 package io.boscoin.toknenet.wallet.utils;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -38,8 +41,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.boscoin.toknenet.wallet.R;
+import io.boscoin.toknenet.wallet.conf.Constants;
 import io.boscoin.toknenet.wallet.crypt.AESCrypt;
 import io.boscoin.toknenet.wallet.crypt.Base58;
+import io.boscoin.toknenet.wallet.db.DataBases;
+import io.boscoin.toknenet.wallet.db.DbOpenHelper;
 
 
 public class Utils {

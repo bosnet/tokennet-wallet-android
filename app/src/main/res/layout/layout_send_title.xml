@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="@color/light_navy_two"
-    android:paddingLeft="20dp"
+    android:paddingLeft="10dp"
     android:paddingRight="20dp">
 
     <ImageButton
@@ -24,7 +24,7 @@
         android:textStyle="normal"
         android:textColor="@color/white"
         android:layout_toRightOf="@+id/btn_back"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:layout_centerInParent="true"
         android:text="@string/send"/>
 

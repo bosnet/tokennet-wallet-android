@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,8 @@ public class CreateWalletActivity extends AppCompatActivity {
     private ProgressDialog mProgDialog;
     private DbInsertThread mThread;
     private TextInputLayout mlayoutName, mlayoutPw, mlayoutConfirm;
+    private boolean mIsNameValid, mIsPw1Valid, mIsPw2Valid, mIsNext;
+    private Button mBtnCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,7 @@ public class CreateWalletActivity extends AppCompatActivity {
         isRecover = it.getStringExtra(Constants.Invoke.RECOVER_WALLET);
         mKey = it.getStringExtra(Constants.Invoke.KEY);
 
+        mBtnCreate = findViewById(R.id.btn_create);
 
         if(isRecover != null && isRecover.equals(BOS_RECOVER)){
             isBosRecover = true;
@@ -154,8 +158,12 @@ public class CreateWalletActivity extends AppCompatActivity {
                 String wName = s.toString().trim();
                 if(TextUtils.isEmpty(wName)){
                     setErrNameNone();
+                    mIsNameValid = false;
+                    changeButton();
                 } else if(!Utils.isNameValid(wName)){
                     setErrNameValid();
+                    mIsNameValid = false;
+                    changeButton();
                 } else{
                     mDbOpenHelperName = new DbOpenHelper(mContext);
                     mDbOpenHelperName.open(Constants.DB.MY_WALLETS);
@@ -171,6 +179,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                                 mDbOpenHelperName.close();
                                 mCursor.close();
                                 mAleradyWallet = true;
+                                changeButton();
                                 return;
                             }
                         }while (mCursor.moveToNext());
@@ -180,6 +189,8 @@ public class CreateWalletActivity extends AppCompatActivity {
                     mCursor.close();
                     mAleradyWallet = false;
                     setErrNoVisible();
+                    mIsNameValid = true;
+                    changeButton();
                 }
             }
         });
@@ -205,9 +216,12 @@ public class CreateWalletActivity extends AppCompatActivity {
                 mTvPwMatch.setVisibility(View.INVISIBLE);
                 if(Utils.isPasswordValid(sPw) ){
                     mTvPwNone.setVisibility(View.GONE);
+                    mIsPw1Valid = true;
                 }else{
                     mTvPwNone.setVisibility(View.VISIBLE);
+                    mIsPw1Valid = false;
                 }
+                changeButton();
             }
         });
 
@@ -229,7 +243,13 @@ public class CreateWalletActivity extends AppCompatActivity {
                 if(!Utils.isPasswordValid(confirmPw) ){
                     mTvPwMatch.setText(R.string.rule_pw);
                     mTvPwMatch.setVisibility(View.VISIBLE);
+                    mIsPw2Valid = false;
+
+                }else{
+                    mIsPw2Valid = true;
+
                 }
+                changeButton();
             }
         });
 
@@ -341,25 +361,9 @@ public class CreateWalletActivity extends AppCompatActivity {
             return;
         }
 
-        if(!Utils.isPasswordValid(wPw1) || !Utils.isPasswordValid(wPw2)){
-            final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-            alert.setMessage(R.string.error_pw).setCancelable(false).setPositiveButton(R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            setErrNoVisible();
-                            mEInputPW.requestFocus();
-
-                        }
-                    });
-            AlertDialog dialog = alert.create();
-            dialog.show();
-            return;
-        }
 
 
-        if(isBosRecover){
+        if(isBosRecover && mIsNext){
 
             if(mThread != null &&  !mThread.getStoped()){
 
@@ -379,7 +383,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
             }
 
-        }else if(isSeedRecover){
+        }else if(isSeedRecover && mIsNext){
             if(mThread != null &&  !mThread.getStoped()){
 
                 return;
@@ -395,6 +399,10 @@ public class CreateWalletActivity extends AppCompatActivity {
 
         } else{
             //create walllet
+            if(!mIsNext){
+                return;
+            }
+
             if(mThread != null &&  !mThread.getStoped()){
 
                return;
@@ -518,7 +526,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                         mThread.stopThread();
                         confirmRecoverAlert();
                     }else{
-                        if(TEST_GET && !isSeedRecover && !isBosRecover){
+                        if( BuildConfig.TOKEN_GET && !isSeedRecover && !isBosRecover){
 
                             requestMoney();
                         }else{
@@ -595,5 +603,14 @@ public class CreateWalletActivity extends AppCompatActivity {
         }
     }
 
-
+    private void changeButton(){
+         
+        if(mIsNameValid && mIsPw1Valid && mIsPw2Valid && !mAleradyWallet){
+            mBtnCreate.setBackgroundColor(getResources().getColor(R.color.cerulean));
+            mIsNext =true;
+        }else{
+            mBtnCreate.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
+            mIsNext =false;
+        }
+    }
 }

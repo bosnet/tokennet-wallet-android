@@ -31,11 +31,12 @@
 
     <ImageButton
         android:id="@+id/add_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="28dp"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/ic_icon_add"
+        android:background="@drawable/bg_box"
+        android:src="@drawable/ic_icon_add"
         android:filterTouchesWhenObscured="true"/>
 
 </RelativeLayout>

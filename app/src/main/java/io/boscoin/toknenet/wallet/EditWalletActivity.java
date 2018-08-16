@@ -195,7 +195,7 @@ public class EditWalletActivity extends AppCompatActivity {
                 long idx = cursor.getLong(cursor.getColumnIndex("_id"));
 
                 if(  wOrder > divCount){
-                    mDbOpenHelper.updateColumnWalletOrder(idx, Long.toString(/*--iWorder*/ --wOrder));
+                    mDbOpenHelper.updateColumnWalletOrder(idx, Long.toString( --wOrder));
                 }
             }while (cursor.moveToNext());
 

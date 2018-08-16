@@ -15,9 +15,9 @@
 
         <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_icon_arrow"
             android:background="@drawable/bg_box"/>
@@ -36,8 +36,8 @@
 
         <ImageButton
             android:id="@+id/btn_setting"
-            android:layout_width="25dp"
-            android:layout_height="21dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_icon_edit"
@@ -78,12 +78,12 @@
         <ImageButton
             android:id="@+id/btn_copy"
             android:layout_width="20dp"
-            android:layout_height="14dp"
+            android:layout_height="20dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tv_balances"
             android:layout_toRightOf="@+id/tv_pub_key"
             android:layout_marginLeft="7dp"
-            android:layout_alignTop="@+id/tv_pub_key"
+            android:layout_marginTop="11dp"
             android:src="@drawable/ic_icon_copy_white"
             android:background="@drawable/bg_box"
             android:onClick="addressCopy"/>

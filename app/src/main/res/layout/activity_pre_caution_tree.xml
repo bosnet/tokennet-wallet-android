@@ -20,8 +20,8 @@
 
     <ImageButton
         android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/bg_box"
         android:src="@drawable/ic_icon_close"
         app:layout_constraintTop_toTopOf="parent"

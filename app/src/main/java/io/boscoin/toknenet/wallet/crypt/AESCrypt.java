@@ -11,6 +11,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import io.boscoin.toknenet.wallet.BuildConfig;
 
 
 public class AESCrypt {
@@ -26,8 +27,6 @@ public class AESCrypt {
     //AESCrypt-ObjC uses blank IV (BOS_COIN_WALLETS)
     private static final byte[] ivBytes = {0x42, 0x4F, 0x53, 0x5F, 0x43, 0x4F, 0x49, 0x4E, 0x5F, 0x57, 0x41, 0x4C, 0x4C, 0x45, 0x54, 0x53};
 
-    //togglable log option (please turn off in live!)
-    public static boolean DEBUG_LOG_ENABLED = true;
 
     public static final String PRE_FIX = "BOS";
     public static final String OS = "A";
@@ -77,7 +76,7 @@ public class AESCrypt {
 
             return  PRE_FIX + encoded + OS +VERSION;
         } catch (UnsupportedEncodingException e) {
-            if (DEBUG_LOG_ENABLED)
+            if (BuildConfig.AES_DEBUG)
 
             throw new GeneralSecurityException(e);
         }
@@ -164,12 +163,12 @@ public class AESCrypt {
 
 
     private static void log(String what, byte[] bytes) {
-        if (DEBUG_LOG_ENABLED)
+        if (BuildConfig.AES_DEBUG)
             Log.d(TAG, what + "[" + bytes.length + "] [" + bytesToHex(bytes) + "]");
     }
 
     private static void log(String what, String value) {
-        if (DEBUG_LOG_ENABLED)
+        if (BuildConfig.AES_DEBUG)
             Log.d(TAG, what + "[" + value.length() + "] [" + value + "]");
     }
 

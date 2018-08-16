@@ -208,7 +208,7 @@
 
         android:textAllCaps="false"
 
-        android:background="@color/cerulean"
+        android:background="@color/pinkish_grey"
         android:textColor="@color/white"
         style="?android:attr/borderlessButtonStyle"
         android:filterTouchesWhenObscured="true"

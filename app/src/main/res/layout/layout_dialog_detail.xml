@@ -181,12 +181,11 @@
         />
 
 
-
-    <TextView
+    <Button
         android:id="@+id/btn_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:textSize="15dp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="@color/cerulean"
@@ -198,5 +197,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginRight="20dp"
-        android:filterTouchesWhenObscured="true"/>
+        android:filterTouchesWhenObscured="true"
+        android:background="@null"/>
+
 </android.support.constraint.ConstraintLayout>

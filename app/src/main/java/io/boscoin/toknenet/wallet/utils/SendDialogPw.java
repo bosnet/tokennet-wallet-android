@@ -7,6 +7,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -42,6 +44,25 @@ public class SendDialogPw extends Dialog{
         setContentView(R.layout.layout_dialog_pw);
 
         editPw = findViewById(R.id.input_pw);
+
+        editPw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mTvErr.setVisibility(View.GONE);
+            }
+        });
+
+
         mTvErr = findViewById(R.id.txt_err_key);
         mTvErr.setVisibility(View.GONE);
 

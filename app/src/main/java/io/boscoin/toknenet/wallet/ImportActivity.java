@@ -203,6 +203,7 @@ public class ImportActivity extends AppCompatActivity {
                         try{
                             Utils.decodeCheck(Utils.VersionByte.SEED, mSeedKey.toCharArray());
                             if(isSamePubKey()){
+                                mErrSeedKey.setVisibility(View.GONE);
                                 Toast.makeText(mContext,R.string.error_same_wallet,Toast.LENGTH_SHORT).show();
                                 mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
                                 return;
@@ -226,6 +227,7 @@ public class ImportActivity extends AppCompatActivity {
 
                     if(!TextUtils.isEmpty(mBosKey) && Utils.isValidRecoveryKey(mBosKey)){
                         if(isSameBosKey()){
+                            mErrBosKey.setVisibility(View.GONE);
                             Toast.makeText(mContext,R.string.error_same_wallet,Toast.LENGTH_SHORT).show();
                             mBtnNext.setBackgroundColor(getResources().getColor(R.color.pinkish_grey));
                             return;

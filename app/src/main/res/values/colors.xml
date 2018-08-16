@@ -6,10 +6,10 @@
     <color name="colorAccent">#0094bd</color>
 
     <!-- pull to refresh temp color -->
-    <color name="swipe_color_1">#B6DB49</color>
-    <color name="swipe_color_2">#99CC00</color>
-    <color name="swipe_color_3">#8ABD00</color>
-    <color name="swipe_color_4">#7CAF00</color>
+    <color name="swipe_color_1">#12AED9</color>
+    <color name="swipe_color_2">#0094BD</color>
+    <color name="swipe_color_3">#00799B</color>
+    <color name="swipe_color_4">#00647F</color>
 
 
 

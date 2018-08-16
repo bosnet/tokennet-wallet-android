@@ -13,37 +13,40 @@
         android:textStyle="normal"
         android:textColor="@color/white"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:text="@string/my_wallet"/>
 
     <ImageButton
         android:id="@+id/btn_setting"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_icon_setting"
+        android:background="@drawable/bg_box"
+        android:src="@drawable/ic_icon_setting"
         android:filterTouchesWhenObscured="true"/>
 
     <ImageButton
         android:id="@+id/btn_import"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
         android:layout_toLeftOf="@+id/btn_setting"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_icon_import"
+        android:background="@drawable/bg_box"
+        android:src="@drawable/ic_icon_import"
         android:filterTouchesWhenObscured="true"/>
 
     <ImageButton
         android:id="@+id/btn_create"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/btn_import"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_icon_create"
+        android:background="@drawable/bg_box"
+        android:src="@drawable/ic_icon_create"
         android:filterTouchesWhenObscured="true"/>
 
 

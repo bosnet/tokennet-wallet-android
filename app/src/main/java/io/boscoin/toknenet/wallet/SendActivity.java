@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -153,6 +154,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 if(getAddressCount() > 0 ){
                     Intent it = new Intent(SendActivity.this, ContactActivity.class);
                     it.putExtra(Constants.Invoke.SEND, true);
+                    it.putExtra(Constants.Invoke.ADDRESS_BOOK, mWalletId);
                     startActivityForResult(it,ADDRESS_REQUEST_CODE );
                 }else{
                     final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
@@ -259,12 +261,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) {
 
                 mAmount = s.toString();
-                if(!TextUtils.isEmpty(mAmount)){
-                    mValidAmmount = true;
 
+                if(mAmount.startsWith("0") || mAmount.startsWith(".")){
+                    mValidAmmount = false;
+                }else if(!TextUtils.isEmpty(mAmount)){
+                    mValidAmmount = true;
                 }else{
                     mValidAmmount = false;
-
                 }
                 changeButton();
             }
@@ -574,7 +577,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         new Thread(){
             public void run(){
 
-                Network.use(new Network(Constants.Network.PASSPHRASE_BOS_TEST));
+
+                Network.use(new Network(BuildConfig.NETWORK_PH));
                 Server server = new Server(Constants.Domain.BOS_HORIZON_TEST);
 
                 KeyPair source = KeyPair.fromSecretSeed(mSeed);
@@ -651,7 +655,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         new Thread(){
             public void run(){
 
-                Network.use(new Network(Constants.Network.PASSPHRASE_BOS_TEST));
+
+                Network.use(new Network(BuildConfig.NETWORK_PH));
                 Server server = new Server(Constants.Domain.BOS_HORIZON_TEST);
 
                 KeyPair source = KeyPair.fromSecretSeed(mSeed);

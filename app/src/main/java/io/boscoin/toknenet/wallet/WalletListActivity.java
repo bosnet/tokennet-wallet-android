@@ -335,7 +335,7 @@ public class WalletListActivity extends AppCompatActivity {
     }
 
     private void getResumeBalances() {
-        int ADD_COUNT = 10;
+        //int ADD_COUNT = 10;
         int start = 0;
         getWalletCount();
 
