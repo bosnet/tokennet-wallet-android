@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -14,10 +14,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-import io.boscoin.toknenet.wallet.utils.Utils;
-import io.boscoin.toknenet.wallet.utils.WalletPreference;
+import io.boscoin.tokennet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.db.DbOpenHelper;
+import io.boscoin.tokennet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.utils.WalletPreference;
 
 public class PreCautionTwoActivity extends AppCompatActivity {
 

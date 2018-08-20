@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -46,17 +46,17 @@ import java.math.BigDecimal;
 import java.security.GeneralSecurityException;
 
 import cz.msebera.android.httpclient.Header;
-import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.crypt.AESCrypt;
-import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-import io.boscoin.toknenet.wallet.model.Account;
-import io.boscoin.toknenet.wallet.model.Payments;
-import io.boscoin.toknenet.wallet.utils.SendDialogComplete;
-import io.boscoin.toknenet.wallet.utils.SendDialogConfirm;
-import io.boscoin.toknenet.wallet.utils.SendDialogFail;
-import io.boscoin.toknenet.wallet.utils.SendDialogPw;
-import io.boscoin.toknenet.wallet.utils.Utils;
-import io.boscoin.toknenet.wallet.utils.WalletPreference;
+import io.boscoin.tokennet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.crypt.AESCrypt;
+import io.boscoin.tokennet.wallet.db.DbOpenHelper;
+import io.boscoin.tokennet.wallet.model.Account;
+import io.boscoin.tokennet.wallet.model.Payments;
+import io.boscoin.tokennet.wallet.utils.SendDialogComplete;
+import io.boscoin.tokennet.wallet.utils.SendDialogConfirm;
+import io.boscoin.tokennet.wallet.utils.SendDialogFail;
+import io.boscoin.tokennet.wallet.utils.SendDialogPw;
+import io.boscoin.tokennet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.utils.WalletPreference;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener{
 

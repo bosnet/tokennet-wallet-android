@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.model;
+package io.boscoin.tokennet.wallet.model;
 
 public class Person {
    public long _id;

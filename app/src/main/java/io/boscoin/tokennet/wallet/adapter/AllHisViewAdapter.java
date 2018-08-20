@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.adapter;
+package io.boscoin.tokennet.wallet.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import io.boscoin.toknenet.wallet.AllHistoryFragment.OnListAllFragInteractionListener;
-import io.boscoin.toknenet.wallet.R;
-import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-import io.boscoin.toknenet.wallet.model.Wallet;
-import io.boscoin.toknenet.wallet.utils.Utils;
-import io.boscoin.toknenet.wallet.model.Payments;
+import io.boscoin.tokennet.wallet.AllHistoryFragment.OnListAllFragInteractionListener;
+import io.boscoin.tokennet.wallet.R;
+import io.boscoin.tokennet.wallet.db.DbOpenHelper;
+import io.boscoin.tokennet.wallet.model.Wallet;
+import io.boscoin.tokennet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.model.Payments;
 
 import java.util.ArrayList;
 import java.util.List;

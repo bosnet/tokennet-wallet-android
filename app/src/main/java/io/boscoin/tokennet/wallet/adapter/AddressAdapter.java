@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.adapter;
+package io.boscoin.tokennet.wallet.adapter;
 
 import android.content.Context;
 
@@ -18,9 +18,9 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import io.boscoin.toknenet.wallet.ContactActivity;
-import io.boscoin.toknenet.wallet.R;
-import io.boscoin.toknenet.wallet.model.AddressBook;
+import io.boscoin.tokennet.wallet.ContactActivity;
+import io.boscoin.tokennet.wallet.R;
+import io.boscoin.tokennet.wallet.model.AddressBook;
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressViewHolder> {
 

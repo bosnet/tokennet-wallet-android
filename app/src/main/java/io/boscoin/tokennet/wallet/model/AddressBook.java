@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.model;
+package io.boscoin.tokennet.wallet.model;
 
 import java.io.Serializable;
 

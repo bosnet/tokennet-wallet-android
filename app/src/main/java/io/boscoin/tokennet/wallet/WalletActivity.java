@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 import android.app.ProgressDialog;
 import android.content.ClipData;
@@ -23,13 +23,13 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
-import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-import io.boscoin.toknenet.wallet.model.Account;
-import io.boscoin.toknenet.wallet.model.Payments;
-import io.boscoin.toknenet.wallet.utils.DetailDialog;
-import io.boscoin.toknenet.wallet.utils.Utils;
-import io.boscoin.toknenet.wallet.utils.WalletPreference;
+import io.boscoin.tokennet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.db.DbOpenHelper;
+import io.boscoin.tokennet.wallet.model.Account;
+import io.boscoin.tokennet.wallet.model.Payments;
+import io.boscoin.tokennet.wallet.utils.DetailDialog;
+import io.boscoin.tokennet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.utils.WalletPreference;
 
 public class WalletActivity extends AppCompatActivity implements
         AllHistoryFragment.OnListAllFragInteractionListener, SendHistoryFragment.OnListSendFragInteractionListener

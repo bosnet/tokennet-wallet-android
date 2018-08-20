@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.crypt;
+package io.boscoin.tokennet.wallet.crypt;
 
 import java.math.BigInteger;
 

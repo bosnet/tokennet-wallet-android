@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,10 +23,10 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.stellar.sdk.KeyPair;
 
-import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-import io.boscoin.toknenet.wallet.utils.Utils;
-import io.boscoin.toknenet.wallet.utils.WalletPreference;
+import io.boscoin.tokennet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.db.DbOpenHelper;
+import io.boscoin.tokennet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.utils.WalletPreference;
 
 public class AddContactActivity extends AppCompatActivity {
 

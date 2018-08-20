@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,9 +21,9 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
-import io.boscoin.toknenet.wallet.adapter.ReceiveHisViewAdapter;
-import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.model.Payments;
+import io.boscoin.tokennet.wallet.adapter.ReceiveHisViewAdapter;
+import io.boscoin.tokennet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.model.Payments;
 
 
 public class ReceiveHistoryFragment extends Fragment {

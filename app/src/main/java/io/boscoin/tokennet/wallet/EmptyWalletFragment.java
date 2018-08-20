@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.conf.Constants;
 
 
 public class EmptyWalletFragment extends Fragment {

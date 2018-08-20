@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.utils;
+package io.boscoin.tokennet.wallet.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import io.boscoin.toknenet.wallet.R;
+import io.boscoin.tokennet.wallet.R;
 
 
 public class SendDialogConfirm extends Dialog {

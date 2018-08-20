@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.adapter;
+package io.boscoin.tokennet.wallet.adapter;
 
 
 import android.support.v7.widget.CardView;
@@ -11,10 +11,10 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import io.boscoin.toknenet.wallet.R;
-import io.boscoin.toknenet.wallet.WalletListActivity;
-import io.boscoin.toknenet.wallet.model.Wallet;
-import io.boscoin.toknenet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.R;
+import io.boscoin.tokennet.wallet.WalletListActivity;
+import io.boscoin.tokennet.wallet.model.Wallet;
+import io.boscoin.tokennet.wallet.utils.Utils;
 
 public class WalletListAdapter extends RecyclerView.Adapter<WalletListAdapter.WalletViewHolder>{
 

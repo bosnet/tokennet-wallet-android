@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.utils;
+package io.boscoin.tokennet.wallet.utils;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -40,12 +40,12 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.boscoin.toknenet.wallet.R;
-import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.crypt.AESCrypt;
-import io.boscoin.toknenet.wallet.crypt.Base58;
-import io.boscoin.toknenet.wallet.db.DataBases;
-import io.boscoin.toknenet.wallet.db.DbOpenHelper;
+import io.boscoin.tokennet.wallet.R;
+import io.boscoin.tokennet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.crypt.AESCrypt;
+import io.boscoin.tokennet.wallet.crypt.Base58;
+import io.boscoin.tokennet.wallet.db.DataBases;
+import io.boscoin.tokennet.wallet.db.DbOpenHelper;
 
 
 public class Utils {

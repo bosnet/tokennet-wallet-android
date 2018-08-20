@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.utils;
+package io.boscoin.tokennet.wallet.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
 
-import io.boscoin.toknenet.wallet.R;
+import io.boscoin.tokennet.wallet.R;
 
 public class SendDialogFail extends Dialog {
     private View.OnClickListener mRightClickListener;

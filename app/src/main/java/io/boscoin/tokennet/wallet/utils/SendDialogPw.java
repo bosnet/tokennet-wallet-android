@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.utils;
+package io.boscoin.tokennet.wallet.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import io.boscoin.toknenet.wallet.R;
+import io.boscoin.tokennet.wallet.R;
 
 public class SendDialogPw extends Dialog{
     private View.OnClickListener mRightClickListener;

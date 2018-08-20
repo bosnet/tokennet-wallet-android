@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -23,13 +23,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.boscoin.toknenet.wallet.adapter.AddressAdapter;
-import io.boscoin.toknenet.wallet.conf.Constants;
-import io.boscoin.toknenet.wallet.db.DbOpenHelper;
-import io.boscoin.toknenet.wallet.model.AddressBook;
-import io.boscoin.toknenet.wallet.utils.RecyclerViewItemClickListener;
-import io.boscoin.toknenet.wallet.utils.Utils;
-import io.boscoin.toknenet.wallet.utils.WalletPreference;
+import io.boscoin.tokennet.wallet.adapter.AddressAdapter;
+import io.boscoin.tokennet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.db.DbOpenHelper;
+import io.boscoin.tokennet.wallet.model.AddressBook;
+import io.boscoin.tokennet.wallet.utils.RecyclerViewItemClickListener;
+import io.boscoin.tokennet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.utils.WalletPreference;
 
 public class ContactActivity extends AppCompatActivity implements View.OnClickListener{
 

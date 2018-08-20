@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.crypt;
+package io.boscoin.tokennet.wallet.crypt;
 
 import android.util.Log;
 
@@ -11,7 +11,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import io.boscoin.toknenet.wallet.BuildConfig;
+import io.boscoin.tokennet.wallet.BuildConfig;
 
 
 public class AESCrypt {

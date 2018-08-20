@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.adapter;
+package io.boscoin.tokennet.wallet.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import io.boscoin.toknenet.wallet.R;
-import io.boscoin.toknenet.wallet.WalletTouchHelper;
-import io.boscoin.toknenet.wallet.model.Wallet;
+import io.boscoin.tokennet.wallet.R;
+import io.boscoin.tokennet.wallet.WalletTouchHelper;
+import io.boscoin.tokennet.wallet.model.Wallet;
 
 public class WalletOrderAdapter extends RecyclerView.Adapter<WalletOrderAdapter.WalletOrderViewHolder> implements
         WalletTouchHelper.OnItemMoveListener{

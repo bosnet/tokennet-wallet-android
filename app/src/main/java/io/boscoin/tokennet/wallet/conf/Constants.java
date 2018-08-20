@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.conf;
+package io.boscoin.tokennet.wallet.conf;
 
 
 public class Constants {

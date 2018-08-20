@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet;
+package io.boscoin.tokennet.wallet;
 
 
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import io.boscoin.toknenet.wallet.utils.Utils;
-import io.boscoin.toknenet.wallet.utils.WalletPreference;
+import io.boscoin.tokennet.wallet.utils.Utils;
+import io.boscoin.tokennet.wallet.utils.WalletPreference;
 
 public class CreateNoticeActivity extends AppCompatActivity {
 

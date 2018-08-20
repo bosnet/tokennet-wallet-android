@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.db;
+package io.boscoin.tokennet.wallet.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.conf.Constants;
 
 public class DbOpenHelper {
 

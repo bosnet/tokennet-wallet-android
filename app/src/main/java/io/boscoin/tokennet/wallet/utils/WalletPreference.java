@@ -1,4 +1,4 @@
-package io.boscoin.toknenet.wallet.utils;
+package io.boscoin.tokennet.wallet.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,8 +1,8 @@
-package io.boscoin.toknenet.wallet.db;
+package io.boscoin.tokennet.wallet.db;
 
 import android.provider.BaseColumns;
 
-import io.boscoin.toknenet.wallet.conf.Constants;
+import io.boscoin.tokennet.wallet.conf.Constants;
 
 // DataBase Table
 public final class DataBases {
