@@ -54,7 +54,7 @@ public class PreCautionThreeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pre_caution_tree);
 
         Intent it = getIntent();
-        isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
+        isSetting = it.getBooleanExtra(Constants.Invoke.SETTING, false);
 
 
         mTvNext = findViewById(R.id.tv_caution_next);

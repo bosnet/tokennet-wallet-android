@@ -93,7 +93,7 @@ public class SettingActivity extends AppCompatActivity {
 
     public void viewPreCaution(View view) {
         Intent it = new Intent(SettingActivity.this, PreCautionOneActivity.class);
-        it.putExtra(Constants.Invoke.SEITING, true);
+        it.putExtra(Constants.Invoke.SETTING, true);
         startActivity(it);
     }
 

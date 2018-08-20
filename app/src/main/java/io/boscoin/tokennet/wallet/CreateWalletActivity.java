@@ -57,7 +57,7 @@ public class CreateWalletActivity extends AppCompatActivity {
     private long walletId;
     private static final boolean TEST_GET = true;
     private Cursor mCursor;
-    private boolean mAleradyWallet;
+    private boolean mAlreadyWallet;
     private ProgressDialog mProgDialog;
     private DbInsertThread mThread;
     private TextInputLayout mlayoutName, mlayoutPw, mlayoutConfirm;
@@ -178,7 +178,7 @@ public class CreateWalletActivity extends AppCompatActivity {
                                 setErrNameAlready();
                                 mDbOpenHelperName.close();
                                 mCursor.close();
-                                mAleradyWallet = true;
+                                mAlreadyWallet = true;
                                 changeButton();
                                 return;
                             }
@@ -187,7 +187,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
                     mDbOpenHelperName.close();
                     mCursor.close();
-                    mAleradyWallet = false;
+                    mAlreadyWallet = false;
                     setErrNoVisible();
                     mIsNameValid = true;
                     changeButton();
@@ -332,7 +332,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             return;
         }
 
-        if(mAleradyWallet){
+        if(mAlreadyWallet){
 
             setErrNameAlready();
             mEInputName.requestFocus();
@@ -605,7 +605,7 @@ public class CreateWalletActivity extends AppCompatActivity {
 
     private void changeButton(){
          
-        if(mIsNameValid && mIsPw1Valid && mIsPw2Valid && !mAleradyWallet){
+        if(mIsNameValid && mIsPw1Valid && mIsPw2Valid && !mAlreadyWallet){
             mBtnCreate.setBackgroundColor(getResources().getColor(R.color.cerulean));
             mIsNext =true;
         }else{
