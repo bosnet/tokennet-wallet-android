@@ -100,7 +100,7 @@ public class DetailDialog extends Dialog{
 
         mTvAmount = findViewById(R.id.ammount);
 
-        mTvAmount.setText(Utils.dispayBalance(mAmount));
+        mTvAmount.setText(Utils.displayBalance(mAmount));
 
        mTvFrom.setOnClickListener(new View.OnClickListener() {
            @Override

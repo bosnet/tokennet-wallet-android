@@ -61,7 +61,7 @@ public class PreCautionTwoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pre_caution_two);
 
         Intent it = getIntent();
-        isSetting = it.getBooleanExtra(Constants.Invoke.SEITING, false);
+        isSetting = it.getBooleanExtra(Constants.Invoke.SETTING, false);
 
 
         if(!isSetting){
@@ -121,7 +121,7 @@ public class PreCautionTwoActivity extends AppCompatActivity {
                 if(!isSetting)
                     WalletPreference.setSkipCaution(mContext,false);
                 Intent it = new Intent(PreCautionTwoActivity.this,PreCautionThreeActivity.class);
-                it.putExtra(Constants.Invoke.SEITING, isSetting);
+                it.putExtra(Constants.Invoke.SETTING, isSetting);
 
                 startActivityForResult(it, 0);
                 overridePendingTransition(0,0);

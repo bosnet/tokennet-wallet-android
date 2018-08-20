@@ -280,7 +280,7 @@ public class Utils {
         return false;
     }
 
-    public static SpannableStringBuilder dispayBalance(String bal){
+    public static SpannableStringBuilder displayBalance(String bal){
         int pos = bal.indexOf(".");
 
         SpannableStringBuilder ssb = new SpannableStringBuilder(bal);

@@ -6,7 +6,7 @@ public class Constants {
 
 	public static final class Invoke {
 		public static final String WALLET = "wallet";
-        public static final String RECOVER_WALLET = "wallet-recover";
+		public static final String RECOVER_WALLET = "wallet-recover";
 		public static final String KEY = "key";
 		public static final String HISTORY = "history";
 		public static final String PUBKEY = "public-key";
@@ -21,9 +21,9 @@ public class Constants {
 		public static final String BROAD_CHANGE_LANG = "io.boscoin.tokennet.wallet.change.language";
 	}
 
-    public static final class DB {
-        public static final String ADDRESS_BOOK = "addressbook.db";
-        public static final String MY_WALLETS = "my-wallet.db";
+	public static final class DB {
+		public static final String ADDRESS_BOOK = "addressbook.db";
+		public static final String MY_WALLETS = "my-wallet.db";
 
 		public static final String WALLET_NAME = "name";
 		public static final String WALLET_ADDRESS = "accountid";
@@ -32,12 +32,11 @@ public class Constants {
 		public static final String WALLET_LASTEST = "lastest";
 		public static final String WALLET_LAST_TIME = "ltime";
 
-        public static final String BOOK_NAME = "name";
-        public static final String BOOK_ADDRESS = "address";
-        public static final int DATABASE_VERSION = 1;
-    }
-
-  
+		public static final String BOOK_NAME = "name";
+		public static final String BOOK_ADDRESS = "address";
+		public static final int DATABASE_VERSION = 1;
+	}
+	
 	public static final class Params{
 		public static final String ORDER = "order";
 		public static final String DESC = "desc";
@@ -52,13 +51,11 @@ public class Constants {
 		public static final int NOT_FOUND = 404;
 	}
 
-
 	public static final class ResultCode {
 		public static final int CHANGE_NAME = 1;
 		public static final int DELETE_WALLET = 2;
 		public static final int ADDRESS = 3;
 		public static final int SEND = 4;
 		public static final int FINISH = 5;
-
 	}
 }

@@ -104,7 +104,7 @@ public class WalletActivity extends AppCompatActivity implements
             String tmp = Utils.fitDigit(mBal);
             String amount = tmp + " BOS";
 
-            wBalance.setText(Utils.dispayBalance(amount));
+            wBalance.setText(Utils.displayBalance(amount));
 
             wPubKey = findViewById(R.id.tv_pub_key);
             mMyPublicKey = mCursor.getString(mCursor.getColumnIndex(Constants.DB.WALLET_ADDRESS));
@@ -216,7 +216,7 @@ public class WalletActivity extends AppCompatActivity implements
                 String amount = tmp+" BOS";
 
 
-                wBalance.setText(Utils.dispayBalance(amount));
+                wBalance.setText(Utils.displayBalance(amount));
 
                 try{
 
