@@ -426,7 +426,6 @@ public class WalletActivity extends AppCompatActivity implements
 
         }catch (Exception e){
 
-            e.printStackTrace();
         }finally {
             mDbOpenHelper.close();
             mCursor.close();

@@ -71,7 +71,7 @@ public class ConfirmPassWordActivity extends AppCompatActivity {
         mDbOpenHelper.open(Constants.DB.MY_WALLETS);
         Cursor cursor = mDbOpenHelper.getColumnWallet(mIdx);
         mBosKey = cursor.getString(cursor.getColumnIndex(Constants.DB.WALLET_KET));
-        Log.e(TAG,"key = "+mBosKey);
+
         mDbOpenHelper.close();
         cursor.close();
 

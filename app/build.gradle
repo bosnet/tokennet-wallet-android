@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 26
@@ -28,6 +29,7 @@ android {
         def AES_DEBUG = "AES_DEBUG"
 
         debug {
+            applicationIdSuffix ".debug"
             buildConfigField BOOLEAN, TOKEN_GET, TRUE
             buildConfigField BOOLEAN, AES_DEBUG, TRUE
             buildConfigField STRING, NETWORK_PH, '"Test BOS Token Network ; tokennet.test; September 2017"'
@@ -48,7 +50,24 @@ android {
         checkReleaseBuilds false
     }
 
+    task switchToDebug(type: Copy) {
+        description = 'Switches to DEBUG google-services.json'
+        from "src/debug"
+        include "google-services.json"
+        into "."
+    }
 
+    task switchToRelease(type: Copy) {
+        description = 'Switches to RELEASE google-services.json'
+        from "src/release"
+        include "google-services.json"
+        into "."
+    }
+
+    afterEvaluate {
+        processDebugGoogleServices.dependsOn switchToDebug
+        processReleaseGoogleServices.dependsOn switchToRelease
+    }
 }
 
 dependencies {
@@ -64,5 +83,11 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.google.android.gms:play-services-plus:15.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
 
 }
+
+
+apply plugin: 'com.google.gms.google-services'

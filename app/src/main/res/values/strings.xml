@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BosTokennetWallet</string>
+    <string name="app_name">BOScoin Tokennet Wallet</string>
 
     <!-- 가져다 쓰기 -->
     <string name="transaction_his">Transaction Details</string>
@@ -64,13 +64,13 @@
     <string name="dont_show">Do Not Show Again</string>
     <string name="next">Next</string>
     <string name="ca_do_not_lose">Do not share your Secret Seed and password to anyone</string>
-    <string name="ca_sec_seed">Do not loose your Secret Seed and password.\nYou can not retrieve your Secret Seed</string>
+    <string name="ca_sec_seed">Do not loose your Secret Seed and password\nYou can not retrieve your Secret Seed</string>
     <string name="no_see_page">Are you sure you want to close current page?</string>
     <string name="please_check">Please check the following Precautions</string>
-    <string name="min_balance">You need a minimum balance of 0.1 BOS to make your account valid. Please deposit minimum balance of 0.1 BOS to activate your wallet.</string>
+    <string name="min_balance">You need a minimum balance of 0.1 BOS to make your account valid. Please deposit minimum balance of 0.1 BOS to activate your wallet</string>
     <string name="wallet_name">Information in the wallet will be lost when the app is deleted or when you import the wallet</string>
-    <string name="your_pw">Password is required for all wallet activities.\nDO NOT loose or share your password to anyone.</string>
-    <string name="secret_seed">Secret Seed is required to import your wallet. DO NOT loose or share your Secret Seed to anyone.</string>
+    <string name="your_pw">Password is required for all wallet activities.\nDO NOT loose or share your password to anyone</string>
+    <string name="secret_seed">Secret Seed is required to import your wallet. DO NOT loose or share your Secret Seed to anyone</string>
     <string name="enter_wname">Input Wallet Name</string>
     <string name="enter_pw">Input Wallet Password</string>
     <string name="confirm_pw">Confirm Wallet Password</string>
@@ -90,7 +90,7 @@ Each wallet need to set a password</string>
     <string name="add_contact">Add contact</string>
     <string name="add_cname">Name</string>
     <string name="pub_address">Public Address</string>
-    <string name="inform_you">The information you have registered can not be recovered if the app is deleted.\nYou can register up to 100 contacts.</string>
+    <string name="inform_you">The information you have registered can not be recovered if the app is deleted.\nYou can register up to 100 contacts</string>
     <string name="enter_name">Input Name</string>
     <string name="enter_pub_address">Input Public Address</string>
     <string name="menu_edit">Edit</string>
@@ -115,22 +115,22 @@ Each wallet need to set a password</string>
     <string name="check_seed">Confirm Secret Seed</string>
     <string name="check_rckey">Confirm Recovery Key</string>
     <string name="delete_wallet">Delete Wallet</string>
-    <string name="info_endit">The information you have registered can not be recovered if the app is deleted.\nYou can register up to 100 contacts.</string>
+    <string name="info_endit">The information you have registered can not be recovered if the app is deleted.\nYou can register up to 100 contacts</string>
     <string name="cur_wname">Current Wallet Name</string>
     <string name="new_wname">New Wallet Name</string>
     <string name="cur_pw">Current Password</string>
     <string name="noti_pw">Changing the password will remove the existing Recovery Key.\n
-You can find new Recovery Key in settings.</string>
+You can find new Recovery Key in settings</string>
     <string name="new_pw">Input New Password</string>
     <string name="conf_pw">Confirm New password</string>
     <string name="screen_cap">For security reasons, screenshot is inhibited.\n
 To recover your wallet, you need Secret Seed or Recovery Key.</string>
-    <string name="be_care">Do not loose your Secret Seed or Recovery Key.\nYou can not retrieve your wallet without them.</string>
+    <string name="be_care">Do not loose your Secret Seed or Recovery Key\nYou can not retrieve your wallet without them</string>
     <string name="ck_seed">Confirm Secret Seed</string>
     <string name="ck_rckey">Confirm Recovery Key</string>
     <string name="sec_key_noti">Secret Seed starts with letter \'S\' and 56 characters in total.\nPlease store your
 Secret Seed securely</string>
-    <string name="rc_key_noti">Recovery Key starts with letter \' B\'.\nPlease store your Recovery Key securely.</string>
+    <string name="rc_key_noti">Recovery Key starts with letter \' B\'.\nPlease store your Recovery Key securely</string>
     <string name="delete_w">Are you sure you want to delete it?</string>
    
     <string name="if_you_delete">Please save Wallet Password, Recovery Key, and Secret Seed somewhere safe before deleting your wallet!</string>
@@ -145,7 +145,7 @@ Secret Seed securely</string>
     <string name="d_amount">Amount</string>
     <string name="min_bal">You need a minimum balance of 0.1 BOS to make your acoount valid.\nPlease deposit minimum balance of 0.1 BOS to activate your wallet.</string>
     <string name="receive_bos">Receive 0.1 BOS</string>
-    <string name="restore">Your wallet has been restored.</string>
+    <string name="restore">Your wallet has been restored</string>
     <string name="error_no_account">This wallet is not valid. Please activate your wallet (minimum balance of 0.1 BOS)</string>
     <string name="error_no_funds">The wallet is out of balance</string>
     <string name="error_no_send">Minimum balance of the wallet after any remittance is at least 0.1 BOS</string>

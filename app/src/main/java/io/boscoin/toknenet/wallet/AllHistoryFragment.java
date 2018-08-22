@@ -55,7 +55,7 @@ public class AllHistoryFragment extends Fragment {
 
         if (getArguments() != null) {
             mPubkey = getArguments().getString(Constants.Invoke.PUBKEY);
-            Log.e(TAG, "pubkey = "+mPubkey);
+
         }
     }
 

@@ -10,7 +10,7 @@ public class Base58 {
 
     private Base58()
     {
-        // The constructor of this class is private in order to prevent the class being instantiated
+       
     }
 
     public static String encode(byte[] input)

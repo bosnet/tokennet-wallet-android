@@ -57,7 +57,7 @@ public class SettingActivity extends AppCompatActivity {
 
 
         TextView tvVersion = findViewById(R.id.tv_version);
-        tvVersion.setText("BOScoin wallet Version: "+getAppVersion());
+        tvVersion.setText("BOScoin Tokennet Wallet Version: "+getAppVersion());
     }
 
     private String getAppVersion() {

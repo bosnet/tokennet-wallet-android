@@ -250,7 +250,7 @@ public class WalletListActivity extends AppCompatActivity {
                     DbOpenHelper.updateColumnWalletBalance(mContext,wallet.getWalletId(), curBal);
                 }catch (Exception e){
 
-                    e.printStackTrace();
+
 
                     dismissDialog();
                 }finally {
@@ -386,7 +386,8 @@ public class WalletListActivity extends AppCompatActivity {
 
         if(isUp){
 
-            if(firstVisibleItemPosition < mLastCount){
+            if(firstVisibleItemPosition <= (mLastCount -ADD_COUNT) ){
+
 
                 mCount = firstVisibleItemPosition -ADD_COUNT;
 
