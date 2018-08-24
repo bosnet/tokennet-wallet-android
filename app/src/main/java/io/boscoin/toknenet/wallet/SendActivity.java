@@ -262,11 +262,40 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
                 mAmount = s.toString();
 
-                if(mAmount.startsWith("0") || mAmount.startsWith(".")){
+
+                if( mAmount.startsWith(".")){
                     mValidAmmount = false;
-                }else if(!TextUtils.isEmpty(mAmount)){
-                    mValidAmmount = true;
-                }else{
+                }
+
+
+                else if(!TextUtils.isEmpty(mAmount)){
+                    BigDecimal zeroNum = new BigDecimal("0");
+                    String formatted = mAmount;
+                    if(mAmount.contains(".")) {
+
+                        if (mAmount.indexOf(".") + 8 <= mAmount.length() - 1) {
+                            formatted = mAmount.substring(0, mAmount.indexOf(".") + 8);
+                        }
+
+                    }
+
+                    String s1 = Utils.fitDigit(formatted);
+
+                    try {
+                        if(Utils.MoneyCalcualtion(s1, "0", ADD).equals(zeroNum)){
+                            mValidAmmount = false;
+
+                        }else{
+                            mValidAmmount = true;
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        mValidAmmount = false;
+                    }
+                }
+
+                else{
                     mValidAmmount = false;
                 }
                 changeButton();
@@ -711,9 +740,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                                 sendFailDialog();
                             }
                         });
-                        // If the result is unknown (no response body, timeout etc.) we simply resubmit
-                        // already built transaction:
-                        // SubmitTransactionResponse response = server.submitTransaction(transaction);
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

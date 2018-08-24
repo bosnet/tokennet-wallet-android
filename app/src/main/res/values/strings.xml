@@ -202,7 +202,7 @@ numbers, and special characters.</string>
     <string name="error_same_edit">Do not use the same name</string>
     <string name="error_same_send">Can not make transactions to the same Public Address</string>
 
-    <string name="error_request_wallet">Error Server Response</string>
+    <string name="error_request_wallet">Error Network Connection</string>
 
 
 

@@ -44,7 +44,7 @@ public class SendDialogComplete extends Dialog{
         setContentView(R.layout.layout_dialog_complete);
 
         mTvAmmount = findViewById(R.id.total_val);
-        mTvAmmount.setText(mTotal);
+        mTvAmmount.setText(mTotal + " BOS");
 
 
 

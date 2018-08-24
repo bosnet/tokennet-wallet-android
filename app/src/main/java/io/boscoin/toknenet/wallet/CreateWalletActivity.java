@@ -274,7 +274,7 @@ public class CreateWalletActivity extends AppCompatActivity {
     private void setErrNameNone() {
         mTvNameNone.setVisibility(View.VISIBLE);
         mTvNameAlready.setVisibility(View.GONE);
-        mTvLengthErr.setVisibility(View.GONE);
+        mTvLengthErr.setVisibility(View.INVISIBLE);
 
         mTvPwMatch.setVisibility(View.INVISIBLE);
     }
