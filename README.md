@@ -1,4 +1,7 @@
 # Tokennet Wallet For Android
+
+[![CLA assistant](https://cla-assistant.io/readme/badge/bosnet/tokennet-wallet-android)](https://cla-assistant.io/bosnet/tokennet-wallet-android)
+
 BOSCoin Tokennet wallet for Android by BlockchainOS, Inc
 
 This wallet is designed to enhance security to solve the problem of users losing or taken over their *Secret Seed*. The wallet will introduce the *Recovery Key* instead of *Seed Seed*. The *Recovery Key* is stored in the wallet and can only be decrypted with *Password* which you set at the creation time. As you expected, the *Password* will not be stored in your device.
