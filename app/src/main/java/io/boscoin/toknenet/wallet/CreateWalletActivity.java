@@ -427,7 +427,7 @@ public class CreateWalletActivity extends AppCompatActivity {
             @Override
             public void run() {
                 String friendbotUrl = String.format(
-                        Constants.Domain.BOS_HORIZON_TEST+"/friendbot?addr=%s",
+                        BuildConfig.NETWORK_DOMAIN+"/friendbot?addr=%s",
                         pair.getAccountId());
 
                 try {

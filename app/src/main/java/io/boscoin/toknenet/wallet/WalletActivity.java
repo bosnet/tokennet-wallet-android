@@ -194,7 +194,8 @@ public class WalletActivity extends AppCompatActivity implements
 
         AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
-        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+
+        StringBuilder url = new StringBuilder(BuildConfig.NETWORK_DOMAIN);
         url.append("/");
         url.append(Constants.Params.ACCOUNTS);
         url.append("/");

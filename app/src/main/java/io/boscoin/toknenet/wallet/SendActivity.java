@@ -385,7 +385,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
         AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
-        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+
+        StringBuilder url = new StringBuilder(BuildConfig.NETWORK_DOMAIN);
         url.append("/");
         url.append(Constants.Params.ACCOUNTS);
         url.append("/");
@@ -578,7 +579,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
         AsyncHttpClient client = new AsyncHttpClient(true, PORT_HTTP,PORT_HTTPS);
         RequestParams params = new RequestParams();
-        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+
+        StringBuilder url = new StringBuilder(BuildConfig.NETWORK_DOMAIN);
         url.append("/");
         url.append(Constants.Params.ACCOUNTS);
         url.append("/");
@@ -608,7 +610,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 Network.use(new Network(BuildConfig.NETWORK_PH));
-                Server server = new Server(Constants.Domain.BOS_HORIZON_TEST);
+                Server server = new Server( BuildConfig.NETWORK_DOMAIN);
 
                 KeyPair source = KeyPair.fromSecretSeed(mSeed);
                 KeyPair destination = KeyPair.fromAccountId(mDestion);
@@ -686,7 +688,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 Network.use(new Network(BuildConfig.NETWORK_PH));
-                Server server = new Server(Constants.Domain.BOS_HORIZON_TEST);
+                Server server = new Server(BuildConfig.NETWORK_DOMAIN);
 
                 KeyPair source = KeyPair.fromSecretSeed(mSeed);
                 KeyPair destination = KeyPair.fromAccountId(mDestion);
@@ -766,7 +768,8 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         params.put(Constants.Params.LIMIT, "1");
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
 
-        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+
+        StringBuilder url = new StringBuilder(BuildConfig.NETWORK_DOMAIN);
         url.append("/");
         url.append(Constants.Params.ACCOUNTS);
         url.append("/");

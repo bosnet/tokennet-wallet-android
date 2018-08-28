@@ -37,14 +37,7 @@ public class Constants {
         public static final int DATABASE_VERSION = 1;
     }
 
-    public static final class Domain {
-
-		public static final String BOS_HORIZON_TEST = "https://horizon-tokennet-test.dev.boscoin.io";
-		public static final String STELLAR_HORIZON_TEST = "https://horizon-testnet.stellar.org";
-
-
-	}
-
+  
 	public static final class Params{
 		public static final String ORDER = "order";
 		public static final String DESC = "desc";
@@ -59,12 +52,6 @@ public class Constants {
 		public static final int NOT_FOUND = 404;
 	}
 
-	public static  final  class Network {
-		public static final String PASSPHRASE_BOS = "BOS Token Network ; October 2017";
-		public static final String PASSPHRASE_BOS_TEST = "Test BOS Token Network ; tokennet.test; September 2017";
-		public static final String PASSPHRASE_STELLAR_TEST = "Test SDF Network ; September 2015";
-
-	}
 
 	public static final class ResultCode {
 		public static final int CHANGE_NAME = 1;
@@ -72,6 +59,6 @@ public class Constants {
 		public static final int ADDRESS = 3;
 		public static final int SEND = 4;
 		public static final int FINISH = 5;
-		public static final int LANGUAGE = 6;
+
 	}
 }

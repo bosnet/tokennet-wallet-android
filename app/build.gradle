@@ -28,10 +28,13 @@ android {
         def NETWORK_PH = "NETWORK_PH"
         def AES_DEBUG = "AES_DEBUG"
 
+        def DOMAIN = "NETWORK_DOMAIN"
+
         debug {
             applicationIdSuffix ".debug"
             buildConfigField BOOLEAN, TOKEN_GET, TRUE
             buildConfigField BOOLEAN, AES_DEBUG, TRUE
+            buildConfigField STRING, DOMAIN,  '"https://horizon-tokennet-test.dev.boscoin.io"'
             buildConfigField STRING, NETWORK_PH, '"Test BOS Token Network ; tokennet.test; September 2017"'
         }
 
@@ -41,6 +44,7 @@ android {
             minifyEnabled true
             buildConfigField BOOLEAN, TOKEN_GET, FALSE
             buildConfigField BOOLEAN, AES_DEBUG, FALSE
+            buildConfigField STRING, DOMAIN,  '"https://horizon-tokennet.dev.boscoin.io"'
             buildConfigField STRING, NETWORK_PH, '"BOS Token Network ; October 2017"'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -141,7 +141,8 @@ public class ReceiveHistoryFragment extends Fragment {
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
 
-        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+
+        StringBuilder url = new StringBuilder(BuildConfig.NETWORK_DOMAIN);
         url.append("/");
         url.append(Constants.Params.ACCOUNTS);
         url.append("/");
@@ -213,7 +214,8 @@ public class ReceiveHistoryFragment extends Fragment {
         RequestParams params = new RequestParams();
         params.put(Constants.Params.ORDER, Constants.Params.DESC);
 
-        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+
+        StringBuilder url = new StringBuilder(BuildConfig.NETWORK_DOMAIN);
         url.append("/");
         url.append(Constants.Params.ACCOUNTS);
         url.append("/");
@@ -261,7 +263,8 @@ public class ReceiveHistoryFragment extends Fragment {
         params.put(Constants.Params.CURSOR, cursor);
         params.put(Constants.Params.ORDER, Constants.Params.ASC);
 
-        StringBuilder url = new StringBuilder(Constants.Domain.BOS_HORIZON_TEST);
+
+        StringBuilder url = new StringBuilder(BuildConfig.NETWORK_DOMAIN);
         url.append("/");
         url.append(Constants.Params.ACCOUNTS);
         url.append("/");

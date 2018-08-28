@@ -124,8 +124,8 @@ You can find new Recovery Key in settings</string>
     <string name="new_pw">Input New Password</string>
     <string name="conf_pw">Confirm New password</string>
     <string name="screen_cap">For security reasons, screenshot is inhibited.\n
-To recover your wallet, you need Secret Seed or Recovery Key.</string>
-    <string name="be_care">Do not loose your Secret Seed or Recovery Key\nYou can not retrieve your wallet without them</string>
+To recover your wallet, you need Secret Seed\nor Recovery Key.</string>
+    <string name="be_care">Do not loose your Secret Seed\nor Recovery Key\nYou can not retrieve your wallet without them</string>
     <string name="ck_seed">Confirm Secret Seed</string>
     <string name="ck_rckey">Confirm Recovery Key</string>
     <string name="sec_key_noti">Secret Seed starts with letter \'S\' and 56 characters in total.\nPlease store your
@@ -157,7 +157,7 @@ Secret Seed securely</string>
     <string name="agree_all_precautions">the precautions of the Wallet activation</string>
     <string name="please_quit">Please close the App Wallet when not in use</string>
     <string name="someone_can">Your Secret Seed and Recovery Key may be stolen</string>
-    <string name="noti_key">Secret Seed or Recovery Key is required to restore your Wallet</string>
+    <string name="noti_key">Secret Seed or Recovery Key is required to restore\nyour Wallet</string>
     <string name="s_precautions">Precautions</string>
     <string name="d_walit">Please Wait</string>
     <string name="a_walit_max">You can only create up to 100\nwallets</string>
