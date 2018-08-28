@@ -1,3 +1,9 @@
+/**
+ *  This Source refer https://github.com/scottyab/AESCrypt-Android/blob/master/aescrypt/src/main/java/com/scottyab/aescrypt/AESCrypt.java
+ *  by Apache License
+ *  we add prefix, os, version and change base68 to base58 for using our wallet
+ **/
+
 package io.boscoin.toknenet.wallet.crypt;
 
 import android.util.Log;
@@ -28,9 +34,9 @@ public class AESCrypt {
     private static final byte[] ivBytes = {0x42, 0x4F, 0x53, 0x5F, 0x43, 0x4F, 0x49, 0x4E, 0x5F, 0x57, 0x41, 0x4C, 0x4C, 0x45, 0x54, 0x53};
 
 
-    public static final String PRE_FIX = "BOS";
-    public static final String OS = "A";
-    public static final String VERSION = "1";
+    private static final String PRE_FIX = "BOS";
+    private static final String OS = "A";
+    private static final String VERSION = "1";
 
 
     /**
