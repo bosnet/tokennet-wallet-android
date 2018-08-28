@@ -1,6 +1,6 @@
 /**
  *  This Source refer https://github.com/scottyab/AESCrypt-Android/blob/master/aescrypt/src/main/java/com/scottyab/aescrypt/AESCrypt.java
- *  by Apache License
+ *  Licensed under the Apache License.
  *  we add prefix, os, version and change base68 to base58 for using our wallet
  **/
 

@@ -1,3 +1,9 @@
+/**
+ *  This Source refer https://www.programcreek.com/java-api-examples/index.php?source_dir=bitseal-master/src/org/bitseal/util/Base58.java
+ *  Licensed under the Apache License.
+ *  
+ */
+
 package io.boscoin.toknenet.wallet.crypt;
 
 import java.math.BigInteger;
