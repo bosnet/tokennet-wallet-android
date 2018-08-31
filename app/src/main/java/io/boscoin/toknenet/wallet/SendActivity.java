@@ -639,8 +639,9 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mProgDialog.dismiss();
-                                    sendCompleteDialog();
+
+                                    updateTransTime();
+
                                 }
                             });
                         }else{

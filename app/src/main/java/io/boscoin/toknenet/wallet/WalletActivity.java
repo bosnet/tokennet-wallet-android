@@ -273,7 +273,8 @@ public class WalletActivity extends AppCompatActivity implements
         Bundle bundle = new Bundle();
         bundle.putLong(Constants.Invoke.WALLET, mAccountId);
         fragAll.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,fragAll).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,fragAll).commitAllowingStateLoss();
 
     }
 

@@ -55,6 +55,11 @@ public class EmptyWalletFragment extends Fragment {
 
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
