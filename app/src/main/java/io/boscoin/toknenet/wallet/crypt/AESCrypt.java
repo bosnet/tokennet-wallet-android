@@ -82,7 +82,6 @@ public class AESCrypt {
 
             return  PRE_FIX + encoded + OS +VERSION;
         } catch (UnsupportedEncodingException e) {
-            if (BuildConfig.AES_DEBUG)
 
             throw new GeneralSecurityException(e);
         }
@@ -168,7 +167,7 @@ public class AESCrypt {
 
 
 
-    private static void log(String what, byte[] bytes) {
+   /* private static void log(String what, byte[] bytes) {
         if (BuildConfig.AES_DEBUG)
             Log.d(TAG, what + "[" + bytes.length + "] [" + bytesToHex(bytes) + "]");
     }
@@ -176,7 +175,7 @@ public class AESCrypt {
     private static void log(String what, String value) {
         if (BuildConfig.AES_DEBUG)
             Log.d(TAG, what + "[" + value.length() + "] [" + value + "]");
-    }
+    }*/
 
 
     /**
